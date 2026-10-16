@@ -1,0 +1,26 @@
+# dependencies
+node_modules/
+
+# build output
+.next/
+out/
+dist/
+build/
+
+# environment files: keys and secrets stay on the machine
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+
+# operating system and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Claude Code's per-machine settings
+.claude/settings.local.json
