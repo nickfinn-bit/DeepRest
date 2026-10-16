@@ -1,0 +1,1011 @@
+{
+  "checked": 365,
+  "distinct": 56,
+  "broken": [],
+  "distinctLinks": [
+    {
+      "page": "home",
+      "tag": "link",
+      "href": "https://nickfinn-bit.github.io/DeepRest/",
+      "resolved": "https://nickfinn-bit.github.io/DeepRest/",
+      "kind": "own public address (not yet published)",
+      "checkedLocallyAt": "http://localhost:4173/DeepRest/",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "home"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "link",
+      "href": "assets/img/favicon.svg",
+      "resolved": "http://localhost:4173/DeepRest/assets/img/favicon.svg",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "about",
+        "services",
+        "fees",
+        "faq",
+        "book",
+        "contact",
+        "privacy",
+        "cookies",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "link",
+      "href": "assets/img/apple-touch-icon.png",
+      "resolved": "http://localhost:4173/DeepRest/assets/img/apple-touch-icon.png",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "about",
+        "services",
+        "fees",
+        "faq",
+        "book",
+        "contact",
+        "privacy",
+        "cookies",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "link",
+      "href": "assets/fonts/source-serif-4-latin-wght.woff2",
+      "resolved": "http://localhost:4173/DeepRest/assets/fonts/source-serif-4-latin-wght.woff2",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "about",
+        "services",
+        "fees",
+        "faq",
+        "book",
+        "contact",
+        "privacy",
+        "cookies",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "link",
+      "href": "assets/css/site.css?v=daa08e40bc",
+      "resolved": "http://localhost:4173/DeepRest/assets/css/site.css?v=daa08e40bc",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "about",
+        "services",
+        "fees",
+        "faq",
+        "book",
+        "contact",
+        "privacy",
+        "cookies",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "script",
+      "href": "assets/js/site.js?v=1c9d509989",
+      "resolved": "http://localhost:4173/DeepRest/assets/js/site.js?v=1c9d509989",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "about",
+        "services",
+        "fees",
+        "faq",
+        "book",
+        "contact",
+        "privacy",
+        "cookies",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "#main",
+      "resolved": "http://localhost:4173/DeepRest/#main",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "home",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "./",
+      "resolved": "http://localhost:4173/DeepRest/",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "home",
+        "about",
+        "about",
+        "services",
+        "services",
+        "fees",
+        "fees",
+        "faq",
+        "faq",
+        "book",
+        "book",
+        "contact",
+        "contact",
+        "privacy",
+        "privacy",
+        "cookies",
+        "cookies",
+        "404",
+        "404",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "about/",
+      "resolved": "http://localhost:4173/DeepRest/about/",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "home",
+        "home",
+        "about",
+        "about",
+        "services",
+        "services",
+        "fees",
+        "fees",
+        "faq",
+        "faq",
+        "book",
+        "book",
+        "contact",
+        "contact",
+        "privacy",
+        "privacy",
+        "cookies",
+        "cookies",
+        "404",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "services/",
+      "resolved": "http://localhost:4173/DeepRest/services/",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "home",
+        "home",
+        "about",
+        "about",
+        "services",
+        "services",
+        "fees",
+        "fees",
+        "faq",
+        "faq",
+        "book",
+        "book",
+        "contact",
+        "contact",
+        "privacy",
+        "privacy",
+        "cookies",
+        "cookies",
+        "404",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "fees/",
+      "resolved": "http://localhost:4173/DeepRest/fees/",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "home",
+        "home",
+        "about",
+        "about",
+        "services",
+        "services",
+        "services",
+        "fees",
+        "fees",
+        "faq",
+        "faq",
+        "faq",
+        "book",
+        "book",
+        "book",
+        "contact",
+        "contact",
+        "privacy",
+        "privacy",
+        "cookies",
+        "cookies",
+        "404",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "faq/",
+      "resolved": "http://localhost:4173/DeepRest/faq/",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "home",
+        "about",
+        "about",
+        "services",
+        "services",
+        "fees",
+        "fees",
+        "faq",
+        "faq",
+        "book",
+        "book",
+        "contact",
+        "contact",
+        "privacy",
+        "privacy",
+        "cookies",
+        "cookies",
+        "404",
+        "404",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "contact/",
+      "resolved": "http://localhost:4173/DeepRest/contact/",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "home",
+        "home",
+        "about",
+        "about",
+        "about",
+        "services",
+        "services",
+        "services",
+        "fees",
+        "fees",
+        "fees",
+        "fees",
+        "faq",
+        "faq",
+        "faq",
+        "faq",
+        "book",
+        "book",
+        "book",
+        "contact",
+        "contact",
+        "privacy",
+        "privacy",
+        "cookies",
+        "cookies",
+        "404",
+        "404",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "book/",
+      "resolved": "http://localhost:4173/DeepRest/book/",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "home",
+        "home",
+        "home",
+        "about",
+        "about",
+        "about",
+        "services",
+        "services",
+        "services",
+        "fees",
+        "fees",
+        "fees",
+        "faq",
+        "faq",
+        "faq",
+        "book",
+        "book",
+        "contact",
+        "contact",
+        "contact",
+        "privacy",
+        "privacy",
+        "cookies",
+        "cookies",
+        "cookies",
+        "404",
+        "404",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "https://www.hcpc-uk.org/check-the-register/",
+      "resolved": "https://www.hcpc-uk.org/check-the-register/",
+      "kind": "external",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "home",
+        "about",
+        "about",
+        "services",
+        "fees",
+        "faq",
+        "faq",
+        "book",
+        "contact",
+        "privacy",
+        "cookies",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "tel:999",
+      "kind": "telephone",
+      "ok": true,
+      "pages": [
+        "home",
+        "about",
+        "services",
+        "fees",
+        "faq",
+        "book",
+        "contact",
+        "privacy",
+        "cookies",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "tel:111",
+      "kind": "telephone",
+      "ok": true,
+      "pages": [
+        "home",
+        "about",
+        "services",
+        "fees",
+        "faq",
+        "book",
+        "contact",
+        "privacy",
+        "cookies",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "tel:116123",
+      "kind": "telephone",
+      "ok": true,
+      "pages": [
+        "home",
+        "about",
+        "services",
+        "fees",
+        "faq",
+        "book",
+        "contact",
+        "privacy",
+        "cookies",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "privacy/",
+      "resolved": "http://localhost:4173/DeepRest/privacy/",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "about",
+        "services",
+        "fees",
+        "faq",
+        "faq",
+        "faq",
+        "book",
+        "contact",
+        "privacy",
+        "cookies",
+        "cookies",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "cookies/",
+      "resolved": "http://localhost:4173/DeepRest/cookies/",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "home",
+        "about",
+        "about",
+        "services",
+        "services",
+        "fees",
+        "fees",
+        "faq",
+        "faq",
+        "faq",
+        "book",
+        "book",
+        "book",
+        "contact",
+        "contact",
+        "privacy",
+        "privacy",
+        "privacy",
+        "privacy",
+        "privacy",
+        "cookies",
+        "cookies",
+        "404",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "a",
+      "href": "book/#before-you-book",
+      "resolved": "http://localhost:4173/DeepRest/book/#before-you-book",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "home",
+        "about",
+        "services",
+        "fees",
+        "faq",
+        "book",
+        "contact",
+        "privacy",
+        "cookies",
+        "404"
+      ]
+    },
+    {
+      "page": "home",
+      "tag": "html[data-calendly-url]",
+      "href": "https://calendly.com/embed-demo-sales/discovery-call",
+      "resolved": "https://calendly.com/embed-demo-sales/discovery-call",
+      "kind": "external",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "home",
+        "about",
+        "services",
+        "fees",
+        "faq",
+        "book",
+        "book",
+        "contact",
+        "privacy",
+        "cookies",
+        "404"
+      ]
+    },
+    {
+      "page": "about",
+      "tag": "link",
+      "href": "https://nickfinn-bit.github.io/DeepRest/about/",
+      "resolved": "https://nickfinn-bit.github.io/DeepRest/about/",
+      "kind": "own public address (not yet published)",
+      "checkedLocallyAt": "http://localhost:4173/DeepRest/about/",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "about",
+        "about"
+      ]
+    },
+    {
+      "page": "about",
+      "tag": "a",
+      "href": "#main",
+      "resolved": "http://localhost:4173/DeepRest/about/#main",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "about"
+      ]
+    },
+    {
+      "page": "about",
+      "tag": "a",
+      "href": "https://www.hcpc-uk.org/standards/standards-of-conduct-performance-and-ethics/",
+      "resolved": "https://www.hcpc-uk.org/standards/standards-of-conduct-performance-and-ethics/",
+      "kind": "external",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "about"
+      ]
+    },
+    {
+      "page": "about",
+      "tag": "a",
+      "href": "https://www.hcpc-uk.org/concerns/",
+      "resolved": "https://www.hcpc-uk.org/concerns/",
+      "kind": "external",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "about"
+      ]
+    },
+    {
+      "page": "services",
+      "tag": "link",
+      "href": "https://nickfinn-bit.github.io/DeepRest/services/",
+      "resolved": "https://nickfinn-bit.github.io/DeepRest/services/",
+      "kind": "own public address (not yet published)",
+      "checkedLocallyAt": "http://localhost:4173/DeepRest/services/",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "services",
+        "services"
+      ]
+    },
+    {
+      "page": "services",
+      "tag": "a",
+      "href": "#main",
+      "resolved": "http://localhost:4173/DeepRest/services/#main",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "services"
+      ]
+    },
+    {
+      "page": "fees",
+      "tag": "link",
+      "href": "https://nickfinn-bit.github.io/DeepRest/fees/",
+      "resolved": "https://nickfinn-bit.github.io/DeepRest/fees/",
+      "kind": "own public address (not yet published)",
+      "checkedLocallyAt": "http://localhost:4173/DeepRest/fees/",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "fees",
+        "fees"
+      ]
+    },
+    {
+      "page": "fees",
+      "tag": "a",
+      "href": "#main",
+      "resolved": "http://localhost:4173/DeepRest/fees/#main",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "fees"
+      ]
+    },
+    {
+      "page": "faq",
+      "tag": "link",
+      "href": "https://nickfinn-bit.github.io/DeepRest/faq/",
+      "resolved": "https://nickfinn-bit.github.io/DeepRest/faq/",
+      "kind": "own public address (not yet published)",
+      "checkedLocallyAt": "http://localhost:4173/DeepRest/faq/",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "faq",
+        "faq"
+      ]
+    },
+    {
+      "page": "faq",
+      "tag": "a",
+      "href": "#main",
+      "resolved": "http://localhost:4173/DeepRest/faq/#main",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "faq"
+      ]
+    },
+    {
+      "page": "book",
+      "tag": "link",
+      "href": "https://nickfinn-bit.github.io/DeepRest/book/",
+      "resolved": "https://nickfinn-bit.github.io/DeepRest/book/",
+      "kind": "own public address (not yet published)",
+      "checkedLocallyAt": "http://localhost:4173/DeepRest/book/",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "book",
+        "book"
+      ]
+    },
+    {
+      "page": "book",
+      "tag": "a",
+      "href": "#main",
+      "resolved": "http://localhost:4173/DeepRest/book/#main",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "book"
+      ]
+    },
+    {
+      "page": "book",
+      "tag": "a",
+      "href": "../fees/#insurance",
+      "resolved": "http://localhost:4173/DeepRest/fees/#insurance",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "book"
+      ]
+    },
+    {
+      "page": "contact",
+      "tag": "link",
+      "href": "https://nickfinn-bit.github.io/DeepRest/contact/",
+      "resolved": "https://nickfinn-bit.github.io/DeepRest/contact/",
+      "kind": "own public address (not yet published)",
+      "checkedLocallyAt": "http://localhost:4173/DeepRest/contact/",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "contact",
+        "contact"
+      ]
+    },
+    {
+      "page": "contact",
+      "tag": "a",
+      "href": "#main",
+      "resolved": "http://localhost:4173/DeepRest/contact/#main",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "contact"
+      ]
+    },
+    {
+      "page": "contact",
+      "tag": "a",
+      "href": "#urgent-help",
+      "resolved": "http://localhost:4173/DeepRest/contact/#urgent-help",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "contact"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "link",
+      "href": "https://nickfinn-bit.github.io/DeepRest/privacy/",
+      "resolved": "https://nickfinn-bit.github.io/DeepRest/privacy/",
+      "kind": "own public address (not yet published)",
+      "checkedLocallyAt": "http://localhost:4173/DeepRest/privacy/",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "privacy",
+        "privacy"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "#main",
+      "resolved": "http://localhost:4173/DeepRest/privacy/#main",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "privacy"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "#who-we-are",
+      "resolved": "http://localhost:4173/DeepRest/privacy/#who-we-are",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "privacy"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "#information",
+      "resolved": "http://localhost:4173/DeepRest/privacy/#information",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "privacy"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "#lawful-bases",
+      "resolved": "http://localhost:4173/DeepRest/privacy/#lawful-bases",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "privacy"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "#sharing",
+      "resolved": "http://localhost:4173/DeepRest/privacy/#sharing",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "privacy"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "#transfers",
+      "resolved": "http://localhost:4173/DeepRest/privacy/#transfers",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "privacy"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "#retention",
+      "resolved": "http://localhost:4173/DeepRest/privacy/#retention",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "privacy"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "#security",
+      "resolved": "http://localhost:4173/DeepRest/privacy/#security",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "privacy"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "#rights",
+      "resolved": "http://localhost:4173/DeepRest/privacy/#rights",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "privacy"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "#complaints",
+      "resolved": "http://localhost:4173/DeepRest/privacy/#complaints",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "privacy"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "#changes",
+      "resolved": "http://localhost:4173/DeepRest/privacy/#changes",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "privacy"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "https://calendly.com/legal/privacy-notice",
+      "resolved": "https://calendly.com/legal/privacy-notice",
+      "kind": "external",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "privacy",
+        "cookies"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement",
+      "resolved": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement",
+      "kind": "external",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "privacy"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "https://ico.org.uk/make-a-complaint/",
+      "resolved": "https://ico.org.uk/make-a-complaint/",
+      "kind": "external",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "privacy"
+      ]
+    },
+    {
+      "page": "privacy",
+      "tag": "a",
+      "href": "tel:03031231113",
+      "kind": "telephone",
+      "ok": true,
+      "pages": [
+        "privacy"
+      ]
+    },
+    {
+      "page": "cookies",
+      "tag": "link",
+      "href": "https://nickfinn-bit.github.io/DeepRest/cookies/",
+      "resolved": "https://nickfinn-bit.github.io/DeepRest/cookies/",
+      "kind": "own public address (not yet published)",
+      "checkedLocallyAt": "http://localhost:4173/DeepRest/cookies/",
+      "status": 200,
+      "ok": true,
+      "pages": [
+        "cookies",
+        "cookies"
+      ]
+    },
+    {
+      "page": "cookies",
+      "tag": "a",
+      "href": "#main",
+      "resolved": "http://localhost:4173/DeepRest/cookies/#main",
+      "kind": "internal",
+      "status": 200,
+      "ok": true,
+      "fragmentFound": true,
+      "pages": [
+        "cookies"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "placeholdersFilled": 28,
+  "buildOutput": "Built 10 pages into ..\\..\\..\\AppData\\Local\\Temp\\deeprest-publish-ready-8W4dft\\dist/ for https://example.org/ with no placeholders.",
+  "strictBuildSucceeded": true,
+  "pages": 10,
+  "pagesStillShowingPlaceholders": [],
+  "calendlyLinkUsed": true,
+  "demoNoticeGone": true,
+  "pass": true
+}
