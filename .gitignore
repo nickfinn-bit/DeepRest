@@ -24,3 +24,6 @@ Thumbs.db
 
 # Claude Code's per-machine settings
 .claude/settings.local.json
+
+# local tools fetched by the verification scripts (Nu HTML Checker)
+.tools/

@@ -1,0 +1,27 @@
+{
+  "name": "deeprest-website",
+  "private": true,
+  "type": "module",
+  "description": "Static website for the DeepRest psychology practice",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:strict": "node scripts/build.mjs --strict",
+    "serve": "node scripts/serve.mjs",
+    "verify": "node scripts/verify/run-all.mjs",
+    "verify:calendly": "node scripts/verify/calendly.mjs",
+    "verify:layout": "node scripts/verify/layout.mjs",
+    "verify:html": "node scripts/verify/validate.mjs",
+    "verify:links": "node scripts/verify/links.mjs",
+    "verify:facts": "node scripts/verify/facts.mjs",
+    "verify:publish-ready": "node scripts/verify/publish-ready.mjs",
+    "verify:lighthouse": "node scripts/verify/lighthouse.mjs",
+    "verify:pdf": "node scripts/verify/pdf.mjs",
+    "verify:report": "node scripts/verify/report.mjs",
+    "icons": "node scripts/make-icons.mjs"
+  },
+  "devDependencies": {
+    "lighthouse": "^13.5.0",
+    "pdf-lib": "^1.17.1",
+    "puppeteer": "^25.14.0"
+  }
+}

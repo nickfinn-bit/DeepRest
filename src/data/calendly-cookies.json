@@ -1,0 +1,21 @@
+{
+  "checked": "2026-10-16T17:19:55.925Z",
+  "cookies": [
+    {
+      "name": "__cf_bm",
+      "domain": ".calendly.com"
+    },
+    {
+      "name": "_cfuvid",
+      "domain": ".calendly.com"
+    },
+    {
+      "name": "OptanonConsent",
+      "domain": ".calendly.com"
+    },
+    {
+      "name": "m",
+      "domain": "m.stripe.com"
+    }
+  ]
+}
