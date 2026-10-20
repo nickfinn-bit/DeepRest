@@ -1,108 +1,117 @@
 {
-  "placeholders": 28,
-  "placeholderKeys": [
-    "site.url",
-    "practice.legalName",
-    "practice.icoRegistrationNumber",
-    "practice.email",
-    "practice.phone",
-    "practice.address",
-    "psychologist.name",
-    "psychologist.title",
-    "psychologist.qualifications",
-    "psychologist.hcpcNumber",
-    "psychologist.bpsMembership",
-    "psychologist.bio",
-    "psychologist.photo",
-    "psychologist.clientGroups",
-    "psychologist.specialisms",
-    "psychologist.approach",
-    "sessions.formats",
-    "fees.items.0.appointment",
-    "fees.items.0.length",
-    "fees.items.0.fee",
-    "fees.payment",
-    "fees.cancellation",
-    "fees.insurers",
-    "calendly.url",
-    "privacy.lastUpdated",
-    "privacy.retention",
-    "privacy.providers",
-    "privacy.security"
-  ],
+  "testedAt": "https://deepestrest.com/",
+  "live": true,
+  "placeholders": 0,
+  "placeholderKeys": [],
   "missingFromPlaceholdersMd": [],
   "marksOnPagesNotInConfig": [],
   "pages": [
     {
       "page": "home",
-      "placeholderMarks": 17,
-      "distinctPlaceholders": 9,
-      "flags": []
+      "placeholderMarks": 0,
+      "distinctPlaceholders": 0,
+      "flags": [],
+      "protectedTitles": [],
+      "clinicalClaims": [],
+      "headline": {
+        "satisfaction": true,
+        "freeDiagnostic": true,
+        "years": true
+      }
+    },
+    {
+      "page": "mentoring",
+      "placeholderMarks": 0,
+      "distinctPlaceholders": 0,
+      "flags": [],
+      "protectedTitles": [],
+      "clinicalClaims": []
     },
     {
       "page": "about",
-      "placeholderMarks": 13,
-      "distinctPlaceholders": 9,
-      "flags": []
-    },
-    {
-      "page": "services",
-      "placeholderMarks": 11,
-      "distinctPlaceholders": 9,
-      "flags": []
-    },
-    {
-      "page": "fees",
-      "placeholderMarks": 12,
-      "distinctPlaceholders": 11,
-      "flags": []
+      "placeholderMarks": 0,
+      "distinctPlaceholders": 0,
+      "flags": [],
+      "protectedTitles": [],
+      "clinicalClaims": []
     },
     {
       "page": "faq",
-      "placeholderMarks": 11,
-      "distinctPlaceholders": 7,
-      "flags": []
+      "placeholderMarks": 0,
+      "distinctPlaceholders": 0,
+      "flags": [],
+      "protectedTitles": [],
+      "clinicalClaims": []
     },
     {
       "page": "book",
-      "placeholderMarks": 7,
-      "distinctPlaceholders": 7,
-      "flags": []
+      "placeholderMarks": 0,
+      "distinctPlaceholders": 0,
+      "flags": [],
+      "protectedTitles": [],
+      "clinicalClaims": []
     },
     {
       "page": "contact",
-      "placeholderMarks": 9,
-      "distinctPlaceholders": 6,
-      "flags": []
+      "placeholderMarks": 0,
+      "distinctPlaceholders": 0,
+      "flags": [],
+      "protectedTitles": [],
+      "clinicalClaims": []
     },
     {
       "page": "privacy",
-      "placeholderMarks": 18,
-      "distinctPlaceholders": 12,
-      "flags": []
+      "placeholderMarks": 0,
+      "distinctPlaceholders": 0,
+      "flags": [],
+      "protectedTitles": [],
+      "clinicalClaims": []
     },
     {
       "page": "cookies",
-      "placeholderMarks": 5,
-      "distinctPlaceholders": 5,
-      "flags": []
+      "placeholderMarks": 0,
+      "distinctPlaceholders": 0,
+      "flags": [],
+      "protectedTitles": [],
+      "clinicalClaims": []
     },
     {
       "page": "404",
-      "placeholderMarks": 5,
-      "distinctPlaceholders": 5,
-      "flags": []
+      "placeholderMarks": 0,
+      "distinctPlaceholders": 0,
+      "flags": [],
+      "protectedTitles": [],
+      "clinicalClaims": []
     }
   ],
   "inventedFacts": 0,
+  "protectedTitles": 0,
+  "clinicalClaims": 0,
+  "headline": {
+    "satisfaction": true,
+    "freeDiagnostic": true,
+    "years": true
+  },
   "verifiedFigures": [
     {
+      "text": "100%",
+      "source": "Nick's own words, his order of 19 October 2026 (site.config.json, _sources): \"a 100% satisfaction rate across 23 clients\""
+    },
+    {
+      "text": "23",
+      "source": "Nick's own words, his order of 19 October 2026 (site.config.json, _sources): 23 clients"
+    },
+    {
+      "text": "5",
+      "source": "Nick's own words, his order of 19 October 2026 (site.config.json, _sources): five years of mentoring (shown as the figure 5 in the figures panel)"
+    },
+    {
       "text": "999",
-      "source": "UK emergency number (given in the brief)"
+      "source": "UK emergency number"
     },
     {
       "text": "111",
-      "source": "NHS 111 (given in the brief)"
+      "source": "NHS 111"
     },
     {
       "text": "116 123",
@@ -119,6 +128,10 @@
     {
       "text": "2018",
       "source": "Data Protection Act 2018 (UK statute)"
+    },
+    {
+      "text": "6(1)(a)",
+      "source": "UK GDPR Article 6(1)(a), consent"
     },
     {
       "text": "6(1)(b)",
@@ -141,30 +154,6 @@
       "source": "UK GDPR Article 9(2)(a), explicit consent"
     },
     {
-      "text": "9(2)(c)",
-      "source": "UK GDPR Article 9(2)(c), vital interests"
-    },
-    {
-      "text": "9(2)(f)",
-      "source": "UK GDPR Article 9(2)(f), legal claims"
-    },
-    {
-      "text": "9(2)(g)",
-      "source": "UK GDPR Article 9(2)(g), substantial public interest"
-    },
-    {
-      "text": "9(2)(h)",
-      "source": "UK GDPR Article 9(2)(h), health or social care"
-    },
-    {
-      "text": "Schedule 1, paragraph 2",
-      "source": "Data Protection Act 2018, Schedule 1 Part 1 paragraph 2, health or social care purposes"
-    },
-    {
-      "text": "Schedule 1, paragraph 18",
-      "source": "Data Protection Act 2018, Schedule 1 Part 2 paragraph 18, safeguarding of children and individuals at risk"
-    },
-    {
       "text": "Article 6",
       "source": "UK GDPR"
     },
@@ -177,13 +166,66 @@
       "source": "HTTP status of the error page"
     },
     {
+      "text": "20 October 2026",
+      "source": "the date the privacy policy was last updated (site.config.json, privacy.lastUpdated)"
+    },
+    {
       "text": "© 2026",
       "source": "year of the build"
     },
     {
-      "text": "16 October 2026",
+      "text": "Article 6(1)(a)",
+      "source": "UK GDPR Article 6(1)(a), consent"
+    },
+    {
+      "text": "Article 6(1)(b)",
+      "source": "UK GDPR Article 6(1)(b), contract"
+    },
+    {
+      "text": "Article 6(1)(c)",
+      "source": "UK GDPR Article 6(1)(c), legal obligation"
+    },
+    {
+      "text": "Article 6(1)(d)",
+      "source": "UK GDPR Article 6(1)(d), vital interests"
+    },
+    {
+      "text": "Article 6(1)(f)",
+      "source": "UK GDPR Article 6(1)(f), legitimate interests"
+    },
+    {
+      "text": "Article 9(2)(a)",
+      "source": "UK GDPR Article 9(2)(a), explicit consent"
+    },
+    {
+      "text": "20 October 2026",
       "source": "date scripts/verify/calendly.mjs recorded the Calendly cookies (src/data/calendly-cookies.json)"
+    },
+    {
+      "text": "hello@deepestrest.com",
+      "source": "site.config.json, practice.email (Cloudflare Email Routing to Nick)"
     }
+  ],
+  "protectedPatterns": [
+    "/psycholog/i",
+    "/therapist/i",
+    "/counsel+or/i",
+    "/\\bcounsel+ing\\b/i",
+    "/psychiatr/i",
+    "/\\bHCPC\\b|Health and Care Professions Council/i",
+    "/\\bBPS\\b|British Psychological Society|\\bCPsychol\\b|\\b[AM]?F?BPsS\\b|\\bchartered\\b/i",
+    "/\\b(dietitian|physiotherapist|paramedic|radiographer|podiatrist|chiropodist|orthoptist|prosthetist|orthotist|biomedical scientist|clinical scientist|hearing aid dispenser|operating department practitioner|social worker|nurse|doctor)\\b/i",
+    "/\\bDr\\.?\\s/"
+  ],
+  "clinicalPatterns": [
+    "/\\bclinic(al|ian|s)?\\b/i",
+    "/\\bcur(e|es|ed|ing)\\b/i",
+    "/\\btreat(s|ed|ing|ment|ments)?\\b/i",
+    "/\\bpatients?\\b/i",
+    "/\\bdiagnos(e|es|ed|is|ing)\\b/i",
+    "/\\bprescri/i",
+    "/\\bdisorder/i",
+    "/\\bsymptom/i"
   ],
   "pass": true
 }

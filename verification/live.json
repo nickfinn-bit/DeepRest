@@ -1,0 +1,300 @@
+{
+  "testedAt": "http://localhost:4173/",
+  "live": false,
+  "site": "https://deepestrest.com/",
+  "checks": [
+    {
+      "name": "deepestrest.com A records are GitHub Pages'",
+      "ok": true,
+      "detail": [
+        "185.199.109.153",
+        "185.199.110.153",
+        "185.199.111.153",
+        "185.199.108.153"
+      ]
+    },
+    {
+      "name": "deepestrest.com AAAA records are GitHub Pages'",
+      "ok": true,
+      "detail": [
+        "2606:50c0:8001::153",
+        "2606:50c0:8000::153",
+        "2606:50c0:8002::153",
+        "2606:50c0:8003::153"
+      ]
+    },
+    {
+      "name": "www.deepestrest.com is a CNAME to nickfinn-bit.github.io",
+      "ok": true,
+      "detail": [
+        "nickfinn-bit.github.io"
+      ]
+    },
+    {
+      "name": "deepestrest.com MX records are Cloudflare Email Routing's",
+      "ok": true,
+      "detail": [
+        {
+          "exchange": "route2.mx.cloudflare.net",
+          "priority": 20,
+          "type": "MX"
+        },
+        {
+          "exchange": "route3.mx.cloudflare.net",
+          "priority": 35,
+          "type": "MX"
+        },
+        {
+          "exchange": "route1.mx.cloudflare.net",
+          "priority": 6,
+          "type": "MX"
+        }
+      ]
+    },
+    {
+      "name": "deepestrest.com SPF record allows Cloudflare Email Routing",
+      "ok": true,
+      "detail": [
+        [
+          "v=spf1 include:_spf.mx.cloudflare.net ~all"
+        ]
+      ]
+    },
+    {
+      "name": "HTTPS certificate is valid for the domain",
+      "ok": true,
+      "detail": {
+        "authorized": true,
+        "subject": "deepestrest.com",
+        "altNames": "DNS:deepestrest.com, DNS:www.deepestrest.com",
+        "issuer": "Let's Encrypt",
+        "validTo": "Jan 18 00:29:23 2027 GMT"
+      }
+    },
+    {
+      "name": "http://deepestrest.com/ redirects to https://deepestrest.com/",
+      "ok": true,
+      "detail": {
+        "status": 301,
+        "location": "https://deepestrest.com/",
+        "final": "https://deepestrest.com/"
+      }
+    },
+    {
+      "name": "https://www.deepestrest.com/ redirects to https://deepestrest.com/",
+      "ok": true,
+      "detail": {
+        "status": 301,
+        "location": "https://deepestrest.com/",
+        "final": "https://deepestrest.com/"
+      }
+    },
+    {
+      "name": "http://www.deepestrest.com/ redirects to https://deepestrest.com/",
+      "ok": true,
+      "detail": {
+        "status": 301,
+        "location": "http://deepestrest.com/",
+        "final": "https://deepestrest.com/"
+      }
+    },
+    {
+      "name": "https://nickfinn-bit.github.io/DeepRest/ redirects to https://deepestrest.com/",
+      "ok": true,
+      "detail": {
+        "status": 301,
+        "location": "https://deepestrest.com/",
+        "final": "https://deepestrest.com/"
+      }
+    },
+    {
+      "name": "https://deepestrest.com/ answers 200 and matches dist/",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "server": "GitHub.com",
+        "sameAsBuild": true
+      }
+    },
+    {
+      "name": "https://deepestrest.com/mentoring/ answers 200 and matches dist/",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "server": "GitHub.com",
+        "sameAsBuild": true
+      }
+    },
+    {
+      "name": "https://deepestrest.com/about/ answers 200 and matches dist/",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "server": "GitHub.com",
+        "sameAsBuild": true
+      }
+    },
+    {
+      "name": "https://deepestrest.com/faq/ answers 200 and matches dist/",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "server": "GitHub.com",
+        "sameAsBuild": true
+      }
+    },
+    {
+      "name": "https://deepestrest.com/book/ answers 200 and matches dist/",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "server": "GitHub.com",
+        "sameAsBuild": true
+      }
+    },
+    {
+      "name": "https://deepestrest.com/contact/ answers 200 and matches dist/",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "server": "GitHub.com",
+        "sameAsBuild": true
+      }
+    },
+    {
+      "name": "https://deepestrest.com/privacy/ answers 200 and matches dist/",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "server": "GitHub.com",
+        "sameAsBuild": true
+      }
+    },
+    {
+      "name": "https://deepestrest.com/cookies/ answers 200 and matches dist/",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "server": "GitHub.com",
+        "sameAsBuild": true
+      }
+    },
+    {
+      "name": "https://deepestrest.com/no-such-page/ answers 404 and matches dist/",
+      "ok": true,
+      "detail": {
+        "status": 404,
+        "server": "GitHub.com",
+        "sameAsBuild": true
+      }
+    },
+    {
+      "name": "https://deepestrest.com/sitemap.xml answers 200 and matches dist/",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "sameAsBuild": true
+      }
+    },
+    {
+      "name": "https://deepestrest.com/robots.txt answers 200 and matches dist/",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "sameAsBuild": true
+      }
+    },
+    {
+      "name": "https://deepestrest.com/404.html answers 200 and matches dist/",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "sameAsBuild": true
+      }
+    }
+  ],
+  "pages": [
+    {
+      "page": "home",
+      "url": "https://deepestrest.com/",
+      "status": 200,
+      "server": "GitHub.com",
+      "sameAsBuild": true,
+      "bytes": 14013,
+      "pass": true
+    },
+    {
+      "page": "mentoring",
+      "url": "https://deepestrest.com/mentoring/",
+      "status": 200,
+      "server": "GitHub.com",
+      "sameAsBuild": true,
+      "bytes": 11599,
+      "pass": true
+    },
+    {
+      "page": "about",
+      "url": "https://deepestrest.com/about/",
+      "status": 200,
+      "server": "GitHub.com",
+      "sameAsBuild": true,
+      "bytes": 10383,
+      "pass": true
+    },
+    {
+      "page": "faq",
+      "url": "https://deepestrest.com/faq/",
+      "status": 200,
+      "server": "GitHub.com",
+      "sameAsBuild": true,
+      "bytes": 14779,
+      "pass": true
+    },
+    {
+      "page": "book",
+      "url": "https://deepestrest.com/book/",
+      "status": 200,
+      "server": "GitHub.com",
+      "sameAsBuild": true,
+      "bytes": 11195,
+      "pass": true
+    },
+    {
+      "page": "contact",
+      "url": "https://deepestrest.com/contact/",
+      "status": 200,
+      "server": "GitHub.com",
+      "sameAsBuild": true,
+      "bytes": 10512,
+      "pass": true
+    },
+    {
+      "page": "privacy",
+      "url": "https://deepestrest.com/privacy/",
+      "status": 200,
+      "server": "GitHub.com",
+      "sameAsBuild": true,
+      "bytes": 19478,
+      "pass": true
+    },
+    {
+      "page": "cookies",
+      "url": "https://deepestrest.com/cookies/",
+      "status": 200,
+      "server": "GitHub.com",
+      "sameAsBuild": true,
+      "bytes": 12264,
+      "pass": true
+    },
+    {
+      "page": "404",
+      "url": "https://deepestrest.com/no-such-page/",
+      "status": 404,
+      "server": "GitHub.com",
+      "sameAsBuild": true,
+      "bytes": 8306,
+      "pass": true
+    }
+  ],
+  "pass": true
+}

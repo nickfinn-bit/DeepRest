@@ -1,148 +1,181 @@
 # DeepRest website: verification report
 
-Written by `scripts/verify/report.mjs` (the last step of `npm run verify`) on 2026-10-16 19:55 UTC, from the JSON results each check left in this folder.
-The site was tested as built in `dist/`, served locally the way GitHub Pages will serve it (`scripts/serve.mjs`: under `/DeepRest/`, gzip, 10-minute caching, the 404 page for missing addresses).
-It is not published, so nothing was measured on the live site.
+Written by `scripts/verify/report.mjs` (the last step of `npm run verify`) on 2026-10-20 03:16 UTC, from the JSON results each check left in this folder.
+Every check below ran against the **live site, https://deepestrest.com/**, served by GitHub Pages under Nick's domain; the hosting check also confirmed that each live page is byte-for-byte the page built from this commit.
 
 ## Summary
 
 | Check | Target | Result |
 |---|---|---|
-| Lighthouse, mobile and desktop, 10 pages | 95+ in Performance, Accessibility, Best Practices and SEO | ✅ 20/20 pass in every run; lowest score in any of 3 runs: **99**; 1 pair needed a re-run after an attempt slowed by other load on the machine, shown below |
-| Horizontal scroll, 7 widths × 10 pages | 0 | ✅ largest: **0 px** over 70 page-widths |
+| Hosting: DNS, HTTPS, redirects, every page live and identical to the build | all pass | ✅ 22/22 |
+| Lighthouse, mobile and desktop, 9 pages (live) | 95+ in Performance, Accessibility, Best Practices and SEO | ❌ 17/18 pass in every run; lowest score in any of 3 runs: **84**; 2 re-run after a failed attempt, shown below |
+| PageSpeed Insights (Lighthouse on Google's servers), mobile and desktop, 9 pages (live) | 95+ in all four categories | ✅ 9/9 pages; lowest score: **100** |
+| Horizontal scroll, 7 widths × 9 pages (live) | 0 | ✅ largest: **0 px** over 63 page-widths |
 | Layout shift during load | under 0.1 | ✅ largest: **0.0000**; with the Calendly calendar auto-loading: 0.0000 |
-| Text cut off or overlapping | none | ✅ 0 cut, 0 overlapping, 0 elements past the screen edge |
-| Calendly inline embed: loads and opens its booking flow | every width | ✅ 7/7 widths |
-| Calendly popup from the header button | every page, every width | ✅ 70/70 page-widths |
-| HTML validator (W3C Nu HTML Checker) | 0 errors | ✅ **0 errors** in 11 files; 0 other warnings; 20 known CSP warnings, explained below |
-| Broken links | 0 | ✅ **0** broken of 365 references (56 distinct) |
-| Placeholders | listed | **28**, every one in [PLACEHOLDERS.md](../PLACEHOLDERS.md) with where it appears |
-| Invented facts | 0 | ✅ **0** unexplained figures or contact details on any page |
-| Publishing guard | no publishing while placeholders remain | ✅ strict build refuses now; with every placeholder filled it builds 10 pages with no placeholder |
+| Layout faults: text cut off or overlapping, elements past the screen edge | 0 | ✅ **0**: 0 cut, 0 overlapping, 0 past the edge |
+| Calendly inline calendar, after consent: loads and opens its booking flow (live) | every width | ✅ 7/7 widths; 0 Calendly requests and 0 cookies before consent: ✅ |
+| Calendly popup from the header button, after consent | every page, every width | ✅ 63/63 page-widths |
+| HTML validator (W3C Nu HTML Checker, live) | 0 errors | ✅ **0 errors** in 10 files; 0 other warnings; 18 known CSP warnings, explained below |
+| Broken links (live) | 0 | ✅ **0** broken of 318 references (46 distinct) |
+| Placeholders | 0 | ✅ **0** |
+| `npm run build:strict` | passes | ✅ builds 9 pages, none showing a placeholder, with the booking link https://calendly.com/nicholas-finnemore/free-diagnostic |
+| Protected titles used for Nick (psychologist, therapist, counsellor, HCPC and BPS titles) | 0 | ✅ **0** on any page, in its text, title, description or sharing tags |
+| Clinical or medical claims | 0 | ✅ **0** |
+| Invented facts | 0 | ✅ **0** unexplained figures or contact details |
+| Home page: headline figures and the free-diagnostic offer | shown | ✅ 100% satisfaction across 23 clients; five years; "Your first five sessions are free, as a diagnostic" |
+
+## Hosting
+
+Checked from this machine against https://deepestrest.com/, with DNS asked of 1.1.1.1 and 8.8.8.8.
+
+| Check | Result | Detail |
+|---|---|---|
+| deepestrest.com A records are GitHub Pages' | ✅ | `["185.199.109.153","185.199.110.153","185.199.111.153","185.199.108.153"]` |
+| deepestrest.com AAAA records are GitHub Pages' | ✅ | `["2606:50c0:8001::153","2606:50c0:8000::153","2606:50c0:8002::153","2606:50c0:8003::153"]` |
+| www.deepestrest.com is a CNAME to nickfinn-bit.github.io | ✅ | `["nickfinn-bit.github.io"]` |
+| deepestrest.com MX records are Cloudflare Email Routing's | ✅ | `[{"exchange":"route2.mx.cloudflare.net","priority":20,"type":"MX"},{"exchange":"route3.mx.cloudflare.net","priority":35,"type":"MX"},{"exchange":"route1.mx.cloudflare.net","priority":6,"type":"MX"}]` |
+| deepestrest.com SPF record allows Cloudflare Email Routing | ✅ | `[["v=spf1 include:_spf.mx.cloudflare.net ~all"]]` |
+| HTTPS certificate is valid for the domain | ✅ | `{"authorized":true,"subject":"deepestrest.com","altNames":"DNS:deepestrest.com, DNS:www.deepestrest.com","issuer":"Let's Encrypt","validTo":"Jan 18 00:29:23 2027 GMT"}` |
+| http://deepestrest.com/ redirects to https://deepestrest.com/ | ✅ | `{"status":301,"location":"https://deepestrest.com/","final":"https://deepestrest.com/"}` |
+| https://www.deepestrest.com/ redirects to https://deepestrest.com/ | ✅ | `{"status":301,"location":"https://deepestrest.com/","final":"https://deepestrest.com/"}` |
+| http://www.deepestrest.com/ redirects to https://deepestrest.com/ | ✅ | `{"status":301,"location":"http://deepestrest.com/","final":"https://deepestrest.com/"}` |
+| https://nickfinn-bit.github.io/DeepRest/ redirects to https://deepestrest.com/ | ✅ | `{"status":301,"location":"https://deepestrest.com/","final":"https://deepestrest.com/"}` |
+| https://deepestrest.com/ answers 200 and matches dist/ | ✅ | `{"status":200,"server":"GitHub.com","sameAsBuild":true}` |
+| https://deepestrest.com/mentoring/ answers 200 and matches dist/ | ✅ | `{"status":200,"server":"GitHub.com","sameAsBuild":true}` |
+| https://deepestrest.com/about/ answers 200 and matches dist/ | ✅ | `{"status":200,"server":"GitHub.com","sameAsBuild":true}` |
+| https://deepestrest.com/faq/ answers 200 and matches dist/ | ✅ | `{"status":200,"server":"GitHub.com","sameAsBuild":true}` |
+| https://deepestrest.com/book/ answers 200 and matches dist/ | ✅ | `{"status":200,"server":"GitHub.com","sameAsBuild":true}` |
+| https://deepestrest.com/contact/ answers 200 and matches dist/ | ✅ | `{"status":200,"server":"GitHub.com","sameAsBuild":true}` |
+| https://deepestrest.com/privacy/ answers 200 and matches dist/ | ✅ | `{"status":200,"server":"GitHub.com","sameAsBuild":true}` |
+| https://deepestrest.com/cookies/ answers 200 and matches dist/ | ✅ | `{"status":200,"server":"GitHub.com","sameAsBuild":true}` |
+| https://deepestrest.com/no-such-page/ answers 404 and matches dist/ | ✅ | `{"status":404,"server":"GitHub.com","sameAsBuild":true}` |
+| https://deepestrest.com/sitemap.xml answers 200 and matches dist/ | ✅ | `{"status":200,"sameAsBuild":true}` |
+| https://deepestrest.com/robots.txt answers 200 and matches dist/ | ✅ | `{"status":200,"sameAsBuild":true}` |
+| https://deepestrest.com/404.html answers 200 and matches dist/ | ✅ | `{"status":200,"sameAsBuild":true}` |
+
+## PageSpeed Insights
+
+Lighthouse run on Google's own servers through PageSpeed Insights (pagespeed.web.dev), against the live site, so this machine's load plays no part (`scripts/verify/pagespeed.mjs`). Scores: Performance / Accessibility / Best Practices / SEO. Each row links to Google's report.
+
+| Page | Mobile | Desktop | Report |
+|---|---|---|---|
+| Home | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 2.3 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.3 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com/wkdwo260e5) |
+| How mentoring works | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.2 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-mentoring/3rpcuqk0ka) |
+| About Nick | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.3 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-about/ina9k6nwvz) |
+| FAQ | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.3 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-faq/dx2bx9nh16) |
+| Book a free session | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.2 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-book/m5hrhrwx20) |
+| Contact | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.2 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-contact/2shbokcsx6) |
+| Privacy policy | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.3 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-privacy/0vsa9n154v) |
+| Cookie notice | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.2 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-cookies/q8cg3ck3lk) |
+| Page not found (404) | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.2 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-404-html/c1vq5iteeu) |
 
 ## Lighthouse
 
-Lighthouse 13.5.0, default mobile settings (emulated phone, slow 4G, 4× slower CPU) and the desktop preset. Each page and form factor ran 3 times; the table gives the median run (by Performance) and, after it, the lowest score in any run. Scores: Performance / Accessibility / Best Practices / SEO. Full reports of the median runs are in [lighthouse/](lighthouse/).
+Lighthouse 13.5.0, default mobile settings (emulated phone, slow 4G, 4× slower CPU) and the desktop preset, against https://deepestrest.com/. Each page and form factor ran 3 times; the table gives the median run (by Performance) and, after it, the lowest score in any run. Scores: Performance / Accessibility / Best Practices / SEO. Full reports of the median runs are in [lighthouse/](lighthouse/).
 
 | Page | Mobile, median | Mobile, lowest | Desktop, median | Desktop, lowest |
 |---|---|---|---|---|
-| Home | 100 / 100 / 100 / 100 | 99 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 99 / 100 / 100 / 100 |
-| About | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
-| Services and approach | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
-| Fees and insurance | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
-| FAQ | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 99 / 100 / 100 / 100 |
-| Book a session | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
-| Contact | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
+| Home | 100 / 100 / 100 / 100 | 96 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 97 / 100 / 100 / 100 |
+| How mentoring works | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
+| About Nick | 90 / 100 / 100 / 100 | 84 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
+| FAQ | 100 / 100 / 100 / 100 | 96 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
+| Book a free session | 100 / 100 / 100 / 100 | 98 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 98 / 100 / 100 / 100 |
+| Contact | 100 / 100 / 100 / 100 | 99 / 100 / 100 / 100 | 99 / 100 / 100 / 100 | 98 / 100 / 100 / 100 |
 | Privacy policy | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
-| Cookie notice | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
-| Page not found (404) | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
+| Cookie notice | 100 / 100 / 100 / 100 | 99 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
+| Page not found (404) | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 99 / 100 / 100 / 100 | 99 / 100 / 100 / 100 |
 
-**Failed attempts, and the re-runs that replaced them.** Nothing in the site changed between an attempt and its re-run. This machine also runs other services: when they take the CPU, a page can get long main-thread tasks that are not its own work, and Lighthouse’s mobile setting multiplies them by four. Each run is shown as Performance score (total blocking time, main-thread time).
+**Failed attempts, and the re-runs that replaced them.** Nothing in the site changed between an attempt and its re-run. Each run is shown as Performance score (total blocking time, main-thread time).
 
 | Page | Form factor | Failed attempt: median; lowest | Each failed-attempt run | Re-run: median; lowest | Each re-run |
 |---|---|---|---|---|---|
-| Home | mobile | 100 / 100 / 100 / 100; 90 / 100 / 100 / 100 | 100 (0 ms, 1,518 ms); 100 (0 ms, 1,608 ms); 90 (237 ms, 1,420 ms) | 100 / 100 / 100 / 100; 99 / 100 / 100 / 100 | 100 (0 ms, 1,223 ms); 100 (0 ms, 1,516 ms); 99 (0 ms, 2,317 ms) |
+| About Nick | mobile | 100 / 100 / 100 / 100; 94 / 100 / 100 / 100 | 94 (21 ms, 487 ms); 100 (57 ms, 486 ms); 100 (22 ms, 429 ms) | 90 / 100 / 100 / 100; 84 / 100 / 100 / 100 | 84 (462 ms, 2,728 ms); 96 (198 ms, 1,217 ms); 90 (309 ms, 1,568 ms) |
+| FAQ | desktop | 98 / 100 / 100 / 100; 92 / 100 / 100 / 100 | 100 (0 ms, 117 ms); 92 (52 ms, 519 ms); 98 (0 ms, 317 ms) | 100 / 100 / 100 / 100; 100 / 100 / 100 / 100 | 100 (0 ms, 126 ms); 100 (0 ms, 112 ms); 100 (0 ms, 115 ms) |
 
 Audits that did not score full marks in at least one run:
 
-- Home, mobile: performance: first-contentful-paint (0.99)
-- Home, mobile: performance: speed-index (0.99)
-- Home, mobile: performance: first-contentful-paint (0.93)
-- Home, mobile: performance: largest-contentful-paint (0.99)
-- Home, mobile: performance: speed-index (0.97)
-- Home, desktop: performance: speed-index (0.98)
-- Home, desktop: performance: first-contentful-paint (0.99)
-- Home, desktop: performance: speed-index (0.92)
-- Home, desktop: performance: speed-index (0.99)
-- About, mobile: performance: first-contentful-paint (0.99)
-- About, mobile: performance: speed-index (0.98)
-- About, mobile: performance: speed-index (0.97)
-- About, desktop: performance: speed-index (0.99)
-- About, desktop: performance: speed-index (0.98)
-- Services and approach, mobile: performance: speed-index (0.99)
-- Services and approach, mobile: performance: first-contentful-paint (0.98)
-- Services and approach, mobile: performance: first-contentful-paint (0.99)
-- Services and approach, desktop: performance: speed-index (0.99)
-- Services and approach, desktop: performance: speed-index (0.98)
-- Services and approach, desktop: performance: speed-index (0.96)
-- Fees and insurance, mobile: performance: first-contentful-paint (0.99)
-- Fees and insurance, mobile: performance: speed-index (0.98)
-- Fees and insurance, desktop: performance: speed-index (0.96)
-- FAQ, mobile: performance: speed-index (0.99)
-- FAQ, mobile: performance: first-contentful-paint (0.99)
-- FAQ, mobile: performance: speed-index (0.98)
-- FAQ, desktop: performance: speed-index (0.9)
-- FAQ, desktop: performance: speed-index (0.99)
-- Book a session, mobile: performance: first-contentful-paint (0.99)
-- Book a session, desktop: performance: speed-index (0.98)
-- Book a session, desktop: performance: speed-index (0.95)
-- Contact, mobile: performance: first-contentful-paint (0.99)
-- Contact, desktop: performance: speed-index (0.98)
-- Contact, desktop: performance: speed-index (0.99)
-- Privacy policy, mobile: performance: first-contentful-paint (0.96)
-- Privacy policy, mobile: performance: speed-index (0.99)
-- Privacy policy, mobile: performance: first-contentful-paint (0.99)
-- Privacy policy, mobile: performance: speed-index (0.98)
-- Privacy policy, desktop: performance: speed-index (0.98)
+- Home, mobile: performance: speed-index (0.64)
+- Home, desktop: performance: speed-index (0.69)
+- About Nick, mobile: performance: first-contentful-paint (0.92)
+- About Nick, mobile: performance: largest-contentful-paint (0.98)
+- About Nick, mobile: performance: total-blocking-time (0.62)
+- About Nick, mobile: performance: speed-index (0.7)
+- About Nick, mobile: performance: first-contentful-paint (0.99)
+- About Nick, mobile: performance: total-blocking-time (0.9)
+- About Nick, mobile: performance: speed-index (0.9)
+- About Nick, mobile: performance: total-blocking-time (0.78)
+- About Nick, mobile: performance: speed-index (0.63)
+- About Nick, desktop: performance: speed-index (0.99)
+- FAQ, mobile: performance: speed-index (0.57)
+- Book a free session, mobile: performance: speed-index (0.99)
+- Book a free session, mobile: performance: speed-index (0.83)
+- Book a free session, desktop: performance: speed-index (0.84)
+- Book a free session, desktop: performance: speed-index (0.95)
+- Contact, mobile: performance: speed-index (0.94)
+- Contact, desktop: performance: speed-index (0.87)
+- Contact, desktop: performance: speed-index (0.82)
+- Privacy policy, mobile: performance: total-blocking-time (0.99)
 - Privacy policy, desktop: performance: speed-index (0.99)
-- Cookie notice, mobile: performance: first-contentful-paint (0.99)
+- Cookie notice, mobile: performance: speed-index (0.93)
+- Page not found (404), desktop: performance: speed-index (0.89)
+- Page not found (404), desktop: performance: speed-index (0.95)
 
-The 404 page was audited at `/DeepRest/404.html`, the same file served with status 200: Lighthouse will not audit a page served with status 404.
+The 404 page was audited at `404.html`, the same file served with status 200: Lighthouse will not audit a page served with status 404.
 
-**Supplementary: the booking page for a returning visitor who has already chosen to load Calendly**, so the calendar loads at once. This is not part of the pass mark: it shows what Calendly itself costs, and why it loads only when asked.
+**Supplementary: the booking page for a returning visitor who has already agreed to load Calendly**, so the calendar loads at once. This is not part of the pass mark: it shows what Calendly itself costs, and why it loads only when asked.
 
 | Form factor | Median | Lowest | Audits below full marks |
 |---|---|---|---|
-| mobile | 99 / 100 / 77 / 100 | 99 / 100 / 77 / 100 | performance: first-contentful-paint (0.99); performance: largest-contentful-paint (0.99); best-practices: third-party-cookies (0); best-practices: inspector-issues (0); performance: first-contentful-paint (0.97); performance: speed-index (0.99); performance: first-contentful-paint (0.98); performance: total-blocking-time (0.99) |
-| desktop | 100 / 100 / 77 / 100 | 100 / 100 / 77 / 100 | best-practices: third-party-cookies (0); best-practices: inspector-issues (0); performance: speed-index (0.98); performance: speed-index (0.99) |
+| mobile | 57 / 100 / 77 / 100 | 56 / 100 / 77 / 100 | performance: first-contentful-paint (0); performance: largest-contentful-paint (0); performance: speed-index (0.08); best-practices: third-party-cookies (0); best-practices: inspector-issues (0); performance: speed-index (0.16); performance: speed-index (0.17) |
+| desktop | 71 / 100 / 77 / 100 | 68 / 100 / 77 / 100 | performance: first-contentful-paint (0.39); performance: largest-contentful-paint (0.28); performance: speed-index (0.48); best-practices: third-party-cookies (0); best-practices: inspector-issues (0); performance: speed-index (0.24); performance: first-contentful-paint (0.38); performance: speed-index (0.53) |
 
 ## Layout at every width
 
-Each page was loaded fresh at each width (360, 390 and 768 px emulated as touch phones and tablets; 1,024 px and up as desktops). After the page settled, the check measured: horizontal scroll (document width minus window width); layout shift, by adding up every `layout-shift` entry from the start of loading; every element reaching past the screen edge; every line of text clipped by the screen or by a box that hides overflow; and every pair of text lines covering each other. Pages with collapsed answers (the FAQ) were checked again with every answer open.
+Each page was loaded fresh at each width from https://deepestrest.com/ (360, 390 and 768 px emulated as touch phones and tablets; 1,024 px and up as desktops). After the page settled, the check measured: horizontal scroll (document width minus window width); layout shift, by adding up every `layout-shift` entry from the start of loading; every element reaching past the screen edge; every line of text clipped by the screen or by a box that hides overflow; and every pair of text lines covering each other. The FAQ was checked again with every answer open.
 
 | Page | 360 | 390 | 768 | 1024 | 1280 | 1440 | 1920 |
 |---|---|---|---|---|---|---|---|
 | Home | ✅ [png](screenshots/home/360.png) | ✅ [png](screenshots/home/390.png) | ✅ [png](screenshots/home/768.png) | ✅ [png](screenshots/home/1024.png) | ✅ [png](screenshots/home/1280.png) | ✅ [png](screenshots/home/1440.png) | ✅ [png](screenshots/home/1920.png) |
-| About | ✅ [png](screenshots/about/360.png) | ✅ [png](screenshots/about/390.png) | ✅ [png](screenshots/about/768.png) | ✅ [png](screenshots/about/1024.png) | ✅ [png](screenshots/about/1280.png) | ✅ [png](screenshots/about/1440.png) | ✅ [png](screenshots/about/1920.png) |
-| Services and approach | ✅ [png](screenshots/services/360.png) | ✅ [png](screenshots/services/390.png) | ✅ [png](screenshots/services/768.png) | ✅ [png](screenshots/services/1024.png) | ✅ [png](screenshots/services/1280.png) | ✅ [png](screenshots/services/1440.png) | ✅ [png](screenshots/services/1920.png) |
-| Fees and insurance | ✅ [png](screenshots/fees/360.png) | ✅ [png](screenshots/fees/390.png) | ✅ [png](screenshots/fees/768.png) | ✅ [png](screenshots/fees/1024.png) | ✅ [png](screenshots/fees/1280.png) | ✅ [png](screenshots/fees/1440.png) | ✅ [png](screenshots/fees/1920.png) |
+| How mentoring works | ✅ [png](screenshots/mentoring/360.png) | ✅ [png](screenshots/mentoring/390.png) | ✅ [png](screenshots/mentoring/768.png) | ✅ [png](screenshots/mentoring/1024.png) | ✅ [png](screenshots/mentoring/1280.png) | ✅ [png](screenshots/mentoring/1440.png) | ✅ [png](screenshots/mentoring/1920.png) |
+| About Nick | ✅ [png](screenshots/about/360.png) | ✅ [png](screenshots/about/390.png) | ✅ [png](screenshots/about/768.png) | ✅ [png](screenshots/about/1024.png) | ✅ [png](screenshots/about/1280.png) | ✅ [png](screenshots/about/1440.png) | ✅ [png](screenshots/about/1920.png) |
 | FAQ | ✅ [png](screenshots/faq/360.png) | ✅ [png](screenshots/faq/390.png) | ✅ [png](screenshots/faq/768.png) | ✅ [png](screenshots/faq/1024.png) | ✅ [png](screenshots/faq/1280.png) | ✅ [png](screenshots/faq/1440.png) | ✅ [png](screenshots/faq/1920.png) |
-| Book a session | ✅ [png](screenshots/book/360.png) | ✅ [png](screenshots/book/390.png) | ✅ [png](screenshots/book/768.png) | ✅ [png](screenshots/book/1024.png) | ✅ [png](screenshots/book/1280.png) | ✅ [png](screenshots/book/1440.png) | ✅ [png](screenshots/book/1920.png) |
+| Book a free session | ✅ [png](screenshots/book/360.png) | ✅ [png](screenshots/book/390.png) | ✅ [png](screenshots/book/768.png) | ✅ [png](screenshots/book/1024.png) | ✅ [png](screenshots/book/1280.png) | ✅ [png](screenshots/book/1440.png) | ✅ [png](screenshots/book/1920.png) |
 | Contact | ✅ [png](screenshots/contact/360.png) | ✅ [png](screenshots/contact/390.png) | ✅ [png](screenshots/contact/768.png) | ✅ [png](screenshots/contact/1024.png) | ✅ [png](screenshots/contact/1280.png) | ✅ [png](screenshots/contact/1440.png) | ✅ [png](screenshots/contact/1920.png) |
 | Privacy policy | ✅ [png](screenshots/privacy/360.png) | ✅ [png](screenshots/privacy/390.png) | ✅ [png](screenshots/privacy/768.png) | ✅ [png](screenshots/privacy/1024.png) | ✅ [png](screenshots/privacy/1280.png) | ✅ [png](screenshots/privacy/1440.png) | ✅ [png](screenshots/privacy/1920.png) |
 | Cookie notice | ✅ [png](screenshots/cookies/360.png) | ✅ [png](screenshots/cookies/390.png) | ✅ [png](screenshots/cookies/768.png) | ✅ [png](screenshots/cookies/1024.png) | ✅ [png](screenshots/cookies/1280.png) | ✅ [png](screenshots/cookies/1440.png) | ✅ [png](screenshots/cookies/1920.png) |
 | Page not found (404) | ✅ [png](screenshots/404/360.png) | ✅ [png](screenshots/404/390.png) | ✅ [png](screenshots/404/768.png) | ✅ [png](screenshots/404/1024.png) | ✅ [png](screenshots/404/1280.png) | ✅ [png](screenshots/404/1440.png) | ✅ [png](screenshots/404/1920.png) |
 
-Every cell links to its full-page screenshot. The FAQ also has screenshots with every answer open (`screenshots/faq/<width>-answers-open.png`). Headings used the site's own serif font in 70 of 70 loads.
+Every cell links to its full-page screenshot. The FAQ also has screenshots with every answer open (`screenshots/faq/<width>-answers-open.png`). Headings used the site's own serif font in 63 of 63 loads. Console errors: 0.
 
 ## Calendly
 
-Tested with Puppeteer against the demo scheduling page. These checks run first, because they record the cookies the cookie notice lists; the site is then rebuilt with that list, which changes only the cookie notice’s table, before every other check. Calendly loads only after the visitor chooses it, so each test first checks that nothing came from Calendly before that choice. The booking flow was followed to Calendly's details form and never submitted, so no demo meeting was booked. On phone and tablet widths the test taps, as people do: Calendly ignores mouse clicks on touch screens.
+Tested with Puppeteer against https://deepestrest.com/, with the booking link https://calendly.com/nicholas-finnemore/free-diagnostic. Calendly loads only after the visitor agrees, so each test first checks that nothing came from Calendly before that choice. The booking flow was followed to Calendly's details form and never submitted, so nothing was booked in Nick's calendar. On phone and tablet widths the test taps, as people do: Calendly ignores mouse clicks on touch screens. The details form asks for: full_name, email, question_0, g-recaptcha-response, ot-group-id-C0002, ot-group-id-C0003, ot-group-id-C0004, vendor-search-handler, checkbox, checkbox, checkbox, checkbox.
 
 **Inline calendar on the booking page**
 
-| Width | Calendly requests before the choice | Cookies before the choice | Calendar loaded | Booking flow opened | Loads by itself when the choice is remembered | Layout shift then | Pass |
+| Width | Calendly requests before consent | Cookies before consent | Calendar loaded | Booking flow opened | Loads by itself when the choice is remembered | Layout shift then | Pass |
 |---|---|---|---|---|---|---|---|
-| 360 | 0 | 0 | ✅ | ✅ day: Monday, October 19 - Times available → time: 5:00pm → next → details form | ✅ | 0.0000 | ✅ |
-| 390 | 0 | 0 | ✅ | ✅ day: Monday, October 19 - Times available → time: 5:00pm → next → details form | ✅ | 0.0000 | ✅ |
-| 768 | 0 | 0 | ✅ | ✅ day: Monday, October 19 - Times available → time: 5:00pm → next → details form | ✅ | 0.0000 | ✅ |
-| 1024 | 0 | 0 | ✅ | ✅ day: Monday, October 19 - Times available → time: 5:00pm → next → details form | ✅ | 0.0000 | ✅ |
-| 1280 | 0 | 0 | ✅ | ✅ day: Monday, October 19 - Times available → time: 5:00pm → next → details form | ✅ | 0.0000 | ✅ |
-| 1440 | 0 | 0 | ✅ | ✅ day: Monday, October 19 - Times available → time: 5:00pm → next → details form | ✅ | 0.0000 | ✅ |
-| 1920 | 0 | 0 | ✅ | ✅ day: Monday, October 19 - Times available → time: 5:00pm → next → details form | ✅ | 0.0000 | ✅ |
+| 360 | 0 | 0 | ✅ | ✅ day: Tuesday, October 20 - Times available → time: 9:30am → next → details form | ✅ | 0.0000 | ✅ |
+| 390 | 0 | 0 | ✅ | ✅ day: Tuesday, October 20 - Times available → time: 9:30am → time pressed again → next → details form | ✅ | 0.0000 | ✅ |
+| 768 | 0 | 0 | ✅ | ✅ day: Tuesday, October 20 - Times available → time: 9:30am → next → details form | ✅ | 0.0000 | ✅ |
+| 1024 | 0 | 0 | ✅ | ✅ day: Tuesday, October 20 - Times available → time: 9:30am → next → details form | ✅ | 0.0000 | ✅ |
+| 1280 | 0 | 0 | ✅ | ✅ day: Tuesday, October 20 - Times available → time: 9:30am → time pressed again → next → details form | ✅ | 0.0000 | ✅ |
+| 1440 | 0 | 0 | ✅ | ✅ day: Tuesday, October 20 - Times available → time: 9:30am → next → details form | ✅ | 0.0000 | ✅ |
+| 1920 | 0 | 0 | ✅ | ✅ day: Tuesday, October 20 - Times available → time: 9:30am → time pressed again → next → details form | ✅ | 0.0000 | ✅ |
 
 Screenshots of the details form reached at each width: [calendly/](calendly/) (`inline-<width>.png`). Content Security Policy violations recorded during these tests: 0.
+
+Cookies after loading the calendar, compared with the cookie notice's list: 0 not listed; 0 listed but not seen this time.
 
 **Popup from the header button**: on every page, the button first asks before loading Calendly, then opens Calendly's popup with the calendar drawn, which then closes; after a reload, with the choice remembered, the popup opens straight away.
 
 | Page | 360 | 390 | 768 | 1024 | 1280 | 1440 | 1920 |
 |---|---|---|---|---|---|---|---|
 | Home | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| About | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Services and approach | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Fees and insurance | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| How mentoring works | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| About Nick | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | FAQ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Book a session | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Book a free session | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Contact | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Privacy policy | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Cookie notice | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
@@ -152,7 +185,7 @@ Without JavaScript: ✅ the header button is a plain link to the booking page, w
 
 ## HTML validation
 
-Nu HTML Checker 26.10.12 (0a70d65), the engine behind validator.w3.org/nu, run locally on every built page and the stylesheet.
+Nu HTML Checker 26.10.12 (0a70d65), the engine behind validator.w3.org/nu, run locally on every page and the stylesheet, as downloaded from https://deepestrest.com/.
 
 | File | Errors | Warnings | Known CSP warnings |
 |---|---|---|---|
@@ -163,90 +196,93 @@ Nu HTML Checker 26.10.12 (0a70d65), the engine behind validator.w3.org/nu, run l
 | contact/index.html | 0 | 0 | 2 |
 | cookies/index.html | 0 | 0 | 2 |
 | faq/index.html | 0 | 0 | 2 |
-| fees/index.html | 0 | 0 | 2 |
+| mentoring/index.html | 0 | 0 | 2 |
 | privacy/index.html | 0 | 0 | 2 |
-| services/index.html | 0 | 0 | 2 |
 | assets/css/site.css | 0 | 0 | 0 |
 
-The known warnings are the checker's, not the browser's: checking files, it has no web origin for the page, so it cannot match the Content Security Policy's `'self'` and warns that the site's own stylesheet and script would be blocked. In Chrome the same policy blocked nothing: the Calendly tests record every violation and found none. Checking over HTTP instead was tried: the checker refuses `localhost` ("Forbidden host"), and through standard input the same warning appears.
+The known warnings are the checker's, not the browser's: checking files, it has no web origin for the page, so it cannot match the Content Security Policy's `'self'` and warns that the site's own stylesheet and script would be blocked. In Chrome the same policy blocked nothing: the Calendly tests record every violation and found none.
 
 ## Links
 
-365 references on 10 pages (56 distinct): every link, stylesheet, script, icon and `#section` target. Internal pages were fetched from the local server, and each `#section` was found on its page. Broken: **0**.
+318 references on 9 pages (46 distinct), fetched from https://deepestrest.com/: every link, stylesheet, script, icon and `#section` target, and each `#section` was found on its page. Broken: **0**.
 
 External sites:
 
-- ✅ 200 https://www.hcpc-uk.org/check-the-register/
-- ✅ 200 https://calendly.com/embed-demo-sales/discovery-call
-- ✅ 200 https://www.hcpc-uk.org/standards/standards-of-conduct-performance-and-ethics/
-- ✅ 200 https://www.hcpc-uk.org/concerns/
+- ✅ 200 https://calendly.com/nicholas-finnemore/free-diagnostic
 - ✅ 200 https://calendly.com/legal/privacy-notice
+- ✅ 200 https://policies.google.com/privacy?hl=en-GB
+- ✅ 200 https://www.cloudflare.com/privacypolicy/
 - ✅ 200 https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
 - ✅ 200 https://ico.org.uk/make-a-complaint/
 
-Telephone links: `tel:999`, `tel:111`, `tel:116123`, `tel:03031231113`.
+Telephone links: `tel:999`, `tel:111`, `tel:116123`, `tel:03031231113`. Email links: `mailto:hello@deepestrest.com`.
 
-The site's own future public address (9 canonical and sharing addresses) cannot answer until the site is published, so each was checked against the same page on the local server.
+## Facts, protected titles and clinical claims
 
-## Placeholders and facts
+**Placeholders: 0.** Facts that are not known were left out of the pages rather than shown as placeholders; [PLACEHOLDERS.md](../PLACEHOLDERS.md) lists them under "Left out for want of a fact".
 
-**28 placeholders**, each listed with what is needed and where it appears in [PLACEHOLDERS.md](../PLACEHOLDERS.md): `site.url`, `practice.legalName`, `practice.icoRegistrationNumber`, `practice.email`, `practice.phone`, `practice.address`, `psychologist.name`, `psychologist.title`, `psychologist.qualifications`, `psychologist.hcpcNumber`, `psychologist.bpsMembership`, `psychologist.bio`, `psychologist.photo`, `psychologist.clientGroups`, `psychologist.specialisms`, `psychologist.approach`, `sessions.formats`, `fees.items.0.appointment`, `fees.items.0.length`, `fees.items.0.fee`, `fees.payment`, `fees.cancellation`, `fees.insurers`, `calendly.url`, `privacy.lastUpdated`, `privacy.retention`, `privacy.providers`, `privacy.security`.
-
-| Page | Placeholder marks | Distinct placeholders | Unexplained figures or contact details |
+| Page | Unexplained figures or contact details | Protected titles | Clinical claims |
 |---|---|---|---|
-| Home | 17 | 9 | 0 |
-| About | 13 | 9 | 0 |
-| Services and approach | 11 | 9 | 0 |
-| Fees and insurance | 12 | 11 | 0 |
-| FAQ | 11 | 7 | 0 |
-| Book a session | 7 | 7 | 0 |
-| Contact | 9 | 6 | 0 |
-| Privacy policy | 18 | 12 | 0 |
-| Cookie notice | 5 | 5 | 0 |
-| Page not found (404) | 5 | 5 | 0 |
+| Home | 0 | 0 | 0 |
+| How mentoring works | 0 | 0 | 0 |
+| About Nick | 0 | 0 | 0 |
+| FAQ | 0 | 0 | 0 |
+| Book a free session | 0 | 0 | 0 |
+| Contact | 0 | 0 | 0 |
+| Privacy policy | 0 | 0 | 0 |
+| Cookie notice | 0 | 0 | 0 |
+| Page not found (404) | 0 | 0 | 0 |
 
-**Invented facts: 0.** The scan removes the placeholders from each page's visible text and then looks for money, percentages, email addresses, HCPC numbers, postcodes, long quotations and any figure at all. Every figure left must be one of these, each checked against its source:
+**Protected titles: 0.** Each page's visible text, title, description and sharing tags were searched for: `/psycholog/i`, `/therapist/i`, `/counsel+or/i`, `/\bcounsel+ing\b/i`, `/psychiatr/i`, `/\bHCPC\b|Health and Care Professions Council/i`, `/\bBPS\b|British Psychological Society|\bCPsychol\b|\b[AM]?F?BPsS\b|\bchartered\b/i`, `/\b(dietitian|physiotherapist|paramedic|radiographer|podiatrist|chiropodist|orthoptist|prosthetist|orthotist|biomedical scientist|clinical scientist|hearing aid dispenser|operating department practitioner|social worker|nurse|doctor)\b/i`, `/\bDr\.?\s/`.
 
-- `999`: UK emergency number (given in the brief)
-- `111`: NHS 111 (given in the brief)
+**Clinical claims: 0.** The same text was searched for: `/\bclinic(al|ian|s)?\b/i`, `/\bcur(e|es|ed|ing)\b/i`, `/\btreat(s|ed|ing|ment|ments)?\b/i`, `/\bpatients?\b/i`, `/\bdiagnos(e|es|ed|is|ing)\b/i`, `/\bprescri/i`, `/\bdisorder/i`, `/\bsymptom/i`. "Diagnostic" is Nick's own word for the free sessions; the site says plainly that mentoring is not therapy or medical care.
+
+**Invented facts: 0.** The scan looks for money, percentages, email addresses, postcodes, long quotations and any figure at all. Every one left must be one of these, each checked against its source:
+
+- `100%`: Nick's own words, his order of 19 October 2026 (site.config.json, _sources): "a 100% satisfaction rate across 23 clients"
+- `23`: Nick's own words, his order of 19 October 2026 (site.config.json, _sources): 23 clients
+- `5`: Nick's own words, his order of 19 October 2026 (site.config.json, _sources): five years of mentoring (shown as the figure 5 in the figures panel)
+- `999`: UK emergency number
+- `111`: NHS 111
 - `116 123`: Samaritans, https://www.samaritans.org/how-we-can-help/contact-samaritan/ (free, day or night, 365 days a year)
 - `365`: Samaritans page above: "365 days a year"
 - `0303 123 1113`: ICO helpline, https://ico.org.uk/make-a-complaint/
 - `2018`: Data Protection Act 2018 (UK statute)
+- `6(1)(a)`: UK GDPR Article 6(1)(a), consent
 - `6(1)(b)`: UK GDPR Article 6(1)(b), contract
 - `6(1)(c)`: UK GDPR Article 6(1)(c), legal obligation
 - `6(1)(d)`: UK GDPR Article 6(1)(d), vital interests
 - `6(1)(f)`: UK GDPR Article 6(1)(f), legitimate interests
 - `9(2)(a)`: UK GDPR Article 9(2)(a), explicit consent
-- `9(2)(c)`: UK GDPR Article 9(2)(c), vital interests
-- `9(2)(f)`: UK GDPR Article 9(2)(f), legal claims
-- `9(2)(g)`: UK GDPR Article 9(2)(g), substantial public interest
-- `9(2)(h)`: UK GDPR Article 9(2)(h), health or social care
-- `Schedule 1, paragraph 2`: Data Protection Act 2018, Schedule 1 Part 1 paragraph 2, health or social care purposes
-- `Schedule 1, paragraph 18`: Data Protection Act 2018, Schedule 1 Part 2 paragraph 18, safeguarding of children and individuals at risk
 - `Article 6`: UK GDPR
 - `Article 9`: UK GDPR
 - `404`: HTTP status of the error page
+- `20 October 2026`: the date the privacy policy was last updated (site.config.json, privacy.lastUpdated)
 - `© 2026`: year of the build
-- `16 October 2026`: date scripts/verify/calendly.mjs recorded the Calendly cookies (src/data/calendly-cookies.json)
+- `Article 6(1)(a)`: UK GDPR Article 6(1)(a), consent
+- `Article 6(1)(b)`: UK GDPR Article 6(1)(b), contract
+- `Article 6(1)(c)`: UK GDPR Article 6(1)(c), legal obligation
+- `Article 6(1)(d)`: UK GDPR Article 6(1)(d), vital interests
+- `Article 6(1)(f)`: UK GDPR Article 6(1)(f), legitimate interests
+- `Article 9(2)(a)`: UK GDPR Article 9(2)(a), explicit consent
+- `20 October 2026`: date scripts/verify/calendly.mjs recorded the Calendly cookies (src/data/calendly-cookies.json)
+- `hello@deepestrest.com`: site.config.json, practice.email (Cloudflare Email Routing to Nick)
 
 Statements in the text, and where each was checked:
 
-- Titles such as clinical and counselling psychologist are protected by law; only people on the HCPC register may use them: HCPC, https://www.hcpc-uk.org/about-us/who-we-regulate/the-professions/
-- Registrants must meet the HCPC standards of conduct, performance and ethics, including confidentiality (standard 5) and keeping knowledge and skills up to date (standard 3.4): https://www.hcpc-uk.org/standards/standards-of-conduct-performance-and-ethics/
-- Practitioner psychologists' HCPC numbers begin PYL (used only in the instructions in site.config.json): https://www.hcpc-uk.org/check-the-register/how-to-check/
-- Psychiatrists are doctors and can prescribe; psychologists do not prescribe: NHS Health Careers lists psychiatry among doctors' specialties (https://www.healthcareers.nhs.uk/explore-roles/doctors/roles-doctors/psychiatry); the HCPC's list of professions with prescribing rights does not include practitioner psychologists (https://www.hcpc-uk.org/standards/meeting-our-standards/scope-of-practice/medicines-and-prescribing-rights/our-professions-medicines-and-prescribing-rights/)
-- Counsellors and psychotherapists are not regulated by law; many join voluntary registers: UKCP, https://www.psychotherapy.org.uk/policy-and-research/public-policy/statutory-regulation/
+- Nick's figures and words (five years mentoring students and young adults; young, which has played to his advantage because he has seen many people go through tech addiction and been able to get them out of it; a 100% satisfaction rate across 23 clients; the first five sessions free, as a diagnostic): his order of 19 October 2026, recorded in site.config.json under _sources
+- His full name, Nicholas Finnemore, used as data controller in the privacy policy: the name on his Google account
+- The booking event, its optional question ("Please share anything that will help prepare for our meeting."), guests allowed, Google Calendar connection and Google Meet location: the Calendly event "Free diagnostic session" as configured on calendly.com/nicholas-finnemore/free-diagnostic
+- Calendly confirmation emails carry links to cancel and reschedule: Calendly's standard invitee emails
+- hello@deepestrest.com forwards to Nick's Gmail through Cloudflare Email Routing: the routing rule on his Cloudflare account
 - Samaritans, 116 123, free from landlines and mobiles, day or night, 365 days a year: https://www.samaritans.org/how-we-can-help/contact-samaritan/
 - ICO complaints and helpline 0303 123 1113: https://ico.org.uk/make-a-complaint/
-- Calendly, LLC is in the United States, acts as a processor for its customers' invitee data, and complies with the UK Extension to the EU-U.S. Data Privacy Framework; its privacy notice covers cookies: https://calendly.com/legal/privacy-notice
+- Calendly, LLC, Google LLC, Cloudflare, Inc. and GitHub, Inc. each state that they comply with the UK Extension to the EU-U.S. Data Privacy Framework: https://calendly.com/legal/privacy-notice, https://policies.google.com/privacy/frameworks, https://www.cloudflare.com/privacypolicy/, https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
 - UK law treats personal data sent to US organisations certified under the UK Extension as adequately protected: Data Protection (Adequacy) (United States of America) Regulations 2023, https://www.legislation.gov.uk/uksi/2023/1028/made
 - GitHub Pages logs every visitor's IP address for security purposes: https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages
-- GitHub adheres to the Data Privacy Framework principles for UK data under the UK Extension: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
-- Calendly's booking form asks for a name and email address; Calendly shows its own cookie settings in the calendar, to accept or decline optional cookies; loading the calendar sets the cookies listed on the cookie notice: observed by scripts/verify/calendly.mjs (see calendly/ screenshots)
 - Health information is special category data; the rights listed; a reply within one month, extendable by two further months, usually free: UK GDPR Articles 9, 12 and 15 to 21
 
-There are no testimonials, outcomes or statistics. General wording about how sessions work is listed for the psychologist to check at the end of PLACEHOLDERS.md.
+There are no testimonials. General wording about how mentoring works, beyond Nick's own words, is listed for him to check at the end of PLACEHOLDERS.md.
 
 ## PDFs for review
 
@@ -260,33 +296,34 @@ Made with Chrome's print-to-PDF (Puppeteer `page.pdf`) at a desktop width of 1,4
 - [verification/pdf/contact.pdf](pdf/contact.pdf)
 - [verification/pdf/cookies.pdf](pdf/cookies.pdf)
 - [verification/pdf/faq.pdf](pdf/faq.pdf)
-- [verification/pdf/fees.pdf](pdf/fees.pdf)
 - [verification/pdf/home.pdf](pdf/home.pdf)
+- [verification/pdf/mentoring.pdf](pdf/mentoring.pdf)
 - [verification/pdf/privacy.pdf](pdf/privacy.pdf)
-- [verification/pdf/services.pdf](pdf/services.pdf)
 
 ## Approaches that failed, and what replaced them
 
-- Finding Calendly's demo page by URL: every calendly.com address answers 200 (it is a single-page app), so candidates were loaded in Chrome. `acmesales` and `team-demo` showed no openings; `calendly-demo` worked, but nothing showed it is Calendly's own. Calendly's embed help pages give only YOURLINK examples. Calendly's blog links to its own demo site, calendly-embed.com, whose inline embed is `calendly.com/embed-demo-sales/discovery-call`, now the interim link.
-- Calendly's cookie notice address, calendly.com/legal/cookie-notice, returns 404. The site links to Calendly's privacy notice, whose "Cookie and Local Storage Data" section covers cookies.
-- The first look inside the Calendly iframe came after a fixed 8 seconds and found it empty: Calendly takes about 6 seconds to draw. The tests now wait for the calendar's day buttons, not for a fixed time.
-- Calendly's loading spinner did not show: its `z-index: -1` put it behind the frame's white background. Fixed with `isolation: isolate` on the frame.
-- A 760 px booking frame made Calendly scroll inside the frame at tablet widths. Calendly's content was measured: 1,058 to 1,114 px tall in its stacked layout, 758 px in two columns, switching when the frame is about 1,000 px wide. The frame is now 1,130 px tall below 1,088 px of viewport, and 760 px above.
-- Mouse clicks inside Calendly did nothing on touch-emulated widths, because Calendly listens for taps there. The test now taps on phones and tablets. At 360 px one tap landed while the time list was still sliding in, and was lost; the test now lets it settle and taps again, up to 3 times.
-- The layout check reported the FAQ answers as overlapping: Chrome keeps collapsed `<details>` content in the layout without drawing it. The check now skips text that is not drawn (`checkVisibility`), and checks the FAQ a second time with every answer open.
-- Validating over HTTP, to avoid the checker's CSP warnings: the Nu checker refuses `localhost` ("Forbidden host"), and with standard input the same warnings appear. The files are checked directly, and the warnings are explained above.
-- The Nu HTML Checker normally needs Java, which this machine does not have. The self-contained vnu.windows.zip build needed none.
-- The link check reported the canonical addresses as broken, because the GitHub Pages site is not published yet. They are now checked against the same page on the local server.
-- The facts scan first flagged the ICO's number, because removing "111" broke up "1113". Verified figures are now matched longest first.
-- The first full Lighthouse batch stopped part-way (CHROME_INTERSTITIAL_ERROR on the FAQ page) when the local server it relied on ended with the session that had started it. A second batch, while this machine was busy, gave About on mobile a median Performance of 71 and a lowest of 43, with Chrome’s main thread at 4.3 seconds for a page that needs about 1 second elsewhere; it was stopped before finishing, and its results were not kept. The batch reported here was then run from the start, recording each run, and its one failed pair re-run with `--retry-failed`.
-- Printing the booking page with the calendar loaded gave a blank frame: print-to-PDF does not draw a cross-origin iframe running in its own process. That one PDF is printed by a Chrome started without site isolation.
+- Calendly sign-up with "Continue with Google" on calendly.com/signup returned to the log-in page with "No account exists" for his Google address, twice. Typing the address into the sign-up form first led to a page offering "Sign up with Google" with a terms box; that created the account.
+- Calendly's Google sign-in first offered calendar access as an optional box, which was left unticked; sign-up then required the full Google Calendar permission, with no option. The alternative, signing up with a password, was not used, because agents do not create passwords. The permission was granted, as signing up with Google requires.
+- Calendly's onboarding switched its Notetaker (meeting recording and transcripts) on by default. It was switched off before finishing, and the account shows Notetaker as not in use.
+- Clicking by screen position in Nick's Chrome missed its targets: that window runs at 125% scaling, so screenshot pixels are 1.25 times page pixels. Clicks now go to elements, or to positions divided by 1.25.
+- The facts scan read the "0%" inside "100%" as a separate percentage, matched "Article 6" before "6(1)(b)" and so left "(1)(b)" unexplained, and flagged the legal sense of "treat" ("UK law treats personal data...") as a clinical claim. The patterns were fixed for the first two; for the third the scan stayed strict and the privacy policy says "regards" and "handle" instead.
+- Finding Calendly's demo page for the earlier build (every calendly.com address answers 200, as a single-page app) took several tries; the real booking link has now replaced it.
+- The first look inside the Calendly iframe came after a fixed 8 seconds and found it empty: Calendly takes about 6 seconds to draw. The tests wait for the calendar's day buttons instead.
+- A 760 px booking frame made Calendly scroll inside the frame at tablet widths. The frame is 1,130 px tall below 68rem, matching Calendly's stacked layout, and 760 px above.
+- Mouse clicks inside Calendly did nothing on touch-emulated widths, because Calendly listens for taps there. The test taps on phones and tablets, and taps a time again if one is lost while the list slides in.
+- The layout check reported collapsed FAQ answers as overlapping, because Chrome keeps closed `<details>` content in the layout. It skips text that is not drawn, and checks the FAQ again with every answer open.
+- Validating over HTTP, to avoid the checker's CSP warnings: the Nu checker refuses `localhost` ("Forbidden host"). Files are checked directly; with --live, copies downloaded from the live site.
+- Printing the booking page with the calendar loaded gave a blank frame: print-to-PDF does not draw a cross-origin iframe in its own process. That PDF is printed by a Chrome started without site isolation.
+- Lighthouse on this machine scored About on mobile below 95 in one of three runs, three times over (lowest 93, then 94, then 84), and FAQ on desktop once (92; its re-run scored 100 in every run). The slow runs had 1.4 to 6 times the main-thread time of the fast runs on the same page (2,728 ms against about 450 ms at worst), while this machine was also running other services, including two Colab runners, at about 40% CPU. A filmstrip of one slow run showed a blank screen until 4.0 s although the page had finished loading at 0.34 s, so Chrome was not getting to paint, not waiting for the site. Re-running stopped there; PageSpeed Insights, which runs Lighthouse on Google's servers, was used as the second opinion below.
+- PageSpeed Insights' keyless API answered 429 (its shared daily quota used up), and its web page, opened signed out in a headless Chrome, answered "Unable to resolve" for the same reason. Run from a tab of its own in Nick's Chrome, signed in to Google, it worked; one page's mobile result timed out once and was re-run on its own.
+- Two scripted edits (a Python find-and-replace) silently did nothing because of an escaping slip: the cookie comparison in the Calendly check, and the wrapping of result lists in the shared result writer. Both were found when result files lacked the expected fields (the layout rows of the report read "not run"), redone by hand, and the layout check re-run live. A third scripted edit broke a pattern in the PageSpeed check, which the syntax check caught at once. Every scripted edit is now checked with a search afterwards.
 
 ## Limits of these checks
 
-- The site is not published, so every measurement is local. On GitHub Pages, the canonical addresses and sitemap start working only once the site is live there. At a project address such as nickfinn-bit.github.io/DeepRest/, search engines do not read robots.txt from the sub-folder; it takes effect only on a domain of the site's own.
 - Only Chrome was used (Chrome for Testing, headless), with phones and tablets emulated. Safari, Firefox and real devices were not tested.
-- Calendly is a third party: its demo account, layout, cookie list and cookie banner can change. The banner appeared from this machine's location, and may differ elsewhere.
-- No booking was submitted, so Calendly's confirmation step was not exercised.
+- Calendly is a third party: its layout, cookie list and cookie banner can change. The banner appeared from this machine's location, and may differ elsewhere.
+- No booking was submitted, so no session was booked in Nick's calendar and Calendly's confirmation step and emails were not exercised.
+- No email was sent to hello@deepestrest.com, since nothing is sent outside this machine without Nick's yes: the routing rule and DNS records were checked, delivery was not.
 - Lighthouse scores vary from run to run and from machine to machine; the table gives the lowest score of every run as well as the median.
-- The privacy policy and cookie notice were drafted for UK GDPR and PECR from the sources above. They have not been reviewed by a lawyer or by the data controller, and must be before publishing.
+- The privacy policy and cookie notice were drafted for UK GDPR and PECR from the sources above. They have not been reviewed by a lawyer, and Nick, as data controller, should check them against how he handles bookings and emails (PLACEHOLDERS.md lists the wording to check).
 
