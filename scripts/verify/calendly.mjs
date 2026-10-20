@@ -7,11 +7,12 @@
 //     popup; with the choice remembered it opens the popup straight away.
 //  3. Without JavaScript the header button is a plain link to the booking page.
 // It also records the cookies Calendly sets, for the cookie notice (src/data/calendly-cookies.json).
-//   node scripts/verify/calendly.mjs [--widths=360,1440] [--pages=home,book] [--skip-popup] [--skip-inline]
+// With --live it tests the published site, and compares the cookies with that list instead.
+//   node scripts/verify/calendly.mjs [--live] [--widths=360,1440] [--pages=home,book] [--skip-popup] [--skip-inline]
 import fs from 'node:fs';
 import path from 'node:path';
 import puppeteer from 'puppeteer';
-import { OUT, PAGES, ROOT, WIDTHS, pageUrl, sleep, viewportFor, writeJson } from './common.mjs';
+import { LIVE, OUT, PAGES, ROOT, WIDTHS, pageUrl, sleep, viewportFor, writeJson } from './common.mjs';
 
 const arg = (name) => process.argv.find((a) => a.startsWith(`--${name}=`))?.split('=')[1];
 const widths = arg('widths') ? arg('widths').split(',').map(Number) : WIDTHS;

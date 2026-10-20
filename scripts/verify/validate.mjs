@@ -7,10 +7,14 @@
 // cannot match the Content Security Policy's 'self' and warns that the site's own
 // stylesheet and script are blocked. In a browser they are not: scripts/verify/calendly.mjs
 // records every CSP violation, and finds none.
+//
+// With --live it first downloads every page, and the stylesheet, from the published site
+// into a temporary folder, and checks those copies: what visitors are actually served.
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
-import { ROOT, writeJson } from './common.mjs';
+import { BASE, LIVE, PAGES, ROOT, pageHtml, writeJson } from './common.mjs';
 
 // The launcher scripts only call the bundled Java runtime; calling it directly avoids a shell.
 const java = path.join(ROOT, '.tools', 'vnu-runtime-image', 'bin', process.platform === 'win32' ? 'java.exe' : 'java');
@@ -23,7 +27,20 @@ const run = (args) =>
     maxBuffer: 32 * 1024 * 1024,
   }).toString();
 
-const DIST = path.join(ROOT, 'dist');
+let DIST = path.join(ROOT, 'dist');
+if (LIVE) {
+  DIST = fs.mkdtempSync(path.join(os.tmpdir(), 'deeprest-live-'));
+  for (const p of PAGES) {
+    const file = p.slug === '404' ? path.join(DIST, '404.html') : path.join(DIST, p.path, 'index.html');
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, await pageHtml(p));
+  }
+  const home = await pageHtml(PAGES[0]);
+  const css = home.match(/href="(assets\/css\/site\.css[^"]*)"/)[1];
+  fs.mkdirSync(path.join(DIST, 'assets', 'css'), { recursive: true });
+  fs.writeFileSync(path.join(DIST, 'assets', 'css', 'site.css'), await (await fetch(new URL(css, BASE))).text());
+  console.log(`Downloaded ${PAGES.length} pages and the stylesheet from ${BASE} into ${DIST}`);
+}
 const slash = (p) => p.split(path.sep).join('/');
 const files = fs
   .readdirSync(DIST, { recursive: true })
@@ -69,6 +86,7 @@ for (const r of results) {
 }
 for (const m of unattached) console.log(`      (no file) ${m.type}: ${m.message}`);
 writeJson('html-validation.json', { checker: `Nu HTML Checker ${version}`, results, unattached });
+if (LIVE) fs.rmSync(DIST, { recursive: true, force: true });
 const errors = results.reduce((n, r) => n + r.errors.length, 0) + unattached.filter((m) => m.type !== 'info').length;
 console.log(`\n${errors} errors in ${results.length} files.`);
 process.exitCode = errors ? 1 : 0;

@@ -2,6 +2,7 @@
 // (1,440px). Each page prints as one continuous sheet, the height of the page, using
 // the screen styles so the PDF shows the site as visitors see it. Also writes one
 // combined PDF of every page, and the booking page with Calendly's calendar loaded.
+//   node scripts/verify/pdf.mjs [--live]
 import fs from 'node:fs';
 import path from 'node:path';
 import { PDFDocument } from 'pdf-lib';
@@ -59,7 +60,7 @@ try {
   await sleep(1500);
   const file = path.join(DIR, 'book-calendar-loaded.pdf');
   await printPage(page, file);
-  files.push({ name: 'Book a session, calendar loaded', file });
+  files.push({ name: 'Book a free session, calendar loaded', file });
   console.log(path.relative(OUT, file));
 } finally {
   await isolationOff.close();

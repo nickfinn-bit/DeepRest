@@ -1,23 +1,14 @@
-// Checks every link and resource reference on every built page: internal pages and
-// assets (served by scripts/serve.mjs), #fragments, external sites, tel: numbers,
-// and the Calendly link the booking buttons use.
-import fs from 'node:fs';
-import path from 'node:path';
-import { BASE, PAGES, ROOT, writeJson } from './common.mjs';
+// Checks every link and resource reference on every page: internal pages and assets,
+// #fragments, external sites, tel: and mailto: links, and the Calendly link the booking
+// buttons use. Locally (scripts/serve.mjs) the site's own public address, used by the
+// canonical and sharing tags, is checked against the same page on the local server;
+// with --live everything is checked on the published site itself.
+//   node scripts/verify/links.mjs [--live]
+import { BASE, LIVE, PAGES, SITE_URL, pageHtml, writeJson } from './common.mjs';
 
-const DIST = path.join(ROOT, 'dist');
-const config = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.config.json'), 'utf8'));
-const SITE_URL = typeof config.site.url === 'string' ? config.site.url : config.site.url.interim;
-// Until the site is published, its own public address (canonical and og:url) returns 404
-// there, so those references are checked against the same page on the local server.
-const published = typeof config.site.url === 'string';
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0 Safari/537.36';
 
-const pages = PAGES.map((p) => ({
-  ...p,
-  url: BASE + p.path,
-  file: p.slug === '404' ? path.join(DIST, '404.html') : path.join(DIST, p.path, 'index.html'),
-}));
+const pages = PAGES.map((p) => ({ ...p, url: BASE + p.path }));
 
 // Every href/src on the page, and the Calendly link on <html>.
 function references(html) {
@@ -44,7 +35,7 @@ function get(url) {
 
 const results = [];
 for (const page of pages) {
-  const html = fs.readFileSync(page.file, 'utf8');
+  const html = await pageHtml(page);
   const base = html.match(/<base href="([^"]*)"/)?.[1];
   const baseUrl = base ? new URL(base, page.url).href : page.url;
   for (const ref of references(html)) {
@@ -58,10 +49,10 @@ for (const page of pages) {
     } else {
       const target = new URL(ref.url, baseUrl);
       row.resolved = target.href;
-      row.kind = target.origin === new URL(BASE).origin ? 'internal' : 'external';
+      row.kind = target.origin === new URL(BASE).origin || target.href.startsWith(SITE_URL) ? 'internal' : 'external';
       let fetchUrl = target.href.split('#')[0];
-      if (!published && target.href.startsWith(SITE_URL)) {
-        row.kind = 'own public address (not yet published)';
+      if (!LIVE && target.href.startsWith(SITE_URL)) {
+        row.kind = 'own public address (checked locally)';
         fetchUrl = BASE + target.href.slice(SITE_URL.length).split('#')[0];
         row.checkedLocallyAt = fetchUrl;
       }
@@ -86,7 +77,7 @@ for (const r of results) {
   unique.get(key).pages.push(r.page);
 }
 const list = [...unique.values()];
-for (const kind of ['internal', 'own public address (not yet published)', 'external', 'telephone', 'email']) {
+for (const kind of ['internal', 'own public address (checked locally)', 'external', 'telephone', 'email']) {
   const of = list.filter((r) => r.kind === kind);
   if (!of.length) continue;
   console.log(`\n${kind}: ${of.length} distinct, ${of.filter((r) => !r.ok).length} broken`);

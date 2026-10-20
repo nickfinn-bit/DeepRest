@@ -1,48 +1,47 @@
 // Writes verification/REPORT.md from the JSON results the other checks leave in verification/.
 import fs from 'node:fs';
 import path from 'node:path';
-import { OUT, PAGES, WIDTHS } from './common.mjs';
+import { OUT, PAGES, ROOT, WIDTHS } from './common.mjs';
+
+const config = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.config.json'), 'utf8'));
 
 // Statements in the site's text that rest on outside facts, and where each was checked.
 const TEXT_SOURCES = [
-  'Titles such as clinical and counselling psychologist are protected by law; only people on the HCPC register may use them: HCPC, https://www.hcpc-uk.org/about-us/who-we-regulate/the-professions/',
-  'Registrants must meet the HCPC standards of conduct, performance and ethics, including confidentiality (standard 5) and keeping knowledge and skills up to date (standard 3.4): https://www.hcpc-uk.org/standards/standards-of-conduct-performance-and-ethics/',
-  'Practitioner psychologists\' HCPC numbers begin PYL (used only in the instructions in site.config.json): https://www.hcpc-uk.org/check-the-register/how-to-check/',
-  'Psychiatrists are doctors and can prescribe; psychologists do not prescribe: NHS Health Careers lists psychiatry among doctors\' specialties (https://www.healthcareers.nhs.uk/explore-roles/doctors/roles-doctors/psychiatry); the HCPC\'s list of professions with prescribing rights does not include practitioner psychologists (https://www.hcpc-uk.org/standards/meeting-our-standards/scope-of-practice/medicines-and-prescribing-rights/our-professions-medicines-and-prescribing-rights/)',
-  'Counsellors and psychotherapists are not regulated by law; many join voluntary registers: UKCP, https://www.psychotherapy.org.uk/policy-and-research/public-policy/statutory-regulation/',
+  `Nick's figures and words (five years mentoring students and young adults; young, which has played to his advantage because he has seen many people go through tech addiction and been able to get them out of it; a 100% satisfaction rate across 23 clients; the first five sessions free, as a diagnostic): his order of 19 October 2026, recorded in site.config.json under _sources`,
+  'His full name, Nicholas Finnemore, used as data controller in the privacy policy: the name on his Google account',
+  'The booking event, its optional question ("Please share anything that will help prepare for our meeting."), guests allowed, Google Calendar connection and Google Meet location: the Calendly event "Free diagnostic session" as configured on calendly.com/nicholas-finnemore/free-diagnostic',
+  'Calendly confirmation emails carry links to cancel and reschedule: Calendly\'s standard invitee emails',
+  'hello@deepestrest.com forwards to Nick\'s Gmail through Cloudflare Email Routing: the routing rule on his Cloudflare account',
   'Samaritans, 116 123, free from landlines and mobiles, day or night, 365 days a year: https://www.samaritans.org/how-we-can-help/contact-samaritan/',
   'ICO complaints and helpline 0303 123 1113: https://ico.org.uk/make-a-complaint/',
-  'Calendly, LLC is in the United States, acts as a processor for its customers\' invitee data, and complies with the UK Extension to the EU-U.S. Data Privacy Framework; its privacy notice covers cookies: https://calendly.com/legal/privacy-notice',
+  'Calendly, LLC, Google LLC, Cloudflare, Inc. and GitHub, Inc. each state that they comply with the UK Extension to the EU-U.S. Data Privacy Framework: https://calendly.com/legal/privacy-notice, https://policies.google.com/privacy/frameworks, https://www.cloudflare.com/privacypolicy/, https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement',
   'UK law treats personal data sent to US organisations certified under the UK Extension as adequately protected: Data Protection (Adequacy) (United States of America) Regulations 2023, https://www.legislation.gov.uk/uksi/2023/1028/made',
   'GitHub Pages logs every visitor\'s IP address for security purposes: https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages',
-  'GitHub adheres to the Data Privacy Framework principles for UK data under the UK Extension: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement',
-  'Calendly\'s booking form asks for a name and email address; Calendly shows its own cookie settings in the calendar, to accept or decline optional cookies; loading the calendar sets the cookies listed on the cookie notice: observed by scripts/verify/calendly.mjs (see calendly/ screenshots)',
   'Health information is special category data; the rights listed; a reply within one month, extendable by two further months, usually free: UK GDPR Articles 9, 12 and 15 to 21',
 ];
 
 const FAILED = [
-  'Finding Calendly\'s demo page by URL: every calendly.com address answers 200 (it is a single-page app), so candidates were loaded in Chrome. `acmesales` and `team-demo` showed no openings; `calendly-demo` worked, but nothing showed it is Calendly\'s own. Calendly\'s embed help pages give only YOURLINK examples. Calendly\'s blog links to its own demo site, calendly-embed.com, whose inline embed is `calendly.com/embed-demo-sales/discovery-call`, now the interim link.',
-  'Calendly\'s cookie notice address, calendly.com/legal/cookie-notice, returns 404. The site links to Calendly\'s privacy notice, whose "Cookie and Local Storage Data" section covers cookies.',
-  'The first look inside the Calendly iframe came after a fixed 8 seconds and found it empty: Calendly takes about 6 seconds to draw. The tests now wait for the calendar\'s day buttons, not for a fixed time.',
-  'Calendly\'s loading spinner did not show: its `z-index: -1` put it behind the frame\'s white background. Fixed with `isolation: isolate` on the frame.',
-  'A 760 px booking frame made Calendly scroll inside the frame at tablet widths. Calendly\'s content was measured: 1,058 to 1,114 px tall in its stacked layout, 758 px in two columns, switching when the frame is about 1,000 px wide. The frame is now 1,130 px tall below 1,088 px of viewport, and 760 px above.',
-  'Mouse clicks inside Calendly did nothing on touch-emulated widths, because Calendly listens for taps there. The test now taps on phones and tablets. At 360 px one tap landed while the time list was still sliding in, and was lost; the test now lets it settle and taps again, up to 3 times.',
-  'The layout check reported the FAQ answers as overlapping: Chrome keeps collapsed `<details>` content in the layout without drawing it. The check now skips text that is not drawn (`checkVisibility`), and checks the FAQ a second time with every answer open.',
-  'Validating over HTTP, to avoid the checker\'s CSP warnings: the Nu checker refuses `localhost` ("Forbidden host"), and with standard input the same warnings appear. The files are checked directly, and the warnings are explained above.',
-  'The Nu HTML Checker normally needs Java, which this machine does not have. The self-contained vnu.windows.zip build needed none.',
-  'The link check reported the canonical addresses as broken, because the GitHub Pages site is not published yet. They are now checked against the same page on the local server.',
-  'The facts scan first flagged the ICO\'s number, because removing "111" broke up "1113". Verified figures are now matched longest first.',
-  'The first full Lighthouse batch stopped part-way (CHROME_INTERSTITIAL_ERROR on the FAQ page) when the local server it relied on ended with the session that had started it. A second batch, while this machine was busy, gave About on mobile a median Performance of 71 and a lowest of 43, with Chrome’s main thread at 4.3 seconds for a page that needs about 1 second elsewhere; it was stopped before finishing, and its results were not kept. The batch reported here was then run from the start, recording each run, and its one failed pair re-run with `--retry-failed`.',
-  'Printing the booking page with the calendar loaded gave a blank frame: print-to-PDF does not draw a cross-origin iframe running in its own process. That one PDF is printed by a Chrome started without site isolation.',
+  'Calendly sign-up with "Continue with Google" on calendly.com/signup returned to the log-in page with "No account exists" for his Google address, twice. Typing the address into the sign-up form first led to a page offering "Sign up with Google" with a terms box; that created the account.',
+  'Calendly\'s Google sign-in first offered calendar access as an optional box, which was left unticked; sign-up then required the full Google Calendar permission, with no option. The alternative, signing up with a password, was not used, because agents do not create passwords. The permission was granted, as signing up with Google requires.',
+  'Calendly\'s onboarding switched its Notetaker (meeting recording and transcripts) on by default. It was switched off before finishing, and the account shows Notetaker as not in use.',
+  'Clicking by screen position in Nick\'s Chrome missed its targets: that window runs at 125% scaling, so screenshot pixels are 1.25 times page pixels. Clicks now go to elements, or to positions divided by 1.25.',
+  'The facts scan read the "0%" inside "100%" as a separate percentage, matched "Article 6" before "6(1)(b)" and so left "(1)(b)" unexplained, and flagged the legal sense of "treat" ("UK law treats personal data...") as a clinical claim. The patterns were fixed for the first two; for the third the scan stayed strict and the privacy policy says "regards" and "handle" instead.',
+  'Finding Calendly\'s demo page for the earlier build (every calendly.com address answers 200, as a single-page app) took several tries; the real booking link has now replaced it.',
+  'The first look inside the Calendly iframe came after a fixed 8 seconds and found it empty: Calendly takes about 6 seconds to draw. The tests wait for the calendar\'s day buttons instead.',
+  'A 760 px booking frame made Calendly scroll inside the frame at tablet widths. The frame is 1,130 px tall below 68rem, matching Calendly\'s stacked layout, and 760 px above.',
+  'Mouse clicks inside Calendly did nothing on touch-emulated widths, because Calendly listens for taps there. The test taps on phones and tablets, and taps a time again if one is lost while the list slides in.',
+  'The layout check reported collapsed FAQ answers as overlapping, because Chrome keeps closed `<details>` content in the layout. It skips text that is not drawn, and checks the FAQ again with every answer open.',
+  'Validating over HTTP, to avoid the checker\'s CSP warnings: the Nu checker refuses `localhost` ("Forbidden host"). Files are checked directly; with --live, copies downloaded from the live site.',
+  'Printing the booking page with the calendar loaded gave a blank frame: print-to-PDF does not draw a cross-origin iframe in its own process. That PDF is printed by a Chrome started without site isolation.',
 ];
 
 const LIMITS = [
-  'The site is not published, so every measurement is local. On GitHub Pages, the canonical addresses and sitemap start working only once the site is live there. At a project address such as nickfinn-bit.github.io/DeepRest/, search engines do not read robots.txt from the sub-folder; it takes effect only on a domain of the site\'s own.',
   'Only Chrome was used (Chrome for Testing, headless), with phones and tablets emulated. Safari, Firefox and real devices were not tested.',
-  'Calendly is a third party: its demo account, layout, cookie list and cookie banner can change. The banner appeared from this machine\'s location, and may differ elsewhere.',
-  'No booking was submitted, so Calendly\'s confirmation step was not exercised.',
+  'Calendly is a third party: its layout, cookie list and cookie banner can change. The banner appeared from this machine\'s location, and may differ elsewhere.',
+  'No booking was submitted, so no session was booked in Nick\'s calendar and Calendly\'s confirmation step and emails were not exercised.',
+  'No email was sent to hello@deepestrest.com, since nothing is sent outside this machine without Nick\'s yes: the routing rule and DNS records were checked, delivery was not.',
   'Lighthouse scores vary from run to run and from machine to machine; the table gives the lowest score of every run as well as the median.',
-  'The privacy policy and cookie notice were drafted for UK GDPR and PECR from the sources above. They have not been reviewed by a lawyer or by the data controller, and must be before publishing.',
+  'The privacy policy and cookie notice were drafted for UK GDPR and PECR from the sources above. They have not been reviewed by a lawyer, and Nick, as data controller, should check them against how he handles bookings and emails (PLACEHOLDERS.md lists the wording to check).',
 ];
 
 const read = (name) => {
@@ -50,14 +49,19 @@ const read = (name) => {
   return fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : null;
 };
 const lh = read('lighthouse.json');
-const layout = read('layout.json');
+const layoutFile = read('layout.json');
+const layout = layoutFile?.results ?? null;
 const cal = read('calendly.json');
 const html = read('html-validation.json');
 const links = read('links.json');
 const facts = read('facts.json');
 const ready = read('publish-ready.json');
+const hosting = read('live.json');
 
+const live = Boolean(layoutFile?.live);
+const testedAt = layoutFile?.testedAt ?? '';
 const yes = (b) => (b ? '✅' : '❌');
+const where = (data) => (data ? (data.live ? 'live' : 'local') : '');
 // A summary row, or 'not run' when that check left no results.
 const row = (data, text) => (data ? text : text.replace(/^(\| [^|]+\| [^|]+\| ).*$/, '$1not run |'));
 const name = (slug) => PAGES.find((p) => p.slug === slug)?.name ?? slug;
@@ -70,8 +74,9 @@ out(
   '# DeepRest website: verification report',
   '',
   `Written by \`scripts/verify/report.mjs\` (the last step of \`npm run verify\`) on ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC, from the JSON results each check left in this folder.`,
-  'The site was tested as built in `dist/`, served locally the way GitHub Pages will serve it (`scripts/serve.mjs`: under `/DeepRest/`, gzip, 10-minute caching, the 404 page for missing addresses).',
-  'It is not published, so nothing was measured on the live site.',
+  live
+    ? `Every check below ran against the **live site, ${testedAt}**, served by GitHub Pages under Nick's domain; the hosting check also confirmed that each live page is byte-for-byte the page built from this commit.`
+    : `The site was tested as built in \`dist/\`, served locally the way GitHub Pages serves it (\`scripts/serve.mjs\`, at ${testedAt}).`,
   '',
 );
 
@@ -84,31 +89,50 @@ const popup = cal?.popup ?? [];
 const htmlErrors = html ? html.results.reduce((n, r) => n + r.errors.length, 0) : null;
 const htmlWarnings = html ? html.results.reduce((n, r) => n + r.warnings.length, 0) : null;
 const htmlKnown = html ? html.results.reduce((n, r) => n + r.knownCspWarnings.length, 0) : null;
+const hostChecks = hosting?.checks ?? [];
 out(
   '## Summary',
   '',
   '| Check | Target | Result |',
   '|---|---|---|',
-  row(lh, `| Lighthouse, mobile and desktop, ${lhAll.length / 2} pages | 95+ in Performance, Accessibility, Best Practices and SEO | ${yes(lhAll.length && lhAll.every((r) => r.pass))} ${lhAll.filter((r) => r.pass).length}/${lhAll.length} pass in every run; lowest score in any of ${lh?.runsPerPage} runs: **${lhLowest}**${lhAll.some((r) => r.failedAttempt) ? `; ${lhAll.filter((r) => r.failedAttempt).length} ${lhAll.filter((r) => r.failedAttempt).length === 1 ? 'pair' : 'pairs'} needed a re-run after an attempt slowed by other load on the machine, shown below` : ''} |`),
-  row(layout, `| Horizontal scroll, ${WIDTHS.length} widths × ${PAGES.length} pages | 0 | ${yes(lay.length && lay.every((r) => r.horizontalScroll === 0))} largest: **${Math.max(...lay.map((r) => r.horizontalScroll))} px** over ${lay.length} page-widths |`),
-  row(layout, `| Layout shift during load | under 0.1 | ${yes(lay.length && lay.every((r) => r.cls < 0.1))} largest: **${Math.max(...lay.map((r) => r.cls)).toFixed(4)}**; with the Calendly calendar auto-loading: ${Math.max(...inline.map((r) => r.clsWhenRemembered ?? 0)).toFixed(4)} |`),
-  row(layout, `| Text cut off or overlapping | none | ${yes(lay.length && lay.every((r) => !r.cut.length && !r.overlaps.length && !r.offenders.length))} ${lay.reduce((n, r) => n + r.cut.length, 0)} cut, ${lay.reduce((n, r) => n + r.overlaps.length, 0)} overlapping, ${lay.reduce((n, r) => n + r.offenders.length, 0)} elements past the screen edge |`),
-  row(cal, `| Calendly inline embed: loads and opens its booking flow | every width | ${yes(inline.length && inline.every((r) => r.pass))} ${inline.filter((r) => r.pass).length}/${inline.length} widths |`),
-  row(cal, `| Calendly popup from the header button | every page, every width | ${yes(popup.length && popup.every((r) => r.pass))} ${popup.filter((r) => r.pass).length}/${popup.length} page-widths |`),
-  row(html, `| HTML validator (W3C Nu HTML Checker) | 0 errors | ${yes(htmlErrors === 0)} **${htmlErrors} errors** in ${html?.results.length} files; ${htmlWarnings} other warnings; ${htmlKnown} known CSP warnings, explained below |`),
-  row(links, `| Broken links | 0 | ${yes(links && links.broken.length === 0)} **${links?.broken.length}** broken of ${links?.checked} references (${links?.distinct} distinct) |`),
-  row(facts, `| Placeholders | listed | **${facts?.placeholders}**, every one in [PLACEHOLDERS.md](../PLACEHOLDERS.md) with where it appears |`),
-  row(facts, `| Invented facts | 0 | ${yes(facts?.inventedFacts === 0)} **${facts?.inventedFacts}** unexplained figures or contact details on any page |`),
-  row(ready, `| Publishing guard | no publishing while placeholders remain | ${yes(ready?.pass)} strict build refuses now; with every placeholder filled it builds ${ready?.pages} pages with no placeholder |`),
+  ...(hosting ? [`| Hosting: DNS, HTTPS, redirects, every page live and identical to the build | all pass | ${yes(hosting.pass)} ${hostChecks.filter((c) => c.ok).length}/${hostChecks.length} |`] : []),
+  row(lh, `| Lighthouse, mobile and desktop, ${lhAll.length / 2} pages (${where(lh)}) | 95+ in Performance, Accessibility, Best Practices and SEO | ${yes(lhAll.length && lhAll.every((r) => r.pass))} ${lhAll.filter((r) => r.pass).length}/${lhAll.length} pass in every run; lowest score in any of ${lh?.runsPerPage} runs: **${lhLowest}**${lhAll.some((r) => r.failedAttempt) ? `; ${lhAll.filter((r) => r.failedAttempt).length} re-run after a failed attempt, shown below` : ''} |`),
+  row(layout, `| Horizontal scroll, ${WIDTHS.length} widths × ${PAGES.length} pages (${where(layoutFile)}) | 0 | ${yes(lay.length && lay.every((r) => r.horizontalScroll === 0))} largest: **${Math.max(...lay.map((r) => r.horizontalScroll))} px** over ${lay.length} page-widths |`),
+  row(layout, `| Layout shift during load | under 0.1 | ${yes(lay.length && lay.every((r) => r.cls < 0.1))} largest: **${Math.max(...lay.map((r) => r.cls)).toFixed(4)}**; with the Calendly calendar auto-loading: ${Math.max(0, ...inline.map((r) => r.clsWhenRemembered ?? 0)).toFixed(4)} |`),
+  row(layout, `| Layout faults: text cut off or overlapping, elements past the screen edge | 0 | ${yes(lay.length && lay.every((r) => !r.cut.length && !r.overlaps.length && !r.offenders.length))} **${lay.reduce((n, r) => n + r.cut.length + r.overlaps.length + r.offenders.length, 0)}**: ${lay.reduce((n, r) => n + r.cut.length, 0)} cut, ${lay.reduce((n, r) => n + r.overlaps.length, 0)} overlapping, ${lay.reduce((n, r) => n + r.offenders.length, 0)} past the edge |`),
+  row(cal, `| Calendly inline calendar, after consent: loads and opens its booking flow (${where(cal)}) | every width | ${yes(inline.length && inline.every((r) => r.pass))} ${inline.filter((r) => r.pass).length}/${inline.length} widths; 0 Calendly requests and 0 cookies before consent: ${yes(inline.every((r) => r.requestsBeforeChoice === 0 && r.cookiesBeforeChoice === 0))} |`),
+  row(cal, `| Calendly popup from the header button, after consent | every page, every width | ${yes(popup.length && popup.every((r) => r.pass))} ${popup.filter((r) => r.pass).length}/${popup.length} page-widths |`),
+  row(html, `| HTML validator (W3C Nu HTML Checker, ${where(html)}) | 0 errors | ${yes(htmlErrors === 0)} **${htmlErrors} errors** in ${html?.results.length} files; ${htmlWarnings} other warnings; ${htmlKnown} known CSP warnings, explained below |`),
+  row(links, `| Broken links (${where(links)}) | 0 | ${yes(links && links.broken.length === 0)} **${links?.broken.length}** broken of ${links?.checked} references (${links?.distinct} distinct) |`),
+  row(facts, `| Placeholders | 0 | ${yes(facts?.placeholders === 0)} **${facts?.placeholders}** |`),
+  row(ready, `| \`npm run build:strict\` | passes | ${yes(ready?.pass)} builds ${ready?.pages} pages, none showing a placeholder, with the booking link ${ready?.calendlyUrl} |`),
+  row(facts, `| Protected titles used for Nick (psychologist, therapist, counsellor, HCPC and BPS titles) | 0 | ${yes(facts?.protectedTitles === 0)} **${facts?.protectedTitles}** on any page, in its text, title, description or sharing tags |`),
+  row(facts, `| Clinical or medical claims | 0 | ${yes(facts?.clinicalClaims === 0)} **${facts?.clinicalClaims}** |`),
+  row(facts, `| Invented facts | 0 | ${yes(facts?.inventedFacts === 0)} **${facts?.inventedFacts}** unexplained figures or contact details |`),
+  row(facts, `| Home page: headline figures and the free-diagnostic offer | shown | ${yes(facts?.headline && Object.values(facts.headline).every(Boolean))} ${config.mentor.satisfaction} satisfaction across ${config.mentor.clients} clients; five years; "Your first five sessions are free, as a diagnostic" |`),
   '',
 );
+
+// Hosting.
+if (hosting) {
+  out(
+    '## Hosting',
+    '',
+    `Checked from this machine against ${hosting.site}, with DNS asked of 1.1.1.1 and 8.8.8.8.`,
+    '',
+    '| Check | Result | Detail |',
+    '|---|---|---|',
+    ...hostChecks.map((c) => `| ${c.name} | ${yes(c.ok)} | ${typeof c.detail === 'string' ? c.detail : `\`${JSON.stringify(c.detail).replace(/\|/g, '\\|')}\``} |`),
+    '',
+  );
+}
 
 // Lighthouse.
 if (lh) {
   out(
     '## Lighthouse',
     '',
-    `Lighthouse ${lhAll[0]?.lighthouseVersion}, default mobile settings (emulated phone, slow 4G, 4× slower CPU) and the desktop preset. Each page and form factor ran ${lh.runsPerPage} times; the table gives the median run (by Performance) and, after it, the lowest score in any run. Scores: Performance / Accessibility / Best Practices / SEO. Full reports of the median runs are in [lighthouse/](lighthouse/).`,
+    `Lighthouse ${lhAll[0]?.lighthouseVersion}, default mobile settings (emulated phone, slow 4G, 4× slower CPU) and the desktop preset, against ${lh.testedAt}. Each page and form factor ran ${lh.runsPerPage} times; the table gives the median run (by Performance) and, after it, the lowest score in any run. Scores: Performance / Accessibility / Best Practices / SEO. Full reports of the median runs are in [lighthouse/](lighthouse/).`,
     '',
     '| Page | Mobile, median | Mobile, lowest | Desktop, median | Desktop, lowest |',
     '|---|---|---|---|---|',
@@ -123,7 +147,7 @@ if (lh) {
   if (retried.length) {
     out(
       '',
-      '**Failed attempts, and the re-runs that replaced them.** Nothing in the site changed between an attempt and its re-run. This machine also runs other services: when they take the CPU, a page can get long main-thread tasks that are not its own work, and Lighthouse’s mobile setting multiplies them by four. Each run is shown as Performance score (total blocking time, main-thread time).',
+      '**Failed attempts, and the re-runs that replaced them.** Nothing in the site changed between an attempt and its re-run. Each run is shown as Performance score (total blocking time, main-thread time).',
       '',
       '| Page | Form factor | Failed attempt: median; lowest | Each failed-attempt run | Re-run: median; lowest | Each re-run |',
       '|---|---|---|---|---|---|',
@@ -131,21 +155,16 @@ if (lh) {
     const each = (runs) =>
       runs ? runs.map((x) => `${x.scores.performance} (${x.tbtMs} ms, ${x.mainThreadMs.toLocaleString('en-GB')} ms)`).join('; ') : 'not recorded';
     for (const r of retried) {
-      out(
-        `| ${name(r.page)} | ${r.formFactor} | ${scores(r.failedAttempt.median)}; ${scores(r.failedAttempt.lowest)} | ${each(r.failedAttempt.eachRun)} | ${scores(r.median)}; ${scores(r.lowest)} | ${each(r.eachRun)} |`,
-      );
+      out(`| ${name(r.page)} | ${r.formFactor} | ${scores(r.failedAttempt.median)}; ${scores(r.failedAttempt.lowest)} | ${each(r.failedAttempt.eachRun)} | ${scores(r.median)}; ${scores(r.lowest)} | ${each(r.eachRun)} |`);
     }
   }
   out('', 'Audits that did not score full marks in at least one run:', '');
   const notes = lhAll.flatMap((r) => r.failingAudits.map((a) => `${name(r.page)}, ${r.formFactor}: ${a}`));
   out(...(notes.length ? notes.map((n) => `- ${n}`) : ['- none']), '');
-  out(
-    'The 404 page was audited at `/DeepRest/404.html`, the same file served with status 200: Lighthouse will not audit a page served with status 404.',
-    '',
-  );
+  out('The 404 page was audited at `404.html`, the same file served with status 200: Lighthouse will not audit a page served with status 404.', '');
   if (lh.supplementary?.length) {
     out(
-      '**Supplementary: the booking page for a returning visitor who has already chosen to load Calendly**, so the calendar loads at once. This is not part of the pass mark: it shows what Calendly itself costs, and why it loads only when asked.',
+      '**Supplementary: the booking page for a returning visitor who has already agreed to load Calendly**, so the calendar loads at once. This is not part of the pass mark: it shows what Calendly itself costs, and why it loads only when asked.',
       '',
       '| Form factor | Median | Lowest | Audits below full marks |',
       '|---|---|---|---|',
@@ -160,7 +179,7 @@ if (layout) {
   out(
     '## Layout at every width',
     '',
-    'Each page was loaded fresh at each width (360, 390 and 768 px emulated as touch phones and tablets; 1,024 px and up as desktops). After the page settled, the check measured: horizontal scroll (document width minus window width); layout shift, by adding up every `layout-shift` entry from the start of loading; every element reaching past the screen edge; every line of text clipped by the screen or by a box that hides overflow; and every pair of text lines covering each other. Pages with collapsed answers (the FAQ) were checked again with every answer open.',
+    `Each page was loaded fresh at each width from ${testedAt} (360, 390 and 768 px emulated as touch phones and tablets; 1,024 px and up as desktops). After the page settled, the check measured: horizontal scroll (document width minus window width); layout shift, by adding up every \`layout-shift\` entry from the start of loading; every element reaching past the screen edge; every line of text clipped by the screen or by a box that hides overflow; and every pair of text lines covering each other. The FAQ was checked again with every answer open.`,
     '',
     `| Page | ${WIDTHS.map((w) => `${w}`).join(' | ')} |`,
     `|---|${WIDTHS.map(() => '---').join('|')}|`,
@@ -174,21 +193,22 @@ if (layout) {
   }
   out(
     '',
-    `Every cell links to its full-page screenshot. The FAQ also has screenshots with every answer open (\`screenshots/faq/<width>-answers-open.png\`). Headings used the site's own serif font in ${layout.filter((r) => r.serifLoaded).length} of ${layout.length} loads.`,
+    `Every cell links to its full-page screenshot. The FAQ also has screenshots with every answer open (\`screenshots/faq/<width>-answers-open.png\`). Headings used the site's own serif font in ${layout.filter((r) => r.serifLoaded).length} of ${layout.length} loads. Console errors: ${layout.reduce((n, r) => n + r.consoleErrors.length, 0)}.`,
     '',
   );
 }
 
 // Calendly.
 if (cal) {
+  const fields = inline.find((r) => r.flowSteps?.some((s) => s.startsWith('details form')))?.flowSteps.find((s) => s.startsWith('details form'));
   out(
     '## Calendly',
     '',
-    'Tested with Puppeteer against the demo scheduling page. These checks run first, because they record the cookies the cookie notice lists; the site is then rebuilt with that list, which changes only the cookie notice’s table, before every other check. Calendly loads only after the visitor chooses it, so each test first checks that nothing came from Calendly before that choice. The booking flow was followed to Calendly\'s details form and never submitted, so no demo meeting was booked. On phone and tablet widths the test taps, as people do: Calendly ignores mouse clicks on touch screens.',
+    `Tested with Puppeteer against ${cal.testedAt}, with the booking link ${config.calendly.url}. Calendly loads only after the visitor agrees, so each test first checks that nothing came from Calendly before that choice. The booking flow was followed to Calendly's details form and never submitted, so nothing was booked in Nick's calendar. On phone and tablet widths the test taps, as people do: Calendly ignores mouse clicks on touch screens.${fields ? ` The details form asks for: ${fields.replace('details form: ', '')}.` : ''}`,
     '',
     '**Inline calendar on the booking page**',
     '',
-    '| Width | Calendly requests before the choice | Cookies before the choice | Calendar loaded | Booking flow opened | Loads by itself when the choice is remembered | Layout shift then | Pass |',
+    '| Width | Calendly requests before consent | Cookies before consent | Calendar loaded | Booking flow opened | Loads by itself when the choice is remembered | Layout shift then | Pass |',
     '|---|---|---|---|---|---|---|---|',
     ...inline.map(
       (r) =>
@@ -196,6 +216,7 @@ if (cal) {
     ),
     '',
     `Screenshots of the details form reached at each width: [calendly/](calendly/) (\`inline-<width>.png\`). Content Security Policy violations recorded during these tests: ${inline.reduce((n, r) => n + (r.cspViolations?.length ?? 0), 0) + popup.reduce((n, r) => n + (r.cspViolations?.length ?? 0), 0)}.`,
+    ...(cal.cookieComparison ? ['', `Cookies after loading the calendar, compared with the cookie notice's list: ${cal.cookieComparison.notListed.length} not listed${cal.cookieComparison.notListed.length ? ` (${cal.cookieComparison.notListed.join(', ')})` : ''}; ${cal.cookieComparison.listedNotSeen.length} listed but not seen this time${cal.cookieComparison.listedNotSeen.length ? ` (${cal.cookieComparison.listedNotSeen.join(', ')})` : ''}.`] : []),
     '',
     '**Popup from the header button**: on every page, the button first asks before loading Calendly, then opens Calendly\'s popup with the calendar drawn, which then closes; after a reload, with the choice remembered, the popup opens straight away.',
     '',
@@ -216,13 +237,13 @@ if (html) {
   out(
     '## HTML validation',
     '',
-    `${html.checker}, the engine behind validator.w3.org/nu, run locally on every built page and the stylesheet.`,
+    `${html.checker}, the engine behind validator.w3.org/nu, run locally on every page and the stylesheet${html.live ? `, as downloaded from ${html.testedAt}` : ' in dist/'}.`,
     '',
     '| File | Errors | Warnings | Known CSP warnings |',
     '|---|---|---|---|',
     ...html.results.map((r) => `| ${r.file} | ${r.errors.length} | ${r.warnings.length} | ${r.knownCspWarnings.length} |`),
     '',
-    'The known warnings are the checker\'s, not the browser\'s: checking files, it has no web origin for the page, so it cannot match the Content Security Policy\'s `\'self\'` and warns that the site\'s own stylesheet and script would be blocked. In Chrome the same policy blocked nothing: the Calendly tests record every violation and found none. Checking over HTTP instead was tried: the checker refuses `localhost` ("Forbidden host"), and through standard input the same warning appears.',
+    'The known warnings are the checker\'s, not the browser\'s: checking files, it has no web origin for the page, so it cannot match the Content Security Policy\'s `\'self\'` and warns that the site\'s own stylesheet and script would be blocked. In Chrome the same policy blocked nothing: the Calendly tests record every violation and found none.',
     '',
   );
 }
@@ -230,35 +251,36 @@ if (html) {
 // Links.
 if (links) {
   const ext = links.distinctLinks.filter((l) => l.kind === 'external');
-  const own = links.distinctLinks.filter((l) => l.kind.startsWith('own public address'));
   out(
     '## Links',
     '',
-    `${links.checked} references on ${PAGES.length} pages (${links.distinct} distinct): every link, stylesheet, script, icon and \`#section\` target. Internal pages were fetched from the local server, and each \`#section\` was found on its page. Broken: **${links.broken.length}**.`,
+    `${links.checked} references on ${PAGES.length} pages (${links.distinct} distinct), fetched from ${links.testedAt}: every link, stylesheet, script, icon and \`#section\` target, and each \`#section\` was found on its page. Broken: **${links.broken.length}**.`,
     '',
     'External sites:',
     '',
     ...ext.map((l) => `- ${yes(l.ok)} ${l.status} ${l.resolved}`),
     '',
-    `Telephone links: ${links.distinctLinks.filter((l) => l.kind === 'telephone').map((l) => `\`${l.href}\``).join(', ')}.`,
-    '',
-    `The site's own future public address (${own.length} canonical and sharing addresses) cannot answer until the site is published, so each was checked against the same page on the local server.`,
+    `Telephone links: ${links.distinctLinks.filter((l) => l.kind === 'telephone').map((l) => `\`${l.href}\``).join(', ')}. Email links: ${links.distinctLinks.filter((l) => l.kind === 'email').map((l) => `\`${l.href}\``).join(', ')}.`,
     '',
   );
 }
 
-// Placeholders and facts.
+// Facts.
 if (facts) {
   out(
-    '## Placeholders and facts',
+    '## Facts, protected titles and clinical claims',
     '',
-    `**${facts.placeholders} placeholders**, each listed with what is needed and where it appears in [PLACEHOLDERS.md](../PLACEHOLDERS.md): ${facts.placeholderKeys.map((k) => `\`${k}\``).join(', ')}.`,
+    `**Placeholders: ${facts.placeholders}.** Facts that are not known were left out of the pages rather than shown as placeholders; [PLACEHOLDERS.md](../PLACEHOLDERS.md) lists them under "Left out for want of a fact".`,
     '',
-    '| Page | Placeholder marks | Distinct placeholders | Unexplained figures or contact details |',
+    '| Page | Unexplained figures or contact details | Protected titles | Clinical claims |',
     '|---|---|---|---|',
-    ...facts.pages.map((p) => `| ${name(p.page)} | ${p.placeholderMarks} | ${p.distinctPlaceholders} | ${p.flags.length} |`),
+    ...facts.pages.map((p) => `| ${name(p.page)} | ${p.flags.length} | ${p.protectedTitles.length} | ${p.clinicalClaims.length} |`),
     '',
-    `**Invented facts: ${facts.inventedFacts}.** The scan removes the placeholders from each page's visible text and then looks for money, percentages, email addresses, HCPC numbers, postcodes, long quotations and any figure at all. Every figure left must be one of these, each checked against its source:`,
+    `**Protected titles: ${facts.protectedTitles}.** Each page's visible text, title, description and sharing tags were searched for: ${facts.protectedPatterns.map((p) => `\`${p}\``).join(', ')}.`,
+    '',
+    `**Clinical claims: ${facts.clinicalClaims}.** The same text was searched for: ${facts.clinicalPatterns.map((p) => `\`${p}\``).join(', ')}. "Diagnostic" is Nick's own word for the free sessions; the site says plainly that mentoring is not therapy or medical care.`,
+    '',
+    `**Invented facts: ${facts.inventedFacts}.** The scan looks for money, percentages, email addresses, postcodes, long quotations and any figure at all. Every one left must be one of these, each checked against its source:`,
     '',
     ...facts.verifiedFigures.map((v) => `- \`${v.text}\`: ${v.source}`),
     '',
@@ -266,7 +288,7 @@ if (facts) {
     '',
     ...TEXT_SOURCES.map((t) => `- ${t}`),
     '',
-    'There are no testimonials, outcomes or statistics. General wording about how sessions work is listed for the psychologist to check at the end of PLACEHOLDERS.md.',
+    'There are no testimonials. General wording about how mentoring works, beyond Nick\'s own words, is listed for him to check at the end of PLACEHOLDERS.md.',
     '',
   );
 }

@@ -1,6 +1,6 @@
 // For every page at every width: horizontal scroll, layout shift during load,
 // text cut off or overlapping, and a full-page screenshot.
-//   node scripts/verify/layout.mjs [--pages=home,book] [--widths=360,1440] [--no-shots]
+//   node scripts/verify/layout.mjs [--live] [--pages=home,book] [--widths=360,1440] [--no-shots]
 import fs from 'node:fs';
 import path from 'node:path';
 import puppeteer from 'puppeteer';
