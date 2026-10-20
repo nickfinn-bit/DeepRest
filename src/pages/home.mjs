@@ -1,94 +1,102 @@
 import { icons } from '../lib/icons.mjs';
-import { ctaBand, ext } from '../lib/ui.mjs';
-import { HCPC_REGISTER } from '../lib/layout.mjs';
+import { ctaBand, figures, inWords } from '../lib/ui.mjs';
 
 export default {
   slug: '',
   name: 'Home',
-  title: ({ F }) => `DeepRest: the psychology practice of ${F.plain('psychologist.name')}`,
+  title: ({ F }) => `DeepRest: tech-addiction mentoring with ${F.plain('mentor.name')}`,
   description: ({ F }) =>
-    `DeepRest is the psychology practice of ${F.plain('psychologist.name')}, ${F.plain('psychologist.title')}, registered with the HCPC. Book an appointment online.`,
+    `Mentoring for ${F.plain('mentor.clientGroups')} who want to break free from tech addiction. ` +
+    `A ${F.plain('mentor.satisfaction')} satisfaction rate across ${F.plain('mentor.clients')} clients, and your first ${inWords(F.value('offer.freeSessions'))} sessions are free.`,
   main: (ctx) => {
     const { F, href } = ctx;
+    const free = inWords(F.value('offer.freeSessions'));
+    const nick = F.text('mentor.firstName');
     return `
 <section class="hero" aria-labelledby="hero-title">
   <div class="container hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow">Psychology practice</p>
-      <h1 id="hero-title">A calm, confidential space to talk things through</h1>
-      <p class="lead">DeepRest is the practice of ${F.text('psychologist.name')}, ${F.text('psychologist.title')}, registered with the Health and Care Professions Council.</p>
+      <p class="eyebrow">Tech-addiction mentoring</p>
+      <h1 id="hero-title">Take back your time from tech</h1>
+      <p class="lead">DeepRest is ${F.text('mentor.name')}’s mentoring practice. For ${inWords(F.value('mentor.years'))} years he has mentored ${F.text('mentor.clientGroups')} through tech addiction, and helped them out of it.</p>
+      <p class="hero-offer">${icons.gift}<span><strong>Your first ${free} sessions are free</strong>, as a diagnostic.</span></p>
       <div class="button-row">
-        <a class="btn btn-primary btn-lg" href="${href('book')}">Book a session</a>
-        <a class="btn btn-secondary btn-lg" href="${href('about')}">About the psychologist</a>
+        <a class="btn btn-primary btn-lg" href="${href('book')}">Book a free session</a>
+        <a class="btn btn-secondary btn-lg" href="${href('mentoring')}">How mentoring works</a>
       </div>
     </div>
-    <aside class="hero-card" aria-labelledby="glance-title">
-      <h2 id="glance-title" class="hero-card-title">At a glance</h2>
-      <dl class="glance">
-        <div><dt>${icons.shield}Registration</dt><dd>HCPC, number ${F.text('psychologist.hcpcNumber')}</dd></div>
-        ${F.isNone('psychologist.bpsMembership') ? '' : `<div><dt>${icons.user}Membership</dt><dd>British Psychological Society: ${F.text('psychologist.bpsMembership')}</dd></div>`}
-        <div><dt>${icons.calendar}Sessions</dt><dd>${F.text('sessions.formats')}</dd></div>
-        <div><dt>${icons.info}Fees</dt><dd><a href="${href('fees')}">Fees and insurance</a></dd></div>
-      </dl>
+    <aside class="hero-card" aria-labelledby="record-title">
+      <h2 id="record-title" class="hero-card-title">${nick}’s record</h2>
+      ${figures(ctx)}
+      <p class="figures-note">A ${F.text('mentor.satisfaction')} satisfaction rate across the ${F.text('mentor.clients')} clients ${nick} has mentored.</p>
     </aside>
   </div>
 </section>
 
-<section class="section" aria-labelledby="start-title">
+<section class="section" aria-labelledby="free-title">
+  <div class="container split">
+    <div>
+      <p class="eyebrow">Start free</p>
+      <h2 id="free-title">Your first ${free} sessions are free</h2>
+      <p>They work as a diagnostic. With ${nick}, you look at how tech fits into your days, what it is costing you and what you would like to change, and you find out whether mentoring is right for you.</p>
+      <p>There is nothing to pay for these ${free} sessions.</p>
+      <p><a class="link-arrow" href="${href('mentoring')}">How mentoring works${icons.arrow}</a></p>
+    </div>
+    <div class="card">
+      <h3>${icons.calendar}Booking a free session</h3>
+      <ul class="tick-list">
+        <li>Choose a day and time that suits you in the online booking calendar.</li>
+        <li>You only need your name and email address to book.</li>
+        <li>Book each session separately, one at a time.</li>
+        <li>Your confirmation email has links to move or cancel the session.</li>
+      </ul>
+      <p><a class="btn btn-primary" href="${href('book')}">Book a free session</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" aria-labelledby="how-title">
   <div class="container">
     <div class="section-head">
       <p class="eyebrow">Getting started</p>
-      <h2 id="start-title">How it works</h2>
+      <h2 id="how-title">How it works</h2>
     </div>
     <ol class="steps">
       <li>
-        <h3>Choose a time</h3>
-        <p>Pick an appointment that suits you in the online booking calendar. You’ll be asked for your name and email address to confirm it.</p>
+        <h3>Book a free session</h3>
+        <p>Pick a day and time that suits you in the online booking calendar, and confirm it with your name and email address.</p>
       </li>
       <li>
-        <h3>Your first appointment</h3>
-        <p>You’ll talk about what has brought you here and what you would like to change, and decide together whether, and how, to continue.</p>
+        <h3>The diagnostic</h3>
+        <p>Over your first ${free} sessions, which are free, you and ${nick} build a clear picture of your tech habits and what you want to change.</p>
       </li>
       <li>
-        <h3>Working together</h3>
-        <p>Sessions follow a plan you agree together, and you’ll review along the way how things are going.</p>
+        <h3>Decide what’s next</h3>
+        <p>After the ${free} free sessions, you decide together whether to carry on. There is no obligation to continue.</p>
       </li>
     </ol>
   </div>
 </section>
 
-<section class="section section-alt" aria-labelledby="help-title">
+<section class="section" aria-labelledby="mentor-title">
   <div class="container split">
     <div>
-      <p class="eyebrow">Areas of work</p>
-      <h2 id="help-title">What ${F.text('psychologist.name')} can help with</h2>
-      <p>Who ${F.text('psychologist.name')} works with: ${F.text('psychologist.clientGroups')}.</p>
-      <p><a class="link-arrow" href="${href('services')}">Services and approach${icons.arrow}</a></p>
+      <p class="eyebrow">Your mentor</p>
+      <h2 id="mentor-title">Young, and that’s the advantage</h2>
+      <p>${F.text('mentor.name')} has mentored ${F.text('mentor.clientGroups')} for ${inWords(F.value('mentor.years'))} years. He is young, and that has played to his advantage: he has seen many people go through tech addiction, and has been able to help them get out of it.</p>
+      <p><a class="link-arrow" href="${href('about')}">About ${nick}${icons.arrow}</a></p>
     </div>
-    <div>
-      ${F.list('psychologist.specialisms')}
-    </div>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="trust-title">
-  <div class="container split">
-    <div>
-      <p class="eyebrow">Registered and accountable</p>
-      <h2 id="trust-title">A registered practitioner psychologist</h2>
-      <p>In the UK, titles such as clinical psychologist and counselling psychologist are protected by law. Only people on the Health and Care Professions Council’s register may use them, and they must meet its standards of conduct, performance and ethics.</p>
-    </div>
-    <div class="card">
-      <h3>Check the register</h3>
-      <p>${F.text('psychologist.name')} is registered as ${F.text('psychologist.title')}, registration number ${F.text('psychologist.hcpcNumber')}.</p>
-      <p>${ext(HCPC_REGISTER, 'Check the HCPC register')}</p>
+    <div class="card card-quiet">
+      <h3>${icons.info}What mentoring is, and isn’t</h3>
+      <p>Mentoring is practical, one-to-one support from someone on your side.</p>
+      <p>It is not therapy or medical care, and it can’t replace help from your GP or a health professional. If you need help urgently, see <a href="#urgent-help">getting help now</a>.</p>
     </div>
   </div>
 </section>
 
 ${ctaBand(ctx, {
-  title: 'When you’re ready',
-  text: 'You can book online at a time that suits you. If you would like to ask something first, you’re welcome to get in touch.',
+  title: 'Ready to start?',
+  text: `Book your first free session online. If you would like to ask something first, you’re welcome to get in touch.`,
 })}`;
   },
 };

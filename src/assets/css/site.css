@@ -571,6 +571,83 @@ code {
   font-weight: 550;
 }
 
+/* The free-sessions offer under the hero lead. */
+.hero-offer {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  max-width: 40rem;
+  margin: 1.25rem 0 0;
+  padding: 0.8rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--warm-line);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-sm);
+  font-size: 1.05rem;
+}
+
+.hero-offer .icon {
+  margin-top: 0.15rem;
+  color: var(--accent);
+}
+
+/* Nick's figures: a large number above what it counts. */
+.figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.figures div {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 0.15rem;
+  padding: 1rem;
+  background: var(--surface);
+}
+
+.figures dd {
+  margin: 0;
+  color: var(--brand-strong);
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 1.6rem + 1.2vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  font-variant-numeric: lining-nums;
+}
+
+.figures dt {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.figures-compact dd {
+  font-size: 1.75rem;
+}
+
+.figures-compact div {
+  padding: 0.8rem;
+}
+
+.figures-note {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.card-quiet {
+  background: var(--sand);
+  box-shadow: none;
+}
+
 .page-head {
   padding-block: clamp(2.5rem, 1.75rem + 3vw, 4.5rem) clamp(2rem, 1.5rem + 2vw, 3.5rem);
 }
@@ -791,6 +868,10 @@ code {
   margin-bottom: 0.5rem;
 }
 
+.prose:not(.doc) > h2:not(:first-child) {
+  margin-top: 1.8em;
+}
+
 .doc h2 {
   margin-top: 2.2em;
   font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.8rem);
@@ -849,8 +930,7 @@ code {
   margin: 0 0 1.5rem;
 }
 
-.doc-table,
-.fee-table {
+.doc-table {
   width: 100%;
   border-collapse: collapse;
   background: var(--surface);
@@ -859,17 +939,14 @@ code {
 }
 
 .doc-table th,
-.doc-table td,
-.fee-table th,
-.fee-table td {
+.doc-table td {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--line);
   text-align: left;
   vertical-align: top;
 }
 
-.doc-table thead th,
-.fee-table thead th {
+.doc-table thead th {
   background: var(--sand);
   color: var(--ink-2);
   font-size: 0.8rem;
@@ -878,19 +955,13 @@ code {
   text-transform: uppercase;
 }
 
-.doc-table tbody th,
-.fee-table tbody th {
+.doc-table tbody th {
   font-weight: 600;
-}
-
-.fee-table {
-  font-size: 1rem;
 }
 
 /* Narrow screens: each table row becomes a stacked block with its own labels. */
 @media (max-width: 47.99rem) {
-  .doc-table thead,
-  .fee-table thead {
+  .doc-table thead {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -902,35 +973,26 @@ code {
   .doc-table tbody,
   .doc-table tr,
   .doc-table th,
-  .doc-table td,
-  .fee-table tbody,
-  .fee-table tr,
-  .fee-table th,
-  .fee-table td {
+  .doc-table td {
     display: block;
   }
 
-  .doc-table tr,
-  .fee-table tr {
+  .doc-table tr {
     padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--line);
   }
 
-  .doc-table tr:last-child,
-  .fee-table tr:last-child {
+  .doc-table tr:last-child {
     border-bottom: 0;
   }
 
   .doc-table th,
-  .doc-table td,
-  .fee-table th,
-  .fee-table td {
+  .doc-table td {
     padding: 0.3rem 0;
     border: 0;
   }
 
-  .doc-table [data-label]::before,
-  .fee-table [data-label]::before {
+  .doc-table [data-label]::before {
     content: attr(data-label);
     display: block;
     color: var(--muted);
@@ -1105,46 +1167,56 @@ code {
   align-items: start;
 }
 
-.portrait {
-  display: block;
-  width: 100%;
-  max-width: 18rem;
-  height: auto;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  border-radius: var(--radius);
-}
-
-.portrait-placeholder {
+.profile-card {
   display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: 0.75rem;
-  padding: 1.5rem;
-  background: var(--ph-bg);
-  border: 1.5px dashed var(--ph-line);
-  color: var(--ph-ink);
-  text-align: center;
+  justify-items: start;
+  gap: 0.2rem;
+  padding: clamp(1.25rem, 1rem + 1vw, 2rem);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
-.portrait-placeholder p {
+.profile-card p {
   margin: 0;
-  font-weight: 600;
 }
 
-.icon-portrait {
-  width: 4rem;
-  height: 4rem;
+.profile-initials {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 0.9rem !important;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.profile-name {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.profile-role {
+  color: var(--muted);
+}
+
+.profile-card .figures {
+  margin-top: 1.25rem;
+  width: 100%;
 }
 
 @media (min-width: 48rem) {
   .about-grid {
     grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
     gap: 3rem;
-  }
-
-  .portrait {
-    max-width: none;
   }
 }
 

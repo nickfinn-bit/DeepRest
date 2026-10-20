@@ -2,6 +2,7 @@
 // footer with crisis signposting, and the Calendly consent dialog.
 import { esc } from './facts.mjs';
 import { logo, icons } from './icons.mjs';
+import { inWords } from './ui.mjs';
 
 export const CONSENT_KEY = 'deeprest-calendly-consent';
 
@@ -12,24 +13,20 @@ export const HEAD_SCRIPT =
   `d.classList.add('calendly-consented')}catch(e){}})(document.documentElement)`;
 
 export const NAV = [
-  { slug: 'about', label: 'About' },
-  { slug: 'services', label: 'Services' },
-  { slug: 'fees', label: 'Fees &amp; insurance' },
+  { slug: 'mentoring', label: 'Mentoring' },
+  { slug: 'about', label: 'About Nick' },
   { slug: 'faq', label: 'FAQ' },
   { slug: 'contact', label: 'Contact' },
 ];
 
 export const FOOTER_PAGES = [
   { slug: '', label: 'Home' },
-  { slug: 'about', label: 'About' },
-  { slug: 'services', label: 'Services and approach' },
-  { slug: 'fees', label: 'Fees and insurance' },
+  { slug: 'mentoring', label: 'How mentoring works' },
+  { slug: 'about', label: 'About Nick' },
   { slug: 'faq', label: 'Questions and answers' },
-  { slug: 'book', label: 'Book a session' },
+  { slug: 'book', label: 'Book a free session' },
   { slug: 'contact', label: 'Contact' },
 ];
-
-export const HCPC_REGISTER = 'https://www.hcpc-uk.org/check-the-register/';
 
 export function renderPage(ctx, page, main) {
   const { F, href, asset, csp, site, year } = ctx;
@@ -52,7 +49,7 @@ export function renderPage(ctx, page, main) {
       </ul>
     </nav>
     <div class="header-actions">
-      <a class="btn btn-primary btn-book" href="${href('book')}" data-calendly-popup${current('book')}>${icons.calendar}<span>Book<span class="btn-book-more"> a session</span></span></a>
+      <a class="btn btn-primary btn-book" href="${href('book')}" data-calendly-popup${current('book')}>${icons.calendar}<span>Book<span class="btn-book-more"> a free session</span></span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">${icons.menu}<span class="nav-toggle-label">Menu</span></button>
     </div>
   </div>
@@ -87,8 +84,8 @@ export function renderPage(ctx, page, main) {
     <div class="container footer-grid">
       <div class="footer-about">
         <p class="footer-brand">${logo(30)}<span>DeepRest</span></p>
-        <p>The psychology practice of ${F.text('psychologist.name')}, ${F.text('psychologist.title')}.</p>
-        <p>HCPC registration number ${F.text('psychologist.hcpcNumber')}. <a href="${HCPC_REGISTER}">Check the HCPC register</a></p>
+        <p>Tech-addiction mentoring for ${F.text('mentor.clientGroups')}, with ${F.text('mentor.name')}.</p>
+        <p>Your first ${inWords(F.value('offer.freeSessions'))} sessions are free.</p>
       </div>
       <nav class="footer-col" aria-label="Footer">
         <h2 class="footer-heading">Pages</h2>
@@ -107,8 +104,7 @@ export function renderPage(ctx, page, main) {
       <div class="footer-col">
         <h2 class="footer-heading">Contact</h2>
         <ul class="footer-links footer-contact">
-          <li>${contactLink(F, 'email')}</li>
-          <li>${contactLink(F, 'phone')}</li>
+          <li>${emailLink(F)}</li>
         </ul>
       </div>
     </div>
@@ -124,7 +120,7 @@ export function renderPage(ctx, page, main) {
   <form method="dialog" class="consent-dialog-form">
     <p class="eyebrow">Booking</p>
     <h2 id="calendly-consent-title">Booking opens Calendly</h2>
-    <p id="calendly-consent-text">DeepRest’s appointments are booked through Calendly. If you continue, this page loads Calendly’s booking calendar, and Calendly sets its own cookies on your device. <a href="${href('cookies')}">Read the cookie notice</a></p>
+    <p id="calendly-consent-text">DeepRest’s sessions are booked through Calendly. If you continue, this page loads Calendly’s booking calendar, and Calendly sets its own cookies on your device. <a href="${href('cookies')}">Read the cookie notice</a></p>
     <div class="consent-dialog-actions">
       <button class="btn btn-primary" value="continue">Continue to booking</button>
       <button class="btn btn-secondary" value="cancel">Not now</button>
@@ -169,13 +165,10 @@ ${dialog}
 `;
 }
 
-function contactLink(F, kind) {
-  const key = `practice.${kind}`;
-  const icon = kind === 'email' ? icons.mail : icons.phone;
-  if (F.isPlaceholder(key)) return `${icon}${F.text(key)}`;
-  const v = F.value(key);
-  const target = kind === 'email' ? `mailto:${v}` : `tel:${v.replace(/[^\d+]/g, '')}`;
-  return `${icon}<a href="${esc(target)}">${esc(v)}</a>`;
+// The practice's email address as a link, with its icon unless asked not to.
+export function emailLink(F, withIcon = true) {
+  const icon = withIcon ? icons.mail : '';
+  if (F.isPlaceholder('practice.email')) return `${icon}${F.text('practice.email')}`;
+  const v = F.value('practice.email');
+  return `${icon}<a href="mailto:${esc(v)}">${esc(v)}</a>`;
 }
-
-export { contactLink };

@@ -1,16 +1,18 @@
 import { icons } from '../lib/icons.mjs';
-import { notice, pageHead } from '../lib/ui.mjs';
+import { emailLink } from '../lib/layout.mjs';
+import { inWords, notice, pageHead } from '../lib/ui.mjs';
 import { esc } from '../lib/facts.mjs';
 
 export default {
   slug: 'book',
-  name: 'Book a session',
-  title: () => 'Book a session | DeepRest',
+  name: 'Book a free session',
+  title: () => 'Book a free session | DeepRest',
   description: ({ F }) =>
-    `Book an appointment with ${F.plain('psychologist.name')} at DeepRest online, at a day and time that suits you.`,
+    `Book a mentoring session with ${F.plain('mentor.name')} online. Your first ${inWords(F.value('offer.freeSessions'))} sessions are free, as a diagnostic.`,
   main: (ctx) => {
     const { F, href } = ctx;
     const calendlyUrl = F.value('calendly.url');
+    const free = inWords(F.value('offer.freeSessions'));
     const demo = F.isPlaceholder('calendly.url')
       ? notice(
           'demo',
@@ -21,8 +23,8 @@ export default {
     return `
 ${pageHead({
   eyebrow: 'Booking',
-  title: 'Book a session',
-  lead: 'Choose a day and time that suits you in the booking calendar.',
+  title: 'Book a free session',
+  lead: `Your first ${free} sessions are free, as a diagnostic. Choose a day and time that suits you.`,
 })}
 
 <section class="section section-tight" aria-labelledby="calendar-title">
@@ -52,20 +54,20 @@ ${pageHead({
     </div>
     <div class="card-grid">
       <div class="card">
-        <h3>Fees and payment</h3>
-        <p>What each appointment costs and how to pay are on the <a href="${href('fees')}">fees and insurance</a> page.</p>
-      </div>
-      <div class="card">
-        <h3>Using health insurance</h3>
-        <p>If you plan to claim, <a href="${href('fees')}#insurance">check your cover with your insurer</a> before you book.</p>
+        <h3>${free.replace(/^./, (c) => c.toUpperCase())} free sessions</h3>
+        <p>Your first ${free} sessions are free, as a diagnostic. Book each one separately, at times that suit you.</p>
       </div>
       <div class="card">
         <h3>Cancelling or moving</h3>
-        <p>${F.text('fees.cancellation')}</p>
+        <p>Your confirmation email from Calendly has links to cancel the session or move it to another time.</p>
       </div>
       <div class="card">
         <h3>No suitable time?</h3>
-        <p>If none of the times suit you, or you would like to ask something first, please <a href="${href('contact')}">get in touch</a>.</p>
+        <p>If none of the times suit you, or you would like to ask something first, email ${emailLink(F, false)}.</p>
+      </div>
+      <div class="card">
+        <h3>Need help urgently?</h3>
+        <p>DeepRest is not an emergency service. If you need help now, see <a href="#urgent-help">getting help now</a>.</p>
       </div>
     </div>
   </div>

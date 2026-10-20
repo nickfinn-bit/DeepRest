@@ -1,141 +1,53 @@
 {
   "_readme": [
-    "Every fact about the practice lives in this file, and only here.",
-    "A value written as { \"placeholder\": ..., \"needs\": ... } is not known yet. The site shows it as a marked placeholder, and `npm run build:strict` (the publishing workflow) refuses to build while any remain.",
-    "To confirm a fact, replace the whole { ... } object with the real value: a string, or a list of strings where the 'needs' text says so.",
+    "Every fact about the practice lives in this file, and only here. _sources says where each came from.",
+    "A value written as { \"placeholder\": ..., \"needs\": ... } is not known yet. The site shows it as a marked placeholder, and `npm run build:strict` (the publishing workflow) refuses to build while any remain. Prefer leaving an unknown fact out of the pages, and listing it under _dropped.",
     "Run `npm run build` afterwards: it rebuilds the site and regenerates PLACEHOLDERS.md."
   ],
+  "_sources": {
+    "mentor.*, offer.freeSessions": "Nick's own words, his order of 19 October 2026: he has mentored students and young adults for five years; though he is young, that has played to his advantage, because he has seen many people go through tech addiction and has been able to get them out of it; a 100% satisfaction rate across 23 clients; the first five sessions are free, as a diagnostic.",
+    "mentor.legalName": "The name on his own Google account.",
+    "site.url": "deepestrest.com, registered on Nick's Cloudflare account and served by GitHub Pages.",
+    "practice.email": "hello@deepestrest.com, a Cloudflare Email Routing address on his domain that forwards to his Gmail.",
+    "calendly.url": "The Calendly account in his name (Google sign-in), event 'Free diagnostic session'."
+  },
   "site": {
-    "url": {
-      "placeholder": "Website address",
-      "needs": "The public address of the site, ending in a slash. Until it is confirmed, the build uses this repository's GitHub Pages project address.",
-      "interim": "https://nickfinn-bit.github.io/DeepRest/"
-    }
+    "url": "https://deepestrest.com/"
   },
   "practice": {
     "name": "DeepRest",
-    "legalName": {
-      "placeholder": "Legal name of the practice",
-      "needs": "The data controller's legal name: the psychologist's own name if they practise as a sole trader, or the registered company name and number."
-    },
-    "icoRegistrationNumber": {
-      "placeholder": "ICO registration number",
-      "needs": "The practice's registration number on the ICO's register of fee payers."
-    },
-    "email": {
-      "placeholder": "Practice email address",
-      "needs": "The email address clients should write to."
-    },
-    "phone": {
-      "placeholder": "Practice telephone number",
-      "needs": "The telephone number clients should call, written as it should appear, e.g. 020 7946 0000."
-    },
-    "address": {
-      "placeholder": "Practice address",
-      "needs": "The practice's postal address, as a list of lines."
-    }
+    "email": "hello@deepestrest.com"
   },
-  "psychologist": {
-    "name": {
-      "placeholder": "Psychologist's full name",
-      "needs": "The psychologist's name as it appears on the HCPC register."
-    },
-    "title": {
-      "placeholder": "Protected title",
-      "needs": "The psychologist's HCPC protected title, e.g. Clinical Psychologist or Counselling Psychologist."
-    },
-    "qualifications": {
-      "placeholder": "Qualifications",
-      "needs": "Degrees and professional qualifications, as a list, each with the awarding institution."
-    },
-    "hcpcNumber": {
-      "placeholder": "HCPC registration number",
-      "needs": "The HCPC registration number, which for psychologists begins PYL."
-    },
-    "bpsMembership": {
-      "placeholder": "BPS membership",
-      "needs": "The British Psychological Society membership grade and any divisions, e.g. Chartered Member (CPsychol). Write 'none' if not a member, and the line will be removed."
-    },
-    "bio": {
-      "placeholder": "Professional background",
-      "needs": "Two to four short paragraphs, as a list: training, experience and the settings the psychologist has worked in."
-    },
-    "photo": {
-      "placeholder": "Portrait photograph",
-      "needs": "A portrait photograph, at least 800 x 1000 pixels, saved in src/assets/img/; write its file name here."
-    },
-    "clientGroups": {
-      "placeholder": "Who the psychologist works with",
-      "needs": "The groups the psychologist sees, e.g. adults, young people, couples, with any age limits."
-    },
-    "specialisms": {
-      "placeholder": "Specialisms",
-      "needs": "The difficulties the psychologist works with, as a list."
-    },
-    "approach": {
-      "placeholder": "Approach and therapies offered",
-      "needs": "One to three short paragraphs, as a list, in the psychologist's own words: how they work and which therapies they offer."
-    }
+  "mentor": {
+    "name": "Nick Finnemore",
+    "firstName": "Nick",
+    "legalName": "Nicholas Finnemore",
+    "years": 5,
+    "clients": 23,
+    "satisfaction": "100%",
+    "clientGroups": "students and young adults"
   },
-  "sessions": {
-    "formats": {
-      "placeholder": "Session formats",
-      "needs": "Whether sessions are online, in person at the practice address, or both, and on which video platform."
-    }
-  },
-  "fees": {
-    "items": [
-      {
-        "appointment": {
-          "placeholder": "Appointment type",
-          "needs": "One row per appointment type, e.g. initial assessment; copy the row for each further type."
-        },
-        "length": {
-          "placeholder": "Length",
-          "needs": "The length of that appointment, e.g. 50 minutes."
-        },
-        "fee": {
-          "placeholder": "Fee",
-          "needs": "The fee for that appointment, in pounds, e.g. £120."
-        }
-      }
-    ],
-    "payment": {
-      "placeholder": "How and when fees are paid",
-      "needs": "Payment methods accepted and when payment is due."
-    },
-    "cancellation": {
-      "placeholder": "Cancellation and rescheduling terms",
-      "needs": "How much notice clients must give to cancel or move an appointment, and any charge for late cancellation."
-    },
-    "insurers": {
-      "placeholder": "Health insurers the psychologist is registered with",
-      "needs": "The insurers with which the psychologist is a registered provider, as a list. Write 'none' if none."
-    }
+  "offer": {
+    "freeSessions": 5
   },
   "calendly": {
-    "url": {
-      "placeholder": "Calendly booking link",
-      "needs": "The practice's own Calendly scheduling link. Until it is supplied, the site uses Calendly's own demo scheduling page, the one embedded on Calendly's demo site calendly-embed.com, and the booking page says so.",
-      "interim": "https://calendly.com/embed-demo-sales/discovery-call"
-    }
+    "url": "https://calendly.com/nicholas-finnemore/free-diagnostic"
   },
   "privacy": {
-    "lastUpdated": {
-      "placeholder": "Date of last review",
-      "needs": "The date the practice last reviewed and approved the privacy policy, e.g. 3 November 2026."
-    },
-    "retention": {
-      "placeholder": "How long records are kept",
-      "needs": "How long the practice keeps clinical records, booking details, emails and financial records after the last contact."
-    },
-    "providers": {
-      "placeholder": "Other services that hold clients' information",
-      "needs": "Each service that stores clients' information besides Calendly, e.g. email, clinical notes system, video platform, payments, as a list, each with the country where it stores data."
-    },
-    "security": {
-      "placeholder": "How records are stored and protected",
-      "needs": "A short description of how clinical records are kept secure, e.g. an encrypted clinical records system and two-factor sign-in."
-    }
-  }
+    "lastUpdated": "20 October 2026"
+  },
+  "_dropped": [
+    { "fact": "A photograph of Nick", "use": "the About page" },
+    { "fact": "Fees after the five free sessions, and how to pay", "use": "a fees section; the site says only that the first five sessions are free" },
+    { "fact": "Session length and where sessions happen", "use": "the pages; the Calendly event uses Calendly's defaults (30 minutes, Google Meet), which the booking calendar shows" },
+    { "fact": "When Nick is available", "use": "the Calendly event, which uses Calendly's default of weekdays, 9am to 5pm UK time, minus busy times in his Google Calendar" },
+    { "fact": "The ages Nick works with, and whether he mentors under-18s", "use": "the Mentoring page and the privacy policy" },
+    { "fact": "Nick's background beyond mentoring, such as training or qualifications", "use": "the About page" },
+    { "fact": "How the 100% satisfaction rate was measured", "use": "a note beside the figure" },
+    { "fact": "Any cancellation terms beyond Calendly's own cancel and reschedule links", "use": "the FAQ and booking page" },
+    { "fact": "A telephone number and postal address", "use": "the Contact page and the privacy policy" },
+    { "fact": "Whether DeepRest has paid the ICO's data protection fee, and its registration number", "use": "the privacy policy" },
+    { "fact": "How long Nick keeps booking details and emails", "use": "the privacy policy, which gives the criteria instead of a fixed period" },
+    { "fact": "Client testimonials", "use": "the Home and About pages" }
+  ]
 }

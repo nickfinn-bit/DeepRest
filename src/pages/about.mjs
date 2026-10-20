@@ -1,83 +1,55 @@
-import { icons } from '../lib/icons.mjs';
-import { ctaBand, ext, pageHead } from '../lib/ui.mjs';
-import { HCPC_REGISTER } from '../lib/layout.mjs';
-import { esc } from '../lib/facts.mjs';
+import { ctaBand, figures, inWords, pageHead } from '../lib/ui.mjs';
 
-const HCPC_STANDARDS = 'https://www.hcpc-uk.org/standards/standards-of-conduct-performance-and-ethics/';
-const HCPC_CONCERNS = 'https://www.hcpc-uk.org/concerns/';
-
-function portrait({ F, asset }) {
-  if (F.isPlaceholder('psychologist.photo')) {
-    F.value('psychologist.photo');
-    return `<div class="portrait portrait-placeholder" data-ph="psychologist.photo">${icons.person}<p><span class="ph-tag">To be supplied</span> Portrait photograph</p></div>`;
-  }
-  const file = F.value('psychologist.photo');
-  return `<img class="portrait" src="${asset(`img/${file}`, false)}" width="800" height="1000" alt="${esc(F.plain('psychologist.name'))}">`;
-}
+// No photograph of Nick has been supplied, so the profile card shows his initials.
+const initials = (name) =>
+  name
+    .split(/\s+/)
+    .map((w) => w[0])
+    .join('');
 
 export default {
   slug: 'about',
-  name: 'About',
-  title: ({ F }) => `About ${F.plain('psychologist.name')}, ${F.plain('psychologist.title')} | DeepRest`,
+  name: 'About Nick',
+  title: ({ F }) => `About ${F.plain('mentor.name')} | DeepRest`,
   description: ({ F }) =>
-    `About ${F.plain('psychologist.name')}, ${F.plain('psychologist.title')}: professional background, qualifications, HCPC registration and BPS membership.`,
+    `${F.plain('mentor.name')} has mentored ${F.plain('mentor.clientGroups')} through tech addiction for ${inWords(F.value('mentor.years'))} years, with a ${F.plain('mentor.satisfaction')} satisfaction rate across ${F.plain('mentor.clients')} clients.`,
   main: (ctx) => {
     const { F } = ctx;
+    const nick = F.text('mentor.firstName');
     return `
 ${pageHead({
-  eyebrow: 'About the psychologist',
-  title: F.text('psychologist.name'),
-  lead: `${F.text('psychologist.title')}, registered with the Health and Care Professions Council (HCPC).`,
+  eyebrow: 'About',
+  title: F.text('mentor.name'),
+  lead: `The mentor behind DeepRest. For ${inWords(F.value('mentor.years'))} years, ${nick} has helped ${F.text('mentor.clientGroups')} get out of tech addiction.`,
 })}
 
-<section class="section" aria-labelledby="background-title">
+<section class="section" aria-labelledby="story-title">
   <div class="container about-grid">
-    <div class="about-portrait">${portrait(ctx)}</div>
+    <aside class="profile-card" aria-label="${F.plain('mentor.name')} at a glance">
+      <p class="profile-initials" aria-hidden="true">${initials(F.plain('mentor.name'))}</p>
+      <p class="profile-name">${F.text('mentor.name')}</p>
+      <p class="profile-role">Mentor, DeepRest</p>
+      ${figures(ctx, 'figures-compact')}
+    </aside>
     <div class="prose">
-      <h2 id="background-title">Professional background</h2>
-      ${F.paras('psychologist.bio')}
+      <h2 id="story-title">${inWords(F.value('mentor.years')).replace(/^./, (c) => c.toUpperCase())} years of mentoring</h2>
+      <p>${nick} has spent the last ${inWords(F.value('mentor.years'))} years mentoring ${F.text('mentor.clientGroups')}.</p>
+      <p>He is young, and that has played to his advantage. It has meant seeing many people go through tech addiction, and being able to help them get out of it.</p>
+      <p>DeepRest is his own practice, set up to offer that mentoring to ${F.text('mentor.clientGroups')} who feel that tech has too much of a hold on them.</p>
+
+      <h2 id="record-title">His record</h2>
+      <p>Across the ${F.text('mentor.clients')} clients he has mentored, ${nick}’s satisfaction rate is ${F.text('mentor.satisfaction')}.</p>
+
+      <h2 id="role-title">What ${nick} is, and isn’t</h2>
+      <p>${nick} is a mentor. He is not a medical or mental health professional, and mentoring is not therapy or medical care.</p>
+      <p>If you are worried about your mental or physical health, please talk to your GP. If you need help urgently, see <a href="#urgent-help">getting help now</a>.</p>
     </div>
   </div>
-</section>
-
-<section class="section section-alt" aria-labelledby="credentials-title">
-  <div class="container">
-    <div class="section-head">
-      <p class="eyebrow">Credentials</p>
-      <h2 id="credentials-title">Qualifications, registration and membership</h2>
-    </div>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Qualifications</h3>
-        ${F.list('psychologist.qualifications')}
-      </div>
-      <div class="card">
-        <h3>HCPC registration</h3>
-        <p>Registered as ${F.text('psychologist.title')}, registration number ${F.text('psychologist.hcpcNumber')}.</p>
-        <p>${ext(HCPC_REGISTER, 'Check the HCPC register')}</p>
-      </div>
-      ${F.isNone('psychologist.bpsMembership') ? '' : `<div class="card">
-        <h3>British Psychological Society</h3>
-        <p>${F.text('psychologist.bpsMembership')}</p>
-      </div>`}
-    </div>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="standards-title">
-  <div class="container"><div class="prose">
-    <h2 id="standards-title">Professional standards</h2>
-    <p>In the UK, titles such as clinical psychologist and counselling psychologist are protected by law: only people on the HCPC’s register may use them. Everyone on the register must meet the HCPC’s standards of conduct, performance and ethics, which include respecting confidentiality and keeping their knowledge and skills up to date.</p>
-    <ul class="link-list">
-      <li>${ext(HCPC_STANDARDS, 'The HCPC’s standards of conduct, performance and ethics')}</li>
-      <li>${ext(HCPC_CONCERNS, 'Raising a concern about a registered professional with the HCPC')}</li>
-    </ul>
-  </div></div>
 </section>
 
 ${ctaBand(ctx, {
-  title: 'Would you like to meet?',
-  text: 'Book a first appointment online, or get in touch if you have a question first.',
+  title: `Meet ${nick}`,
+  text: `Your first ${inWords(F.value('offer.freeSessions'))} sessions are free, as a diagnostic. Book one online, or get in touch if you would like to ask something first.`,
 })}`;
   },
 };

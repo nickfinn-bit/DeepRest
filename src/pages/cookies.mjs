@@ -73,7 +73,7 @@ ${pageHead({
     </div>
 
     <h2 id="calendly">Calendly, our booking system</h2>
-    <p>Appointments are booked through Calendly, provided by Calendly, LLC in the United States. The booking calendar is not loaded until you ask for it, either with the button on the <a href="${href('book')}">booking page</a> or through the booking button at the top of each page.</p>
+    <p>Sessions are booked through Calendly, provided by Calendly, LLC in the United States. The booking calendar is not loaded until you ask for it, either with the button on the <a href="${href('book')}">booking page</a> or through the booking button at the top of each page.</p>
     <p>Once it is loaded, your browser connects to Calendly, which sets its own cookies. Calendly shows its own cookie settings inside the calendar, where you can accept or decline its optional cookies, and its ${ext(CALENDLY_PRIVACY, 'privacy notice')} explains how it uses cookies.</p>
     ${observedTable()}
 
