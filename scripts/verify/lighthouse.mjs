@@ -1,6 +1,7 @@
 // Lighthouse, mobile and desktop, on every page, against the local server
-// (scripts/serve.mjs), or with --live against the published site. Each page and form factor runs several times; the report keeps
-// the median run (by Performance) and the lowest score seen in any run.
+// (scripts/serve.mjs), or with --live against the published site. Each page and form
+// factor runs several times; the report keeps the median run (by Performance) and the
+// lowest score seen in any run.
 //   node scripts/verify/lighthouse.mjs [--live] [--runs=3] [--pages=home,book] [--retry-failed]
 // --retry-failed runs again only the page and form-factor pairs that failed in
 // verification/lighthouse.json, and keeps the failed attempt alongside the new one.

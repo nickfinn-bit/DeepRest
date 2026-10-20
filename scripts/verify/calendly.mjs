@@ -265,12 +265,21 @@ try {
   console.log(`${noJs.pass ? 'PASS' : 'FAIL'} no JavaScript: header button goes to the booking page, which links to Calendly`);
   await context.close();
 
+  // Compare the cookies seen with the list on the cookie notice. Locally the list is then
+  // replaced by what was seen; with --live it is only compared.
+  const cookieFile = path.join(ROOT, 'src', 'data', 'calendly-cookies.json');
+  let cookieComparison = null;
+  if (observedCookies) {
+    observedCookies.cookies.sort((a, b) => a.domain.localeCompare(b.domain) || a.name.localeCompare(b.name));
+    const key = (c) => `${c.name} ${c.domain}`;
+    const listed = fs.existsSync(cookieFile) ? JSON.parse(fs.readFileSync(cookieFile, 'utf8')).cookies.map(key) : [];
+    const seen = observedCookies.cookies.map(key);
+    cookieComparison = { notListed: seen.filter((k) => !listed.includes(k)), listedNotSeen: listed.filter((k) => !seen.includes(k)) };
+    console.log(`Cookies seen at 1440px: ${seen.length}; not on the cookie notice: ${cookieComparison.notListed.length}; on it but not seen now: ${cookieComparison.listedNotSeen.length}`);
+  }
   if (!arg('widths') && !arg('pages')) {
-    writeJson('calendly.json', { inline, popup, noJs });
-    if (observedCookies) {
-      observedCookies.cookies.sort((a, b) => a.domain.localeCompare(b.domain) || a.name.localeCompare(b.name));
-      fs.writeFileSync(path.join(ROOT, 'src', 'data', 'calendly-cookies.json'), `${JSON.stringify(observedCookies, null, 2)}\n`);
-    }
+    writeJson('calendly.json', { inline, popup, noJs, cookiesSeen: observedCookies, cookieComparison });
+    if (observedCookies && !LIVE) fs.writeFileSync(cookieFile, `${JSON.stringify(observedCookies, null, 2)}\n`);
   }
   const all = [...inline, ...popup, noJs];
   const failed = all.filter((r) => !r.pass);
