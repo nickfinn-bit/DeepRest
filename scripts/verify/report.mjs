@@ -33,6 +33,9 @@ const FAILED = [
   'The layout check reported collapsed FAQ answers as overlapping, because Chrome keeps closed `<details>` content in the layout. It skips text that is not drawn, and checks the FAQ again with every answer open.',
   'Validating over HTTP, to avoid the checker\'s CSP warnings: the Nu checker refuses `localhost` ("Forbidden host"). Files are checked directly; with --live, copies downloaded from the live site.',
   'Printing the booking page with the calendar loaded gave a blank frame: print-to-PDF does not draw a cross-origin iframe in its own process. That PDF is printed by a Chrome started without site isolation.',
+  'Lighthouse on this machine scored About on mobile below 95 in one of three runs, three times over (lowest 93, then 94, then 84), and FAQ on desktop once (92; its re-run scored 100 in every run). The slow runs had 1.4 to 6 times the main-thread time of the fast runs on the same page (2,728 ms against about 450 ms at worst), while this machine was also running other services, including two Colab runners, at about 40% CPU. A filmstrip of one slow run showed a blank screen until 4.0 s although the page had finished loading at 0.34 s, so Chrome was not getting to paint, not waiting for the site. Re-running stopped there; PageSpeed Insights, which runs Lighthouse on Google\'s servers, was used as the second opinion below.',
+  'PageSpeed Insights\' keyless API answered 429 (its shared daily quota used up), and its web page, opened signed out in a headless Chrome, answered "Unable to resolve" for the same reason. Run from a tab of its own in Nick\'s Chrome, signed in to Google, it worked; one page\'s mobile result timed out once and was re-run on its own.',
+  'Two scripted edits (a Python find-and-replace) silently did nothing because of an escaping slip: the cookie comparison in the Calendly check, and the wrapping of result lists in the shared result writer. Both were found when result files lacked the expected fields (the layout rows of the report read "not run"), redone by hand, and the layout check re-run live. A third scripted edit broke a pattern in the PageSpeed check, which the syntax check caught at once. Every scripted edit is now checked with a search afterwards.',
 ];
 
 const LIMITS = [
@@ -57,6 +60,8 @@ const links = read('links.json');
 const facts = read('facts.json');
 const ready = read('publish-ready.json');
 const hosting = read('live.json');
+const psi = read('pagespeed.json');
+const psiLowest = psi ? Math.min(...psi.results.flatMap((r) => [r.mobile, r.desktop].flatMap((x) => (x.scores ? Object.values(x.scores) : [0])))) : null;
 
 const live = Boolean(layoutFile?.live);
 const testedAt = layoutFile?.testedAt ?? '';
@@ -97,6 +102,7 @@ out(
   '|---|---|---|',
   ...(hosting ? [`| Hosting: DNS, HTTPS, redirects, every page live and identical to the build | all pass | ${yes(hosting.pass)} ${hostChecks.filter((c) => c.ok).length}/${hostChecks.length} |`] : []),
   row(lh, `| Lighthouse, mobile and desktop, ${lhAll.length / 2} pages (${where(lh)}) | 95+ in Performance, Accessibility, Best Practices and SEO | ${yes(lhAll.length && lhAll.every((r) => r.pass))} ${lhAll.filter((r) => r.pass).length}/${lhAll.length} pass in every run; lowest score in any of ${lh?.runsPerPage} runs: **${lhLowest}**${lhAll.some((r) => r.failedAttempt) ? `; ${lhAll.filter((r) => r.failedAttempt).length} re-run after a failed attempt, shown below` : ''} |`),
+  ...(psi ? [`| PageSpeed Insights (Lighthouse on Google's servers), mobile and desktop, ${psi.results.length} pages (live) | 95+ in all four categories | ${yes(psi.results.every((r) => r.pass))} ${psi.results.filter((r) => r.pass).length}/${psi.results.length} pages; lowest score: **${psiLowest}** |`] : []),
   row(layout, `| Horizontal scroll, ${WIDTHS.length} widths × ${PAGES.length} pages (${where(layoutFile)}) | 0 | ${yes(lay.length && lay.every((r) => r.horizontalScroll === 0))} largest: **${Math.max(...lay.map((r) => r.horizontalScroll))} px** over ${lay.length} page-widths |`),
   row(layout, `| Layout shift during load | under 0.1 | ${yes(lay.length && lay.every((r) => r.cls < 0.1))} largest: **${Math.max(...lay.map((r) => r.cls)).toFixed(4)}**; with the Calendly calendar auto-loading: ${Math.max(0, ...inline.map((r) => r.clsWhenRemembered ?? 0)).toFixed(4)} |`),
   row(layout, `| Layout faults: text cut off or overlapping, elements past the screen edge | 0 | ${yes(lay.length && lay.every((r) => !r.cut.length && !r.overlaps.length && !r.offenders.length))} **${lay.reduce((n, r) => n + r.cut.length + r.overlaps.length + r.offenders.length, 0)}**: ${lay.reduce((n, r) => n + r.cut.length, 0)} cut, ${lay.reduce((n, r) => n + r.overlaps.length, 0)} overlapping, ${lay.reduce((n, r) => n + r.offenders.length, 0)} past the edge |`),
@@ -123,6 +129,21 @@ if (hosting) {
     '| Check | Result | Detail |',
     '|---|---|---|',
     ...hostChecks.map((c) => `| ${c.name} | ${yes(c.ok)} | ${typeof c.detail === 'string' ? c.detail : `\`${JSON.stringify(c.detail).replace(/\|/g, '\\|')}\``} |`),
+    '',
+  );
+}
+
+// PageSpeed Insights.
+if (psi) {
+  const cell = (x) => (x.scores ? `${Object.values(x.scores).join(' / ')} (LCP ${x.metrics.lcp}, SI ${x.metrics.si})` : `error: ${x.error}`);
+  out(
+    '## PageSpeed Insights',
+    '',
+    "Lighthouse run on Google's own servers through PageSpeed Insights (pagespeed.web.dev), against the live site, so this machine's load plays no part (`scripts/verify/pagespeed.mjs`). Scores: Performance / Accessibility / Best Practices / SEO. Each row links to Google's report.",
+    '',
+    '| Page | Mobile | Desktop | Report |',
+    '|---|---|---|---|',
+    ...psi.results.map((r) => `| ${name(r.page)} | ${cell(r.mobile)} | ${cell(r.desktop)} | [pagespeed.web.dev](${r.report}) |`),
     '',
   );
 }

@@ -73,6 +73,11 @@
   clinical claims), the strict build, Lighthouse and PDFs. The validator needs
   the Nu HTML Checker unpacked in `.tools/vnu-runtime-image` (vnu.windows.zip
   from github.com/validator/validator/releases; no Java).
+- `node scripts/verify/pagespeed.mjs --live --browser-url=http://127.0.0.1:9222`
+  is an extra check, not part of `verify`: PageSpeed Insights (Lighthouse on
+  Google's servers) for every live page, through a tab of its own in a Chrome
+  signed in to Google, since signed out it hits a shared quota. Lighthouse on
+  this machine varies with its load; Google's result is the second opinion.
 
 ## Code map
 
