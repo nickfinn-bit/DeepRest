@@ -34,6 +34,13 @@ const site = { url: siteUrl, basePath: new URL(siteUrl).pathname };
 // Fresh output folder, with the static assets copied in.
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.cpSync(path.join(ROOT, 'src', 'assets'), path.join(DIST, 'assets'), { recursive: true });
+// Text assets with LF line endings, whatever the checkout uses, so a build on Windows and
+// the publishing workflow's build on Linux are byte-for-byte the same (and so are the
+// cache-busting hashes below).
+for (const f of fs.readdirSync(path.join(DIST, 'assets'), { recursive: true })) {
+  const file = path.join(DIST, 'assets', f);
+  if (/\.(css|js|svg|txt)$/.test(f)) fs.writeFileSync(file, fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n'));
+}
 
 const hashOf = (data) => crypto.createHash('sha256').update(data).digest();
 const versions = Object.fromEntries(
