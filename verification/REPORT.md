@@ -1,6 +1,6 @@
 # DeepRest website: verification report
 
-Written by `scripts/verify/report.mjs` (the last step of `npm run verify`) on 2026-10-20 03:16 UTC, from the JSON results each check left in this folder.
+Written by `scripts/verify/report.mjs` (the last step of `npm run verify`) on 2026-10-20 03:19 UTC, from the JSON results each check left in this folder.
 Every check below ran against the **live site, https://deepestrest.com/**, served by GitHub Pages under Nick's domain; the hosting check also confirmed that each live page is byte-for-byte the page built from this commit.
 
 ## Summary
@@ -30,15 +30,15 @@ Checked from this machine against https://deepestrest.com/, with DNS asked of 1.
 
 | Check | Result | Detail |
 |---|---|---|
-| deepestrest.com A records are GitHub Pages' | ✅ | `["185.199.109.153","185.199.110.153","185.199.111.153","185.199.108.153"]` |
-| deepestrest.com AAAA records are GitHub Pages' | ✅ | `["2606:50c0:8001::153","2606:50c0:8000::153","2606:50c0:8002::153","2606:50c0:8003::153"]` |
+| deepestrest.com A records are GitHub Pages' | ✅ | `["185.199.108.153","185.199.110.153","185.199.109.153","185.199.111.153"]` |
+| deepestrest.com AAAA records are GitHub Pages' | ✅ | `["2606:50c0:8001::153","2606:50c0:8002::153","2606:50c0:8000::153","2606:50c0:8003::153"]` |
 | www.deepestrest.com is a CNAME to nickfinn-bit.github.io | ✅ | `["nickfinn-bit.github.io"]` |
 | deepestrest.com MX records are Cloudflare Email Routing's | ✅ | `[{"exchange":"route2.mx.cloudflare.net","priority":20,"type":"MX"},{"exchange":"route3.mx.cloudflare.net","priority":35,"type":"MX"},{"exchange":"route1.mx.cloudflare.net","priority":6,"type":"MX"}]` |
 | deepestrest.com SPF record allows Cloudflare Email Routing | ✅ | `[["v=spf1 include:_spf.mx.cloudflare.net ~all"]]` |
 | HTTPS certificate is valid for the domain | ✅ | `{"authorized":true,"subject":"deepestrest.com","altNames":"DNS:deepestrest.com, DNS:www.deepestrest.com","issuer":"Let's Encrypt","validTo":"Jan 18 00:29:23 2027 GMT"}` |
 | http://deepestrest.com/ redirects to https://deepestrest.com/ | ✅ | `{"status":301,"location":"https://deepestrest.com/","final":"https://deepestrest.com/"}` |
 | https://www.deepestrest.com/ redirects to https://deepestrest.com/ | ✅ | `{"status":301,"location":"https://deepestrest.com/","final":"https://deepestrest.com/"}` |
-| http://www.deepestrest.com/ redirects to https://deepestrest.com/ | ✅ | `{"status":301,"location":"http://deepestrest.com/","final":"https://deepestrest.com/"}` |
+| http://www.deepestrest.com/ redirects to https://deepestrest.com/ | ✅ | `{"status":301,"location":"https://deepestrest.com/","final":"https://deepestrest.com/"}` |
 | https://nickfinn-bit.github.io/DeepRest/ redirects to https://deepestrest.com/ | ✅ | `{"status":301,"location":"https://deepestrest.com/","final":"https://deepestrest.com/"}` |
 | https://deepestrest.com/ answers 200 and matches dist/ | ✅ | `{"status":200,"server":"GitHub.com","sameAsBuild":true}` |
 | https://deepestrest.com/mentoring/ answers 200 and matches dist/ | ✅ | `{"status":200,"server":"GitHub.com","sameAsBuild":true}` |

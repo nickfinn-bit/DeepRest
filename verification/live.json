@@ -7,10 +7,10 @@
       "name": "deepestrest.com A records are GitHub Pages'",
       "ok": true,
       "detail": [
-        "185.199.109.153",
+        "185.199.108.153",
         "185.199.110.153",
-        "185.199.111.153",
-        "185.199.108.153"
+        "185.199.109.153",
+        "185.199.111.153"
       ]
     },
     {
@@ -18,8 +18,8 @@
       "ok": true,
       "detail": [
         "2606:50c0:8001::153",
-        "2606:50c0:8000::153",
         "2606:50c0:8002::153",
+        "2606:50c0:8000::153",
         "2606:50c0:8003::153"
       ]
     },
@@ -94,7 +94,7 @@
       "ok": true,
       "detail": {
         "status": 301,
-        "location": "http://deepestrest.com/",
+        "location": "https://deepestrest.com/",
         "final": "https://deepestrest.com/"
       }
     },
