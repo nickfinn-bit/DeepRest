@@ -1281,18 +1281,27 @@ code {
 
 /* Booking */
 
+/* Until the visitor chooses to load Calendly, the frame is only as tall as its message, so a
+   phone shows no empty card. The choice (remembered, which the head script marks before the
+   first paint, or made with a click) gives it Calendly's full height at once, before Calendly
+   loads, so nothing moves when the calendar arrives. */
 .booking-frame {
   position: relative;
   isolation: isolate; /* keeps Calendly's loading spinner (z-index -1) above the white background */
-  height: 1130px; /* Calendly's stacked layout, used while its frame is under about 1,000px wide */
   overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
 
+.calendly-consented .booking-frame,
+.booking-frame.is-loading {
+  height: 1130px; /* Calendly's stacked layout, used while its frame is under about 1,000px wide */
+}
+
 @media (min-width: 68rem) {
-  .booking-frame {
+  .calendly-consented .booking-frame,
+  .booking-frame.is-loading {
     height: 760px; /* Calendly's two-column layout */
   }
 }
@@ -1305,14 +1314,11 @@ code {
 }
 
 .booking-gate {
-  position: absolute;
-  inset: 0;
   display: grid;
-  /* At the top of the frame, so the button is in view on a phone; the frame keeps
-     Calendly's full height so nothing moves when the calendar arrives. */
+  /* At the top of the frame, so the message stays in view on a phone while the calendar loads. */
   place-items: start center;
   align-content: start;
-  padding: clamp(2.5rem, 1.5rem + 4vw, 4.5rem) 1.5rem 1.5rem;
+  padding: clamp(2.5rem, 1.5rem + 4vw, 4.5rem) 1.5rem;
   background: radial-gradient(circle at 50% 15%, var(--brand-soft), var(--surface) 60%);
   text-align: center;
 }
@@ -1368,6 +1374,12 @@ code {
 }
 
 /* A remembered choice, or a click, shows the loading message until Calendly takes over. */
+.calendly-consented .booking-gate,
+.booking-frame.is-loading .booking-gate {
+  position: absolute;
+  inset: 0;
+}
+
 .calendly-consented .booking-gate-inner,
 .booking-frame.is-loading .booking-gate-inner {
   display: none;

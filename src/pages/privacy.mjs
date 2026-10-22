@@ -6,6 +6,7 @@ const GOOGLE_PRIVACY = 'https://policies.google.com/privacy?hl=en-GB';
 const CLOUDFLARE_PRIVACY = 'https://www.cloudflare.com/privacypolicy/';
 const GITHUB_PRIVACY = 'https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement';
 const ICO_COMPLAINT = 'https://ico.org.uk/make-a-complaint/';
+const META_PRIVACY = 'https://privacycenter.instagram.com/policy/';
 
 const SECTIONS = [
   ['who-we-are', 'Who we are'],
@@ -60,6 +61,7 @@ ${pageHead({
         <li><strong>Your session.</strong> Calendly adds the booking to ${nick}’s Google Calendar, and creates the Google Meet video call link for the session, which Google provides.</li>
         <li><strong>When you email us.</strong> Your email address and what you write. Email sent to ${email} passes through Cloudflare, which forwards it to ${nick}’s Google email account.</li>
         <li><strong>When you visit this website.</strong> The website uses no analytics and sets no cookies of its own. It is hosted on GitHub Pages, which logs the IP address of every visitor for security purposes. If you choose to load the booking calendar, Calendly collects information about your device and sets cookies, as the <a href="${href('cookies')}">cookie notice</a> explains.</li>
+        <li><strong>If you come from one of our adverts.</strong> A link in one of our adverts on Facebook or Instagram adds tags to the web address that name the platform and the advert, such as <code>utm_source=ig</code> and <code>utm_content=ad_b</code>. The tags say nothing about you. The website keeps them in its links as you move between pages, and passes them to Calendly if you book, which records them with your booking. That lets us see which adverts lead to bookings. The website has no Meta code, such as Meta’s Pixel, and sends Meta nothing about your visit or your booking. What Meta collects when you see or tap an advert on its apps is covered by ${ext(META_PRIVACY, 'Meta’s Privacy Policy')}.</li>
       </ul>
       <p>We don’t ask for information about your health. If you choose to tell us about it, for example in the booking form or in a session, we handle it with the extra care the law requires for health information.</p>
 
@@ -76,12 +78,13 @@ ${pageHead({
             <tr><th scope="row" data-label="Purpose">Replying to your emails</th><td data-label="Lawful basis">Our legitimate interest in answering the questions people send us: Article 6(1)(f)</td></tr>
             <tr><th scope="row" data-label="Purpose">Using any health information you choose to share, only to mentor you</th><td data-label="Lawful basis">Providing the mentoring you ask for: Article 6(1)(b); and your explicit consent, which you can withdraw at any time: Article 9(2)(a)</td></tr>
             <tr><th scope="row" data-label="Purpose">Loading the Calendly booking calendar, and the cookies Calendly then sets</th><td data-label="Lawful basis">Your consent, given when you choose to load it: Article 6(1)(a)</td></tr>
+            <tr><th scope="row" data-label="Purpose">Recording which advert led to a booking, from the tags in the advert’s link</th><td data-label="Lawful basis">Our legitimate interest in knowing which adverts help people find us, so that we spend only on those: Article 6(1)(f)</td></tr>
             <tr><th scope="row" data-label="Purpose">Sharing information where the law requires it, or to protect you or someone else from serious harm</th><td data-label="Lawful basis">Legal obligation, or vital interests: Article 6(1)(c) or 6(1)(d)</td></tr>
             <tr><th scope="row" data-label="Purpose">Keeping the website secure (GitHub’s logs)</th><td data-label="Lawful basis">Legitimate interests in keeping the website safe and available: Article 6(1)(f)</td></tr>
           </tbody>
         </table>
       </div>
-      <p>We do not sell your information, use it for advertising, or make decisions about you based solely on automated processing.</p>
+      <p>We do not sell your information, share it with advertisers or use it to choose who sees our adverts, and we do not make decisions about you based solely on automated processing.</p>
 
       <h2 id="sharing">The services that hold it</h2>
       <p>We use these services to run DeepRest. Each holds the information described above for us:</p>

@@ -8,6 +8,49 @@
   var root = document.documentElement;
   var calendlyUrl = root.getAttribute('data-calendly-url');
 
+  // Campaign tags (utm_*) from an advert's link. They are kept on the links between pages
+  // and passed to Calendly, which records them with a booking. Nothing is stored.
+  var TAG_NAMES = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  var tags = {};
+  var hasTags = false;
+  try {
+    var query = new URLSearchParams(window.location.search);
+    TAG_NAMES.forEach(function (name) {
+      var value = query.get(name);
+      if (value) {
+        tags[name] = value.slice(0, 100);
+        hasTags = true;
+      }
+    });
+  } catch (e) {
+    /* old browser: links are left as they are */
+  }
+
+  if (hasTags) {
+    Array.prototype.forEach.call(document.querySelectorAll('a[href]'), function (link) {
+      if (link.getAttribute('href').charAt(0) === '#') return;
+      try {
+        var url = new URL(link.href);
+        if (url.origin !== window.location.origin && url.hostname !== 'calendly.com') return;
+        TAG_NAMES.forEach(function (name) {
+          if (tags[name]) url.searchParams.set(name, tags[name]);
+        });
+        link.href = url.href;
+      } catch (e) {
+        /* leave this link as it is */
+      }
+    });
+  }
+
+  // The same tags in the form Calendly's embed takes them, leaving out any not given.
+  function calendlyUtm() {
+    var utm = {};
+    TAG_NAMES.forEach(function (name) {
+      if (tags[name]) utm['utm' + name.charAt(4).toUpperCase() + name.slice(5)] = tags[name];
+    });
+    return utm;
+  }
+
   function hasConsent() {
     try {
       return localStorage.getItem(CONSENT_KEY) === 'granted';
@@ -80,7 +123,7 @@
   function openPopup(fallbackHref) {
     loadCalendly().then(
       function (Calendly) {
-        Calendly.initPopupWidget({ url: calendlyUrl });
+        Calendly.initPopupWidget({ url: calendlyUrl, utm: calendlyUtm() });
       },
       function () {
         window.location.href = fallbackHref;
@@ -127,7 +170,7 @@
       function (Calendly) {
         frame.textContent = '';
         frame.classList.remove('is-loading');
-        Calendly.initInlineWidget({ url: calendlyUrl, parentElement: frame });
+        Calendly.initInlineWidget({ url: calendlyUrl, parentElement: frame, utm: calendlyUtm() });
       },
       function () {
         inlineStarted = false;

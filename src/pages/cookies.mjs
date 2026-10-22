@@ -55,7 +55,7 @@ export default {
 ${pageHead({
   eyebrow: 'Cookies',
   title: 'Cookie notice',
-  lead: 'This website sets no cookies of its own and uses no analytics or advertising. Cookies are set only if you choose to load the booking calendar, and they come from Calendly.',
+  lead: 'This website sets no cookies of its own and uses no analytics or advertising trackers. Cookies are set only if you choose to load the booking calendar, and they come from Calendly.',
 })}
 
 <div class="section">
@@ -71,6 +71,7 @@ ${pageHead({
         </tbody>
       </table>
     </div>
+    <p>If you come from one of our adverts on Facebook or Instagram, the web address carries tags that name the platform and the advert. They stay in the address and in the website’s links, and nothing is stored on your device. The website has no Meta code, such as Meta’s Pixel, so Meta sets no cookies through it. The <a href="${href('privacy')}#information">privacy policy</a> explains the tags.</p>
 
     <h2 id="calendly">Calendly, our booking system</h2>
     <p>Sessions are booked through Calendly, provided by Calendly, LLC in the United States. The booking calendar is not loaded until you ask for it, either with the button on the <a href="${href('book')}">booking page</a> or through the booking button at the top of each page.</p>

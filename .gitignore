@@ -27,3 +27,6 @@ Thumbs.db
 
 # local tools fetched by the verification scripts (Nu HTML Checker)
 .tools/
+
+# private working notes: ad drafts, account IDs, screenshots and evidence stay on this machine
+.private/

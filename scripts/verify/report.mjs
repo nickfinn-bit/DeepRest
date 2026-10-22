@@ -38,6 +38,13 @@ const FAILED = [
   'Two scripted edits (a Python find-and-replace) silently did nothing because of an escaping slip: the cookie comparison in the Calendly check, and the wrapping of result lists in the shared result writer. Both were found when result files lacked the expected fields (the layout rows of the report read "not run"), redone by hand, and the layout check re-run live. A third scripted edit broke a pattern in the PageSpeed check, which the syntax check caught at once. Every scripted edit is now checked with a search afterwards.',
 ];
 
+// A re-run keeps the failed attempt before it, which keeps its own: every failed attempt, oldest first.
+function failedAttempts(r) {
+  const list = [];
+  for (let a = r.failedAttempt; a; a = a.failedAttempt) list.unshift(a);
+  return list;
+}
+
 const LIMITS = [
   'Only Chrome was used (Chrome for Testing, headless), with phones and tablets emulated. Safari, Firefox and real devices were not tested.',
   'Calendly is a third party: its layout, cookie list and cookie banner can change. The banner appeared from this machine\'s location, and may differ elsewhere.',
@@ -101,7 +108,7 @@ out(
   '| Check | Target | Result |',
   '|---|---|---|',
   ...(hosting ? [`| Hosting: DNS, HTTPS, redirects, every page live and identical to the build | all pass | ${yes(hosting.pass)} ${hostChecks.filter((c) => c.ok).length}/${hostChecks.length} |`] : []),
-  row(lh, `| Lighthouse, mobile and desktop, ${lhAll.length / 2} pages (${where(lh)}) | 95+ in Performance, Accessibility, Best Practices and SEO | ${yes(lhAll.length && lhAll.every((r) => r.pass))} ${lhAll.filter((r) => r.pass).length}/${lhAll.length} pass in every run; lowest score in any of ${lh?.runsPerPage} runs: **${lhLowest}**${lhAll.some((r) => r.failedAttempt) ? `; ${lhAll.filter((r) => r.failedAttempt).length} re-run after a failed attempt, shown below` : ''} |`),
+  row(lh, `| Lighthouse, mobile and desktop, ${lhAll.length / 2} pages (${where(lh)}) | 95+ in Performance, Accessibility, Best Practices and SEO | ${yes(lhAll.length && lhAll.every((r) => r.pass))} ${lhAll.filter((r) => r.pass).length}/${lhAll.length} pass in every run; lowest score in any of ${lh?.runsPerPage} runs: **${lhLowest}**${lhAll.some((r) => r.failedAttempt) ? `; ${lhAll.filter((r) => r.failedAttempt).length} re-run after ${lhAll.reduce((n, r) => n + failedAttempts(r).length, 0)} failed attempts, shown below` : ''} |`),
   ...(psi ? [`| PageSpeed Insights (Lighthouse on Google's servers), mobile and desktop, ${psi.results.length} pages (live) | 95+ in all four categories | ${yes(psi.results.every((r) => r.pass))} ${psi.results.filter((r) => r.pass).length}/${psi.results.length} pages; lowest score: **${psiLowest}** |`] : []),
   row(layout, `| Horizontal scroll, ${WIDTHS.length} widths × ${PAGES.length} pages (${where(layoutFile)}) | 0 | ${yes(lay.length && lay.every((r) => r.horizontalScroll === 0))} largest: **${Math.max(...lay.map((r) => r.horizontalScroll))} px** over ${lay.length} page-widths |`),
   row(layout, `| Layout shift during load | under 0.1 | ${yes(lay.length && lay.every((r) => r.cls < 0.1))} largest: **${Math.max(...lay.map((r) => r.cls)).toFixed(4)}**; with the Calendly calendar auto-loading: ${Math.max(0, ...inline.map((r) => r.clsWhenRemembered ?? 0)).toFixed(4)} |`),
@@ -168,15 +175,16 @@ if (lh) {
   if (retried.length) {
     out(
       '',
-      '**Failed attempts, and the re-runs that replaced them.** Nothing in the site changed between an attempt and its re-run. Each run is shown as Performance score (total blocking time, main-thread time).',
+      '**Failed attempts, and the re-runs that replaced them.** Nothing in the site changed between an attempt and its re-run. Every attempt is listed, oldest first. Each run is shown as Performance score (total blocking time, main-thread time).',
       '',
-      '| Page | Form factor | Failed attempt: median; lowest | Each failed-attempt run | Re-run: median; lowest | Each re-run |',
-      '|---|---|---|---|---|---|',
+      '| Page | Form factor | Attempt | Median; lowest | Each run |',
+      '|---|---|---|---|---|',
     );
     const each = (runs) =>
-      runs ? runs.map((x) => `${x.scores.performance} (${x.tbtMs} ms, ${x.mainThreadMs.toLocaleString('en-GB')} ms)`).join('; ') : 'not recorded';
+      runs ? runs.map((x) => `${x.scores.performance} (${x.tbtMs.toLocaleString('en-GB')} ms, ${x.mainThreadMs.toLocaleString('en-GB')} ms)`).join('; ') : 'not recorded';
     for (const r of retried) {
-      out(`| ${name(r.page)} | ${r.formFactor} | ${scores(r.failedAttempt.median)}; ${scores(r.failedAttempt.lowest)} | ${each(r.failedAttempt.eachRun)} | ${scores(r.median)}; ${scores(r.lowest)} | ${each(r.eachRun)} |`);
+      const all = [...failedAttempts(r), r];
+      all.forEach((a, i) => out(`| ${name(r.page)} | ${r.formFactor} | ${i + 1} of ${all.length}: ${a === r ? (r.pass ? 'passed' : 'failed') : 'failed'} | ${scores(a.median)}; ${scores(a.lowest)} | ${each(a.eachRun)} |`));
     }
   }
   out('', 'Audits that did not score full marks in at least one run:', '');

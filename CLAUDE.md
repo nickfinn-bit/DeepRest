@@ -28,6 +28,10 @@
   in localStorage under `deeprest-calendly-consent`. The header "Book a free
   session" button asks first, then opens Calendly's popup; the booking page has
   the inline calendar. Without JavaScript, the button links to the booking page.
+- Advert link tags (`utm_*`) are copied onto the site's own links and Calendly's
+  by `site.js`, and passed to Calendly's embed; nothing is stored. The site has
+  no Meta code (no Pixel): Meta's Business Tools Terms §1.h forbid sharing data
+  based on health information.
 - The Content Security Policy is a meta tag built in `scripts/build.mjs`. A new
   outside resource must be allowed there; the inline head script's hash is
   computed at build time.
@@ -35,9 +39,10 @@
   116 123) and states that DeepRest is not an emergency service.
 - Links are relative, so the site works at any base path; 404.html links
   through a `<base>` taken from `site.url`.
-- The booking frame is 1,130px tall below 68rem and 760px above, matching
-  Calendly's stacked and two-column layouts, so the frame never scrolls inside
-  and nothing shifts when the calendar loads.
+- Once the visitor chooses Calendly (or a remembered choice), the booking frame
+  is 1,130px tall below 68rem and 760px above, matching Calendly's stacked and
+  two-column layouts, so the frame never scrolls inside and nothing shifts when
+  the calendar loads; before the choice it is only as tall as its message.
 - Test with taps, not clicks, inside Calendly on touch widths: Calendly
   ignores mouse clicks there. Tests never submit a booking.
 - Stop servers and browsers you start by their own PID.
