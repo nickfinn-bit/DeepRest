@@ -7,9 +7,9 @@
       "name": "deepestrest.com A records are GitHub Pages'",
       "ok": true,
       "detail": [
-        "185.199.108.153",
-        "185.199.110.153",
         "185.199.109.153",
+        "185.199.110.153",
+        "185.199.108.153",
         "185.199.111.153"
       ]
     },
@@ -17,10 +17,10 @@
       "name": "deepestrest.com AAAA records are GitHub Pages'",
       "ok": true,
       "detail": [
-        "2606:50c0:8001::153",
-        "2606:50c0:8002::153",
         "2606:50c0:8000::153",
-        "2606:50c0:8003::153"
+        "2606:50c0:8002::153",
+        "2606:50c0:8003::153",
+        "2606:50c0:8001::153"
       ]
     },
     {
@@ -274,7 +274,7 @@
       "status": 200,
       "server": "GitHub.com",
       "sameAsBuild": true,
-      "bytes": 19478,
+      "bytes": 21000,
       "pass": true
     },
     {
@@ -283,7 +283,7 @@
       "status": 200,
       "server": "GitHub.com",
       "sameAsBuild": true,
-      "bytes": 12264,
+      "bytes": 12669,
       "pass": true
     },
     {

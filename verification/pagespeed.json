@@ -1,12 +1,92 @@
 {
-  "testedAt": "https://deepestrest.com/",
-  "live": true,
+  "testedAt": "http://localhost:4173/",
+  "live": false,
   "tool": "PageSpeed Insights (pagespeed.web.dev)",
   "results": [
     {
       "page": "home",
       "url": "https://deepestrest.com/",
-      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com/wkdwo260e5",
+      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com/5ry5hpeuoj",
+      "mobile": {
+        "scores": {
+          "Performance": 100,
+          "Accessibility": 100,
+          "Best Practices": 100,
+          "SEO": 100
+        },
+        "metrics": {
+          "fcp": "0.9 s",
+          "lcp": "1.1 s",
+          "tbt": "0 ms",
+          "cls": "0\n",
+          "si": "2.3 s"
+        },
+        "captured": "Oct 22, 2026, 8:53 PM GMT+1",
+        "lighthouse": "13.5.0"
+      },
+      "desktop": {
+        "scores": {
+          "Performance": 100,
+          "Accessibility": 100,
+          "Best Practices": 100,
+          "SEO": 100
+        },
+        "metrics": {
+          "fcp": "0.2 s",
+          "lcp": "0.3 s",
+          "tbt": "0 ms",
+          "cls": "0\n",
+          "si": "0.3 s"
+        },
+        "captured": "Oct 22, 2026, 8:53 PM GMT+1",
+        "lighthouse": "13.5.0"
+      },
+      "pass": true
+    },
+    {
+      "page": "mentoring",
+      "url": "https://deepestrest.com/mentoring/",
+      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-mentoring/qr2hfgnu4x",
+      "mobile": {
+        "scores": {
+          "Performance": 100,
+          "Accessibility": 100,
+          "Best Practices": 100,
+          "SEO": 100
+        },
+        "metrics": {
+          "fcp": "0.8 s",
+          "lcp": "1.1 s",
+          "tbt": "0 ms",
+          "cls": "0\n",
+          "si": "0.8 s"
+        },
+        "captured": "Oct 22, 2026, 8:53 PM GMT+1",
+        "lighthouse": "13.5.0"
+      },
+      "desktop": {
+        "scores": {
+          "Performance": 100,
+          "Accessibility": 100,
+          "Best Practices": 100,
+          "SEO": 100
+        },
+        "metrics": {
+          "fcp": "0.2 s",
+          "lcp": "0.3 s",
+          "tbt": "0 ms",
+          "cls": "0\n",
+          "si": "0.4 s"
+        },
+        "captured": "Oct 22, 2026, 8:53 PM GMT+1",
+        "lighthouse": "13.5.0"
+      },
+      "pass": true
+    },
+    {
+      "page": "about",
+      "url": "https://deepestrest.com/about/",
+      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-about/wq8vr7apul",
       "mobile": {
         "scores": {
           "Performance": 100,
@@ -21,7 +101,7 @@
           "cls": "0\n",
           "si": "2.3 s"
         },
-        "captured": "Oct 20, 2026, 4:05 AM GMT+1",
+        "captured": "Oct 22, 2026, 8:53 PM GMT+1",
         "lighthouse": "13.5.0"
       },
       "desktop": {
@@ -38,87 +118,7 @@
           "cls": "0\n",
           "si": "0.3 s"
         },
-        "captured": "Oct 20, 2026, 4:05 AM GMT+1",
-        "lighthouse": "13.5.0"
-      },
-      "pass": true
-    },
-    {
-      "page": "mentoring",
-      "url": "https://deepestrest.com/mentoring/",
-      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-mentoring/3rpcuqk0ka",
-      "mobile": {
-        "scores": {
-          "Performance": 100,
-          "Accessibility": 100,
-          "Best Practices": 100,
-          "SEO": 100
-        },
-        "metrics": {
-          "fcp": "0.8 s",
-          "lcp": "1.1 s",
-          "tbt": "0 ms",
-          "cls": "0\n",
-          "si": "0.8 s"
-        },
-        "captured": "Oct 20, 2026, 4:05 AM GMT+1",
-        "lighthouse": "13.5.0"
-      },
-      "desktop": {
-        "scores": {
-          "Performance": 100,
-          "Accessibility": 100,
-          "Best Practices": 100,
-          "SEO": 100
-        },
-        "metrics": {
-          "fcp": "0.2 s",
-          "lcp": "0.3 s",
-          "tbt": "0 ms",
-          "cls": "0\n",
-          "si": "0.2 s"
-        },
-        "captured": "Oct 20, 2026, 4:05 AM GMT+1",
-        "lighthouse": "13.5.0"
-      },
-      "pass": true
-    },
-    {
-      "page": "about",
-      "url": "https://deepestrest.com/about/",
-      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-about/ina9k6nwvz",
-      "mobile": {
-        "scores": {
-          "Performance": 100,
-          "Accessibility": 100,
-          "Best Practices": 100,
-          "SEO": 100
-        },
-        "metrics": {
-          "fcp": "0.8 s",
-          "lcp": "1.1 s",
-          "tbt": "0 ms",
-          "cls": "0\n",
-          "si": "0.8 s"
-        },
-        "captured": "Oct 20, 2026, 4:06 AM GMT+1",
-        "lighthouse": "13.5.0"
-      },
-      "desktop": {
-        "scores": {
-          "Performance": 100,
-          "Accessibility": 100,
-          "Best Practices": 100,
-          "SEO": 100
-        },
-        "metrics": {
-          "fcp": "0.2 s",
-          "lcp": "0.3 s",
-          "tbt": "0 ms",
-          "cls": "0\n",
-          "si": "0.3 s"
-        },
-        "captured": "Oct 20, 2026, 4:06 AM GMT+1",
+        "captured": "Oct 22, 2026, 8:53 PM GMT+1",
         "lighthouse": "13.5.0"
       },
       "pass": true
@@ -126,7 +126,7 @@
     {
       "page": "faq",
       "url": "https://deepestrest.com/faq/",
-      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-faq/dx2bx9nh16",
+      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-faq/7whtkcgesj",
       "mobile": {
         "scores": {
           "Performance": 100,
@@ -141,7 +141,7 @@
           "cls": "0\n",
           "si": "0.8 s"
         },
-        "captured": "Oct 20, 2026, 4:09 AM GMT+1",
+        "captured": "Oct 22, 2026, 8:54 PM GMT+1",
         "lighthouse": "13.5.0"
       },
       "desktop": {
@@ -156,9 +156,9 @@
           "lcp": "0.3 s",
           "tbt": "0 ms",
           "cls": "0\n",
-          "si": "0.3 s"
+          "si": "0.2 s"
         },
-        "captured": "Oct 20, 2026, 4:09 AM GMT+1",
+        "captured": "Oct 22, 2026, 8:54 PM GMT+1",
         "lighthouse": "13.5.0"
       },
       "pass": true
@@ -166,7 +166,7 @@
     {
       "page": "book",
       "url": "https://deepestrest.com/book/",
-      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-book/m5hrhrwx20",
+      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-book/alu5q9ocvs",
       "mobile": {
         "scores": {
           "Performance": 100,
@@ -181,87 +181,7 @@
           "cls": "0\n",
           "si": "0.8 s"
         },
-        "captured": "Oct 20, 2026, 4:08 AM GMT+1",
-        "lighthouse": "13.5.0"
-      },
-      "desktop": {
-        "scores": {
-          "Performance": 100,
-          "Accessibility": 100,
-          "Best Practices": 100,
-          "SEO": 100
-        },
-        "metrics": {
-          "fcp": "0.2 s",
-          "lcp": "0.3 s",
-          "tbt": "0 ms",
-          "cls": "0\n",
-          "si": "0.2 s"
-        },
-        "captured": "Oct 20, 2026, 4:08 AM GMT+1",
-        "lighthouse": "13.5.0"
-      },
-      "pass": true
-    },
-    {
-      "page": "contact",
-      "url": "https://deepestrest.com/contact/",
-      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-contact/2shbokcsx6",
-      "mobile": {
-        "scores": {
-          "Performance": 100,
-          "Accessibility": 100,
-          "Best Practices": 100,
-          "SEO": 100
-        },
-        "metrics": {
-          "fcp": "0.8 s",
-          "lcp": "1.1 s",
-          "tbt": "0 ms",
-          "cls": "0\n",
-          "si": "0.8 s"
-        },
-        "captured": "Oct 20, 2026, 4:08 AM GMT+1",
-        "lighthouse": "13.5.0"
-      },
-      "desktop": {
-        "scores": {
-          "Performance": 100,
-          "Accessibility": 100,
-          "Best Practices": 100,
-          "SEO": 100
-        },
-        "metrics": {
-          "fcp": "0.2 s",
-          "lcp": "0.3 s",
-          "tbt": "0 ms",
-          "cls": "0\n",
-          "si": "0.2 s"
-        },
-        "captured": "Oct 20, 2026, 4:08 AM GMT+1",
-        "lighthouse": "13.5.0"
-      },
-      "pass": true
-    },
-    {
-      "page": "privacy",
-      "url": "https://deepestrest.com/privacy/",
-      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-privacy/0vsa9n154v",
-      "mobile": {
-        "scores": {
-          "Performance": 100,
-          "Accessibility": 100,
-          "Best Practices": 100,
-          "SEO": 100
-        },
-        "metrics": {
-          "fcp": "0.8 s",
-          "lcp": "1.1 s",
-          "tbt": "0 ms",
-          "cls": "0\n",
-          "si": "0.8 s"
-        },
-        "captured": "Oct 20, 2026, 4:09 AM GMT+1",
+        "captured": "Oct 22, 2026, 8:54 PM GMT+1",
         "lighthouse": "13.5.0"
       },
       "desktop": {
@@ -278,7 +198,87 @@
           "cls": "0\n",
           "si": "0.3 s"
         },
-        "captured": "Oct 20, 2026, 4:08 AM GMT+1",
+        "captured": "Oct 22, 2026, 8:54 PM GMT+1",
+        "lighthouse": "13.5.0"
+      },
+      "pass": true
+    },
+    {
+      "page": "contact",
+      "url": "https://deepestrest.com/contact/",
+      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-contact/zqyp2wgu8e",
+      "mobile": {
+        "scores": {
+          "Performance": 100,
+          "Accessibility": 100,
+          "Best Practices": 100,
+          "SEO": 100
+        },
+        "metrics": {
+          "fcp": "0.8 s",
+          "lcp": "1.1 s",
+          "tbt": "0 ms",
+          "cls": "0\n",
+          "si": "2.3 s"
+        },
+        "captured": "Oct 22, 2026, 8:54 PM GMT+1",
+        "lighthouse": "13.5.0"
+      },
+      "desktop": {
+        "scores": {
+          "Performance": 100,
+          "Accessibility": 100,
+          "Best Practices": 100,
+          "SEO": 100
+        },
+        "metrics": {
+          "fcp": "0.2 s",
+          "lcp": "0.3 s",
+          "tbt": "0 ms",
+          "cls": "0\n",
+          "si": "0.2 s"
+        },
+        "captured": "Oct 22, 2026, 8:54 PM GMT+1",
+        "lighthouse": "13.5.0"
+      },
+      "pass": true
+    },
+    {
+      "page": "privacy",
+      "url": "https://deepestrest.com/privacy/",
+      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-privacy/jnbhblhxod",
+      "mobile": {
+        "scores": {
+          "Performance": 100,
+          "Accessibility": 100,
+          "Best Practices": 100,
+          "SEO": 100
+        },
+        "metrics": {
+          "fcp": "0.8 s",
+          "lcp": "1.1 s",
+          "tbt": "0 ms",
+          "cls": "0\n",
+          "si": "0.8 s"
+        },
+        "captured": "Oct 22, 2026, 8:55 PM GMT+1",
+        "lighthouse": "13.5.0"
+      },
+      "desktop": {
+        "scores": {
+          "Performance": 100,
+          "Accessibility": 100,
+          "Best Practices": 100,
+          "SEO": 100
+        },
+        "metrics": {
+          "fcp": "0.2 s",
+          "lcp": "0.3 s",
+          "tbt": "0 ms",
+          "cls": "0\n",
+          "si": "0.2 s"
+        },
+        "captured": "Oct 22, 2026, 8:55 PM GMT+1",
         "lighthouse": "13.5.0"
       },
       "pass": true
@@ -286,7 +286,7 @@
     {
       "page": "cookies",
       "url": "https://deepestrest.com/cookies/",
-      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-cookies/q8cg3ck3lk",
+      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-cookies/19lt1wgg8v",
       "mobile": {
         "scores": {
           "Performance": 100,
@@ -301,7 +301,7 @@
           "cls": "0\n",
           "si": "0.8 s"
         },
-        "captured": "Oct 20, 2026, 4:09 AM GMT+1",
+        "captured": "Oct 22, 2026, 8:55 PM GMT+1",
         "lighthouse": "13.5.0"
       },
       "desktop": {
@@ -318,7 +318,7 @@
           "cls": "0\n",
           "si": "0.2 s"
         },
-        "captured": "Oct 20, 2026, 4:09 AM GMT+1",
+        "captured": "Oct 22, 2026, 8:55 PM GMT+1",
         "lighthouse": "13.5.0"
       },
       "pass": true
@@ -326,7 +326,7 @@
     {
       "page": "404",
       "url": "https://deepestrest.com/404.html",
-      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-404-html/c1vq5iteeu",
+      "report": "https://pagespeed.web.dev/analysis/https-deepestrest-com-404-html/fk1cnkmfnc",
       "mobile": {
         "scores": {
           "Performance": 100,
@@ -341,7 +341,7 @@
           "cls": "0\n",
           "si": "0.8 s"
         },
-        "captured": "Oct 20, 2026, 4:09 AM GMT+1",
+        "captured": "Oct 22, 2026, 8:55 PM GMT+1",
         "lighthouse": "13.5.0"
       },
       "desktop": {
@@ -356,9 +356,9 @@
           "lcp": "0.3 s",
           "tbt": "0 ms",
           "cls": "0\n",
-          "si": "0.2 s"
+          "si": "0.3 s"
         },
-        "captured": "Oct 20, 2026, 4:09 AM GMT+1",
+        "captured": "Oct 22, 2026, 8:55 PM GMT+1",
         "lighthouse": "13.5.0"
       },
       "pass": true

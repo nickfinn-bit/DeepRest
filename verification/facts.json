@@ -1,6 +1,6 @@
 {
-  "testedAt": "http://localhost:4173/",
-  "live": false,
+  "testedAt": "https://deepestrest.com/",
+  "live": true,
   "placeholders": 0,
   "placeholderKeys": [],
   "missingFromPlaceholdersMd": [],

@@ -1,22 +1,22 @@
 # DeepRest website: verification report
 
-Written by `scripts/verify/report.mjs` (the last step of `npm run verify`) on 2026-10-22 18:44 UTC, from the JSON results each check left in this folder.
-The site was tested as built in `dist/`, served locally the way GitHub Pages serves it (`scripts/serve.mjs`, at http://localhost:4173/).
+Written by `scripts/verify/report.mjs` (the last step of `npm run verify`) on 2026-10-22 20:18 UTC, from the JSON results each check left in this folder.
+Every check below ran against the **live site, https://deepestrest.com/**, served by GitHub Pages under Nick's domain; the hosting check also confirmed that each live page is byte-for-byte the page built from this commit.
 
 ## Summary
 
 | Check | Target | Result |
 |---|---|---|
 | Hosting: DNS, HTTPS, redirects, every page live and identical to the build | all pass | ✅ 22/22 |
-| Lighthouse, mobile and desktop, 9 pages (local) | 95+ in Performance, Accessibility, Best Practices and SEO | ✅ 18/18 pass in every run; lowest score in any of 3 runs: **95**; 4 re-run after 7 failed attempts, shown below |
+| Lighthouse, mobile and desktop, 9 pages (live) | 95+ in Performance, Accessibility, Best Practices and SEO | ❌ 17/18 pass in every run; lowest score in any of 3 runs: **94**; 4 re-run after 7 failed attempts, shown below |
 | PageSpeed Insights (Lighthouse on Google's servers), mobile and desktop, 9 pages (live) | 95+ in all four categories | ✅ 9/9 pages; lowest score: **100** |
-| Horizontal scroll, 7 widths × 9 pages (local) | 0 | ✅ largest: **0 px** over 63 page-widths |
+| Horizontal scroll, 7 widths × 9 pages (live) | 0 | ✅ largest: **0 px** over 63 page-widths |
 | Layout shift during load | under 0.1 | ✅ largest: **0.0000**; with the Calendly calendar auto-loading: 0.0000 |
 | Layout faults: text cut off or overlapping, elements past the screen edge | 0 | ✅ **0**: 0 cut, 0 overlapping, 0 past the edge |
-| Calendly inline calendar, after consent: loads and opens its booking flow (local) | every width | ✅ 7/7 widths; 0 Calendly requests and 0 cookies before consent: ✅ |
+| Calendly inline calendar, after consent: loads and opens its booking flow (live) | every width | ✅ 7/7 widths; 0 Calendly requests and 0 cookies before consent: ✅ |
 | Calendly popup from the header button, after consent | every page, every width | ✅ 63/63 page-widths |
-| HTML validator (W3C Nu HTML Checker, local) | 0 errors | ✅ **0 errors** in 10 files; 0 other warnings; 18 known CSP warnings, explained below |
-| Broken links (local) | 0 | ✅ **0** broken of 320 references (55 distinct) |
+| HTML validator (W3C Nu HTML Checker, live) | 0 errors | ✅ **0 errors** in 10 files; 0 other warnings; 18 known CSP warnings, explained below |
+| Broken links (live) | 0 | ✅ **0** broken of 320 references (47 distinct) |
 | Placeholders | 0 | ✅ **0** |
 | `npm run build:strict` | passes | ✅ builds 9 pages, none showing a placeholder, with the booking link https://calendly.com/nicholas-finnemore/free-diagnostic |
 | Protected titles used for Nick (psychologist, therapist, counsellor, HCPC and BPS titles) | 0 | ✅ **0** on any page, in its text, title, description or sharing tags |
@@ -30,8 +30,8 @@ Checked from this machine against https://deepestrest.com/, with DNS asked of 1.
 
 | Check | Result | Detail |
 |---|---|---|
-| deepestrest.com A records are GitHub Pages' | ✅ | `["185.199.108.153","185.199.110.153","185.199.109.153","185.199.111.153"]` |
-| deepestrest.com AAAA records are GitHub Pages' | ✅ | `["2606:50c0:8001::153","2606:50c0:8002::153","2606:50c0:8000::153","2606:50c0:8003::153"]` |
+| deepestrest.com A records are GitHub Pages' | ✅ | `["185.199.109.153","185.199.110.153","185.199.108.153","185.199.111.153"]` |
+| deepestrest.com AAAA records are GitHub Pages' | ✅ | `["2606:50c0:8000::153","2606:50c0:8002::153","2606:50c0:8003::153","2606:50c0:8001::153"]` |
 | www.deepestrest.com is a CNAME to nickfinn-bit.github.io | ✅ | `["nickfinn-bit.github.io"]` |
 | deepestrest.com MX records are Cloudflare Email Routing's | ✅ | `[{"exchange":"route2.mx.cloudflare.net","priority":20,"type":"MX"},{"exchange":"route3.mx.cloudflare.net","priority":35,"type":"MX"},{"exchange":"route1.mx.cloudflare.net","priority":6,"type":"MX"}]` |
 | deepestrest.com SPF record allows Cloudflare Email Routing | ✅ | `[["v=spf1 include:_spf.mx.cloudflare.net ~all"]]` |
@@ -59,75 +59,93 @@ Lighthouse run on Google's own servers through PageSpeed Insights (pagespeed.web
 
 | Page | Mobile | Desktop | Report |
 |---|---|---|---|
-| Home | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 2.3 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.3 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com/wkdwo260e5) |
-| How mentoring works | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.2 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-mentoring/3rpcuqk0ka) |
-| About Nick | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.3 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-about/ina9k6nwvz) |
-| FAQ | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.3 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-faq/dx2bx9nh16) |
-| Book a free session | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.2 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-book/m5hrhrwx20) |
-| Contact | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.2 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-contact/2shbokcsx6) |
-| Privacy policy | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.3 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-privacy/0vsa9n154v) |
-| Cookie notice | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.2 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-cookies/q8cg3ck3lk) |
-| Page not found (404) | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.2 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-404-html/c1vq5iteeu) |
+| Home | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 2.3 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.3 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com/5ry5hpeuoj) |
+| How mentoring works | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.4 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-mentoring/qr2hfgnu4x) |
+| About Nick | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 2.3 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.3 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-about/wq8vr7apul) |
+| FAQ | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.2 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-faq/7whtkcgesj) |
+| Book a free session | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.3 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-book/alu5q9ocvs) |
+| Contact | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 2.3 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.2 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-contact/zqyp2wgu8e) |
+| Privacy policy | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.2 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-privacy/jnbhblhxod) |
+| Cookie notice | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.2 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-cookies/19lt1wgg8v) |
+| Page not found (404) | 100 / 100 / 100 / 100 (LCP 1.1 s, SI 0.8 s) | 100 / 100 / 100 / 100 (LCP 0.3 s, SI 0.3 s) | [pagespeed.web.dev](https://pagespeed.web.dev/analysis/https-deepestrest-com-404-html/fk1cnkmfnc) |
 
 ## Lighthouse
 
-Lighthouse 13.5.0, default mobile settings (emulated phone, slow 4G, 4× slower CPU) and the desktop preset, against http://localhost:4173/. Each page and form factor ran 3 times; the table gives the median run (by Performance) and, after it, the lowest score in any run. Scores: Performance / Accessibility / Best Practices / SEO. Full reports of the median runs are in [lighthouse/](lighthouse/).
+Lighthouse 13.5.0, default mobile settings (emulated phone, slow 4G, 4× slower CPU) and the desktop preset, against https://deepestrest.com/. Each page and form factor ran 3 times; the table gives the median run (by Performance) and, after it, the lowest score in any run. Scores: Performance / Accessibility / Best Practices / SEO. Full reports of the median runs are in [lighthouse/](lighthouse/).
 
 | Page | Mobile, median | Mobile, lowest | Desktop, median | Desktop, lowest |
 |---|---|---|---|---|
-| Home | 99 / 100 / 100 / 100 | 97 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 98 / 100 / 100 / 100 |
-| How mentoring works | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 98 / 100 / 100 / 100 |
-| About Nick | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 97 / 100 / 100 / 100 |
-| FAQ | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 99 / 100 / 100 / 100 | 99 / 100 / 100 / 100 |
-| Book a free session | 100 / 100 / 100 / 100 | 95 / 100 / 100 / 100 | 99 / 100 / 100 / 100 | 98 / 100 / 100 / 100 |
-| Contact | 100 / 100 / 100 / 100 | 99 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
-| Privacy policy | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 99 / 100 / 100 / 100 |
-| Cookie notice | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
-| Page not found (404) | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
+| Home | 98 / 100 / 100 / 100 | 94 / 100 / 100 / 100 | 99 / 100 / 100 / 100 | 97 / 100 / 100 / 100 |
+| How mentoring works | 99 / 100 / 100 / 100 | 99 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 99 / 100 / 100 / 100 |
+| About Nick | 100 / 100 / 100 / 100 | 99 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 97 / 100 / 100 / 100 |
+| FAQ | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 96 / 100 / 100 / 100 | 95 / 100 / 100 / 100 |
+| Book a free session | 96 / 100 / 100 / 100 | 95 / 100 / 100 / 100 | 97 / 100 / 100 / 100 | 96 / 100 / 100 / 100 |
+| Contact | 100 / 100 / 100 / 100 | 98 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 98 / 100 / 100 / 100 |
+| Privacy policy | 97 / 100 / 100 / 100 | 95 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 98 / 100 / 100 / 100 |
+| Cookie notice | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 96 / 100 / 100 / 100 |
+| Page not found (404) | 96 / 100 / 100 / 100 | 96 / 100 / 100 / 100 | 100 / 100 / 100 / 100 | 99 / 100 / 100 / 100 |
 
 **Failed attempts, and the re-runs that replaced them.** Nothing in the site changed between an attempt and its re-run. Every attempt is listed, oldest first. Each run is shown as Performance score (total blocking time, main-thread time).
 
 | Page | Form factor | Attempt | Median; lowest | Each run |
 |---|---|---|---|---|
-| Home | mobile | 1 of 4: failed | 100 / 100 / 100 / 100; 94 / 100 / 100 / 100 | 94 (0 ms, 1,418 ms); 100 (0 ms, 464 ms); 100 (58 ms, 761 ms) |
-| Home | mobile | 2 of 4: failed | 90 / 100 / 100 / 100; 74 / 100 / 100 / 100 | 98 (0 ms, 795 ms); 90 (398 ms, 1,781 ms); 74 (978 ms, 3,465 ms) |
-| Home | mobile | 3 of 4: failed | 100 / 100 / 100 / 100; 94 / 100 / 100 / 100 | 94 (0 ms, 2,186 ms); 100 (29 ms, 543 ms); 100 (0 ms, 423 ms) |
-| Home | mobile | 4 of 4: passed | 99 / 100 / 100 / 100; 97 / 100 / 100 / 100 | 99 (0 ms, 804 ms); 97 (100 ms, 1,872 ms); 99 (0 ms, 803 ms) |
-| How mentoring works | mobile | 1 of 3: failed | 100 / 100 / 100 / 100; 77 / 100 / 100 / 100 | 100 (0 ms, 361 ms); 100 (0 ms, 372 ms); 77 (1,019 ms, 2,644 ms) |
-| How mentoring works | mobile | 2 of 3: failed | 97 / 100 / 100 / 100; 86 / 100 / 100 / 100 | 86 (403 ms, 2,026 ms); 98 (113 ms, 1,375 ms); 97 (168 ms, 1,361 ms) |
-| How mentoring works | mobile | 3 of 3: passed | 100 / 100 / 100 / 100; 100 / 100 / 100 / 100 | 100 (0 ms, 479 ms); 100 (0 ms, 430 ms); 100 (0 ms, 559 ms) |
-| FAQ | mobile | 1 of 2: failed | 91 / 100 / 100 / 100; 90 / 100 / 100 / 100 | 91 (285 ms, 1,496 ms); 96 (188 ms, 1,891 ms); 90 (339 ms, 1,557 ms) |
-| FAQ | mobile | 2 of 2: passed | 100 / 100 / 100 / 100; 100 / 100 / 100 / 100 | 100 (0 ms, 345 ms); 100 (0 ms, 361 ms); 100 (0 ms, 540 ms) |
-| Contact | desktop | 1 of 2: failed | 100 / 100 / 100 / 100; 94 / 100 / 100 / 100 | 94 (0 ms, 222 ms); 100 (0 ms, 110 ms); 100 (0 ms, 122 ms) |
-| Contact | desktop | 2 of 2: passed | 100 / 100 / 100 / 100; 100 / 100 / 100 / 100 | 100 (0 ms, 92 ms); 100 (0 ms, 105 ms); 100 (0 ms, 94 ms) |
+| Home | mobile | 1 of 4: failed | 99 / 100 / 100 / 100; 91 / 100 / 100 / 100 | 91 (173 ms, 1,507 ms); 99 (0 ms, 688 ms); 100 (25 ms, 594 ms) |
+| Home | mobile | 2 of 4: failed | 98 / 100 / 100 / 100; 86 / 100 / 100 / 100 | 86 (254 ms, 2,469 ms); 98 (8 ms, 1,223 ms); 100 (25 ms, 639 ms) |
+| Home | mobile | 3 of 4: failed | 94 / 100 / 100 / 100; 92 / 100 / 100 / 100 | 96 (72 ms, 1,354 ms); 92 (208 ms, 1,565 ms); 94 (0 ms, 1,505 ms) |
+| Home | mobile | 4 of 4: failed | 98 / 100 / 100 / 100; 94 / 100 / 100 / 100 | 100 (0 ms, 352 ms); 94 (0 ms, 439 ms); 98 (0 ms, 300 ms) |
+| FAQ | desktop | 1 of 2: failed | 96 / 100 / 100 / 100; 92 / 100 / 100 / 100 | 100 (0 ms, 128 ms); 92 (0 ms, 121 ms); 96 (4 ms, 345 ms) |
+| FAQ | desktop | 2 of 2: passed | 96 / 100 / 100 / 100; 95 / 100 / 100 / 100 | 97 (0 ms, 146 ms); 96 (0 ms, 277 ms); 95 (0 ms, 454 ms) |
+| Book a free session | mobile | 1 of 3: failed | 98 / 100 / 100 / 100; 66 / 100 / 100 / 100 | 98 (0 ms, 589 ms); 66 (3,856 ms, 6,650 ms); 100 (17 ms, 471 ms) |
+| Book a free session | mobile | 2 of 3: failed | 98 / 100 / 100 / 100; 93 / 100 / 100 / 100 | 93 (0 ms, 858 ms); 99 (0 ms, 360 ms); 98 (0 ms, 345 ms) |
+| Book a free session | mobile | 3 of 3: passed | 96 / 100 / 100 / 100; 95 / 100 / 100 / 100 | 99 (0 ms, 385 ms); 95 (0 ms, 1,581 ms); 96 (0 ms, 375 ms) |
+| Privacy policy | mobile | 1 of 2: failed | 96 / 100 / 100 / 100; 94 / 100 / 100 / 100 | 98 (0 ms, 479 ms); 96 (80 ms, 660 ms); 94 (68 ms, 513 ms) |
+| Privacy policy | mobile | 2 of 2: passed | 97 / 100 / 100 / 100; 95 / 100 / 100 / 100 | 97 (34 ms, 833 ms); 95 (0 ms, 477 ms); 98 (0 ms, 424 ms) |
 
 Audits that did not score full marks in at least one run:
 
-- Home, mobile: performance: first-contentful-paint (0.98)
-- Home, mobile: performance: speed-index (0.96)
-- Home, mobile: performance: total-blocking-time (0.98)
-- Home, mobile: performance: speed-index (0.8)
-- Home, mobile: performance: first-contentful-paint (0.99)
-- Home, mobile: performance: speed-index (0.9)
-- Home, desktop: performance: speed-index (0.78)
-- Home, desktop: performance: speed-index (0.98)
-- How mentoring works, mobile: performance: speed-index (0.99)
-- How mentoring works, desktop: performance: speed-index (0.81)
-- About Nick, desktop: performance: speed-index (0.99)
+- Home, mobile: performance: speed-index (0.97)
+- Home, mobile: performance: speed-index (0.38)
+- Home, mobile: performance: speed-index (0.76)
+- Home, desktop: performance: speed-index (0.99)
+- Home, desktop: performance: speed-index (0.9)
+- Home, desktop: performance: speed-index (0.73)
+- How mentoring works, mobile: performance: speed-index (0.94)
+- How mentoring works, mobile: performance: speed-index (0.93)
+- How mentoring works, desktop: performance: speed-index (0.95)
+- How mentoring works, desktop: performance: speed-index (0.85)
+- About Nick, mobile: performance: speed-index (0.98)
+- About Nick, mobile: performance: speed-index (0.99)
+- About Nick, mobile: performance: total-blocking-time (0.98)
 - About Nick, desktop: performance: speed-index (0.66)
-- FAQ, desktop: performance: speed-index (0.91)
-- FAQ, desktop: performance: speed-index (0.87)
-- FAQ, desktop: performance: speed-index (0.94)
-- Book a free session, mobile: performance: speed-index (0.48)
-- Book a free session, desktop: performance: speed-index (0.88)
-- Book a free session, desktop: performance: speed-index (0.75)
-- Book a free session, desktop: performance: speed-index (0.92)
-- Contact, mobile: performance: speed-index (0.91)
-- Contact, desktop: performance: speed-index (0.96)
-- Privacy policy, mobile: performance: first-contentful-paint (0.99)
-- Privacy policy, desktop: performance: speed-index (0.9)
-- Cookie notice, mobile: performance: first-contentful-paint (0.99)
-- Page not found (404), mobile: performance: first-contentful-paint (0.99)
+- FAQ, mobile: performance: speed-index (0.98)
+- FAQ, desktop: performance: speed-index (0.72)
+- FAQ, desktop: performance: speed-index (0.6)
+- FAQ, desktop: performance: speed-index (0.47)
+- Book a free session, mobile: performance: speed-index (0.91)
+- Book a free session, mobile: performance: first-contentful-paint (0.97)
+- Book a free session, mobile: performance: speed-index (0.51)
+- Book a free session, mobile: performance: speed-index (0.56)
+- Book a free session, desktop: performance: speed-index (0.74)
+- Book a free session, desktop: performance: speed-index (0.55)
+- Book a free session, desktop: performance: speed-index (0.73)
+- Contact, mobile: performance: speed-index (0.98)
+- Contact, mobile: performance: speed-index (0.83)
+- Contact, mobile: performance: total-blocking-time (0.99)
+- Contact, mobile: performance: speed-index (0.99)
+- Contact, desktop: performance: speed-index (0.83)
+- Contact, desktop: performance: speed-index (0.99)
+- Privacy policy, mobile: performance: speed-index (0.68)
+- Privacy policy, mobile: performance: speed-index (0.5)
+- Privacy policy, mobile: performance: speed-index (0.82)
+- Privacy policy, desktop: performance: speed-index (0.77)
+- Cookie notice, mobile: performance: speed-index (0.99)
+- Cookie notice, mobile: performance: speed-index (0.98)
+- Cookie notice, desktop: performance: speed-index (0.97)
+- Cookie notice, desktop: performance: speed-index (0.6)
+- Page not found (404), mobile: performance: speed-index (0.61)
+- Page not found (404), mobile: performance: speed-index (0.62)
+- Page not found (404), mobile: performance: speed-index (0.69)
+- Page not found (404), desktop: performance: speed-index (0.93)
 
 The 404 page was audited at `404.html`, the same file served with status 200: Lighthouse will not audit a page served with status 404.
 
@@ -135,12 +153,12 @@ The 404 page was audited at `404.html`, the same file served with status 200: Li
 
 | Form factor | Median | Lowest | Audits below full marks |
 |---|---|---|---|
-| mobile | 57 / 100 / 77 / 100 | 57 / 100 / 77 / 100 | performance: first-contentful-paint (0.92); performance: largest-contentful-paint (0.85); performance: speed-index (0.53); best-practices: third-party-cookies (0); best-practices: inspector-issues (0); performance: first-contentful-paint (0); performance: largest-contentful-paint (0); performance: speed-index (0.18); performance: speed-index (0.19) |
-| desktop | 95 / 100 / 73 / 100 | 93 / 100 / 73 / 100 | performance: first-contentful-paint (0.98); performance: largest-contentful-paint (0.88); performance: speed-index (0.85); best-practices: third-party-cookies (0); best-practices: errors-in-console (0); best-practices: inspector-issues (0); performance: speed-index (0.99); performance: first-contentful-paint (0.96); performance: largest-contentful-paint (0.82); performance: speed-index (0.82) |
+| mobile | 57 / 100 / 77 / 100 | 56 / 100 / 77 / 100 | performance: first-contentful-paint (0); performance: largest-contentful-paint (0); performance: speed-index (0.12); best-practices: third-party-cookies (0); best-practices: inspector-issues (0); performance: speed-index (0.17); performance: speed-index (0.16) |
+| desktop | 100 / 100 / 77 / 100 | 100 / 100 / 77 / 100 | best-practices: third-party-cookies (0); best-practices: inspector-issues (0) |
 
 ## Layout at every width
 
-Each page was loaded fresh at each width from http://localhost:4173/ (360, 390 and 768 px emulated as touch phones and tablets; 1,024 px and up as desktops). After the page settled, the check measured: horizontal scroll (document width minus window width); layout shift, by adding up every `layout-shift` entry from the start of loading; every element reaching past the screen edge; every line of text clipped by the screen or by a box that hides overflow; and every pair of text lines covering each other. The FAQ was checked again with every answer open.
+Each page was loaded fresh at each width from https://deepestrest.com/ (360, 390 and 768 px emulated as touch phones and tablets; 1,024 px and up as desktops). After the page settled, the check measured: horizontal scroll (document width minus window width); layout shift, by adding up every `layout-shift` entry from the start of loading; every element reaching past the screen edge; every line of text clipped by the screen or by a box that hides overflow; and every pair of text lines covering each other. The FAQ was checked again with every answer open.
 
 | Page | 360 | 390 | 768 | 1024 | 1280 | 1440 | 1920 |
 |---|---|---|---|---|---|---|---|
@@ -158,7 +176,7 @@ Every cell links to its full-page screenshot. The FAQ also has screenshots with 
 
 ## Calendly
 
-Tested with Puppeteer against http://localhost:4173/, with the booking link https://calendly.com/nicholas-finnemore/free-diagnostic. Calendly loads only after the visitor agrees, so each test first checks that nothing came from Calendly before that choice. The booking flow was followed to Calendly's details form and never submitted, so nothing was booked in Nick's calendar. On phone and tablet widths the test taps, as people do: Calendly ignores mouse clicks on touch screens. The details form asks for: full_name, email, question_0, g-recaptcha-response, ot-group-id-C0002, ot-group-id-C0003, ot-group-id-C0004, vendor-search-handler, checkbox, checkbox, checkbox, checkbox.
+Tested with Puppeteer against https://deepestrest.com/, with the booking link https://calendly.com/nicholas-finnemore/free-diagnostic. Calendly loads only after the visitor agrees, so each test first checks that nothing came from Calendly before that choice. The booking flow was followed to Calendly's details form and never submitted, so nothing was booked in Nick's calendar. On phone and tablet widths the test taps, as people do: Calendly ignores mouse clicks on touch screens. The details form asks for: full_name, email, question_0, g-recaptcha-response, ot-group-id-C0002, ot-group-id-C0003, ot-group-id-C0004, vendor-search-handler, checkbox, checkbox, checkbox, checkbox.
 
 **Inline calendar on the booking page**
 
@@ -167,9 +185,9 @@ Tested with Puppeteer against http://localhost:4173/, with the booking link http
 | 360 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 9:30am → next → details form | ✅ | 0.0000 | ✅ |
 | 390 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 9:30am → time pressed again → next → details form | ✅ | 0.0000 | ✅ |
 | 768 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 9:30am → next → details form | ✅ | 0.0000 | ✅ |
-| 1024 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 9:30am → next → details form | ✅ | 0.0000 | ✅ |
+| 1024 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 9:30am → time pressed again → next → details form | ✅ | 0.0000 | ✅ |
 | 1280 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 9:30am → time pressed again → next → details form | ✅ | 0.0000 | ✅ |
-| 1440 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 9:30am → next → details form | ✅ | 0.0000 | ✅ |
+| 1440 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 9:30am → time pressed again → next → details form | ✅ | 0.0000 | ✅ |
 | 1920 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 9:30am → time pressed again → next → details form | ✅ | 0.0000 | ✅ |
 
 Screenshots of the details form reached at each width: [calendly/](calendly/) (`inline-<width>.png`). Content Security Policy violations recorded during these tests: 0.
@@ -194,7 +212,7 @@ Without JavaScript: ✅ the header button is a plain link to the booking page, w
 
 ## HTML validation
 
-Nu HTML Checker 26.10.12 (0a70d65), the engine behind validator.w3.org/nu, run locally on every page and the stylesheet in dist/.
+Nu HTML Checker 26.10.12 (0a70d65), the engine behind validator.w3.org/nu, run locally on every page and the stylesheet, as downloaded from https://deepestrest.com/.
 
 | File | Errors | Warnings | Known CSP warnings |
 |---|---|---|---|
@@ -213,7 +231,7 @@ The known warnings are the checker's, not the browser's: checking files, it has 
 
 ## Links
 
-320 references on 9 pages (55 distinct), fetched from http://localhost:4173/: every link, stylesheet, script, icon and `#section` target, and each `#section` was found on its page. Broken: **0**.
+320 references on 9 pages (47 distinct), fetched from https://deepestrest.com/: every link, stylesheet, script, icon and `#section` target, and each `#section` was found on its page. Broken: **0**.
 
 External sites:
 
@@ -327,6 +345,8 @@ Made with Chrome's print-to-PDF (Puppeteer `page.pdf`) at a desktop width of 1,4
 - Lighthouse on this machine scored About on mobile below 95 in one of three runs, three times over (lowest 93, then 94, then 84), and FAQ on desktop once (92; its re-run scored 100 in every run). The slow runs had 1.4 to 6 times the main-thread time of the fast runs on the same page (2,728 ms against about 450 ms at worst), while this machine was also running other services, including two Colab runners, at about 40% CPU. A filmstrip of one slow run showed a blank screen until 4.0 s although the page had finished loading at 0.34 s, so Chrome was not getting to paint, not waiting for the site. Re-running stopped there; PageSpeed Insights, which runs Lighthouse on Google's servers, was used as the second opinion below.
 - PageSpeed Insights' keyless API answered 429 (its shared daily quota used up), and its web page, opened signed out in a headless Chrome, answered "Unable to resolve" for the same reason. Run from a tab of its own in Nick's Chrome, signed in to Google, it worked; one page's mobile result timed out once and was re-run on its own.
 - Two scripted edits (a Python find-and-replace) silently did nothing because of an escaping slip: the cookie comparison in the Calendly check, and the wrapping of result lists in the shared result writer. Both were found when result files lacked the expected fields (the layout rows of the report read "not run"), redone by hand, and the layout check re-run live. A third scripted edit broke a pattern in the PageSpeed check, which the syntax check caught at once. Every scripted edit is now checked with a search afterwards.
+- On 22 October the live Calendly check failed once, inline at 768 px: Calendly lost the chosen time twice and showed no Next button. The same check alone passed straight after, and the whole live Calendly check, re-run, passed 71/71; the results above are from that re-run.
+- On 22 October Lighthouse on this machine, against the live site, scored Home on mobile below 95 in one run of three, four times over (lowest 91, 86, 92 and 94, with medians of 99, 98, 94 and 98), while other sessions' Chrome processes used about two CPU cores. Re-running stopped there; PageSpeed Insights scored every live page 100 in all four categories, mobile and desktop.
 
 ## Limits of these checks
 
