@@ -1,6 +1,6 @@
 {
-  "testedAt": "https://deepestrest.com/",
-  "live": true,
+  "testedAt": "http://localhost:4173/",
+  "live": false,
   "checker": "Nu HTML Checker 26.10.12 (0a70d65)",
   "results": [
     {
@@ -8,8 +8,8 @@
       "errors": [],
       "warnings": [],
       "knownCspWarnings": [
-        "17: Resource violates Content Security Policy (meta tag): external stylesheet “assets/css/site.css?v=dd5b7efab9” blocked by “style-src” directive.",
-        "19: Resource violates Content Security Policy (meta tag): external script “assets/js/site.js?v=1c9d509989” blocked by “script-src” directive."
+        "17: Resource violates Content Security Policy (meta tag): external stylesheet “assets/css/site.css?v=b305e0416f” blocked by “style-src” directive.",
+        "19: Resource violates Content Security Policy (meta tag): external script “assets/js/site.js?v=7168b45550” blocked by “script-src” directive."
       ],
       "info": []
     },
@@ -18,8 +18,8 @@
       "errors": [],
       "warnings": [],
       "knownCspWarnings": [
-        "18: Resource violates Content Security Policy (meta tag): external stylesheet “assets/css/site.css?v=dd5b7efab9” blocked by “style-src” directive.",
-        "20: Resource violates Content Security Policy (meta tag): external script “assets/js/site.js?v=1c9d509989” blocked by “script-src” directive."
+        "18: Resource violates Content Security Policy (meta tag): external stylesheet “assets/css/site.css?v=b305e0416f” blocked by “style-src” directive.",
+        "20: Resource violates Content Security Policy (meta tag): external script “assets/js/site.js?v=7168b45550” blocked by “script-src” directive."
       ],
       "info": []
     },
@@ -28,8 +28,8 @@
       "errors": [],
       "warnings": [],
       "knownCspWarnings": [
-        "18: Resource violates Content Security Policy (meta tag): external stylesheet “../assets/css/site.css?v=dd5b7efab9” blocked by “style-src” directive.",
-        "20: Resource violates Content Security Policy (meta tag): external script “../assets/js/site.js?v=1c9d509989” blocked by “script-src” directive."
+        "18: Resource violates Content Security Policy (meta tag): external stylesheet “../assets/css/site.css?v=b305e0416f” blocked by “style-src” directive.",
+        "20: Resource violates Content Security Policy (meta tag): external script “../assets/js/site.js?v=7168b45550” blocked by “script-src” directive."
       ],
       "info": []
     },
@@ -38,8 +38,8 @@
       "errors": [],
       "warnings": [],
       "knownCspWarnings": [
-        "18: Resource violates Content Security Policy (meta tag): external stylesheet “../assets/css/site.css?v=dd5b7efab9” blocked by “style-src” directive.",
-        "20: Resource violates Content Security Policy (meta tag): external script “../assets/js/site.js?v=1c9d509989” blocked by “script-src” directive."
+        "18: Resource violates Content Security Policy (meta tag): external stylesheet “../assets/css/site.css?v=b305e0416f” blocked by “style-src” directive.",
+        "20: Resource violates Content Security Policy (meta tag): external script “../assets/js/site.js?v=7168b45550” blocked by “script-src” directive."
       ],
       "info": []
     },
@@ -48,8 +48,8 @@
       "errors": [],
       "warnings": [],
       "knownCspWarnings": [
-        "18: Resource violates Content Security Policy (meta tag): external stylesheet “../assets/css/site.css?v=dd5b7efab9” blocked by “style-src” directive.",
-        "20: Resource violates Content Security Policy (meta tag): external script “../assets/js/site.js?v=1c9d509989” blocked by “script-src” directive."
+        "18: Resource violates Content Security Policy (meta tag): external stylesheet “../assets/css/site.css?v=b305e0416f” blocked by “style-src” directive.",
+        "20: Resource violates Content Security Policy (meta tag): external script “../assets/js/site.js?v=7168b45550” blocked by “script-src” directive."
       ],
       "info": []
     },
@@ -58,8 +58,8 @@
       "errors": [],
       "warnings": [],
       "knownCspWarnings": [
-        "18: Resource violates Content Security Policy (meta tag): external stylesheet “../assets/css/site.css?v=dd5b7efab9” blocked by “style-src” directive.",
-        "20: Resource violates Content Security Policy (meta tag): external script “../assets/js/site.js?v=1c9d509989” blocked by “script-src” directive."
+        "18: Resource violates Content Security Policy (meta tag): external stylesheet “../assets/css/site.css?v=b305e0416f” blocked by “style-src” directive.",
+        "20: Resource violates Content Security Policy (meta tag): external script “../assets/js/site.js?v=7168b45550” blocked by “script-src” directive."
       ],
       "info": []
     },
@@ -68,8 +68,8 @@
       "errors": [],
       "warnings": [],
       "knownCspWarnings": [
-        "18: Resource violates Content Security Policy (meta tag): external stylesheet “../assets/css/site.css?v=dd5b7efab9” blocked by “style-src” directive.",
-        "20: Resource violates Content Security Policy (meta tag): external script “../assets/js/site.js?v=1c9d509989” blocked by “script-src” directive."
+        "18: Resource violates Content Security Policy (meta tag): external stylesheet “../assets/css/site.css?v=b305e0416f” blocked by “style-src” directive.",
+        "20: Resource violates Content Security Policy (meta tag): external script “../assets/js/site.js?v=7168b45550” blocked by “script-src” directive."
       ],
       "info": []
     },
@@ -78,8 +78,8 @@
       "errors": [],
       "warnings": [],
       "knownCspWarnings": [
-        "18: Resource violates Content Security Policy (meta tag): external stylesheet “../assets/css/site.css?v=dd5b7efab9” blocked by “style-src” directive.",
-        "20: Resource violates Content Security Policy (meta tag): external script “../assets/js/site.js?v=1c9d509989” blocked by “script-src” directive."
+        "18: Resource violates Content Security Policy (meta tag): external stylesheet “../assets/css/site.css?v=b305e0416f” blocked by “style-src” directive.",
+        "20: Resource violates Content Security Policy (meta tag): external script “../assets/js/site.js?v=7168b45550” blocked by “script-src” directive."
       ],
       "info": []
     },
@@ -88,8 +88,8 @@
       "errors": [],
       "warnings": [],
       "knownCspWarnings": [
-        "18: Resource violates Content Security Policy (meta tag): external stylesheet “../assets/css/site.css?v=dd5b7efab9” blocked by “style-src” directive.",
-        "20: Resource violates Content Security Policy (meta tag): external script “../assets/js/site.js?v=1c9d509989” blocked by “script-src” directive."
+        "18: Resource violates Content Security Policy (meta tag): external stylesheet “../assets/css/site.css?v=b305e0416f” blocked by “style-src” directive.",
+        "20: Resource violates Content Security Policy (meta tag): external script “../assets/js/site.js?v=7168b45550” blocked by “script-src” directive."
       ],
       "info": []
     },

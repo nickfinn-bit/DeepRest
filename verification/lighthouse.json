@@ -1,84 +1,15 @@
 {
-  "testedAt": "https://deepestrest.com/",
-  "live": true,
+  "testedAt": "http://localhost:4173/",
+  "live": false,
   "runsPerPage": 3,
   "results": [
     {
       "page": "home",
-      "url": "https://deepestrest.com/",
+      "url": "http://localhost:4173/",
       "formFactor": "mobile",
       "runs": 3,
       "median": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "lowest": {
-        "performance": 96,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "metrics": {
-        "fcp": 869.549,
-        "lcp": 1142.549,
-        "tbt": 33,
-        "cls": 0,
-        "si": 1817.231572007871
-      },
-      "failingAudits": [
-        "performance: speed-index (0.64)"
-      ],
-      "warnings": [],
-      "lighthouseVersion": "13.5.0",
-      "eachRun": [
-        {
-          "scores": {
-            "performance": 96,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 841,
-          "tbtMs": 34,
-          "benchmarkIndex": 920,
-          "at": "2026-10-20T02:10:07.010Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 369,
-          "tbtMs": 33,
-          "benchmarkIndex": 2071,
-          "at": "2026-10-20T02:10:22.229Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 413,
-          "tbtMs": 0,
-          "benchmarkIndex": 1916.5,
-          "at": "2026-10-20T02:10:33.145Z"
-        }
-      ],
-      "pass": true
-    },
-    {
-      "page": "home",
-      "url": "https://deepestrest.com/",
-      "formFactor": "desktop",
-      "runs": 3,
-      "median": {
-        "performance": 100,
+        "performance": 99,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
@@ -90,18 +21,35 @@
         "seo": 100
       },
       "metrics": {
-        "fcp": 240.02,
-        "lcp": 287.02,
+        "fcp": 1261,
+        "lcp": 1410,
         "tbt": 0,
         "cls": 0,
-        "si": 631.7861333270272
+        "si": 2768.127130007118
       },
       "failingAudits": [
-        "performance: speed-index (0.69)"
+        "performance: first-contentful-paint (0.98)",
+        "performance: speed-index (0.96)",
+        "performance: total-blocking-time (0.98)",
+        "performance: speed-index (0.8)",
+        "performance: first-contentful-paint (0.99)",
+        "performance: speed-index (0.9)"
       ],
       "warnings": [],
       "lighthouseVersion": "13.5.0",
       "eachRun": [
+        {
+          "scores": {
+            "performance": 99,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 804,
+          "tbtMs": 0,
+          "benchmarkIndex": 1920,
+          "at": "2026-10-22T18:43:22.805Z"
+        },
         {
           "scores": {
             "performance": 97,
@@ -109,245 +57,22 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 125,
+          "mainThreadMs": 1872,
+          "tbtMs": 100,
+          "benchmarkIndex": 1500.5,
+          "at": "2026-10-22T18:43:39.042Z"
+        },
+        {
+          "scores": {
+            "performance": 99,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 803,
           "tbtMs": 0,
-          "benchmarkIndex": 2360,
-          "at": "2026-10-20T02:10:47.234Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 128,
-          "tbtMs": 0,
-          "benchmarkIndex": 2277.5,
-          "at": "2026-10-20T02:11:03.505Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 126,
-          "tbtMs": 0,
-          "benchmarkIndex": 2295.5,
-          "at": "2026-10-20T02:11:17.181Z"
-        }
-      ],
-      "pass": true
-    },
-    {
-      "page": "mentoring",
-      "url": "https://deepestrest.com/mentoring/",
-      "formFactor": "mobile",
-      "runs": 3,
-      "median": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "lowest": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "metrics": {
-        "fcp": 864.12,
-        "lcp": 1136.12,
-        "tbt": 35,
-        "cls": 0,
-        "si": 1437.0934679909947
-      },
-      "failingAudits": [],
-      "warnings": [],
-      "lighthouseVersion": "13.5.0",
-      "eachRun": [
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 447,
-          "tbtMs": 36,
-          "benchmarkIndex": 2158,
-          "at": "2026-10-20T02:11:31.726Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 522,
-          "tbtMs": 35,
-          "benchmarkIndex": 2371,
-          "at": "2026-10-20T02:11:45.888Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 516,
-          "tbtMs": 33,
-          "benchmarkIndex": 2270.5,
-          "at": "2026-10-20T02:12:00.484Z"
-        }
-      ],
-      "pass": true
-    },
-    {
-      "page": "mentoring",
-      "url": "https://deepestrest.com/mentoring/",
-      "formFactor": "desktop",
-      "runs": 3,
-      "median": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "lowest": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "metrics": {
-        "fcp": 226.784,
-        "lcp": 280.784,
-        "tbt": 0,
-        "cls": 0,
-        "si": 613.0930333089311
-      },
-      "failingAudits": [],
-      "warnings": [],
-      "lighthouseVersion": "13.5.0",
-      "eachRun": [
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 124,
-          "tbtMs": 0,
-          "benchmarkIndex": 2162.5,
-          "at": "2026-10-20T02:12:14.999Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 121,
-          "tbtMs": 0,
-          "benchmarkIndex": 2208.5,
-          "at": "2026-10-20T02:12:29.366Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 131,
-          "tbtMs": 0,
-          "benchmarkIndex": 1911.5,
-          "at": "2026-10-20T02:12:43.777Z"
-        }
-      ],
-      "pass": true
-    },
-    {
-      "page": "about",
-      "url": "https://deepestrest.com/about/",
-      "formFactor": "mobile",
-      "runs": 3,
-      "median": {
-        "performance": 90,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "lowest": {
-        "performance": 84,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "metrics": {
-        "fcp": 1104.005,
-        "lcp": 1377.005,
-        "tbt": 308.5,
-        "cls": 0,
-        "si": 5023.059182941477
-      },
-      "failingAudits": [
-        "performance: first-contentful-paint (0.92)",
-        "performance: largest-contentful-paint (0.98)",
-        "performance: total-blocking-time (0.62)",
-        "performance: speed-index (0.7)",
-        "performance: first-contentful-paint (0.99)",
-        "performance: total-blocking-time (0.9)",
-        "performance: speed-index (0.9)",
-        "performance: total-blocking-time (0.78)",
-        "performance: speed-index (0.63)"
-      ],
-      "warnings": [],
-      "lighthouseVersion": "13.5.0",
-      "eachRun": [
-        {
-          "scores": {
-            "performance": 84,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 2728,
-          "tbtMs": 462,
-          "benchmarkIndex": 676,
-          "at": "2026-10-20T03:10:27.652Z"
-        },
-        {
-          "scores": {
-            "performance": 96,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 1217,
-          "tbtMs": 198,
-          "benchmarkIndex": 2100.5,
-          "at": "2026-10-20T03:10:44.729Z"
-        },
-        {
-          "scores": {
-            "performance": 90,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 1568,
-          "tbtMs": 309,
-          "benchmarkIndex": 2155.5,
-          "at": "2026-10-20T03:11:00.200Z"
+          "benchmarkIndex": 1770,
+          "at": "2026-10-22T18:43:57.294Z"
         }
       ],
       "failedAttempt": {
@@ -371,10 +96,10 @@
               "best-practices": 100,
               "seo": 100
             },
-            "mainThreadMs": 487,
-            "tbtMs": 21,
-            "benchmarkIndex": 2679,
-            "at": "2026-10-20T02:28:14.102Z"
+            "mainThreadMs": 2186,
+            "tbtMs": 0,
+            "benchmarkIndex": 2552.5,
+            "at": "2026-10-22T18:41:45.324Z"
           },
           {
             "scores": {
@@ -383,10 +108,10 @@
               "best-practices": 100,
               "seo": 100
             },
-            "mainThreadMs": 486,
-            "tbtMs": 57,
-            "benchmarkIndex": 2132.5,
-            "at": "2026-10-20T02:28:33.398Z"
+            "mainThreadMs": 543,
+            "tbtMs": 29,
+            "benchmarkIndex": 2348,
+            "at": "2026-10-22T18:42:01.482Z"
           },
           {
             "scores": {
@@ -395,21 +120,21 @@
               "best-practices": 100,
               "seo": 100
             },
-            "mainThreadMs": 429,
-            "tbtMs": 22,
-            "benchmarkIndex": 2516.5,
-            "at": "2026-10-20T02:28:50.052Z"
+            "mainThreadMs": 423,
+            "tbtMs": 0,
+            "benchmarkIndex": 2024.5,
+            "at": "2026-10-22T18:42:14.537Z"
           }
         ],
         "failedAttempt": {
           "median": {
-            "performance": 99,
+            "performance": 90,
             "accessibility": 100,
             "best-practices": 100,
             "seo": 100
           },
           "lowest": {
-            "performance": 93,
+            "performance": 74,
             "accessibility": 100,
             "best-practices": 100,
             "seo": 100
@@ -417,49 +142,171 @@
           "eachRun": [
             {
               "scores": {
-                "performance": 93,
+                "performance": 98,
                 "accessibility": 100,
                 "best-practices": 100,
                 "seo": 100
               },
-              "mainThreadMs": 676,
-              "tbtMs": 162,
-              "benchmarkIndex": 2223.5,
-              "at": "2026-10-20T02:12:57.557Z"
+              "mainThreadMs": 795,
+              "tbtMs": 0,
+              "benchmarkIndex": 1475.5,
+              "at": "2026-10-22T18:38:08.245Z"
             },
             {
               "scores": {
-                "performance": 100,
+                "performance": 90,
                 "accessibility": 100,
                 "best-practices": 100,
                 "seo": 100
               },
-              "mainThreadMs": 372,
-              "tbtMs": 19,
-              "benchmarkIndex": 2332,
-              "at": "2026-10-20T02:13:14.435Z"
+              "mainThreadMs": 1781,
+              "tbtMs": 398,
+              "benchmarkIndex": 2029,
+              "at": "2026-10-22T18:38:25.857Z"
             },
             {
               "scores": {
-                "performance": 99,
+                "performance": 74,
                 "accessibility": 100,
                 "best-practices": 100,
                 "seo": 100
               },
-              "mainThreadMs": 493,
-              "tbtMs": 107,
-              "benchmarkIndex": 2423,
-              "at": "2026-10-20T02:13:27.339Z"
+              "mainThreadMs": 3465,
+              "tbtMs": 978,
+              "benchmarkIndex": 1765.5,
+              "at": "2026-10-22T18:38:41.735Z"
             }
-          ]
+          ],
+          "failedAttempt": {
+            "median": {
+              "performance": 100,
+              "accessibility": 100,
+              "best-practices": 100,
+              "seo": 100
+            },
+            "lowest": {
+              "performance": 94,
+              "accessibility": 100,
+              "best-practices": 100,
+              "seo": 100
+            },
+            "eachRun": [
+              {
+                "scores": {
+                  "performance": 94,
+                  "accessibility": 100,
+                  "best-practices": 100,
+                  "seo": 100
+                },
+                "mainThreadMs": 1418,
+                "tbtMs": 0,
+                "benchmarkIndex": 2161,
+                "at": "2026-10-22T18:17:12.829Z"
+              },
+              {
+                "scores": {
+                  "performance": 100,
+                  "accessibility": 100,
+                  "best-practices": 100,
+                  "seo": 100
+                },
+                "mainThreadMs": 464,
+                "tbtMs": 0,
+                "benchmarkIndex": 2381.5,
+                "at": "2026-10-22T18:17:29.945Z"
+              },
+              {
+                "scores": {
+                  "performance": 100,
+                  "accessibility": 100,
+                  "best-practices": 100,
+                  "seo": 100
+                },
+                "mainThreadMs": 761,
+                "tbtMs": 58,
+                "benchmarkIndex": 2286,
+                "at": "2026-10-22T18:17:44.269Z"
+              }
+            ]
+          }
         }
       },
-      "pass": false
+      "pass": true
     },
     {
-      "page": "about",
-      "url": "https://deepestrest.com/about/",
+      "page": "home",
+      "url": "http://localhost:4173/",
       "formFactor": "desktop",
+      "runs": 3,
+      "median": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lowest": {
+        "performance": 98,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 260,
+        "lcp": 380,
+        "tbt": 0,
+        "cls": 0,
+        "si": 675.1821583324422
+      },
+      "failingAudits": [
+        "performance: speed-index (0.78)",
+        "performance: speed-index (0.98)"
+      ],
+      "warnings": [],
+      "lighthouseVersion": "13.5.0",
+      "eachRun": [
+        {
+          "scores": {
+            "performance": 98,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 106,
+          "tbtMs": 0,
+          "benchmarkIndex": 1854,
+          "at": "2026-10-22T18:17:56.387Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 148,
+          "tbtMs": 0,
+          "benchmarkIndex": 2401.5,
+          "at": "2026-10-22T18:18:10.009Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 147,
+          "tbtMs": 0,
+          "benchmarkIndex": 1829,
+          "at": "2026-10-22T18:18:21.722Z"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "page": "mentoring",
+      "url": "http://localhost:4173/mentoring/",
+      "formFactor": "mobile",
       "runs": 3,
       "median": {
         "performance": 100,
@@ -474,11 +321,11 @@
         "seo": 100
       },
       "metrics": {
-        "fcp": 248.763,
-        "lcp": 281.76300000000003,
+        "fcp": 810,
+        "lcp": 1410,
         "tbt": 0,
         "cls": 0,
-        "si": 780.8665885967883
+        "si": 1058.9315119968057
       },
       "failingAudits": [
         "performance: speed-index (0.99)"
@@ -493,10 +340,10 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 111,
+          "mainThreadMs": 479,
           "tbtMs": 0,
-          "benchmarkIndex": 1615.5,
-          "at": "2026-10-20T02:13:42.968Z"
+          "benchmarkIndex": 1554,
+          "at": "2026-10-22T18:42:27.680Z"
         },
         {
           "scores": {
@@ -505,10 +352,10 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 141,
+          "mainThreadMs": 430,
           "tbtMs": 0,
-          "benchmarkIndex": 2401.5,
-          "at": "2026-10-20T02:13:55.585Z"
+          "benchmarkIndex": 2075,
+          "at": "2026-10-22T18:42:41.308Z"
         },
         {
           "scores": {
@@ -517,18 +364,122 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 92,
+          "mainThreadMs": 559,
           "tbtMs": 0,
-          "benchmarkIndex": 2151.5,
-          "at": "2026-10-20T02:14:08.414Z"
+          "benchmarkIndex": 2318,
+          "at": "2026-10-22T18:42:54.272Z"
         }
       ],
+      "failedAttempt": {
+        "median": {
+          "performance": 97,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "lowest": {
+          "performance": 86,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "eachRun": [
+          {
+            "scores": {
+              "performance": 86,
+              "accessibility": 100,
+              "best-practices": 100,
+              "seo": 100
+            },
+            "mainThreadMs": 2026,
+            "tbtMs": 403,
+            "benchmarkIndex": 2063,
+            "at": "2026-10-22T18:38:58.114Z"
+          },
+          {
+            "scores": {
+              "performance": 98,
+              "accessibility": 100,
+              "best-practices": 100,
+              "seo": 100
+            },
+            "mainThreadMs": 1375,
+            "tbtMs": 113,
+            "benchmarkIndex": 1902,
+            "at": "2026-10-22T18:39:16.389Z"
+          },
+          {
+            "scores": {
+              "performance": 97,
+              "accessibility": 100,
+              "best-practices": 100,
+              "seo": 100
+            },
+            "mainThreadMs": 1361,
+            "tbtMs": 168,
+            "benchmarkIndex": 1823,
+            "at": "2026-10-22T18:39:32.279Z"
+          }
+        ],
+        "failedAttempt": {
+          "median": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "lowest": {
+            "performance": 77,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "eachRun": [
+            {
+              "scores": {
+                "performance": 100,
+                "accessibility": 100,
+                "best-practices": 100,
+                "seo": 100
+              },
+              "mainThreadMs": 361,
+              "tbtMs": 0,
+              "benchmarkIndex": 2203.5,
+              "at": "2026-10-22T18:18:35.280Z"
+            },
+            {
+              "scores": {
+                "performance": 100,
+                "accessibility": 100,
+                "best-practices": 100,
+                "seo": 100
+              },
+              "mainThreadMs": 372,
+              "tbtMs": 0,
+              "benchmarkIndex": 2186,
+              "at": "2026-10-22T18:18:49.634Z"
+            },
+            {
+              "scores": {
+                "performance": 77,
+                "accessibility": 100,
+                "best-practices": 100,
+                "seo": 100
+              },
+              "mainThreadMs": 2644,
+              "tbtMs": 1019,
+              "benchmarkIndex": 1643,
+              "at": "2026-10-22T18:19:02.827Z"
+            }
+          ]
+        }
+      },
       "pass": true
     },
     {
-      "page": "faq",
-      "url": "https://deepestrest.com/faq/",
-      "formFactor": "mobile",
+      "page": "mentoring",
+      "url": "http://localhost:4173/mentoring/",
+      "formFactor": "desktop",
       "runs": 3,
       "median": {
         "performance": 100,
@@ -537,20 +488,20 @@
         "seo": 100
       },
       "lowest": {
-        "performance": 96,
+        "performance": 98,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
       "metrics": {
-        "fcp": 858.548,
-        "lcp": 1130.548,
-        "tbt": 26,
+        "fcp": 260,
+        "lcp": 380,
+        "tbt": 0,
         "cls": 0,
-        "si": 1708.782186001015
+        "si": 712.0776083288093
       },
       "failingAudits": [
-        "performance: speed-index (0.57)"
+        "performance: speed-index (0.81)"
       ],
       "warnings": [],
       "lighthouseVersion": "13.5.0",
@@ -562,10 +513,10 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 352,
-          "tbtMs": 26,
-          "benchmarkIndex": 2127.5,
-          "at": "2026-10-20T02:14:21.028Z"
+          "mainThreadMs": 114,
+          "tbtMs": 0,
+          "benchmarkIndex": 1833.5,
+          "at": "2026-10-22T18:19:16.671Z"
         },
         {
           "scores": {
@@ -574,30 +525,30 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 523,
-          "tbtMs": 41,
-          "benchmarkIndex": 2037,
-          "at": "2026-10-20T02:14:34.394Z"
+          "mainThreadMs": 129,
+          "tbtMs": 0,
+          "benchmarkIndex": 1912,
+          "at": "2026-10-22T18:19:29.098Z"
         },
         {
           "scores": {
-            "performance": 96,
+            "performance": 98,
             "accessibility": 100,
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 451,
-          "tbtMs": 14,
-          "benchmarkIndex": 2304,
-          "at": "2026-10-20T02:14:48.639Z"
+          "mainThreadMs": 236,
+          "tbtMs": 18,
+          "benchmarkIndex": 1773,
+          "at": "2026-10-22T18:19:39.654Z"
         }
       ],
       "pass": true
     },
     {
-      "page": "faq",
-      "url": "https://deepestrest.com/faq/",
-      "formFactor": "desktop",
+      "page": "about",
+      "url": "http://localhost:4173/about/",
+      "formFactor": "mobile",
       "runs": 3,
       "median": {
         "performance": 100,
@@ -612,11 +563,11 @@
         "seo": 100
       },
       "metrics": {
-        "fcp": 250,
-        "lcp": 310,
+        "fcp": 810,
+        "lcp": 1410,
         "tbt": 0,
         "cls": 0,
-        "si": 705.124866640071
+        "si": 1481.1228479964434
       },
       "failingAudits": [],
       "warnings": [],
@@ -629,10 +580,10 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 126,
+          "mainThreadMs": 376,
           "tbtMs": 0,
-          "benchmarkIndex": 2458.5,
-          "at": "2026-10-20T02:29:07.685Z"
+          "benchmarkIndex": 2100.5,
+          "at": "2026-10-22T18:19:51.835Z"
         },
         {
           "scores": {
@@ -641,10 +592,10 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 112,
+          "mainThreadMs": 406,
           "tbtMs": 0,
-          "benchmarkIndex": 2568,
-          "at": "2026-10-20T02:29:22.937Z"
+          "benchmarkIndex": 1924,
+          "at": "2026-10-22T18:20:04.217Z"
         },
         {
           "scores": {
@@ -653,139 +604,17 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 115,
+          "mainThreadMs": 373,
           "tbtMs": 0,
-          "benchmarkIndex": 2403,
-          "at": "2026-10-20T02:29:38.334Z"
-        }
-      ],
-      "failedAttempt": {
-        "median": {
-          "performance": 98,
-          "accessibility": 100,
-          "best-practices": 100,
-          "seo": 100
-        },
-        "lowest": {
-          "performance": 92,
-          "accessibility": 100,
-          "best-practices": 100,
-          "seo": 100
-        },
-        "eachRun": [
-          {
-            "scores": {
-              "performance": 100,
-              "accessibility": 100,
-              "best-practices": 100,
-              "seo": 100
-            },
-            "mainThreadMs": 117,
-            "tbtMs": 0,
-            "benchmarkIndex": 1701.5,
-            "at": "2026-10-20T02:15:05.020Z"
-          },
-          {
-            "scores": {
-              "performance": 92,
-              "accessibility": 100,
-              "best-practices": 100,
-              "seo": 100
-            },
-            "mainThreadMs": 519,
-            "tbtMs": 52,
-            "benchmarkIndex": 1765.5,
-            "at": "2026-10-20T02:15:20.493Z"
-          },
-          {
-            "scores": {
-              "performance": 98,
-              "accessibility": 100,
-              "best-practices": 100,
-              "seo": 100
-            },
-            "mainThreadMs": 317,
-            "tbtMs": 0,
-            "benchmarkIndex": 2058.5,
-            "at": "2026-10-20T02:15:40.547Z"
-          }
-        ]
-      },
-      "pass": true
-    },
-    {
-      "page": "book",
-      "url": "https://deepestrest.com/book/",
-      "formFactor": "mobile",
-      "runs": 3,
-      "median": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "lowest": {
-        "performance": 98,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "metrics": {
-        "fcp": 873.372,
-        "lcp": 1054.3719999999998,
-        "tbt": 40,
-        "cls": 0,
-        "si": 2025.462400051403
-      },
-      "failingAudits": [
-        "performance: speed-index (0.99)",
-        "performance: speed-index (0.83)"
-      ],
-      "warnings": [],
-      "lighthouseVersion": "13.5.0",
-      "eachRun": [
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 504,
-          "tbtMs": 40,
-          "benchmarkIndex": 2087,
-          "at": "2026-10-20T02:15:57.558Z"
-        },
-        {
-          "scores": {
-            "performance": 98,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 390,
-          "tbtMs": 0,
-          "benchmarkIndex": 2311,
-          "at": "2026-10-20T02:16:13.189Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 367,
-          "tbtMs": 19,
-          "benchmarkIndex": 2356.5,
-          "at": "2026-10-20T02:16:30.042Z"
+          "benchmarkIndex": 1816.5,
+          "at": "2026-10-22T18:20:15.749Z"
         }
       ],
       "pass": true
     },
     {
-      "page": "book",
-      "url": "https://deepestrest.com/book/",
+      "page": "about",
+      "url": "http://localhost:4173/about/",
       "formFactor": "desktop",
       "runs": 3,
       "median": {
@@ -795,36 +624,48 @@
         "seo": 100
       },
       "lowest": {
-        "performance": 98,
+        "performance": 97,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
       "metrics": {
-        "fcp": 239.865,
-        "lcp": 291.865,
+        "fcp": 260,
+        "lcp": 380,
         "tbt": 0,
         "cls": 0,
-        "si": 1108.1721750252245
+        "si": 748.3026083288094
       },
       "failingAudits": [
-        "performance: speed-index (0.84)",
-        "performance: speed-index (0.95)"
+        "performance: speed-index (0.99)",
+        "performance: speed-index (0.66)"
       ],
       "warnings": [],
       "lighthouseVersion": "13.5.0",
       "eachRun": [
         {
           "scores": {
-            "performance": 98,
+            "performance": 100,
             "accessibility": 100,
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 141,
+          "mainThreadMs": 228,
           "tbtMs": 0,
-          "benchmarkIndex": 2246,
-          "at": "2026-10-20T02:16:46.051Z"
+          "benchmarkIndex": 1861,
+          "at": "2026-10-22T18:20:29.124Z"
+        },
+        {
+          "scores": {
+            "performance": 97,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 302,
+          "tbtMs": 0,
+          "benchmarkIndex": 1786.5,
+          "at": "2026-10-22T18:20:42.723Z"
         },
         {
           "scores": {
@@ -833,33 +674,140 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 116,
+          "mainThreadMs": 176,
           "tbtMs": 0,
-          "benchmarkIndex": 2354.5,
-          "at": "2026-10-20T02:17:04.273Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 117,
-          "tbtMs": 0,
-          "benchmarkIndex": 2317,
-          "at": "2026-10-20T02:17:20.652Z"
+          "benchmarkIndex": 2455.5,
+          "at": "2026-10-22T18:20:58.971Z"
         }
       ],
       "pass": true
     },
     {
-      "page": "contact",
-      "url": "https://deepestrest.com/contact/",
+      "page": "faq",
+      "url": "http://localhost:4173/faq/",
       "formFactor": "mobile",
       "runs": 3,
       "median": {
         "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lowest": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 810,
+        "lcp": 1410,
+        "tbt": 0,
+        "cls": 0,
+        "si": 1392.6620000052153
+      },
+      "failingAudits": [],
+      "warnings": [],
+      "lighthouseVersion": "13.5.0",
+      "eachRun": [
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 345,
+          "tbtMs": 0,
+          "benchmarkIndex": 2049.5,
+          "at": "2026-10-22T18:39:45.242Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 361,
+          "tbtMs": 0,
+          "benchmarkIndex": 2155,
+          "at": "2026-10-22T18:39:57.421Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 540,
+          "tbtMs": 0,
+          "benchmarkIndex": 1897,
+          "at": "2026-10-22T18:40:08.914Z"
+        }
+      ],
+      "failedAttempt": {
+        "median": {
+          "performance": 91,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "lowest": {
+          "performance": 90,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "eachRun": [
+          {
+            "scores": {
+              "performance": 91,
+              "accessibility": 100,
+              "best-practices": 100,
+              "seo": 100
+            },
+            "mainThreadMs": 1496,
+            "tbtMs": 285,
+            "benchmarkIndex": 1739.5,
+            "at": "2026-10-22T18:21:11.651Z"
+          },
+          {
+            "scores": {
+              "performance": 96,
+              "accessibility": 100,
+              "best-practices": 100,
+              "seo": 100
+            },
+            "mainThreadMs": 1891,
+            "tbtMs": 188,
+            "benchmarkIndex": 1754,
+            "at": "2026-10-22T18:21:26.413Z"
+          },
+          {
+            "scores": {
+              "performance": 90,
+              "accessibility": 100,
+              "best-practices": 100,
+              "seo": 100
+            },
+            "mainThreadMs": 1557,
+            "tbtMs": 339,
+            "benchmarkIndex": 1649,
+            "at": "2026-10-22T18:21:51.939Z"
+          }
+        ]
+      },
+      "pass": true
+    },
+    {
+      "page": "faq",
+      "url": "http://localhost:4173/faq/",
+      "formFactor": "desktop",
+      "runs": 3,
+      "median": {
+        "performance": 99,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
@@ -871,13 +819,15 @@
         "seo": 100
       },
       "metrics": {
-        "fcp": 860.535,
-        "lcp": 1050.5349999999999,
-        "tbt": 0,
+        "fcp": 275,
+        "lcp": 380,
+        "tbt": 2,
         "cls": 0,
-        "si": 1545.1088000073432
+        "si": 1397.3316058938494
       },
       "failingAudits": [
+        "performance: speed-index (0.91)",
+        "performance: speed-index (0.87)",
         "performance: speed-index (0.94)"
       ],
       "warnings": [],
@@ -890,41 +840,110 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 431,
-          "tbtMs": 36,
-          "benchmarkIndex": 1995,
-          "at": "2026-10-20T02:17:37.141Z"
+          "mainThreadMs": 439,
+          "tbtMs": 22,
+          "benchmarkIndex": 1575,
+          "at": "2026-10-22T18:22:08.120Z"
         },
         {
           "scores": {
-            "performance": 100,
+            "performance": 99,
             "accessibility": 100,
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 381,
+          "mainThreadMs": 339,
+          "tbtMs": 2,
+          "benchmarkIndex": 2057,
+          "at": "2026-10-22T18:22:19.595Z"
+        },
+        {
+          "scores": {
+            "performance": 99,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 93,
           "tbtMs": 0,
-          "benchmarkIndex": 2260.5,
-          "at": "2026-10-20T02:17:52.416Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 536,
-          "tbtMs": 42,
-          "benchmarkIndex": 2278.5,
-          "at": "2026-10-20T02:18:05.349Z"
+          "benchmarkIndex": 1975,
+          "at": "2026-10-22T18:22:31.704Z"
         }
       ],
       "pass": true
     },
     {
-      "page": "contact",
-      "url": "https://deepestrest.com/contact/",
+      "page": "book",
+      "url": "http://localhost:4173/book/",
+      "formFactor": "mobile",
+      "runs": 3,
+      "median": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lowest": {
+        "performance": 95,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 810,
+        "lcp": 1410,
+        "tbt": 0,
+        "cls": 0,
+        "si": 1419.9498479897677
+      },
+      "failingAudits": [
+        "performance: speed-index (0.48)"
+      ],
+      "warnings": [],
+      "lighthouseVersion": "13.5.0",
+      "eachRun": [
+        {
+          "scores": {
+            "performance": 95,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 753,
+          "tbtMs": 0,
+          "benchmarkIndex": 2062,
+          "at": "2026-10-22T18:22:45.041Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 385,
+          "tbtMs": 0,
+          "benchmarkIndex": 1870,
+          "at": "2026-10-22T18:23:01.810Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 428,
+          "tbtMs": 0,
+          "benchmarkIndex": 2014.5,
+          "at": "2026-10-22T18:23:13.898Z"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "page": "book",
+      "url": "http://localhost:4173/book/",
       "formFactor": "desktop",
       "runs": 3,
       "median": {
@@ -940,15 +959,16 @@
         "seo": 100
       },
       "metrics": {
-        "fcp": 238.408,
-        "lcp": 282.408,
-        "tbt": 0,
+        "fcp": 321,
+        "lcp": 380,
+        "tbt": 5,
         "cls": 0,
-        "si": 1386.5487416622798
+        "si": 1364.169900982702
       },
       "failingAudits": [
-        "performance: speed-index (0.87)",
-        "performance: speed-index (0.82)"
+        "performance: speed-index (0.88)",
+        "performance: speed-index (0.75)",
+        "performance: speed-index (0.92)"
       ],
       "warnings": [],
       "lighthouseVersion": "13.5.0",
@@ -960,22 +980,10 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 122,
-          "tbtMs": 0,
-          "benchmarkIndex": 2150.5,
-          "at": "2026-10-20T02:18:19.006Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 113,
-          "tbtMs": 0,
-          "benchmarkIndex": 2309.5,
-          "at": "2026-10-20T02:18:34.013Z"
+          "mainThreadMs": 500,
+          "tbtMs": 5,
+          "benchmarkIndex": 1573.5,
+          "at": "2026-10-22T18:23:26.804Z"
         },
         {
           "scores": {
@@ -984,272 +992,67 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 138,
-          "tbtMs": 0,
-          "benchmarkIndex": 1937,
-          "at": "2026-10-20T02:18:47.252Z"
-        }
-      ],
-      "pass": true
-    },
-    {
-      "page": "privacy",
-      "url": "https://deepestrest.com/privacy/",
-      "formFactor": "mobile",
-      "runs": 3,
-      "median": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "lowest": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "metrics": {
-        "fcp": 914,
-        "lcp": 1166,
-        "tbt": 36,
-        "cls": 0,
-        "si": 1627.999964032531
-      },
-      "failingAudits": [
-        "performance: total-blocking-time (0.99)"
-      ],
-      "warnings": [],
-      "lighthouseVersion": "13.5.0",
-      "eachRun": [
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 616,
-          "tbtMs": 75,
-          "benchmarkIndex": 2009.5,
-          "at": "2026-10-20T02:19:02.031Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 462,
-          "tbtMs": 36,
-          "benchmarkIndex": 2415.5,
-          "at": "2026-10-20T02:19:17.209Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 561,
-          "tbtMs": 62,
-          "benchmarkIndex": 2277.5,
-          "at": "2026-10-20T02:19:31.907Z"
-        }
-      ],
-      "pass": true
-    },
-    {
-      "page": "privacy",
-      "url": "https://deepestrest.com/privacy/",
-      "formFactor": "desktop",
-      "runs": 3,
-      "median": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "lowest": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "metrics": {
-        "fcp": 251.493,
-        "lcp": 285.493,
-        "tbt": 0,
-        "cls": 0,
-        "si": 759.4529499832748
-      },
-      "failingAudits": [
-        "performance: speed-index (0.99)"
-      ],
-      "warnings": [],
-      "lighthouseVersion": "13.5.0",
-      "eachRun": [
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 139,
-          "tbtMs": 0,
-          "benchmarkIndex": 2184,
-          "at": "2026-10-20T02:19:47.186Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 145,
-          "tbtMs": 0,
-          "benchmarkIndex": 1912,
-          "at": "2026-10-20T02:20:01.466Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 119,
-          "tbtMs": 0,
-          "benchmarkIndex": 2140,
-          "at": "2026-10-20T02:20:18.322Z"
-        }
-      ],
-      "pass": true
-    },
-    {
-      "page": "cookies",
-      "url": "https://deepestrest.com/cookies/",
-      "formFactor": "mobile",
-      "runs": 3,
-      "median": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "lowest": {
-        "performance": 99,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "metrics": {
-        "fcp": 888.505,
-        "lcp": 1146.505,
-        "tbt": 44,
-        "cls": 0,
-        "si": 1557.8482460231783
-      },
-      "failingAudits": [
-        "performance: speed-index (0.93)"
-      ],
-      "warnings": [],
-      "lighthouseVersion": "13.5.0",
-      "eachRun": [
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 585,
-          "tbtMs": 44,
-          "benchmarkIndex": 2226.5,
-          "at": "2026-10-20T02:20:35.924Z"
-        },
-        {
-          "scores": {
-            "performance": 99,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 527,
-          "tbtMs": 0,
-          "benchmarkIndex": 2353.5,
-          "at": "2026-10-20T02:20:51.099Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 464,
-          "tbtMs": 0,
-          "benchmarkIndex": 2248,
-          "at": "2026-10-20T02:21:07.232Z"
-        }
-      ],
-      "pass": true
-    },
-    {
-      "page": "cookies",
-      "url": "https://deepestrest.com/cookies/",
-      "formFactor": "desktop",
-      "runs": 3,
-      "median": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "lowest": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "metrics": {
-        "fcp": 228.098,
-        "lcp": 281.098,
-        "tbt": 0,
-        "cls": 0,
-        "si": 591.4658833423813
-      },
-      "failingAudits": [],
-      "warnings": [],
-      "lighthouseVersion": "13.5.0",
-      "eachRun": [
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 142,
-          "tbtMs": 0,
-          "benchmarkIndex": 2304.5,
-          "at": "2026-10-20T02:21:22.065Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
           "mainThreadMs": 130,
           "tbtMs": 0,
-          "benchmarkIndex": 2159,
-          "at": "2026-10-20T02:21:38.244Z"
+          "benchmarkIndex": 1398.5,
+          "at": "2026-10-22T18:23:41.616Z"
+        },
+        {
+          "scores": {
+            "performance": 99,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 203,
+          "tbtMs": 0,
+          "benchmarkIndex": 1770.5,
+          "at": "2026-10-22T18:23:57.277Z"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "page": "contact",
+      "url": "http://localhost:4173/contact/",
+      "formFactor": "mobile",
+      "runs": 3,
+      "median": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lowest": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 810,
+        "lcp": 1410,
+        "tbt": 0,
+        "cls": 0,
+        "si": 1465.0270900031626
+      },
+      "failingAudits": [
+        "performance: speed-index (0.91)"
+      ],
+      "warnings": [],
+      "lighthouseVersion": "13.5.0",
+      "eachRun": [
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 501,
+          "tbtMs": 0,
+          "benchmarkIndex": 1730,
+          "at": "2026-10-22T18:24:10.497Z"
         },
         {
           "scores": {
@@ -1258,17 +1061,150 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 111,
+          "mainThreadMs": 355,
           "tbtMs": 0,
-          "benchmarkIndex": 2316,
-          "at": "2026-10-20T02:21:52.630Z"
+          "benchmarkIndex": 1420.5,
+          "at": "2026-10-22T18:24:20.892Z"
+        },
+        {
+          "scores": {
+            "performance": 99,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 579,
+          "tbtMs": 0,
+          "benchmarkIndex": 1885,
+          "at": "2026-10-22T18:24:31.127Z"
         }
       ],
       "pass": true
     },
     {
-      "page": "404",
-      "url": "https://deepestrest.com/404.html",
+      "page": "contact",
+      "url": "http://localhost:4173/contact/",
+      "formFactor": "desktop",
+      "runs": 3,
+      "median": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lowest": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 201.654,
+        "lcp": 321.654,
+        "tbt": 0,
+        "cls": 0,
+        "si": 551.154624997738
+      },
+      "failingAudits": [
+        "performance: speed-index (0.96)"
+      ],
+      "warnings": [],
+      "lighthouseVersion": "13.5.0",
+      "eachRun": [
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 92,
+          "tbtMs": 0,
+          "benchmarkIndex": 2438,
+          "at": "2026-10-22T18:40:20.496Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 105,
+          "tbtMs": 0,
+          "benchmarkIndex": 2121.5,
+          "at": "2026-10-22T18:40:32.558Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 94,
+          "tbtMs": 0,
+          "benchmarkIndex": 1945.5,
+          "at": "2026-10-22T18:40:44.144Z"
+        }
+      ],
+      "failedAttempt": {
+        "median": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "lowest": {
+          "performance": 94,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "eachRun": [
+          {
+            "scores": {
+              "performance": 94,
+              "accessibility": 100,
+              "best-practices": 100,
+              "seo": 100
+            },
+            "mainThreadMs": 222,
+            "tbtMs": 0,
+            "benchmarkIndex": 1821,
+            "at": "2026-10-22T18:24:50.676Z"
+          },
+          {
+            "scores": {
+              "performance": 100,
+              "accessibility": 100,
+              "best-practices": 100,
+              "seo": 100
+            },
+            "mainThreadMs": 110,
+            "tbtMs": 0,
+            "benchmarkIndex": 1924,
+            "at": "2026-10-22T18:25:05.051Z"
+          },
+          {
+            "scores": {
+              "performance": 100,
+              "accessibility": 100,
+              "best-practices": 100,
+              "seo": 100
+            },
+            "mainThreadMs": 122,
+            "tbtMs": 0,
+            "benchmarkIndex": 2308.5,
+            "at": "2026-10-22T18:25:17.131Z"
+          }
+        ]
+      },
+      "pass": true
+    },
+    {
+      "page": "privacy",
+      "url": "http://localhost:4173/privacy/",
       "formFactor": "mobile",
       "runs": 3,
       "median": {
@@ -1284,11 +1220,218 @@
         "seo": 100
       },
       "metrics": {
-        "fcp": 833.169,
-        "lcp": 1055.1689999999999,
-        "tbt": 45,
+        "fcp": 810,
+        "lcp": 1410,
+        "tbt": 0,
         "cls": 0,
-        "si": 1658.3581999779701
+        "si": 1186.5064980028271
+      },
+      "failingAudits": [
+        "performance: first-contentful-paint (0.99)"
+      ],
+      "warnings": [],
+      "lighthouseVersion": "13.5.0",
+      "eachRun": [
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 512,
+          "tbtMs": 0,
+          "benchmarkIndex": 1598.5,
+          "at": "2026-10-22T18:25:28.479Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 517,
+          "tbtMs": 0,
+          "benchmarkIndex": 2214.5,
+          "at": "2026-10-22T18:25:40.737Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 429,
+          "tbtMs": 0,
+          "benchmarkIndex": 1982.5,
+          "at": "2026-10-22T18:25:52.772Z"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "page": "privacy",
+      "url": "http://localhost:4173/privacy/",
+      "formFactor": "desktop",
+      "runs": 3,
+      "median": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lowest": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 260,
+        "lcp": 380,
+        "tbt": 0,
+        "cls": 0,
+        "si": 436.8400583316883
+      },
+      "failingAudits": [
+        "performance: speed-index (0.9)"
+      ],
+      "warnings": [],
+      "lighthouseVersion": "13.5.0",
+      "eachRun": [
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 176,
+          "tbtMs": 0,
+          "benchmarkIndex": 1523,
+          "at": "2026-10-22T18:26:05.086Z"
+        },
+        {
+          "scores": {
+            "performance": 99,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 134,
+          "tbtMs": 0,
+          "benchmarkIndex": 1514,
+          "at": "2026-10-22T18:26:17.680Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 131,
+          "tbtMs": 0,
+          "benchmarkIndex": 2194.5,
+          "at": "2026-10-22T18:26:33.532Z"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "page": "cookies",
+      "url": "http://localhost:4173/cookies/",
+      "formFactor": "mobile",
+      "runs": 3,
+      "median": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lowest": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 1093,
+        "lcp": 1410,
+        "tbt": 0,
+        "cls": 0,
+        "si": 1093
+      },
+      "failingAudits": [
+        "performance: first-contentful-paint (0.99)"
+      ],
+      "warnings": [],
+      "lighthouseVersion": "13.5.0",
+      "eachRun": [
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 640,
+          "tbtMs": 0,
+          "benchmarkIndex": 1959.5,
+          "at": "2026-10-22T18:26:45.342Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 557,
+          "tbtMs": 0,
+          "benchmarkIndex": 2163.5,
+          "at": "2026-10-22T18:26:57.537Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 365,
+          "tbtMs": 0,
+          "benchmarkIndex": 2362,
+          "at": "2026-10-22T18:27:10.243Z"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "page": "cookies",
+      "url": "http://localhost:4173/cookies/",
+      "formFactor": "desktop",
+      "runs": 3,
+      "median": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lowest": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 260,
+        "lcp": 380,
+        "tbt": 0,
+        "cls": 0,
+        "si": 475.02753333312774
       },
       "failingAudits": [],
       "warnings": [],
@@ -1301,92 +1444,10 @@
             "best-practices": 100,
             "seo": 100
           },
-          "mainThreadMs": 497,
-          "tbtMs": 26,
-          "benchmarkIndex": 2269,
-          "at": "2026-10-20T02:22:07.210Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 516,
-          "tbtMs": 45,
-          "benchmarkIndex": 2182.5,
-          "at": "2026-10-20T02:22:20.423Z"
-        },
-        {
-          "scores": {
-            "performance": 100,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 305,
+          "mainThreadMs": 107,
           "tbtMs": 0,
-          "benchmarkIndex": 2239.5,
-          "at": "2026-10-20T02:22:34.344Z"
-        }
-      ],
-      "pass": true
-    },
-    {
-      "page": "404",
-      "url": "https://deepestrest.com/404.html",
-      "formFactor": "desktop",
-      "runs": 3,
-      "median": {
-        "performance": 99,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "lowest": {
-        "performance": 99,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "metrics": {
-        "fcp": 227.163,
-        "lcp": 280.163,
-        "tbt": 0,
-        "cls": 0,
-        "si": 1329.5681666840946
-      },
-      "failingAudits": [
-        "performance: speed-index (0.89)",
-        "performance: speed-index (0.95)"
-      ],
-      "warnings": [],
-      "lighthouseVersion": "13.5.0",
-      "eachRun": [
-        {
-          "scores": {
-            "performance": 99,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 101,
-          "tbtMs": 0,
-          "benchmarkIndex": 2170,
-          "at": "2026-10-20T02:22:47.751Z"
-        },
-        {
-          "scores": {
-            "performance": 99,
-            "accessibility": 100,
-            "best-practices": 100,
-            "seo": 100
-          },
-          "mainThreadMs": 121,
-          "tbtMs": 0,
-          "benchmarkIndex": 2300.5,
-          "at": "2026-10-20T02:23:02.824Z"
+          "benchmarkIndex": 2030,
+          "at": "2026-10-22T18:27:19.465Z"
         },
         {
           "scores": {
@@ -1397,8 +1458,156 @@
           },
           "mainThreadMs": 108,
           "tbtMs": 0,
-          "benchmarkIndex": 2242,
-          "at": "2026-10-20T02:23:17.281Z"
+          "benchmarkIndex": 2178,
+          "at": "2026-10-22T18:27:31.450Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 117,
+          "tbtMs": 0,
+          "benchmarkIndex": 1867,
+          "at": "2026-10-22T18:27:42.847Z"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "page": "404",
+      "url": "http://localhost:4173/404.html",
+      "formFactor": "mobile",
+      "runs": 3,
+      "median": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lowest": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 810,
+        "lcp": 1410,
+        "tbt": 0,
+        "cls": 0,
+        "si": 1066.4370239954887
+      },
+      "failingAudits": [
+        "performance: first-contentful-paint (0.99)"
+      ],
+      "warnings": [],
+      "lighthouseVersion": "13.5.0",
+      "eachRun": [
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 422,
+          "tbtMs": 0,
+          "benchmarkIndex": 2507,
+          "at": "2026-10-22T18:27:54.133Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 313,
+          "tbtMs": 0,
+          "benchmarkIndex": 2282.5,
+          "at": "2026-10-22T18:28:05.488Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 527,
+          "tbtMs": 0,
+          "benchmarkIndex": 1974.5,
+          "at": "2026-10-22T18:28:17.674Z"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "page": "404",
+      "url": "http://localhost:4173/404.html",
+      "formFactor": "desktop",
+      "runs": 3,
+      "median": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lowest": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 260,
+        "lcp": 380,
+        "tbt": 0,
+        "cls": 0,
+        "si": 395.47570833538964
+      },
+      "failingAudits": [],
+      "warnings": [],
+      "lighthouseVersion": "13.5.0",
+      "eachRun": [
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 125,
+          "tbtMs": 0,
+          "benchmarkIndex": 1767,
+          "at": "2026-10-22T18:28:28.426Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 113,
+          "tbtMs": 0,
+          "benchmarkIndex": 2002.5,
+          "at": "2026-10-22T18:28:38.583Z"
+        },
+        {
+          "scores": {
+            "performance": 100,
+            "accessibility": 100,
+            "best-practices": 100,
+            "seo": 100
+          },
+          "mainThreadMs": 88,
+          "tbtMs": 0,
+          "benchmarkIndex": 2125,
+          "at": "2026-10-22T18:28:49.054Z"
         }
       ],
       "pass": true
@@ -1416,39 +1625,41 @@
         "seo": 100
       },
       "lowest": {
-        "performance": 56,
+        "performance": 57,
         "accessibility": 100,
         "best-practices": 77,
         "seo": 100
       },
       "metrics": {
-        "fcp": 8690.859999999997,
-        "lcp": 17142.538299999993,
+        "fcp": 8357.375999999997,
+        "lcp": 16779.84399999999,
         "tbt": 0,
-        "cls": 0,
-        "si": 8690.859999999997
+        "cls": 0.001034573027367091,
+        "si": 8357.375999999997
       },
       "failingAudits": [
-        "performance: first-contentful-paint (0)",
-        "performance: largest-contentful-paint (0)",
-        "performance: speed-index (0.08)",
+        "performance: first-contentful-paint (0.92)",
+        "performance: largest-contentful-paint (0.85)",
+        "performance: speed-index (0.53)",
         "best-practices: third-party-cookies (0)",
         "best-practices: inspector-issues (0)",
-        "performance: speed-index (0.16)",
-        "performance: speed-index (0.17)"
+        "performance: first-contentful-paint (0)",
+        "performance: largest-contentful-paint (0)",
+        "performance: speed-index (0.18)",
+        "performance: speed-index (0.19)"
       ],
       "eachRun": [
         {
           "scores": {
-            "performance": 56,
+            "performance": 91,
             "accessibility": 100,
             "best-practices": 77,
             "seo": 100
           },
-          "mainThreadMs": 3044,
+          "mainThreadMs": 1714,
           "tbtMs": 0,
-          "benchmarkIndex": 2384,
-          "at": "2026-10-20T02:23:33.106Z"
+          "benchmarkIndex": 2147,
+          "at": "2026-10-22T18:29:01.128Z"
         },
         {
           "scores": {
@@ -1457,10 +1668,10 @@
             "best-practices": 77,
             "seo": 100
           },
-          "mainThreadMs": 2783,
+          "mainThreadMs": 3505,
           "tbtMs": 0,
-          "benchmarkIndex": 2389.5,
-          "at": "2026-10-20T02:24:13.333Z"
+          "benchmarkIndex": 2460,
+          "at": "2026-10-22T18:29:30.387Z"
         },
         {
           "scores": {
@@ -1469,10 +1680,10 @@
             "best-practices": 77,
             "seo": 100
           },
-          "mainThreadMs": 2724,
+          "mainThreadMs": 1767,
           "tbtMs": 0,
-          "benchmarkIndex": 1940.5,
-          "at": "2026-10-20T02:24:47.690Z"
+          "benchmarkIndex": 1642.5,
+          "at": "2026-10-22T18:29:58.767Z"
         }
       ]
     },
@@ -1481,70 +1692,72 @@
       "formFactor": "desktop",
       "runs": 3,
       "median": {
-        "performance": 71,
+        "performance": 95,
         "accessibility": 100,
-        "best-practices": 77,
+        "best-practices": 73,
         "seo": 100
       },
       "lowest": {
-        "performance": 68,
+        "performance": 93,
         "accessibility": 100,
-        "best-practices": 77,
+        "best-practices": 73,
         "seo": 100
       },
       "metrics": {
-        "fcp": 1795.8560999999997,
-        "lcp": 3282.0885999999996,
+        "fcp": 646.7569193908691,
+        "lcp": 1256.5765387817382,
         "tbt": 0,
-        "cls": 0.0002890302163905696,
-        "si": 2336.1838983451785
+        "cls": 0,
+        "si": 1444.6826592357334
       },
       "failingAudits": [
-        "performance: first-contentful-paint (0.39)",
-        "performance: largest-contentful-paint (0.28)",
-        "performance: speed-index (0.48)",
+        "performance: first-contentful-paint (0.98)",
+        "performance: largest-contentful-paint (0.88)",
+        "performance: speed-index (0.85)",
         "best-practices: third-party-cookies (0)",
+        "best-practices: errors-in-console (0)",
         "best-practices: inspector-issues (0)",
-        "performance: speed-index (0.24)",
-        "performance: first-contentful-paint (0.38)",
-        "performance: speed-index (0.53)"
+        "performance: speed-index (0.99)",
+        "performance: first-contentful-paint (0.96)",
+        "performance: largest-contentful-paint (0.82)",
+        "performance: speed-index (0.82)"
       ],
       "eachRun": [
         {
           "scores": {
-            "performance": 71,
+            "performance": 95,
             "accessibility": 100,
-            "best-practices": 77,
+            "best-practices": 73,
             "seo": 100
           },
-          "mainThreadMs": 552,
+          "mainThreadMs": 540,
           "tbtMs": 0,
-          "benchmarkIndex": 2252,
-          "at": "2026-10-20T02:25:24.131Z"
+          "benchmarkIndex": 2215,
+          "at": "2026-10-22T18:30:30.400Z"
         },
         {
           "scores": {
-            "performance": 68,
+            "performance": 100,
             "accessibility": 100,
             "best-practices": 77,
             "seo": 100
           },
-          "mainThreadMs": 801,
+          "mainThreadMs": 414,
           "tbtMs": 0,
-          "benchmarkIndex": 2652.5,
-          "at": "2026-10-20T02:25:58.855Z"
+          "benchmarkIndex": 1984,
+          "at": "2026-10-22T18:30:58.218Z"
         },
         {
           "scores": {
-            "performance": 71,
+            "performance": 93,
             "accessibility": 100,
             "best-practices": 77,
             "seo": 100
           },
-          "mainThreadMs": 485,
+          "mainThreadMs": 383,
           "tbtMs": 0,
-          "benchmarkIndex": 2440.5,
-          "at": "2026-10-20T02:26:38.970Z"
+          "benchmarkIndex": 1718.5,
+          "at": "2026-10-22T18:31:26.339Z"
         }
       ]
     }

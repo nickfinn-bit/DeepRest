@@ -1,6 +1,6 @@
 {
-  "testedAt": "https://deepestrest.com/",
-  "live": true,
+  "testedAt": "http://localhost:4173/",
+  "live": false,
   "placeholders": 0,
   "placeholderKeys": [],
   "missingFromPlaceholdersMd": [],
@@ -166,7 +166,7 @@
       "source": "HTTP status of the error page"
     },
     {
-      "text": "20 October 2026",
+      "text": "22 October 2026",
       "source": "the date the privacy policy was last updated (site.config.json, privacy.lastUpdated)"
     },
     {
@@ -198,7 +198,7 @@
       "source": "UK GDPR Article 9(2)(a), explicit consent"
     },
     {
-      "text": "20 October 2026",
+      "text": "22 October 2026",
       "source": "date scripts/verify/calendly.mjs recorded the Calendly cookies (src/data/calendly-cookies.json)"
     },
     {
