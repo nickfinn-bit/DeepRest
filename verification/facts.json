@@ -1,6 +1,6 @@
 {
-  "testedAt": "http://localhost:4173/",
-  "live": false,
+  "testedAt": "https://deepestrest.com/",
+  "live": true,
   "placeholders": 0,
   "placeholderKeys": [],
   "missingFromPlaceholdersMd": [],
@@ -357,7 +357,7 @@
   ],
   "thirdParties": {
     "measured": true,
-    "checked": "2026-10-23T07:42:06.782Z",
+    "checked": "2026-10-23T09:11:12.652Z",
     "unidentified": [],
     "services": {
       "always": {

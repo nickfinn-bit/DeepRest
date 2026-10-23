@@ -1,6 +1,6 @@
 {
-  "testedAt": "http://localhost:4173/",
-  "live": false,
+  "testedAt": "https://deepestrest.com/",
+  "live": true,
   "inline": [
     {
       "width": 360,
@@ -935,7 +935,7 @@
     "pass": true
   },
   "thirdParties": {
-    "checked": "2026-10-23T07:42:06.782Z",
+    "checked": "2026-10-23T09:11:12.652Z",
     "declined": {
       "hosts": [
         "accounts.google.com",
@@ -955,7 +955,7 @@
         {
           "name": "__cf_bm",
           "domain": ".calendly.com",
-          "seconds": 1777
+          "seconds": 1765
         },
         {
           "name": "_cfuvid",
@@ -965,17 +965,17 @@
         {
           "name": "OptanonAlertBoxClosed",
           "domain": ".calendly.com",
-          "seconds": 31535986
+          "seconds": 31535987
         },
         {
           "name": "OptanonConsent",
           "domain": ".calendly.com",
-          "seconds": 31535986
+          "seconds": 31535987
         },
         {
           "name": "m",
           "domain": "m.stripe.com",
-          "seconds": 34559993
+          "seconds": 34559995
         }
       ],
       "storage": [
@@ -1038,7 +1038,7 @@
         {
           "name": "__cf_bm",
           "domain": ".calendly.com",
-          "seconds": 1769
+          "seconds": 1778
         },
         {
           "name": "_cfuvid",
@@ -1048,17 +1048,17 @@
         {
           "name": "OptanonAlertBoxClosed",
           "domain": ".calendly.com",
-          "seconds": 31535985
+          "seconds": 31535988
         },
         {
           "name": "OptanonConsent",
           "domain": ".calendly.com",
-          "seconds": 31535985
+          "seconds": 31535988
         },
         {
           "name": "m",
           "domain": "m.stripe.com",
-          "seconds": 34559996
+          "seconds": 34559995
         }
       ],
       "storage": [
@@ -1112,5 +1112,5 @@
       "detailsForm": true
     }
   },
-  "calendarText": "POWERED BY\nCalendly\nNicholas Finnemore\nFree diagnostic session\n30 min\nWeb conferencing details provided upon confirmation.\n\nDeepRest mentoring with Nick Finnemore, for students and young adults who want to get on top of their tech use. Your first five sessions are free, as a diagnostic. Book one session at a time here.\n\nCookie settings\nPrivacy Policy\nSelect a Date & Time\nOctober 2026\nOctober is now displayed\nMon\tTue\tWed\tThu\tFri\tSat\tSun\n\t\t\t\n1\n\t\n2\n\t\n3\n\t\n4\n\n\n5\n\t\n6\n\t\n7\n\t\n8\n\t\n9\n\t\n10\n\t\n11\n\n\n12\n\t\n13\n\t\n14\n\t\n15\n\t\n16\n\t\n17\n\t\n18\n\n\n19\n\t\n20\n\t\n21\n\t\n22\n\t\n23\n\t\n24\n\t\n25\n\n\n26\n\t\n27\n\t\n28\n\t\n29\n\t\n30\n\t\n31\n\t\n\nTime zone\n\nUK, Ireland, Lisbon Time\n(8:41am)\nWe use cookies and similar technologies, including necessary cookies to provide our website, and optional cookies to improve and personalize your experience, to understand website interactions (including clicks, cursor movement and screen recordings), and for marketing. You may accept all, decline all optional cookies, or manage your optional cookies. To learn more, visit our privacy notice.\nCookie settings\nDecline all\nAccept all"
+  "calendarText": "POWERED BY\nCalendly\nNicholas Finnemore\nFree diagnostic session\n30 min\nWeb conferencing details provided upon confirmation.\n\nDeepRest mentoring with Nick Finnemore, for students and young adults who want to get on top of their tech use. Your first five sessions are free, as a diagnostic. Book one session at a time here.\n\nCookie settings\nPrivacy Policy\nSelect a Date & Time\nOctober 2026\nOctober is now displayed\nMon\tTue\tWed\tThu\tFri\tSat\tSun\n\t\t\t\n1\n\t\n2\n\t\n3\n\t\n4\n\n\n5\n\t\n6\n\t\n7\n\t\n8\n\t\n9\n\t\n10\n\t\n11\n\n\n12\n\t\n13\n\t\n14\n\t\n15\n\t\n16\n\t\n17\n\t\n18\n\n\n19\n\t\n20\n\t\n21\n\t\n22\n\t\n23\n\t\n24\n\t\n25\n\n\n26\n\t\n27\n\t\n28\n\t\n29\n\t\n30\n\t\n31\n\t\n\nTime zone\n\nUK, Ireland, Lisbon Time\n(10:10am)\nWe use cookies and similar technologies, including necessary cookies to provide our website, and optional cookies to improve and personalize your experience, to understand website interactions (including clicks, cursor movement and screen recordings), and for marketing. You may accept all, decline all optional cookies, or manage your optional cookies. To learn more, visit our privacy notice.\nCookie settings\nDecline all\nAccept all"
 }

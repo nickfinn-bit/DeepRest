@@ -7,20 +7,20 @@
       "name": "deepestrest.com A records are GitHub Pages'",
       "ok": true,
       "detail": [
-        "185.199.109.153",
         "185.199.110.153",
+        "185.199.111.153",
         "185.199.108.153",
-        "185.199.111.153"
+        "185.199.109.153"
       ]
     },
     {
       "name": "deepestrest.com AAAA records are GitHub Pages'",
       "ok": true,
       "detail": [
-        "2606:50c0:8000::153",
         "2606:50c0:8002::153",
-        "2606:50c0:8003::153",
-        "2606:50c0:8001::153"
+        "2606:50c0:8001::153",
+        "2606:50c0:8000::153",
+        "2606:50c0:8003::153"
       ]
     },
     {
@@ -220,7 +220,7 @@
       "status": 200,
       "server": "GitHub.com",
       "sameAsBuild": true,
-      "bytes": 14013,
+      "bytes": 13623,
       "pass": true
     },
     {
@@ -229,7 +229,7 @@
       "status": 200,
       "server": "GitHub.com",
       "sameAsBuild": true,
-      "bytes": 11599,
+      "bytes": 11014,
       "pass": true
     },
     {
@@ -238,7 +238,7 @@
       "status": 200,
       "server": "GitHub.com",
       "sameAsBuild": true,
-      "bytes": 10383,
+      "bytes": 10051,
       "pass": true
     },
     {
@@ -247,7 +247,7 @@
       "status": 200,
       "server": "GitHub.com",
       "sameAsBuild": true,
-      "bytes": 14779,
+      "bytes": 13794,
       "pass": true
     },
     {
@@ -256,7 +256,7 @@
       "status": 200,
       "server": "GitHub.com",
       "sameAsBuild": true,
-      "bytes": 11195,
+      "bytes": 12184,
       "pass": true
     },
     {
@@ -265,7 +265,7 @@
       "status": 200,
       "server": "GitHub.com",
       "sameAsBuild": true,
-      "bytes": 10512,
+      "bytes": 10556,
       "pass": true
     },
     {
@@ -274,7 +274,7 @@
       "status": 200,
       "server": "GitHub.com",
       "sameAsBuild": true,
-      "bytes": 21000,
+      "bytes": 29299,
       "pass": true
     },
     {
@@ -283,7 +283,7 @@
       "status": 200,
       "server": "GitHub.com",
       "sameAsBuild": true,
-      "bytes": 12669,
+      "bytes": 18712,
       "pass": true
     },
     {
@@ -292,7 +292,7 @@
       "status": 404,
       "server": "GitHub.com",
       "sameAsBuild": true,
-      "bytes": 8306,
+      "bytes": 8340,
       "pass": true
     }
   ],
