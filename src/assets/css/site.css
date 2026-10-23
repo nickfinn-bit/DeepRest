@@ -612,6 +612,10 @@ code {
   background: var(--surface);
 }
 
+.figures .figures-wide {
+  grid-column: 1 / -1;
+}
+
 .figures dd {
   margin: 0;
   color: var(--brand-strong);
@@ -1394,6 +1398,44 @@ code {
   max-width: 34rem;
 }
 
+/* Under the calendar once it is chosen. Calendly books one session at a time, so this offers
+   a fresh calendar for the next one, and says so when Calendly reports a booking. */
+.booking-next {
+  display: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.calendly-consented .booking-next {
+  display: flex;
+}
+
+.booking-next p {
+  margin: 0;
+  color: var(--ink-2);
+}
+
+.booking-next.is-booked {
+  background: var(--brand-soft);
+  border-color: var(--brand);
+}
+
+.booking-next.is-booked p {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.booking-all {
+  margin-top: clamp(2rem, 1.5rem + 2vw, 3rem);
+}
+
 /* Consent dialog */
 
 .consent-dialog {
@@ -1610,6 +1652,7 @@ code {
   .skip-link,
   .consent-dialog,
   .booking-frame,
+  .booking-next,
   .cta-band .button-row {
     display: none !important;
   }

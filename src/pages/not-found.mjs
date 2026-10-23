@@ -20,7 +20,7 @@ ${pageHead({
     <h2 id="next-title">Where to next</h2>
     <ul class="link-list">
       <li><a href="${href('')}">Home page</a></li>
-      <li><a href="${href('mentoring')}">How mentoring works</a></li>
+      <li><a href="${href('mentoring')}">Mentoring</a></li>
       <li><a href="${href('book')}">Book a free session</a></li>
       <li><a href="${href('faq')}">Questions and answers</a></li>
       <li><a href="${href('contact')}">Contact</a></li>

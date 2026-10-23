@@ -10,7 +10,10 @@ These are not on the site because the fact is not known. Each can be added to `s
 
 - **A photograph of Nick**: would go in the About page.
 - **Fees after the five free sessions, and how to pay**: would go in a fees section; the site says only that the first five sessions are free.
-- **Session length and where sessions happen**: would go in the pages; the Calendly event uses Calendly's defaults (30 minutes, Google Meet), which the booking calendar shows.
+- **What the five free diagnostic sessions cover**: would go in the Home and Mentoring pages and the FAQ, which say only that the first five sessions are free, as a diagnostic.
+- **What happens after the five free sessions**: would go in the Mentoring page and the FAQ.
+- **Who DeepRest is for**: would go in the Mentoring page; the site says only that Nick has mentored students and young adults for five years.
+- **Session length, where sessions happen and how they are held (for example, one to one)**: would go in the pages; the Calendly event uses Calendly's defaults (30 minutes, Google Meet), which the booking calendar shows.
 - **When Nick is available**: would go in the Calendly event, which uses Calendly's default of weekdays, 9am to 5pm UK time, minus busy times in his Google Calendar.
 - **The ages Nick works with, and whether he mentors under-18s**: would go in the Mentoring page and the privacy policy.
 - **Nick's background beyond mentoring, such as training or qualifications**: would go in the About page.
@@ -25,8 +28,9 @@ These are not on the site because the fact is not known. Each can be added to `s
 
 These passages contain no unknown facts, but they describe how DeepRest works in general terms, beyond Nick's own words. He should confirm that each matches his practice:
 
-- **Home, "Start free" and "How it works"; Mentoring, "The free diagnostic" and "What to expect"; FAQ, first question:** what the five free diagnostic sessions cover (how tech fits into your days, what it costs you, what you want to change, whether mentoring suits you).
-- **Home, "How it works"; Mentoring; FAQ, "What happens after the five free sessions?":** that after the five free sessions you decide together whether to carry on, with no obligation to continue.
-- **Mentoring, "Who it’s for":** the description of who DeepRest is for: students and young adults who feel their phone, games or time online have taken over more of their life than they would like.
-- **Home, Mentoring, FAQ and About: "What mentoring is, and isn’t":** that mentoring is practical one-to-one support, not therapy or medical care, and that Nick is not a medical or mental health professional.
+- **Home, the headline and first lines; About; footer:** the headline “Take back your time from tech”, and DeepRest described as “Nick Finnemore’s tech-addiction mentoring practice” and “tech-addiction mentoring with Nick Finnemore”.
+- **Home, Mentoring and About: “Mentoring, not therapy”; FAQ, “Is mentoring the same as therapy?”:** that mentoring is not therapy or medical care and can’t replace help from a GP or a health professional. The site must say this; Nick should confirm the wording.
+- **Booking page, “Booking all five free sessions” and the “Book another session” button; Home, “Booking your five free sessions”; FAQ, “How do I book?”:** that visitors book their five free sessions one at a time, each with its own confirmation, by choosing “Book another session” or opening the booking page again. Calendly’s free plan books one session per booking. Nick should confirm he is happy for all five to be booked ahead.
+- **Privacy policy and cookie notice, “Services the booking calendar loads” and the cookie lists:** the description of each service Calendly’s page loads (Calendly, Cloudflare, OneTrust, Stripe, Google reCAPTCHA, Airbrake, and the tools that load only if Calendly’s optional cookies are accepted), written from each service’s own documentation and from what the verification measured.
 - **Privacy policy:** the whole policy, above all: the lawful bases; the services listed (Calendly, Google Calendar, Gmail and Google Meet, Cloudflare Email Routing, GitHub Pages); and the retention wording, which gives criteria instead of a fixed period. Nick, as data controller, should check it against how he actually handles bookings and emails.
+- **His own words, left off every page:** his order also said that, though he is young, that has played to his advantage, because he has seen many people go through tech addiction and has been able to get them out of it. The site states only his three facts, so these words are not on it; he can say whether he wants them back.

@@ -16,7 +16,7 @@ export const BASE = LIVE ? SITE_URL : `http://localhost:${PORT}${new URL(SITE_UR
 
 export const PAGES = [
   { slug: 'home', name: 'Home', path: '' },
-  { slug: 'mentoring', name: 'How mentoring works', path: 'mentoring/' },
+  { slug: 'mentoring', name: 'Mentoring', path: 'mentoring/' },
   { slug: 'about', name: 'About Nick', path: 'about/' },
   { slug: 'faq', name: 'FAQ', path: 'faq/' },
   { slug: 'book', name: 'Book a free session', path: 'book/' },

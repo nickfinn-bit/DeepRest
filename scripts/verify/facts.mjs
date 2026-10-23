@@ -6,13 +6,18 @@
 //    postcodes, quotations and any other figures. Each figure must be on the list below
 //    of facts checked against the source given; anything else fails.
 //  - Scans the visible text and the page's title, description and sharing tags for
-//    protected professional titles and for clinical or medical claims: there must be none.
+//    protected professional titles, for clinical or medical claims and for the claims beyond
+//    Nick's three facts that the site has retired (claims.mjs, RETIRED): there must be none.
+//  - Compares the outside services the privacy policy names, and the cookies and stored items
+//    the cookie notice lists, with those scripts/verify/calendly.mjs measured in the same run
+//    (verification/calendly.json): nothing may be missing or extra.
 //   node scripts/verify/facts.mjs [--live]
 import fs from 'node:fs';
 import path from 'node:path';
 import { listPlaceholders } from '../../src/lib/facts.mjs';
-import { PAGES, ROOT, pageHtml, writeJson } from './common.mjs';
-import { CLINICAL, PROTECTED, findClaims } from './claims.mjs';
+import { describe, thirdParties as recorded } from '../../src/lib/third-parties.mjs';
+import { BASE, OUT, PAGES, ROOT, pageHtml, writeJson } from './common.mjs';
+import { CLINICAL, PROTECTED, RETIRED, findClaims, findRetired } from './claims.mjs';
 
 const config = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.config.json'), 'utf8'));
 const NICK = "Nick's own words, his order of 19 October 2026 (site.config.json, _sources)";
@@ -47,11 +52,32 @@ for (const v of VERIFIED.filter((x) => /^\d\(/.test(x.text))) VERIFIED.push({ te
 // The one email address the site may show, and where it comes from.
 const EMAILS = [{ text: config.practice.email, source: 'site.config.json, practice.email (Cloudflare Email Routing to Nick)' }];
 
-const cookieFile = path.join(ROOT, 'src', 'data', 'calendly-cookies.json');
-if (fs.existsSync(cookieFile)) {
-  const { checked } = JSON.parse(fs.readFileSync(cookieFile, 'utf8'));
+// The Calendly check's results from this run: what the booking calendar loaded, and the text
+// of the calendar, Calendly's cookie banner included.
+const calendlyFile = path.join(OUT, 'calendly.json');
+const calendly = fs.existsSync(calendlyFile) ? JSON.parse(fs.readFileSync(calendlyFile, 'utf8')) : null;
+
+// How long each cookie the cookie notice lists lasts, as the Calendly check measured it.
+const lists = recorded(new URL(config.site.url).hostname);
+for (const lasts of new Set([...(lists?.always.items ?? []), ...(lists?.optional.items ?? [])].map((i) => i.lasts).filter((t) => /\d/.test(t)))) {
+  VERIFIED.push({ text: lasts, source: `how long a cookie on the cookie notice lasts, from the time it had left when scripts/verify/calendly.mjs measured it (src/data/calendly-third-parties.json)` });
+}
+
+// Quotations long enough to look like testimonials, each from its source. Each must also be
+// in the text of Calendly's calendar as the Calendly check saw it in this run.
+const QUOTES = [
+  {
+    text: 'to improve and personalize your experience, to understand website interactions (including clicks, cursor movement and screen recordings), and for marketing',
+    source: 'Calendly’s cookie banner, inside the calendar',
+  },
+];
+for (const q of QUOTES) q.seenInThisRun = calendly?.calendarText ? calendly.calendarText.includes(q.text) : null;
+
+const thirdPartyFile = path.join(ROOT, 'src', 'data', 'calendly-third-parties.json');
+if (fs.existsSync(thirdPartyFile)) {
+  const { checked } = JSON.parse(fs.readFileSync(thirdPartyFile, 'utf8'));
   const text = new Date(checked).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
-  VERIFIED.push({ text, source: 'date scripts/verify/calendly.mjs recorded the Calendly cookies (src/data/calendly-cookies.json)' });
+  VERIFIED.push({ text, source: 'date scripts/verify/calendly.mjs measured what the booking calendar loads (src/data/calendly-third-parties.json)' });
 }
 
 const decode = (s) =>
@@ -91,6 +117,7 @@ for (const p of PAGES) {
   const meta = headText(html);
   const everything = `${meta} | ${shown}`;
   const { protectedTitles, clinicalClaims } = findClaims(everything);
+  const retired = findRetired(everything);
 
   let text = everything;
   const flags = [];
@@ -104,6 +131,7 @@ for (const p of PAGES) {
     for (const m of text.matchAll(re)) {
       if (kind === 'percentage' && m[0].replace(/\s/g, '') === config.mentor.satisfaction) continue;
       if (kind === 'email address' && EMAILS.some((e) => e.text === m[0])) continue;
+      if (kind === 'quotation (testimonial?)' && QUOTES.some((q) => m[0] === `“${q.text}”`)) continue;
       flags.push(`${kind}: ${m[0]}`);
     }
   }
@@ -118,6 +146,7 @@ for (const p of PAGES) {
     flags,
     protectedTitles,
     clinicalClaims,
+    retired,
     headline: p.slug === 'home' ? headlineCheck(shown) : undefined,
   });
 }
@@ -133,6 +162,41 @@ function headlineCheck(shown) {
   };
 }
 
+// The outside services and stored items the pages name, against those measured in this run:
+// what loads whatever the visitor answers to Calendly's banner, and what loads only if they
+// accept its optional cookies.
+async function thirdPartyCheck() {
+  const measured = calendly?.thirdParties;
+  if (!measured?.declined || !measured?.accepted?.bannerAccepted) return { measured: false, pass: false };
+  const siteHost = new URL(BASE).hostname;
+  const always = describe(measured.declined, siteHost);
+  const accepted = describe(measured.accepted, siteHost);
+  const key = (i) => `${i.type} ${i.name} ${i.host}`;
+  const seen = {
+    services: { always: always.services, accepted: accepted.services.filter((s) => !always.services.includes(s)) },
+    items: { always: always.items.map(key), accepted: accepted.items.map(key).filter((k) => !always.items.map(key).includes(k)) },
+  };
+  const named = (html, attr) => {
+    const out = { always: [], accepted: [] };
+    for (const m of html.matchAll(new RegExp(`${attr}="([^"]+)" data-when="(always|accepted)"`, 'g'))) out[m[2]].push(decode(m[1]));
+    return out;
+  };
+  const privacy = named(await pageHtml(PAGES.find((p) => p.slug === 'privacy')), 'data-third-party');
+  const cookies = named(await pageHtml(PAGES.find((p) => p.slug === 'cookies')), 'data-third-party-item');
+  const compare = (want, have) => ({ measured: want.length, named: have.length, missing: want.filter((x) => !have.includes(x)), extra: have.filter((x) => !want.includes(x)) });
+  const result = {
+    measured: true,
+    checked: measured.checked,
+    unidentified: [...new Set([...always.unknown, ...accepted.unknown])],
+    services: { always: compare(seen.services.always, privacy.always), accepted: compare(seen.services.accepted, privacy.accepted) },
+    items: { always: compare(seen.items.always, cookies.always), accepted: compare(seen.items.accepted, cookies.accepted) },
+  };
+  const all = [result.services.always, result.services.accepted, result.items.always, result.items.accepted];
+  result.pass = !result.unidentified.length && all.every((c) => !c.missing.length && !c.extra.length);
+  return result;
+}
+const thirdParties = await thirdPartyCheck();
+
 const flagged = pages.filter((p) => p.flags.length);
 const home = pages.find((p) => p.page === 'home');
 const result = {
@@ -144,8 +208,12 @@ const result = {
   inventedFacts: flagged.reduce((n, p) => n + p.flags.length, 0),
   protectedTitles: pages.reduce((n, p) => n + p.protectedTitles.length, 0),
   clinicalClaims: pages.reduce((n, p) => n + p.clinicalClaims.length, 0),
+  retiredClaims: pages.reduce((n, p) => n + p.retired.length, 0),
+  retiredList: RETIRED.map((r) => ({ claim: r.claim, found: r.found, fix: r.fix, pattern: String(r.re), left: pages.flatMap((p) => p.retired.filter((x) => x.claim === r.claim).map((x) => `${p.page}: ${x.words}`)) })),
+  thirdParties,
   headline: home.headline,
   verifiedFigures: [...VERIFIED, ...EMAILS],
+  quotes: QUOTES,
   protectedPatterns: PROTECTED.map(String),
   clinicalPatterns: CLINICAL.map(String),
 };
@@ -155,15 +223,28 @@ result.pass =
   result.inventedFacts === 0 &&
   result.protectedTitles === 0 &&
   result.clinicalClaims === 0 &&
+  result.retiredClaims === 0 &&
+  QUOTES.every((q) => q.seenInThisRun === true) &&
+  thirdParties.pass &&
   Object.values(home.headline).every(Boolean);
 writeJson('facts.json', result);
 
 console.log(`Placeholders in site.config.json: ${placeholders.length}; missing from PLACEHOLDERS.md: ${missingFromList.length}; marks on pages not in config: ${unknownMarks.size}`);
 for (const p of pages) {
-  const bad = p.flags.length + p.protectedTitles.length + p.clinicalClaims.length;
-  console.log(`${bad ? 'FAIL' : 'PASS'} ${p.page.padEnd(9)} placeholder marks ${String(p.placeholderMarks).padStart(3)}  unexplained facts ${p.flags.length}  protected titles ${p.protectedTitles.length}  clinical claims ${p.clinicalClaims.length}`);
-  for (const f of [...p.flags, ...p.protectedTitles.map((t) => `protected title: ${t}`), ...p.clinicalClaims.map((t) => `clinical claim: ${t}`)]) console.log(`      ${f}`);
+  const bad = p.flags.length + p.protectedTitles.length + p.clinicalClaims.length + p.retired.length;
+  console.log(`${bad ? 'FAIL' : 'PASS'} ${p.page.padEnd(9)} placeholder marks ${String(p.placeholderMarks).padStart(3)}  unexplained facts ${p.flags.length}  protected titles ${p.protectedTitles.length}  clinical claims ${p.clinicalClaims.length}  retired claims ${p.retired.length}`);
+  for (const f of [...p.flags, ...p.protectedTitles.map((t) => `protected title: ${t}`), ...p.clinicalClaims.map((t) => `clinical claim: ${t}`), ...p.retired.map((r) => `retired claim (${r.claim}): ${r.words}`)]) console.log(`      ${f}`);
 }
 console.log(`\nHome page headline: ${JSON.stringify(home.headline)}`);
-console.log(`Invented or unverified facts: ${result.inventedFacts}. Protected titles: ${result.protectedTitles}. Clinical claims: ${result.clinicalClaims}.`);
+console.log(`Invented or unverified facts: ${result.inventedFacts}. Protected titles: ${result.protectedTitles}. Clinical claims: ${result.clinicalClaims}. Retired claims (${RETIRED.length} kinds, ${RETIRED.reduce((n, r) => n + r.found.length, 0)} places found): ${result.retiredClaims} left.`);
+for (const q of QUOTES) console.log(`${q.seenInThisRun ? 'PASS' : 'FAIL'} quotation from ${q.source}: ${q.seenInThisRun === null ? 'no calendar text in verification/calendly.json' : q.seenInThisRun ? 'in the calendar as seen in this run' : 'not in the calendar as seen in this run'}`);
+if (!thirdParties.measured) console.log('FAIL third parties: verification/calendly.json has no complete measurement; run scripts/verify/calendly.mjs first.');
+else {
+  console.log(`${thirdParties.pass ? 'PASS' : 'FAIL'} third parties named against measured (${thirdParties.checked}):${thirdParties.unidentified.length ? ` unidentified ${thirdParties.unidentified.join(', ')}` : ''}`);
+  for (const [what, page] of [['services', 'privacy policy'], ['items', 'cookie notice']])
+    for (const when of ['always', 'accepted']) {
+      const c = thirdParties[what][when];
+      console.log(`      ${what} (${when === 'always' ? 'whatever the answer' : 'only if accepted'}): measured ${c.measured}, named on the ${page} ${c.named}${c.missing.length ? `, missing ${c.missing.join(', ')}` : ''}${c.extra.length ? `, extra ${c.extra.join(', ')}` : ''}`);
+    }
+}
 process.exitCode = result.pass ? 0 : 1;

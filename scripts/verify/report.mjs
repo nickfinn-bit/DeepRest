@@ -1,13 +1,14 @@
 // Writes verification/REPORT.md from the JSON results the other checks leave in verification/.
 import fs from 'node:fs';
 import path from 'node:path';
+import { SERVICES, describe } from '../../src/lib/third-parties.mjs';
 import { OUT, PAGES, ROOT, WIDTHS } from './common.mjs';
 
 const config = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.config.json'), 'utf8'));
 
 // Statements in the site's text that rest on outside facts, and where each was checked.
 const TEXT_SOURCES = [
-  `Nick's figures and words (five years mentoring students and young adults; young, which has played to his advantage because he has seen many people go through tech addiction and been able to get them out of it; a 100% satisfaction rate across 23 clients; the first five sessions free, as a diagnostic): his order of 19 October 2026, recorded in site.config.json under _sources`,
+  `Nick's three facts (five years mentoring students and young adults; a 100% satisfaction rate across 23 clients; the first five sessions free, as a diagnostic): his order of 19 October 2026, recorded in site.config.json under _sources. His order also said that being young has played to his advantage, because he has seen many people go through tech addiction and been able to get them out of it; the site leaves those words off, as the brief limits it to his three facts, and PLACEHOLDERS.md asks him about them`,
   'His full name, Nicholas Finnemore, used as data controller in the privacy policy: the name on his Google account',
   'The booking event, its optional question ("Please share anything that will help prepare for our meeting."), guests allowed, Google Calendar connection and Google Meet location: the Calendly event "Free diagnostic session" as configured on calendly.com/nicholas-finnemore/free-diagnostic',
   'Calendly confirmation emails carry links to cancel and reschedule: Calendly\'s standard invitee emails',
@@ -18,6 +19,10 @@ const TEXT_SOURCES = [
   'UK law treats personal data sent to US organisations certified under the UK Extension as adequately protected: Data Protection (Adequacy) (United States of America) Regulations 2023, https://www.legislation.gov.uk/uksi/2023/1028/made',
   'GitHub Pages logs every visitor\'s IP address for security purposes: https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages',
   'Health information is special category data; the rights listed; a reply within one month, extendable by two further months, usually free: UK GDPR Articles 9, 12 and 15 to 21',
+  'Calendly books one time per booking, so the five free sessions are booked one at a time: Calendly staff, 22 May 2024, "there is no way to book multiple time slots in one go via the Calendly booking flow", https://community.calendly.com/how-do-i-40/book-multiple-time-slots-at-once-1542',
+  'The booking page learns that a session was booked from the message Calendly sends it, calendly.event_scheduled: https://developer.calendly.com/api-docs/overview/embedding/notifying-the-parent-window',
+  'The purpose of Calendly’s optional cookies, quoted in the privacy policy: Calendly’s own cookie banner inside the calendar, as the test saw it',
+  ...SERVICES.filter((s) => s.source).map((s) => `What ${s.name} does and collects, in the privacy policy: ${s.source}`),
 ];
 
 const FAILED = [
@@ -38,6 +43,10 @@ const FAILED = [
   'Two scripted edits (a Python find-and-replace) silently did nothing because of an escaping slip: the cookie comparison in the Calendly check, and the wrapping of result lists in the shared result writer. Both were found when result files lacked the expected fields (the layout rows of the report read "not run"), redone by hand, and the layout check re-run live. A third scripted edit broke a pattern in the PageSpeed check, which the syntax check caught at once. Every scripted edit is now checked with a search afterwards.',
   'On 22 October the live Calendly check failed once, inline at 768 px: Calendly lost the chosen time twice and showed no Next button. The same check alone passed straight after, and the whole live Calendly check, re-run, passed 71/71; the results above are from that re-run.',
   'On 22 October Lighthouse on this machine, against the live site, scored Home on mobile below 95 in one run of three, four times over (lowest 91, 86, 92 and 94, with medians of 99, 98, 94 and 98), while other sessions\' Chrome processes used about two CPU cores. Re-running stopped there; PageSpeed Insights scored every live page 100 in all four categories, mobile and desktop.',
+  'The cookie check before 23 October recorded only cookies, only until the calendar appeared, and only with Calendly\'s banner unanswered. It found 4 (Cloudflare\'s two, OneTrust\'s and Stripe\'s `m`), so the cookie notice listed those and the site said Meta set no cookies through it. Measuring every host, cookie and stored item in every frame, up to the details form, with the banner declined and then accepted, found Google reCAPTCHA, Airbrake and Stripe\'s storage whatever the answer, and, only if accepted, Google Analytics, Meta\'s Pixel, Segment, Braze, Sprig and Survicate. The privacy policy and cookie notice are now built from that measurement.',
+  'Python edits run through the shell lose backslashes: a `\\n` in a JavaScript string became a real line break and broke the privacy page\'s code, and escaped quotes in this report lost their backslashes. The syntax check caught the first and reading the line back the second; both were fixed in the editor, and edits with backslashes are now made there.',
+  'Three source pages for the service descriptions answered 404 (calendly.com/legal/cookie-notice, docs.stripe.com/privacy-and-cookies and www.airbrake.io/privacy-policy); the descriptions rest on the pages listed under the facts instead.',
+  'The first pattern for the retired claim that Nick helped clients out of tech addiction also matched the privacy policy\'s "adverts help people find us". It was narrowed to the forms the site had used, and checked against the old live text, where it still finds every one.',
 ];
 
 // A re-run keeps the failed attempt before it, which keeps its own: every failed attempt, oldest first.
@@ -50,6 +59,8 @@ function failedAttempts(r) {
 const LIMITS = [
   'Only Chrome was used (Chrome for Testing, headless), with phones and tablets emulated. Safari, Firefox and real devices were not tested.',
   'Calendly is a third party: its layout, cookie list and cookie banner can change. The banner appeared from this machine\'s location, and may differ elsewhere.',
+  'What Calendly\'s page loads was measured from this machine in the UK, in headless Chrome, up to the details form. What it loads after a booking is submitted, in other countries or in other browsers was not measured.',
+  'The message shown after a booking was tested by sending the page the message Calendly sends, not by booking.',
   'No booking was submitted, so no session was booked in Nick\'s calendar and Calendly\'s confirmation step and emails were not exercised.',
   'No email was sent to hello@deepestrest.com, since nothing is sent outside this machine without Nick\'s yes: the routing rule and DNS records were checked, delivery was not.',
   'Lighthouse scores vary from run to run and from machine to machine; the table gives the lowest score of every run as well as the median.',
@@ -104,6 +115,9 @@ const htmlErrors = html ? html.results.reduce((n, r) => n + r.errors.length, 0) 
 const htmlWarnings = html ? html.results.reduce((n, r) => n + r.warnings.length, 0) : null;
 const htmlKnown = html ? html.results.reduce((n, r) => n + r.knownCspWarnings.length, 0) : null;
 const hostChecks = hosting?.checks ?? [];
+const frames = lay.filter((r) => r.bookingFrame);
+const BLANK_BAND = frames[0]?.bookingFrame.limit;
+const tp = facts?.thirdParties;
 out(
   '## Summary',
   '',
@@ -115,7 +129,9 @@ out(
   row(layout, `| Horizontal scroll, ${WIDTHS.length} widths × ${PAGES.length} pages (${where(layoutFile)}) | 0 | ${yes(lay.length && lay.every((r) => r.horizontalScroll === 0))} largest: **${Math.max(...lay.map((r) => r.horizontalScroll))} px** over ${lay.length} page-widths |`),
   row(layout, `| Layout shift during load | under 0.1 | ${yes(lay.length && lay.every((r) => r.cls < 0.1))} largest: **${Math.max(...lay.map((r) => r.cls)).toFixed(4)}**; with the Calendly calendar auto-loading: ${Math.max(0, ...inline.map((r) => r.clsWhenRemembered ?? 0)).toFixed(4)} |`),
   row(layout, `| Layout faults: text cut off or overlapping, elements past the screen edge | 0 | ${yes(lay.length && lay.every((r) => !r.cut.length && !r.overlaps.length && !r.offenders.length))} **${lay.reduce((n, r) => n + r.cut.length + r.overlaps.length + r.offenders.length, 0)}**: ${lay.reduce((n, r) => n + r.cut.length, 0)} cut, ${lay.reduce((n, r) => n + r.overlaps.length, 0)} overlapping, ${lay.reduce((n, r) => n + r.offenders.length, 0)} past the edge |`),
-  row(cal, `| Calendly inline calendar, after consent: loads and opens its booking flow (${where(cal)}) | every width | ${yes(inline.length && inline.every((r) => r.pass))} ${inline.filter((r) => r.pass).length}/${inline.length} widths; 0 Calendly requests and 0 cookies before consent: ${yes(inline.every((r) => r.requestsBeforeChoice === 0 && r.cookiesBeforeChoice === 0))} |`),
+  row(layout, `| Booking frame before the visitor chooses to load Calendly: tallest empty band (blank in all) | no band over ${BLANK_BAND} px | ${yes(frames.length && frames.every((r) => r.bookingFrame.largestBand <= BLANK_BAND && !r.bookingFrame.consented))} ${frames.map((r) => `${r.width}: **${r.bookingFrame.largestBand} px** (${r.bookingFrame.blank} of ${r.bookingFrame.height})`).join('; ')} |`),
+  row(cal, `| Calendly inline calendar, after consent: loads and opens its booking flow (${where(cal)}) | every width | ${yes(inline.length && inline.every((r) => r.pass))} ${inline.filter((r) => r.pass).length}/${inline.length} widths; 0 Calendly requests, 0 other outside requests and 0 cookies before consent: ${yes(inline.every((r) => r.requestsBeforeChoice === 0 && r.outsideRequestsBeforeChoice === 0 && r.cookiesBeforeChoice === 0))} |`),
+  row(cal, `| “Book another session”, for booking all five free sessions one at a time | hidden before consent; shown after; says a session was booked when Calendly reports one; opens a fresh calendar | ${yes(inline.length && inline.every((r) => r.bookAnotherHiddenBeforeChoice && r.bookAnotherShown && r.bookedMessageShown && r.bookAnotherRestarts))} ${inline.filter((r) => r.bookAnotherHiddenBeforeChoice && r.bookAnotherShown && r.bookedMessageShown && r.bookAnotherRestarts).length}/${inline.length} widths |`),
   row(cal, `| Calendly popup from the header button, after consent | every page, every width | ${yes(popup.length && popup.every((r) => r.pass))} ${popup.filter((r) => r.pass).length}/${popup.length} page-widths |`),
   row(html, `| HTML validator (W3C Nu HTML Checker, ${where(html)}) | 0 errors | ${yes(htmlErrors === 0)} **${htmlErrors} errors** in ${html?.results.length} files; ${htmlWarnings} other warnings; ${htmlKnown} known CSP warnings, explained below |`),
   row(links, `| Broken links (${where(links)}) | 0 | ${yes(links && links.broken.length === 0)} **${links?.broken.length}** broken of ${links?.checked} references (${links?.distinct} distinct) |`),
@@ -124,6 +140,8 @@ out(
   row(facts, `| Protected titles used for Nick (psychologist, therapist, counsellor, HCPC and BPS titles) | 0 | ${yes(facts?.protectedTitles === 0)} **${facts?.protectedTitles}** on any page, in its text, title, description or sharing tags |`),
   row(facts, `| Clinical or medical claims | 0 | ${yes(facts?.clinicalClaims === 0)} **${facts?.clinicalClaims}** |`),
   row(facts, `| Invented facts | 0 | ${yes(facts?.inventedFacts === 0)} **${facts?.inventedFacts}** unexplained figures or contact details |`),
+  row(facts, `| Claims beyond Nick's three facts, of the kinds found and removed | 0 | ${yes(facts?.retiredClaims === 0)} **${facts?.retiredClaims}** left; ${facts?.retiredList?.length} kinds were found in ${facts?.retiredList?.reduce((n, r) => n + r.found.length, 0)} places, each listed below with its fix |`),
+  row(facts, `| Outside services the privacy policy names, and items the cookie notice lists, against those measured (${where(cal)}) | equal | ${tp?.measured ? `${yes(tp.pass)} services ${tp.services.always.named + tp.services.accepted.named} named, ${tp.services.always.measured + tp.services.accepted.measured} measured; items ${tp.items.always.named + tp.items.accepted.named} listed, ${tp.items.always.measured + tp.items.accepted.measured} measured; missing ${['services', 'items'].reduce((n, k) => n + tp[k].always.missing.length + tp[k].accepted.missing.length, 0)}, extra ${['services', 'items'].reduce((n, k) => n + tp[k].always.extra.length + tp[k].accepted.extra.length, 0)}` : '❌ not measured'} |`),
   row(facts, `| Home page: headline figures and the free-diagnostic offer | shown | ${yes(facts?.headline && Object.values(facts.headline).every(Boolean))} ${config.mentor.satisfaction} satisfaction across ${config.mentor.clients} clients; five years; "Your first five sessions are free, as a diagnostic" |`),
   '',
 );
@@ -227,6 +245,19 @@ if (layout) {
     `Every cell links to its full-page screenshot. The FAQ also has screenshots with every answer open (\`screenshots/faq/<width>-answers-open.png\`). Headings used the site's own serif font in ${layout.filter((r) => r.serifLoaded).length} of ${layout.length} loads. Console errors: ${layout.reduce((n, r) => n + r.consoleErrors.length, 0)}.`,
     '',
   );
+  if (frames.length) {
+    out(
+      '**The booking frame before the visitor chooses to load Calendly.** Until then the frame is only as tall as its message, so no empty panel shows. The check measured, in each fresh load of the booking page: the frame\'s height; the height its icon, heading, explanation, button and links cover; the blank remainder (its padding and the space between those lines); and the tallest empty band, at the top, at the bottom or between two of them, which must be no more than the limit.',
+      '',
+      '| Width | Frame height | Covered | Blank | Tallest empty band (top; bottom) | Pass |',
+      '|---|---|---|---|---|---|',
+      ...frames.map((r) => {
+        const f = r.bookingFrame;
+        return `| ${r.width} | ${f.height} px | ${f.covered} px | **${f.blank} px** | ${f.largestBand} px (${f.topBand}; ${f.bottomBand}) | ${yes(!f.consented && f.largestBand <= f.limit)} |`;
+      }),
+      '',
+    );
+  }
 }
 
 // Calendly.
@@ -239,15 +270,16 @@ if (cal) {
     '',
     '**Inline calendar on the booking page**',
     '',
-    '| Width | Calendly requests before consent | Cookies before consent | Calendar loaded | Booking flow opened | Loads by itself when the choice is remembered | Layout shift then | Pass |',
-    '|---|---|---|---|---|---|---|---|',
+    '| Width | Calendly requests before consent | Other outside requests before consent | Cookies before consent | Calendar loaded | Booking flow opened | “Book another session”: hidden before, shown after, booked message, fresh calendar | Loads by itself when the choice is remembered | Layout shift then | Pass |',
+    '|---|---|---|---|---|---|---|---|---|---|',
     ...inline.map(
       (r) =>
-        `| ${r.width} | ${r.requestsBeforeChoice} | ${r.cookiesBeforeChoice} | ${yes(r.calendarLoaded)} | ${yes(r.flowOpened)} ${(r.flowSteps || []).map((s) => s.replace(/details form: .*/, 'details form')).join(' → ')} | ${yes(r.autoLoadsWhenRemembered)} | ${(r.clsWhenRemembered ?? 0).toFixed(4)} | ${yes(r.pass)} |`,
+        `| ${r.width} | ${r.requestsBeforeChoice} | ${r.outsideRequestsBeforeChoice ?? '–'} | ${r.cookiesBeforeChoice} | ${yes(r.calendarLoaded)} | ${yes(r.flowOpened)} ${(r.flowSteps || []).map((s) => s.replace(/details form: .*/, 'details form')).join(' → ')} | ${[r.bookAnotherHiddenBeforeChoice, r.bookAnotherShown, r.bookedMessageShown, r.bookAnotherRestarts].map(yes).join(' ')} | ${yes(r.autoLoadsWhenRemembered)} | ${(r.clsWhenRemembered ?? 0).toFixed(4)} | ${yes(r.pass)} |`,
     ),
     '',
     `Screenshots of the details form reached at each width: [calendly/](calendly/) (\`inline-<width>.png\`). Content Security Policy violations recorded during these tests: ${inline.reduce((n, r) => n + (r.cspViolations?.length ?? 0), 0) + popup.reduce((n, r) => n + (r.cspViolations?.length ?? 0), 0)}.`,
-    ...(cal.cookieComparison ? ['', `Cookies after loading the calendar, compared with the cookie notice's list: ${cal.cookieComparison.notListed.length} not listed${cal.cookieComparison.notListed.length ? ` (${cal.cookieComparison.notListed.join(', ')})` : ''}; ${cal.cookieComparison.listedNotSeen.length} listed but not seen this time${cal.cookieComparison.listedNotSeen.length ? ` (${cal.cookieComparison.listedNotSeen.join(', ')})` : ''}.`] : []),
+    '',
+    'Since tests never book, the message after a booking was tested by sending the page the message Calendly sends when a session is booked (`calendly.event_scheduled`, from `https://calendly.com`); “Book another session” was then pressed and had to bring back a fresh calendar.',
     '',
     '**Popup from the header button**: on every page, the button first asks before loading Calendly, then opens Calendly\'s popup with the calendar drawn, which then closes; after a reload, with the choice remembered, the popup opens straight away.',
     '',
@@ -261,6 +293,26 @@ if (cal) {
     `Without JavaScript: ${yes(cal.noJs?.pass)} the header button is a plain link to the booking page, which explains that the calendar needs JavaScript and links to the booking page on Calendly's website.`,
     '',
   );
+  const seen = cal.thirdParties;
+  if (seen?.declined && seen?.accepted) {
+    const siteHost = new URL(cal.testedAt).hostname;
+    const [d, a] = [describe(seen.declined, siteHost), describe(seen.accepted, siteHost)];
+    const svc = (ids) => ids.map((id) => SERVICES.find((s) => s.id === id).name).join(', ');
+    const items = (list) => list.map((i) => `\`${i.name}\` (${i.kind.toLowerCase()}, ${i.host})`).join(', ');
+    const itemKey = (i) => `${i.type} ${i.name} ${i.host}`;
+    const onlyAccepted = (key) => a[key].filter((x) => !d[key].some((y) => itemKey(y) === itemKey(x)));
+    out(
+      '**What the booking calendar loads.** Measured at 1,440 px on ' + seen.checked + ', after loading the calendar and opening its details form: every outside host the browser contacted (from every frame, including Calendly\'s), every cookie, and every local and session storage item in every frame. Once with Calendly\'s cookie banner declined, and once, in a fresh browser context with nothing stored, accepted. The privacy policy and cookie notice are built from these measurements (`src/lib/third-parties.mjs`), and the facts check compares them, below.',
+      '',
+      '| Banner answer | Outside hosts | Services | Cookies and stored items |',
+      '|---|---|---|---|',
+      `| Declined | ${seen.declined.hosts.length}: ${seen.declined.hosts.join(', ')} | ${d.services.length}: ${svc(d.services)} | ${d.items.length}: ${items(d.items)} |`,
+      `| Accepted | ${seen.accepted.hosts.length}: ${seen.accepted.hosts.join(', ')} | ${a.services.length}: ${svc(a.services)} | ${a.items.length}: ${items(a.items)} |`,
+      '',
+      `Only when accepted: ${svc(a.services.filter((s) => !d.services.includes(s))) || 'nothing'}, which stored ${items(onlyAccepted('items')) || 'nothing'}. Unidentified hosts or items: ${[...new Set([...d.unknown, ...a.unknown])].length}.`,
+      '',
+    );
+  }
 }
 
 // HTML validation.
@@ -299,13 +351,13 @@ if (links) {
 // Facts.
 if (facts) {
   out(
-    '## Facts, protected titles and clinical claims',
+    '## Facts, claims, protected titles and clinical claims',
     '',
     `**Placeholders: ${facts.placeholders}.** Facts that are not known were left out of the pages rather than shown as placeholders; [PLACEHOLDERS.md](../PLACEHOLDERS.md) lists them under "Left out for want of a fact".`,
     '',
-    '| Page | Unexplained figures or contact details | Protected titles | Clinical claims |',
-    '|---|---|---|---|',
-    ...facts.pages.map((p) => `| ${name(p.page)} | ${p.flags.length} | ${p.protectedTitles.length} | ${p.clinicalClaims.length} |`),
+    '| Page | Unexplained figures or contact details | Protected titles | Clinical claims | Claims beyond his three facts |',
+    '|---|---|---|---|---|',
+    ...facts.pages.map((p) => `| ${name(p.page)} | ${p.flags.length} | ${p.protectedTitles.length} | ${p.clinicalClaims.length} | ${p.retired?.length ?? '–'} |`),
     '',
     `**Protected titles: ${facts.protectedTitles}.** Each page's visible text, title, description and sharing tags were searched for: ${facts.protectedPatterns.map((p) => `\`${p}\``).join(', ')}.`,
     '',
@@ -315,13 +367,40 @@ if (facts) {
     '',
     ...facts.verifiedFigures.map((v) => `- \`${v.text}\`: ${v.source}`),
     '',
+    ...(facts.quotes?.length
+      ? ['Long quotations, which the scan would otherwise take for testimonials, each from its source and found again in this run:', '', ...facts.quotes.map((q) => `- ${yes(q.seenInThisRun)} “${q.text}”: ${q.source}`), '']
+      : []),
     'Statements in the text, and where each was checked:',
     '',
     ...TEXT_SOURCES.map((t) => `- ${t}`),
     '',
-    'There are no testimonials. General wording about how mentoring works, beyond Nick\'s own words, is listed for him to check at the end of PLACEHOLDERS.md.',
+    'There are no testimonials. Wording beyond Nick\'s three facts is listed for him to check at the end of PLACEHOLDERS.md.',
     '',
   );
+  if (facts.retiredList) {
+    out(
+      `**Claims beyond Nick's three facts: ${facts.retiredClaims} left.** Every page was read against his three facts, and each claim found beyond them was removed or rewritten. The facts check searches every page's text, title, description and sharing tags for each kind of claim, with the pattern shown, so none can return:`,
+      '',
+      '| Claim | Where it was, and its words | Fix | Pattern | Left |',
+      '|---|---|---|---|---|',
+      ...facts.retiredList.map((r) => `| ${r.claim} | ${r.found.map(([page, words]) => `${name(page) || page}: “${words}”`).join('<br>')} | ${r.fix} | \`${r.pattern.replace(/\|/g, '\\|')}\` | ${r.left.length ? `❌ ${r.left.join('<br>')}` : '✅ 0'} |`),
+      '',
+    );
+  }
+  if (tp?.measured) {
+    const cell = (c) => `${c.measured} | ${c.named} | ${c.missing.length ? c.missing.join(', ') : '0'} | ${c.extra.length ? c.extra.join(', ') : '0'}`;
+    out(
+      `**Outside services and stored items: named on the pages against measured.** The privacy policy's services and the cookie notice's rows, read from the ${facts.live ? 'live' : 'built'} pages, against the Calendly check's measurement of ${tp.checked} (above). ${yes(tp.pass)}`,
+      '',
+      '| What | When | Measured | Named | Missing from the page | On the page but not measured |',
+      '|---|---|---|---|---|---|',
+      `| Services, privacy policy | whatever the banner answer | ${cell(tp.services.always)} |`,
+      `| Services, privacy policy | only if accepted | ${cell(tp.services.accepted)} |`,
+      `| Cookies and stored items, cookie notice | whatever the banner answer | ${cell(tp.items.always)} |`,
+      `| Cookies and stored items, cookie notice | only if accepted | ${cell(tp.items.accepted)} |`,
+      '',
+    );
+  }
 }
 
 // PDFs.

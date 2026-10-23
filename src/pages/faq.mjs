@@ -13,7 +13,7 @@ export default {
   name: 'FAQ',
   title: () => 'Questions and answers | DeepRest',
   description: ({ F }) =>
-    `Answers to common questions about mentoring at DeepRest: the ${inWords(F.value('offer.freeSessions'))} free sessions, who it is for, booking, cancelling and urgent help.`,
+    `Answers to common questions about mentoring at DeepRest: the ${inWords(F.value('offer.freeSessions'))} free sessions, booking all ${inWords(F.value('offer.freeSessions'))}, cancelling and urgent help.`,
   main: (ctx) => {
     const { F, href } = ctx;
     const nick = F.text('mentor.firstName');
@@ -28,24 +28,20 @@ ${pageHead({
 <section class="section" aria-label="Questions">
   <div class="container narrow faq-list">
     ${item('free', `Are the first ${free} sessions really free?`, `
-      <p>Yes. Your first ${free} sessions cost nothing. They work as a diagnostic, so that you and ${nick} can understand your situation and decide whether mentoring is right for you.</p>`)}
-    ${item('who', 'Who is DeepRest for?', `
-      <p>${F.text('mentor.clientGroups').replace(/^./, (c) => c.toUpperCase())} who feel that tech has too much of a hold on them, and who want to change that.</p>`)}
+      <p>Yes. Your first ${free} sessions are free, as a diagnostic. There is nothing to pay for them.</p>`)}
     ${item('nick', `Who is ${nick}?`, `
       <p>${F.text('mentor.name')} is the mentor behind DeepRest. He has mentored ${F.text('mentor.clientGroups')} for ${inWords(F.value('mentor.years'))} years, with a ${F.text('mentor.satisfaction')} satisfaction rate across ${F.text('mentor.clients')} clients.</p>
       <p><a href="${href('about')}">More about ${nick}</a></p>`)}
     ${item('therapy', 'Is mentoring the same as therapy?', `
-      <p>No. Mentoring is practical, one-to-one support. It is not therapy or medical care, and ${nick} is not a medical or mental health professional.</p>
+      <p>No. ${nick} is a mentor, and mentoring is not therapy or medical care.</p>
       <p>If you are worried about your mental or physical health, please talk to your GP.</p>`)}
     ${item('book', 'How do I book?', `
-      <p>Choose a day and time in the <a href="${href('book')}">booking calendar</a>, and confirm it with your name and email address. Each session is booked separately.</p>
+      <p>Choose a day and time in the <a href="${href('book')}">booking calendar</a>, and confirm it with your name and email address. Calendly books one session at a time, so you book each of your ${free} free sessions separately: the booking page explains <a href="${href('book')}#all-five">how to book all ${free}</a>.</p>
       <p>The calendar is provided by Calendly, and loads only once you agree to it, because Calendly sets its own cookies. The <a href="${href('cookies')}">cookie notice</a> explains them.</p>`)}
     ${item('length', 'How long is a session, and how do we meet?', `
       <p>The booking calendar shows how long a session lasts and how you will meet, and your confirmation email has the details.</p>`)}
     ${item('cancel', 'Can I cancel or move a session?', `
       <p>Yes. Your confirmation email from Calendly has links to cancel the session or move it to another time.</p>`)}
-    ${item('after', `What happens after the ${free} free sessions?`, `
-      <p>You and ${nick} decide together whether to carry on. There is no obligation to continue.</p>`)}
     ${item('urgent', 'What if I need help urgently?', `
       <p><strong>DeepRest is not an emergency service.</strong> If you or someone else is in immediate danger, call 999 or go to your nearest A&amp;E. For urgent medical help or advice that isn’t an emergency, call NHS 111. You can talk to Samaritans free, day or night, on 116 123.</p>`)}
     ${item('data', 'What happens to the details I give?', `

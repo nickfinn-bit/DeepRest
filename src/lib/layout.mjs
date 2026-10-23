@@ -21,7 +21,7 @@ export const NAV = [
 
 export const FOOTER_PAGES = [
   { slug: '', label: 'Home' },
-  { slug: 'mentoring', label: 'How mentoring works' },
+  { slug: 'mentoring', label: 'Mentoring' },
   { slug: 'about', label: 'About Nick' },
   { slug: 'faq', label: 'Questions and answers' },
   { slug: 'book', label: 'Book a free session' },
@@ -84,8 +84,8 @@ export function renderPage(ctx, page, main) {
     <div class="container footer-grid">
       <div class="footer-about">
         <p class="footer-brand">${logo(30)}<span>DeepRest</span></p>
-        <p>Tech-addiction mentoring for ${F.text('mentor.clientGroups')}, with ${F.text('mentor.name')}.</p>
-        <p>Your first ${inWords(F.value('offer.freeSessions'))} sessions are free.</p>
+        <p>Tech-addiction mentoring with ${F.text('mentor.name')}.</p>
+        <p>Your first ${inWords(F.value('offer.freeSessions'))} sessions are free, as a diagnostic.</p>
       </div>
       <nav class="footer-col" aria-label="Footer">
         <h2 class="footer-heading">Pages</h2>
@@ -120,7 +120,7 @@ export function renderPage(ctx, page, main) {
   <form method="dialog" class="consent-dialog-form">
     <p class="eyebrow">Booking</p>
     <h2 id="calendly-consent-title">Booking opens Calendly</h2>
-    <p id="calendly-consent-text">DeepRest’s sessions are booked through Calendly. If you continue, this page loads Calendly’s booking calendar, and Calendly sets its own cookies on your device. <a href="${href('cookies')}">Read the cookie notice</a></p>
+    <p id="calendly-consent-text">DeepRest’s sessions are booked through Calendly. If you continue, this page loads Calendly’s booking calendar. Calendly then sets cookies on your device and connects to services it uses, such as Google reCAPTCHA and Stripe. <a href="${href('cookies')}#calendly">See what is loaded</a></p>
     <div class="consent-dialog-actions">
       <button class="btn btn-primary" value="continue">Continue to booking</button>
       <button class="btn btn-secondary" value="cancel">Not now</button>

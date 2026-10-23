@@ -15,7 +15,9 @@
   any of these words.
 - His figures are used exactly as he gave them: a 100% satisfaction rate across
   23 clients, five years mentoring students and young adults, and the first five
-  sessions free, as a diagnostic.
+  sessions free, as a diagnostic. The pages state only these three facts about
+  him and his practice; `RETIRED` in `scripts/verify/claims.mjs` lists the claims
+  removed for going beyond them, and `npm run verify:facts` fails if one returns.
 - No invented facts: never write a practice fact into page code; put it in
   `site.config.json` with its source under `_sources`, and render it through
   `F`. An unknown fact is left off the pages and listed under `_dropped`, not
@@ -31,7 +33,13 @@
 - Advert link tags (`utm_*`) are copied onto the site's own links and Calendly's
   by `site.js`, and passed to Calendly's embed; nothing is stored. The site has
   no Meta code (no Pixel): Meta's Business Tools Terms §1.h forbid sharing data
-  based on health information.
+  based on health information. Calendly's own page, inside the booking frame,
+  loads Meta's Pixel and other tools only if the visitor accepts Calendly's
+  optional cookies; the privacy policy and cookie notice say so.
+- The privacy policy and cookie notice name what the booking calendar loads from
+  `src/data/calendly-third-parties.json` (measured by `scripts/verify/calendly.mjs`)
+  through `src/lib/third-parties.mjs`, which describes each service with its
+  source; the build stops on any host or stored item it cannot identify.
 - The Content Security Policy is a meta tag built in `scripts/build.mjs`. A new
   outside resource must be allowed there; the inline head script's hash is
   computed at build time.
@@ -42,7 +50,12 @@
 - Once the visitor chooses Calendly (or a remembered choice), the booking frame
   is 1,130px tall below 68rem and 760px above, matching Calendly's stacked and
   two-column layouts, so the frame never scrolls inside and nothing shifts when
-  the calendar loads; before the choice it is only as tall as its message.
+  the calendar loads; before the choice it is only as tall as its message, with
+  no empty band over 80px (`scripts/verify/layout.mjs`).
+- Calendly books one session per booking, so the booking page explains how to
+  book all five free sessions one at a time. After the choice, "Book another
+  session" under the calendar reloads it, and Calendly's
+  `calendly.event_scheduled` message marks a booking.
 - Test with taps, not clicks, inside Calendly on touch widths: Calendly
   ignores mouse clicks there. Tests never submit a booking.
 - Stop servers and browsers you start by their own PID.
@@ -75,7 +88,9 @@
   redirects, every live page identical to `dist/`); build the deployed commit
   first. The checks are Calendly, layout and screenshots at 7 widths, the HTML
   validator, links, facts (placeholders, invented facts, protected titles,
-  clinical claims), the strict build, Lighthouse and PDFs. The validator needs
+  clinical claims, retired claims, third parties named against those the
+  Calendly check measured in the same run), the strict build, Lighthouse and
+  PDFs. The validator needs
   the Nu HTML Checker unpacked in `.tools/vnu-runtime-image` (vnu.windows.zip
   from github.com/validator/validator/releases; no Java).
 - `node scripts/verify/pagespeed.mjs --live --browser-url=http://127.0.0.1:9222`
@@ -96,8 +111,9 @@
 - `src/assets/`: `css/site.css` (mobile first; breakpoints 30rem, 48rem,
   60rem, 68rem), `js/site.js` (menu, Calendly loading), the self-hosted Source
   Serif 4 heading font (OFL), favicon and touch icon.
-- `src/data/calendly-cookies.json`: cookies Calendly set when last tested
-  locally, written by `scripts/verify/calendly.mjs` and listed on the cookie
-  notice.
+- `src/data/calendly-third-parties.json`: the outside hosts, cookies and
+  stored items the booking calendar loaded, up to its details form, with
+  Calendly's banner declined and accepted, when last measured locally;
+  `src/lib/third-parties.mjs` identifies and describes each.
 - `src/lib/review-notes.mjs`: wording beyond Nick's own words that he should
   confirm, listed at the end of PLACEHOLDERS.md.

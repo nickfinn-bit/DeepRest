@@ -197,6 +197,30 @@
     if (hasConsent()) startInline();
   }
 
+  // Calendly books one session at a time. Under the calendar, "Book another session" brings
+  // back a fresh calendar, and Calendly's message that a session was booked says so there.
+  var next = document.querySelector('[data-booking-next]');
+  var nextText = next && next.querySelector('[data-booking-next-text]');
+  var nextPrompt = nextText ? nextText.textContent : '';
+  var restart = next && next.querySelector('[data-calendly-restart]');
+
+  if (restart) {
+    restart.addEventListener('click', function () {
+      if (!window.Calendly || !frame) return;
+      next.classList.remove('is-booked');
+      nextText.textContent = nextPrompt;
+      frame.textContent = '';
+      window.Calendly.initInlineWidget({ url: calendlyUrl, parentElement: frame, utm: calendlyUtm() });
+      frame.scrollIntoView({ block: 'start' });
+    });
+  }
+
+  window.addEventListener('message', function (e) {
+    if (e.origin !== 'https://calendly.com' || !next || !e.data || e.data.event !== 'calendly.event_scheduled') return;
+    next.classList.add('is-booked');
+    nextText.textContent = 'Session booked. To book the next of your free sessions, choose “Book another session”.';
+  });
+
   // The choice shown, and cleared, on the cookie notice.
   var status = document.querySelector('[data-consent-status]');
   var forget = document.querySelector('[data-consent-forget]');

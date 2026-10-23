@@ -1,20 +1,25 @@
 {
-  "testedAt": "https://deepestrest.com/",
-  "live": true,
+  "testedAt": "http://localhost:4173/",
+  "live": false,
   "inline": [
     {
       "width": 360,
       "requestsBeforeChoice": 0,
+      "outsideRequestsBeforeChoice": 0,
       "cookiesBeforeChoice": 0,
+      "bookAnotherHiddenBeforeChoice": true,
       "calendarLoaded": true,
       "calendlyCookieBanner": true,
       "flowOpened": true,
       "flowSteps": [
         "day: Friday, October 23 - Times available",
-        "time: 9:30am",
+        "time: 3:00pm",
         "next",
         "details form: full_name, email, question_0, g-recaptcha-response, ot-group-id-C0002, ot-group-id-C0003, ot-group-id-C0004, vendor-search-handler, checkbox, checkbox, checkbox, checkbox"
       ],
+      "bookAnotherShown": true,
+      "bookedMessageShown": true,
+      "bookAnotherRestarts": true,
       "autoLoadsWhenRemembered": true,
       "clsWhenRemembered": 0,
       "cspViolations": [],
@@ -24,17 +29,21 @@
     {
       "width": 390,
       "requestsBeforeChoice": 0,
+      "outsideRequestsBeforeChoice": 0,
       "cookiesBeforeChoice": 0,
+      "bookAnotherHiddenBeforeChoice": true,
       "calendarLoaded": true,
       "calendlyCookieBanner": true,
       "flowOpened": true,
       "flowSteps": [
         "day: Friday, October 23 - Times available",
-        "time: 9:30am",
-        "time pressed again",
+        "time: 3:00pm",
         "next",
         "details form: full_name, email, question_0, g-recaptcha-response, ot-group-id-C0002, ot-group-id-C0003, ot-group-id-C0004, vendor-search-handler, checkbox, checkbox, checkbox, checkbox"
       ],
+      "bookAnotherShown": true,
+      "bookedMessageShown": true,
+      "bookAnotherRestarts": true,
       "autoLoadsWhenRemembered": true,
       "clsWhenRemembered": 0,
       "cspViolations": [],
@@ -44,16 +53,21 @@
     {
       "width": 768,
       "requestsBeforeChoice": 0,
+      "outsideRequestsBeforeChoice": 0,
       "cookiesBeforeChoice": 0,
+      "bookAnotherHiddenBeforeChoice": true,
       "calendarLoaded": true,
       "calendlyCookieBanner": true,
       "flowOpened": true,
       "flowSteps": [
         "day: Friday, October 23 - Times available",
-        "time: 9:30am",
+        "time: 3:00pm",
         "next",
         "details form: full_name, email, question_0, g-recaptcha-response, ot-group-id-C0002, ot-group-id-C0003, ot-group-id-C0004, vendor-search-handler, checkbox, checkbox, checkbox, checkbox"
       ],
+      "bookAnotherShown": true,
+      "bookedMessageShown": true,
+      "bookAnotherRestarts": true,
       "autoLoadsWhenRemembered": true,
       "clsWhenRemembered": 0,
       "cspViolations": [],
@@ -63,17 +77,21 @@
     {
       "width": 1024,
       "requestsBeforeChoice": 0,
+      "outsideRequestsBeforeChoice": 0,
       "cookiesBeforeChoice": 0,
+      "bookAnotherHiddenBeforeChoice": true,
       "calendarLoaded": true,
       "calendlyCookieBanner": true,
       "flowOpened": true,
       "flowSteps": [
         "day: Friday, October 23 - Times available",
-        "time: 9:30am",
-        "time pressed again",
+        "time: 3:00pm",
         "next",
         "details form: full_name, email, question_0, g-recaptcha-response, ot-group-id-C0002, ot-group-id-C0003, ot-group-id-C0004, vendor-search-handler, checkbox, checkbox, checkbox, checkbox"
       ],
+      "bookAnotherShown": true,
+      "bookedMessageShown": true,
+      "bookAnotherRestarts": true,
       "autoLoadsWhenRemembered": true,
       "clsWhenRemembered": 0,
       "cspViolations": [],
@@ -83,17 +101,21 @@
     {
       "width": 1280,
       "requestsBeforeChoice": 0,
+      "outsideRequestsBeforeChoice": 0,
       "cookiesBeforeChoice": 0,
+      "bookAnotherHiddenBeforeChoice": true,
       "calendarLoaded": true,
       "calendlyCookieBanner": true,
       "flowOpened": true,
       "flowSteps": [
         "day: Friday, October 23 - Times available",
-        "time: 9:30am",
-        "time pressed again",
+        "time: 3:00pm",
         "next",
         "details form: full_name, email, question_0, g-recaptcha-response, ot-group-id-C0002, ot-group-id-C0003, ot-group-id-C0004, vendor-search-handler, checkbox, checkbox, checkbox, checkbox"
       ],
+      "bookAnotherShown": true,
+      "bookedMessageShown": true,
+      "bookAnotherRestarts": true,
       "autoLoadsWhenRemembered": true,
       "clsWhenRemembered": 0,
       "cspViolations": [],
@@ -103,17 +125,21 @@
     {
       "width": 1440,
       "requestsBeforeChoice": 0,
+      "outsideRequestsBeforeChoice": 0,
       "cookiesBeforeChoice": 0,
+      "bookAnotherHiddenBeforeChoice": true,
       "calendarLoaded": true,
       "calendlyCookieBanner": true,
       "flowOpened": true,
       "flowSteps": [
         "day: Friday, October 23 - Times available",
-        "time: 9:30am",
-        "time pressed again",
+        "time: 3:00pm",
         "next",
         "details form: full_name, email, question_0, g-recaptcha-response, ot-group-id-C0002, ot-group-id-C0003, ot-group-id-C0004, vendor-search-handler, checkbox, checkbox, checkbox, checkbox"
       ],
+      "bookAnotherShown": true,
+      "bookedMessageShown": true,
+      "bookAnotherRestarts": true,
       "autoLoadsWhenRemembered": true,
       "clsWhenRemembered": 0,
       "cspViolations": [],
@@ -123,17 +149,21 @@
     {
       "width": 1920,
       "requestsBeforeChoice": 0,
+      "outsideRequestsBeforeChoice": 0,
       "cookiesBeforeChoice": 0,
+      "bookAnotherHiddenBeforeChoice": true,
       "calendarLoaded": true,
       "calendlyCookieBanner": true,
       "flowOpened": true,
       "flowSteps": [
         "day: Friday, October 23 - Times available",
-        "time: 9:30am",
-        "time pressed again",
+        "time: 3:00pm",
         "next",
         "details form: full_name, email, question_0, g-recaptcha-response, ot-group-id-C0002, ot-group-id-C0003, ot-group-id-C0004, vendor-search-handler, checkbox, checkbox, checkbox, checkbox"
       ],
+      "bookAnotherShown": true,
+      "bookedMessageShown": true,
+      "bookAnotherRestarts": true,
       "autoLoadsWhenRemembered": true,
       "clsWhenRemembered": 0,
       "cspViolations": [],
@@ -904,29 +934,183 @@
     "explainsAndLinksToCalendly": true,
     "pass": true
   },
-  "cookiesSeen": {
-    "checked": "2026-10-22T19:59:33.751Z",
-    "cookies": [
-      {
-        "name": "__cf_bm",
-        "domain": ".calendly.com"
-      },
-      {
-        "name": "_cfuvid",
-        "domain": ".calendly.com"
-      },
-      {
-        "name": "OptanonConsent",
-        "domain": ".calendly.com"
-      },
-      {
-        "name": "m",
-        "domain": "m.stripe.com"
-      }
-    ]
+  "thirdParties": {
+    "checked": "2026-10-23T07:42:06.782Z",
+    "declined": {
+      "hosts": [
+        "accounts.google.com",
+        "assets.calendly.com",
+        "calendly.com",
+        "cdn.cookielaw.org",
+        "dfp.calendly.com",
+        "geolocation.onetrust.com",
+        "js.stripe.com",
+        "m.stripe.com",
+        "m.stripe.network",
+        "notifier-configs.airbrake.io",
+        "www.gstatic.com",
+        "www.recaptcha.net"
+      ],
+      "cookies": [
+        {
+          "name": "__cf_bm",
+          "domain": ".calendly.com",
+          "seconds": 1777
+        },
+        {
+          "name": "_cfuvid",
+          "domain": ".calendly.com",
+          "seconds": null
+        },
+        {
+          "name": "OptanonAlertBoxClosed",
+          "domain": ".calendly.com",
+          "seconds": 31535986
+        },
+        {
+          "name": "OptanonConsent",
+          "domain": ".calendly.com",
+          "seconds": 31535986
+        },
+        {
+          "name": "m",
+          "domain": "m.stripe.com",
+          "seconds": 34559993
+        }
+      ],
+      "storage": [
+        {
+          "type": "local",
+          "origin": "https://calendly.com",
+          "key": "_cache"
+        },
+        {
+          "type": "session",
+          "origin": "https://m.stripe.network",
+          "key": "_ab"
+        },
+        {
+          "type": "session",
+          "origin": "https://m.stripe.network",
+          "key": "_mf"
+        },
+        {
+          "type": "session",
+          "origin": "https://m.stripe.network",
+          "key": "1"
+        },
+        {
+          "type": "session",
+          "origin": "https://m.stripe.network",
+          "key": "id"
+        },
+        {
+          "type": "local",
+          "origin": "https://www.recaptcha.net",
+          "key": "rc::a"
+        }
+      ]
+    },
+    "accepted": {
+      "hosts": [
+        "accounts.google.com",
+        "api.sprig.com",
+        "assets.calendly.com",
+        "calendly.com",
+        "cdn.cookielaw.org",
+        "cdn.segment.io",
+        "cdn.sprig.com",
+        "connect.facebook.net",
+        "dfp.calendly.com",
+        "geolocation.onetrust.com",
+        "js.appboycdn.com",
+        "js.stripe.com",
+        "m.stripe.com",
+        "m.stripe.network",
+        "notifier-configs.airbrake.io",
+        "survey.survicate.com",
+        "www.google-analytics.com",
+        "www.googletagmanager.com",
+        "www.gstatic.com",
+        "www.recaptcha.net"
+      ],
+      "cookies": [
+        {
+          "name": "__cf_bm",
+          "domain": ".calendly.com",
+          "seconds": 1769
+        },
+        {
+          "name": "_cfuvid",
+          "domain": ".calendly.com",
+          "seconds": null
+        },
+        {
+          "name": "OptanonAlertBoxClosed",
+          "domain": ".calendly.com",
+          "seconds": 31535985
+        },
+        {
+          "name": "OptanonConsent",
+          "domain": ".calendly.com",
+          "seconds": 31535985
+        },
+        {
+          "name": "m",
+          "domain": "m.stripe.com",
+          "seconds": 34559996
+        }
+      ],
+      "storage": [
+        {
+          "type": "local",
+          "origin": "https://calendly.com",
+          "key": "_cache"
+        },
+        {
+          "type": "local",
+          "origin": "https://calendly.com",
+          "key": "ajs_anonymous_id"
+        },
+        {
+          "type": "local",
+          "origin": "https://calendly.com",
+          "key": "sprig.anon.env.vid.map"
+        },
+        {
+          "type": "local",
+          "origin": "https://calendly.com",
+          "key": "userleap.ids"
+        },
+        {
+          "type": "session",
+          "origin": "https://m.stripe.network",
+          "key": "_ab"
+        },
+        {
+          "type": "session",
+          "origin": "https://m.stripe.network",
+          "key": "_mf"
+        },
+        {
+          "type": "session",
+          "origin": "https://m.stripe.network",
+          "key": "1"
+        },
+        {
+          "type": "session",
+          "origin": "https://m.stripe.network",
+          "key": "id"
+        },
+        {
+          "type": "local",
+          "origin": "https://www.recaptcha.net",
+          "key": "rc::a"
+        }
+      ],
+      "bannerAccepted": true,
+      "detailsForm": true
+    }
   },
-  "cookieComparison": {
-    "notListed": [],
-    "listedNotSeen": []
-  }
+  "calendarText": "POWERED BY\nCalendly\nNicholas Finnemore\nFree diagnostic session\n30 min\nWeb conferencing details provided upon confirmation.\n\nDeepRest mentoring with Nick Finnemore, for students and young adults who want to get on top of their tech use. Your first five sessions are free, as a diagnostic. Book one session at a time here.\n\nCookie settings\nPrivacy Policy\nSelect a Date & Time\nOctober 2026\nOctober is now displayed\nMon\tTue\tWed\tThu\tFri\tSat\tSun\n\t\t\t\n1\n\t\n2\n\t\n3\n\t\n4\n\n\n5\n\t\n6\n\t\n7\n\t\n8\n\t\n9\n\t\n10\n\t\n11\n\n\n12\n\t\n13\n\t\n14\n\t\n15\n\t\n16\n\t\n17\n\t\n18\n\n\n19\n\t\n20\n\t\n21\n\t\n22\n\t\n23\n\t\n24\n\t\n25\n\n\n26\n\t\n27\n\t\n28\n\t\n29\n\t\n30\n\t\n31\n\t\n\nTime zone\n\nUK, Ireland, Lisbon Time\n(8:41am)\nWe use cookies and similar technologies, including necessary cookies to provide our website, and optional cookies to improve and personalize your experience, to understand website interactions (including clicks, cursor movement and screen recordings), and for marketing. You may accept all, decline all optional cookies, or manage your optional cookies. To learn more, visit our privacy notice.\nCookie settings\nDecline all\nAccept all"
 }

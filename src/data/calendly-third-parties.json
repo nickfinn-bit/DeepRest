@@ -1,0 +1,176 @@
+{
+  "checked": "2026-10-23T07:42:06.782Z",
+  "declined": {
+    "hosts": [
+      "accounts.google.com",
+      "assets.calendly.com",
+      "calendly.com",
+      "cdn.cookielaw.org",
+      "dfp.calendly.com",
+      "geolocation.onetrust.com",
+      "js.stripe.com",
+      "m.stripe.com",
+      "m.stripe.network",
+      "notifier-configs.airbrake.io",
+      "www.gstatic.com",
+      "www.recaptcha.net"
+    ],
+    "cookies": [
+      {
+        "name": "__cf_bm",
+        "domain": ".calendly.com",
+        "seconds": 1777
+      },
+      {
+        "name": "_cfuvid",
+        "domain": ".calendly.com",
+        "seconds": null
+      },
+      {
+        "name": "OptanonAlertBoxClosed",
+        "domain": ".calendly.com",
+        "seconds": 31535986
+      },
+      {
+        "name": "OptanonConsent",
+        "domain": ".calendly.com",
+        "seconds": 31535986
+      },
+      {
+        "name": "m",
+        "domain": "m.stripe.com",
+        "seconds": 34559993
+      }
+    ],
+    "storage": [
+      {
+        "type": "local",
+        "origin": "https://calendly.com",
+        "key": "_cache"
+      },
+      {
+        "type": "session",
+        "origin": "https://m.stripe.network",
+        "key": "_ab"
+      },
+      {
+        "type": "session",
+        "origin": "https://m.stripe.network",
+        "key": "_mf"
+      },
+      {
+        "type": "session",
+        "origin": "https://m.stripe.network",
+        "key": "1"
+      },
+      {
+        "type": "session",
+        "origin": "https://m.stripe.network",
+        "key": "id"
+      },
+      {
+        "type": "local",
+        "origin": "https://www.recaptcha.net",
+        "key": "rc::a"
+      }
+    ]
+  },
+  "accepted": {
+    "hosts": [
+      "accounts.google.com",
+      "api.sprig.com",
+      "assets.calendly.com",
+      "calendly.com",
+      "cdn.cookielaw.org",
+      "cdn.segment.io",
+      "cdn.sprig.com",
+      "connect.facebook.net",
+      "dfp.calendly.com",
+      "geolocation.onetrust.com",
+      "js.appboycdn.com",
+      "js.stripe.com",
+      "m.stripe.com",
+      "m.stripe.network",
+      "notifier-configs.airbrake.io",
+      "survey.survicate.com",
+      "www.google-analytics.com",
+      "www.googletagmanager.com",
+      "www.gstatic.com",
+      "www.recaptcha.net"
+    ],
+    "cookies": [
+      {
+        "name": "__cf_bm",
+        "domain": ".calendly.com",
+        "seconds": 1769
+      },
+      {
+        "name": "_cfuvid",
+        "domain": ".calendly.com",
+        "seconds": null
+      },
+      {
+        "name": "OptanonAlertBoxClosed",
+        "domain": ".calendly.com",
+        "seconds": 31535985
+      },
+      {
+        "name": "OptanonConsent",
+        "domain": ".calendly.com",
+        "seconds": 31535985
+      },
+      {
+        "name": "m",
+        "domain": "m.stripe.com",
+        "seconds": 34559996
+      }
+    ],
+    "storage": [
+      {
+        "type": "local",
+        "origin": "https://calendly.com",
+        "key": "_cache"
+      },
+      {
+        "type": "local",
+        "origin": "https://calendly.com",
+        "key": "ajs_anonymous_id"
+      },
+      {
+        "type": "local",
+        "origin": "https://calendly.com",
+        "key": "sprig.anon.env.vid.map"
+      },
+      {
+        "type": "local",
+        "origin": "https://calendly.com",
+        "key": "userleap.ids"
+      },
+      {
+        "type": "session",
+        "origin": "https://m.stripe.network",
+        "key": "_ab"
+      },
+      {
+        "type": "session",
+        "origin": "https://m.stripe.network",
+        "key": "_mf"
+      },
+      {
+        "type": "session",
+        "origin": "https://m.stripe.network",
+        "key": "1"
+      },
+      {
+        "type": "session",
+        "origin": "https://m.stripe.network",
+        "key": "id"
+      },
+      {
+        "type": "local",
+        "origin": "https://www.recaptcha.net",
+        "key": "rc::a"
+      }
+    ]
+  }
+}

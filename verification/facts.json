@@ -1,6 +1,6 @@
 {
-  "testedAt": "https://deepestrest.com/",
-  "live": true,
+  "testedAt": "http://localhost:4173/",
+  "live": false,
   "placeholders": 0,
   "placeholderKeys": [],
   "missingFromPlaceholdersMd": [],
@@ -13,6 +13,7 @@
       "flags": [],
       "protectedTitles": [],
       "clinicalClaims": [],
+      "retired": [],
       "headline": {
         "satisfaction": true,
         "freeDiagnostic": true,
@@ -25,7 +26,8 @@
       "distinctPlaceholders": 0,
       "flags": [],
       "protectedTitles": [],
-      "clinicalClaims": []
+      "clinicalClaims": [],
+      "retired": []
     },
     {
       "page": "about",
@@ -33,7 +35,8 @@
       "distinctPlaceholders": 0,
       "flags": [],
       "protectedTitles": [],
-      "clinicalClaims": []
+      "clinicalClaims": [],
+      "retired": []
     },
     {
       "page": "faq",
@@ -41,7 +44,8 @@
       "distinctPlaceholders": 0,
       "flags": [],
       "protectedTitles": [],
-      "clinicalClaims": []
+      "clinicalClaims": [],
+      "retired": []
     },
     {
       "page": "book",
@@ -49,7 +53,8 @@
       "distinctPlaceholders": 0,
       "flags": [],
       "protectedTitles": [],
-      "clinicalClaims": []
+      "clinicalClaims": [],
+      "retired": []
     },
     {
       "page": "contact",
@@ -57,7 +62,8 @@
       "distinctPlaceholders": 0,
       "flags": [],
       "protectedTitles": [],
-      "clinicalClaims": []
+      "clinicalClaims": [],
+      "retired": []
     },
     {
       "page": "privacy",
@@ -65,7 +71,8 @@
       "distinctPlaceholders": 0,
       "flags": [],
       "protectedTitles": [],
-      "clinicalClaims": []
+      "clinicalClaims": [],
+      "retired": []
     },
     {
       "page": "cookies",
@@ -73,7 +80,8 @@
       "distinctPlaceholders": 0,
       "flags": [],
       "protectedTitles": [],
-      "clinicalClaims": []
+      "clinicalClaims": [],
+      "retired": []
     },
     {
       "page": "404",
@@ -81,12 +89,306 @@
       "distinctPlaceholders": 0,
       "flags": [],
       "protectedTitles": [],
-      "clinicalClaims": []
+      "clinicalClaims": [],
+      "retired": []
     }
   ],
   "inventedFacts": 0,
   "protectedTitles": 0,
   "clinicalClaims": 0,
+  "retiredClaims": 0,
+  "retiredList": [
+    {
+      "claim": "That Nick got clients out of tech addiction",
+      "found": [
+        [
+          "home",
+          "For five years he has mentored students and young adults through tech addiction, and helped them out of it."
+        ],
+        [
+          "home",
+          "he has seen many people go through tech addiction, and has been able to help them get out of it."
+        ],
+        [
+          "about",
+          "For five years, Nick has helped students and young adults get out of tech addiction."
+        ],
+        [
+          "about",
+          "It has meant seeing many people go through tech addiction, and being able to help them get out of it."
+        ],
+        [
+          "mentoring",
+          "has seen many people go through tech addiction and come out of it."
+        ],
+        [
+          "mentoring",
+          "someone on your side, who has helped others through the same thing."
+        ]
+      ],
+      "fix": "Each says only that he has mentored students and young adults for five years.",
+      "pattern": "/\\bout of (it|tech)|\\b(has|have|had|been able to) help(ed)?\\b|\\bhelp(ed)? (them|others|students|young)\\b|\\bseen many people\\b|\\bthrough the same thing\\b/i",
+      "left": []
+    },
+    {
+      "claim": "That his five years of mentoring were for tech addiction",
+      "found": [
+        [
+          "home",
+          "he has mentored students and young adults through tech addiction"
+        ],
+        [
+          "about",
+          "Nick Finnemore has mentored students and young adults through tech addiction for five years (description)"
+        ]
+      ],
+      "fix": "“has mentored students and young adults for five years”; DeepRest is described separately as his tech-addiction mentoring practice.",
+      "pattern": "/\\bthrough tech addiction\\b/i",
+      "left": []
+    },
+    {
+      "claim": "That he has mentored 23 clients in all",
+      "found": [
+        [
+          "home",
+          "Clients mentored: 23 (figures panel)"
+        ],
+        [
+          "about",
+          "Clients mentored: 23 (figures panel)"
+        ],
+        [
+          "home",
+          "A 100% satisfaction rate across the 23 clients Nick has mentored."
+        ],
+        [
+          "about",
+          "Across the 23 clients he has mentored, Nick’s satisfaction rate is 100%."
+        ]
+      ],
+      "fix": "The figure is given only as he gave it: “Satisfaction rate across 23 clients: 100%”.",
+      "pattern": "/\\bclients mentored\\b|\\bclients (Nick|he) (has )?mentored\\b/i",
+      "left": []
+    },
+    {
+      "claim": "That he is young, and that being young is an advantage",
+      "found": [
+        [
+          "home",
+          "Young, and that’s the advantage (heading)"
+        ],
+        [
+          "home",
+          "He is young, and that has played to his advantage"
+        ],
+        [
+          "about",
+          "He is young, and that has played to his advantage."
+        ]
+      ],
+      "fix": "Heading “Five years of mentoring”, over the three facts.",
+      "pattern": "/\\bhe is young\\b|\\byoung, and\\b|\\badvantage\\b/i",
+      "left": []
+    },
+    {
+      "claim": "Who the practice is for",
+      "found": [
+        [
+          "home",
+          "Mentoring for students and young adults who want to break free from tech addiction (description)"
+        ],
+        [
+          "mentoring",
+          "One-to-one mentoring for students and young adults who want to break free from tech addiction (description and lead)"
+        ],
+        [
+          "mentoring",
+          "Who it’s for: DeepRest is for students and young adults who feel that their phone, games or time online have taken over more of their life than they would like"
+        ],
+        [
+          "about",
+          "set up to offer that mentoring to students and young adults who feel that tech has too much of a hold on them."
+        ],
+        [
+          "faq",
+          "Who is DeepRest for? Students and young adults who feel that tech has too much of a hold on them"
+        ],
+        [
+          "faq",
+          "Answers to common questions … who it is for (description)"
+        ],
+        [
+          "footer",
+          "Tech-addiction mentoring for students and young adults, with Nick Finnemore."
+        ]
+      ],
+      "fix": "Removed. The pages say whom he has mentored (students and young adults, for five years), not whom DeepRest is for; the footer reads “Tech-addiction mentoring with Nick Finnemore.”",
+      "pattern": "/\\bbreak free\\b|\\btaken over\\b|\\bhold on (them|you)\\b|\\bwho (it is|it’s|it's|DeepRest is) for\\b|\\bwho is DeepRest for\\b|\\bmentoring for students\\b/i",
+      "left": []
+    },
+    {
+      "claim": "How sessions are held, and what mentoring is like",
+      "found": [
+        [
+          "home",
+          "Mentoring is practical, one-to-one support from someone on your side."
+        ],
+        [
+          "mentoring",
+          "Mentoring is practical, one-to-one support from someone on your side"
+        ],
+        [
+          "mentoring",
+          "One-to-one mentoring for students and young adults (lead)"
+        ],
+        [
+          "faq",
+          "No. Mentoring is practical, one-to-one support."
+        ]
+      ],
+      "fix": "“Mentoring, not therapy”: mentoring is not therapy or medical care. How sessions are held is listed under _dropped in site.config.json.",
+      "pattern": "/\\bone-to-one\\b|\\bon your side\\b|\\bpractical(,)? (one-to-one )?support\\b/i",
+      "left": []
+    },
+    {
+      "claim": "What the five free diagnostic sessions cover",
+      "found": [
+        [
+          "home",
+          "With Nick, you look at how tech fits into your days, what it is costing you and what you would like to change, and you find out whether mentoring is right for you."
+        ],
+        [
+          "home",
+          "Over your first five sessions, which are free, you and Nick build a clear picture of your tech habits and what you want to change."
+        ],
+        [
+          "mentoring",
+          "a chance to understand your tech habits and what you want to change, and to see whether mentoring with Nick suits you."
+        ],
+        [
+          "mentoring",
+          "Over your first five sessions, you and Nick look at how tech fits into your days, what it is costing you and what you would like to change."
+        ],
+        [
+          "faq",
+          "so that you and Nick can understand your situation and decide whether mentoring is right for you."
+        ]
+      ],
+      "fix": "“Your first five sessions are free, as a diagnostic. There is nothing to pay for them.” What the diagnostic covers is listed under _dropped.",
+      "pattern": "/\\bhow tech fits\\b|\\bwhat it is costing you\\b|\\bclear picture\\b|\\bunderstand your (tech habits|situation)\\b|\\bfind out whether\\b|\\bwhether mentoring with Nick suits you\\b|\\bwhat you (want|would like) to change\\b/i",
+      "left": []
+    },
+    {
+      "claim": "What happens after the five free sessions",
+      "found": [
+        [
+          "home",
+          "After the five free sessions, you decide together whether to carry on. There is no obligation to continue."
+        ],
+        [
+          "mentoring",
+          "There is nothing to pay for them, and no obligation to continue afterwards."
+        ],
+        [
+          "mentoring",
+          "When the five free sessions are over, you decide together whether to carry on. It is your choice."
+        ],
+        [
+          "faq",
+          "What happens after the five free sessions? You and Nick decide together whether to carry on. There is no obligation to continue."
+        ]
+      ],
+      "fix": "Removed; listed under _dropped until Nick says what happens after the five free sessions.",
+      "pattern": "/\\bdecide together\\b|\\bno obligation\\b|\\bit is your choice\\b|\\bafter the five free sessions\\b|\\bcarry on\\b/i",
+      "left": []
+    },
+    {
+      "claim": "His professional background",
+      "found": [
+        [
+          "about",
+          "He is not a medical or mental health professional"
+        ],
+        [
+          "faq",
+          "Nick is not a medical or mental health professional."
+        ]
+      ],
+      "fix": "“Nick is a mentor, and mentoring is not therapy or medical care.” His background is not one of his facts.",
+      "pattern": "/\\bmental health professional\\b/i",
+      "left": []
+    },
+    {
+      "claim": "That no Meta code can reach a visitor through the site",
+      "found": [
+        [
+          "privacy",
+          "The website has no Meta code, such as Meta’s Pixel, and sends Meta nothing about your visit or your booking."
+        ],
+        [
+          "cookies",
+          "The website has no Meta code, such as Meta’s Pixel, so Meta sets no cookies through it."
+        ]
+      ],
+      "fix": "The site’s own pages have no Meta code; Calendly’s page loads Meta’s code only if the visitor accepts Calendly’s optional cookies, as both pages now say.",
+      "pattern": "/\\bMeta sets no cookies\\b|\\bThe website has no Meta code\\b/i",
+      "left": []
+    },
+    {
+      "claim": "That the booking calendar’s cookies all come from Calendly",
+      "found": [
+        [
+          "cookies",
+          "Cookies are set only if you choose to load the booking calendar, and they come from Calendly."
+        ],
+        [
+          "cookies",
+          "Once it is loaded, your browser connects to Calendly, which sets its own cookies."
+        ],
+        [
+          "privacy",
+          "If you choose to load the booking calendar, Calendly collects information about your device and sets cookies"
+        ]
+      ],
+      "fix": "Both pages name every service the calendar loads, as measured: Calendly, Cloudflare, OneTrust, Stripe, Google reCAPTCHA and Airbrake, and those that load only if Calendly’s optional cookies are accepted.",
+      "pattern": "/\\bthey come from Calendly\\.|\\bconnects to Calendly, which sets its own cookies\\b|\\bCalendly collects information about your device and sets cookies\\b/i",
+      "left": []
+    }
+  ],
+  "thirdParties": {
+    "measured": true,
+    "checked": "2026-10-23T07:42:06.782Z",
+    "unidentified": [],
+    "services": {
+      "always": {
+        "measured": 6,
+        "named": 6,
+        "missing": [],
+        "extra": []
+      },
+      "accepted": {
+        "measured": 6,
+        "named": 6,
+        "missing": [],
+        "extra": []
+      }
+    },
+    "items": {
+      "always": {
+        "measured": 11,
+        "named": 11,
+        "missing": [],
+        "extra": []
+      },
+      "accepted": {
+        "measured": 3,
+        "named": 3,
+        "missing": [],
+        "extra": []
+      }
+    },
+    "pass": true
+  },
   "headline": {
     "satisfaction": true,
     "freeDiagnostic": true,
@@ -166,7 +468,7 @@
       "source": "HTTP status of the error page"
     },
     {
-      "text": "22 October 2026",
+      "text": "23 October 2026",
       "source": "the date the privacy policy was last updated (site.config.json, privacy.lastUpdated)"
     },
     {
@@ -198,12 +500,31 @@
       "source": "UK GDPR Article 9(2)(a), explicit consent"
     },
     {
-      "text": "22 October 2026",
-      "source": "date scripts/verify/calendly.mjs recorded the Calendly cookies (src/data/calendly-cookies.json)"
+      "text": "30 minutes",
+      "source": "how long a cookie on the cookie notice lasts, from the time it had left when scripts/verify/calendly.mjs measured it (src/data/calendly-third-parties.json)"
+    },
+    {
+      "text": "1 year",
+      "source": "how long a cookie on the cookie notice lasts, from the time it had left when scripts/verify/calendly.mjs measured it (src/data/calendly-third-parties.json)"
+    },
+    {
+      "text": "13 months",
+      "source": "how long a cookie on the cookie notice lasts, from the time it had left when scripts/verify/calendly.mjs measured it (src/data/calendly-third-parties.json)"
+    },
+    {
+      "text": "23 October 2026",
+      "source": "date scripts/verify/calendly.mjs measured what the booking calendar loads (src/data/calendly-third-parties.json)"
     },
     {
       "text": "hello@deepestrest.com",
       "source": "site.config.json, practice.email (Cloudflare Email Routing to Nick)"
+    }
+  ],
+  "quotes": [
+    {
+      "text": "to improve and personalize your experience, to understand website interactions (including clicks, cursor movement and screen recordings), and for marketing",
+      "source": "Calendly’s cookie banner, inside the calendar",
+      "seenInThisRun": true
     }
   ],
   "protectedPatterns": [

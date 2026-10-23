@@ -34,12 +34,15 @@
     "url": "https://calendly.com/nicholas-finnemore/free-diagnostic"
   },
   "privacy": {
-    "lastUpdated": "22 October 2026"
+    "lastUpdated": "23 October 2026"
   },
   "_dropped": [
     { "fact": "A photograph of Nick", "use": "the About page" },
     { "fact": "Fees after the five free sessions, and how to pay", "use": "a fees section; the site says only that the first five sessions are free" },
-    { "fact": "Session length and where sessions happen", "use": "the pages; the Calendly event uses Calendly's defaults (30 minutes, Google Meet), which the booking calendar shows" },
+    { "fact": "What the five free diagnostic sessions cover", "use": "the Home and Mentoring pages and the FAQ, which say only that the first five sessions are free, as a diagnostic" },
+    { "fact": "What happens after the five free sessions", "use": "the Mentoring page and the FAQ" },
+    { "fact": "Who DeepRest is for", "use": "the Mentoring page; the site says only that Nick has mentored students and young adults for five years" },
+    { "fact": "Session length, where sessions happen and how they are held (for example, one to one)", "use": "the pages; the Calendly event uses Calendly's defaults (30 minutes, Google Meet), which the booking calendar shows" },
     { "fact": "When Nick is available", "use": "the Calendly event, which uses Calendly's default of weekdays, 9am to 5pm UK time, minus busy times in his Google Calendar" },
     { "fact": "The ages Nick works with, and whether he mentors under-18s", "use": "the Mentoring page and the privacy policy" },
     { "fact": "Nick's background beyond mentoring, such as training or qualifications", "use": "the About page" },

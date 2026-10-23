@@ -1,4 +1,6 @@
 import { emailLink } from '../lib/layout.mjs';
+import { esc } from '../lib/facts.mjs';
+import { service, thirdParties } from '../lib/third-parties.mjs';
 import { ext, pageHead } from '../lib/ui.mjs';
 
 const CALENDLY_PRIVACY = 'https://calendly.com/legal/privacy-notice';
@@ -13,12 +15,35 @@ const SECTIONS = [
   ['information', 'The information we collect'],
   ['lawful-bases', 'How we use it, and our lawful bases'],
   ['sharing', 'The services that hold it'],
+  ['booking-services', 'Services the booking calendar loads'],
   ['transfers', 'Transfers outside the UK'],
   ['retention', 'How long we keep it'],
   ['rights', 'Your rights'],
   ['complaints', 'Complaints'],
   ['changes', 'Cookies and changes to this policy'],
 ];
+
+const longDate = (iso) =>
+  new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+// The services Calendly's page loads, as measured, each marked so the verification can
+// compare the policy with what was measured.
+function bookingServices(seen, href) {
+  if (!seen) return '<p>No observation has been recorded yet.</p>';
+  const always = seen.always.services.map(service);
+  const optional = seen.optional.services.map(service);
+  return `
+      <p>The booking calendar is Calendly’s own page, shown inside ours. When you load it, Calendly’s page connects your browser to the services below, which Calendly chooses. We list what we saw when we last checked, on ${longDate(seen.checked)}, by loading the calendar and opening its booking form; Calendly can change them. Each collects your IP address and details of your browser, as any connection does, and the information described.</p>
+      <p><strong>Whatever you answer to Calendly’s cookie banner:</strong></p>
+      <ul>
+        ${always.map((s) => `<li data-third-party="${s.id}" data-when="always"><strong>${esc(s.name)}</strong>. ${esc(s.role)} It collects ${esc(s.collects)} See its ${ext(s.privacy, 'privacy policy')}.</li>`).join('\n        ')}
+      </ul>
+      <p><strong>Only if you accept Calendly’s optional cookies.</strong> Calendly’s banner says it uses optional cookies “to improve and personalize your experience, to understand website interactions (including clicks, cursor movement and screen recordings), and for marketing”. If you accept them, Calendly’s page also loads:</p>
+      <ul>
+        ${optional.map((s) => `<li data-third-party="${s.id}" data-when="accepted"><strong>${esc(s.name)}</strong>: ${esc(s.role)}</li>`).join('\n        ')}
+      </ul>
+      <p>These are Calendly’s tools, used for Calendly’s own purposes under its ${ext(CALENDLY_PRIVACY, 'privacy notice')}; DeepRest receives nothing from them. If you decline Calendly’s optional cookies, none of them was loaded when we checked. The <a href="${href('cookies')}">cookie notice</a> lists what each service stores on your device.</p>`;
+}
 
 // Keeps legal references such as 6(1)(b) or 9(2)(a) on one line.
 const keepRefsTogether = (html) => html.replace(/\b(\d\(\d\)\([a-z]\))/g, '<span class="nowrap">$1</span>');
@@ -30,9 +55,10 @@ export default {
   description: () =>
     'How DeepRest collects, uses and protects personal information when you visit the website, book a session or get in touch, and your rights under UK data protection law.',
   main: (ctx) => {
-    const { F, href } = ctx;
+    const { F, href, site } = ctx;
     const nick = F.text('mentor.firstName');
     const email = emailLink(F, false);
+    const seen = thirdParties(new URL(site.url).hostname);
     return keepRefsTogether(`
 ${pageHead({
   eyebrow: 'Privacy',
@@ -60,8 +86,8 @@ ${pageHead({
         <li><strong>When you book.</strong> Bookings are made through Calendly. It collects your name and email address, the session and time you choose, your time zone, anything you write in answer to the booking form’s optional question (“Please share anything that will help prepare for our meeting.”), and the email address of any guest you add. If you cancel or move a session, Calendly also records that, and any reason you give.</li>
         <li><strong>Your session.</strong> Calendly adds the booking to ${nick}’s Google Calendar, and creates the Google Meet video call link for the session, which Google provides.</li>
         <li><strong>When you email us.</strong> Your email address and what you write. Email sent to ${email} passes through Cloudflare, which forwards it to ${nick}’s Google email account.</li>
-        <li><strong>When you visit this website.</strong> The website uses no analytics and sets no cookies of its own. It is hosted on GitHub Pages, which logs the IP address of every visitor for security purposes. If you choose to load the booking calendar, Calendly collects information about your device and sets cookies, as the <a href="${href('cookies')}">cookie notice</a> explains.</li>
-        <li><strong>If you come from one of our adverts.</strong> A link in one of our adverts on Facebook or Instagram adds tags to the web address that name the platform and the advert, such as <code>utm_source=ig</code> and <code>utm_content=ad_b</code>. The tags say nothing about you. The website keeps them in its links as you move between pages, and passes them to Calendly if you book, which records them with your booking. That lets us see which adverts lead to bookings. The website has no Meta code, such as Meta’s Pixel, and sends Meta nothing about your visit or your booking. What Meta collects when you see or tap an advert on its apps is covered by ${ext(META_PRIVACY, 'Meta’s Privacy Policy')}.</li>
+        <li><strong>When you visit this website.</strong> The website uses no analytics and sets no cookies of its own. It is hosted on GitHub Pages, which logs the IP address of every visitor for security purposes. If you choose to load the booking calendar, Calendly and the services its page uses collect information about your device and store cookies and other items on it, as <a href="#booking-services">Services the booking calendar loads</a> and the <a href="${href('cookies')}">cookie notice</a> explain.</li>
+        <li><strong>If you come from one of our adverts.</strong> A link in one of our adverts on Facebook or Instagram adds tags to the web address that name the platform and the advert, such as <code>utm_source=ig</code> and <code>utm_content=ad_b</code>. The tags say nothing about you. The website keeps them in its links as you move between pages, and passes them to Calendly if you book, which records them with your booking. That lets us see which adverts lead to bookings. This website’s own pages have no Meta code, such as Meta’s Pixel, and send Meta nothing about your visit or your booking. Inside the booking calendar, Calendly’s page loads Meta’s code only if you accept Calendly’s optional cookies (see <a href="#booking-services">Services the booking calendar loads</a>). What Meta collects when you see or tap an advert on its apps is covered by ${ext(META_PRIVACY, 'Meta’s Privacy Policy')}.</li>
       </ul>
       <p>We don’t ask for information about your health. If you choose to tell us about it, for example in the booking form or in a session, we handle it with the extra care the law requires for health information.</p>
 
@@ -77,7 +103,7 @@ ${pageHead({
             <tr><th scope="row" data-label="Purpose">Arranging and holding the sessions you book, and sending you what you need for them</th><td data-label="Lawful basis">Providing the mentoring you ask for: Article 6(1)(b)</td></tr>
             <tr><th scope="row" data-label="Purpose">Replying to your emails</th><td data-label="Lawful basis">Our legitimate interest in answering the questions people send us: Article 6(1)(f)</td></tr>
             <tr><th scope="row" data-label="Purpose">Using any health information you choose to share, only to mentor you</th><td data-label="Lawful basis">Providing the mentoring you ask for: Article 6(1)(b); and your explicit consent, which you can withdraw at any time: Article 9(2)(a)</td></tr>
-            <tr><th scope="row" data-label="Purpose">Loading the Calendly booking calendar, and the cookies Calendly then sets</th><td data-label="Lawful basis">Your consent, given when you choose to load it: Article 6(1)(a)</td></tr>
+            <tr><th scope="row" data-label="Purpose">Loading the Calendly booking calendar, and the cookies and other items Calendly and the services its page uses then store</th><td data-label="Lawful basis">Your consent, given when you choose to load it: Article 6(1)(a)</td></tr>
             <tr><th scope="row" data-label="Purpose">Recording which advert led to a booking, from the tags in the advert’s link</th><td data-label="Lawful basis">Our legitimate interest in knowing which adverts help people find us, so that we spend only on those: Article 6(1)(f)</td></tr>
             <tr><th scope="row" data-label="Purpose">Sharing information where the law requires it, or to protect you or someone else from serious harm</th><td data-label="Lawful basis">Legal obligation, or vital interests: Article 6(1)(c) or 6(1)(d)</td></tr>
             <tr><th scope="row" data-label="Purpose">Keeping the website secure (GitHub’s logs)</th><td data-label="Lawful basis">Legitimate interests in keeping the website safe and available: Article 6(1)(f)</td></tr>
@@ -96,8 +122,12 @@ ${pageHead({
       </ul>
       <p>We share your information with anyone else only if the law requires it, or if it is needed to protect you or someone else from serious harm.</p>
 
+      <h2 id="booking-services">Services the booking calendar loads</h2>
+      ${bookingServices(seen, href)}
+
       <h2 id="transfers">Transfers outside the UK</h2>
       <p>Calendly, Google, Cloudflare and GitHub are based in the United States. Each states that it complies with the UK Extension to the EU-U.S. Data Privacy Framework, under which UK law regards personal data sent to certified US organisations as adequately protected.</p>
+      <p>The other services Calendly’s page loads are Calendly’s choice. Their own privacy policies, linked above, explain where they hold information and how they protect it.</p>
 
       <h2 id="retention">How long we keep it</h2>
       <p>We keep booking details and emails only for as long as we need them to mentor you and to deal with any questions afterwards, and then delete them. You can ask us to delete your information sooner.</p>
