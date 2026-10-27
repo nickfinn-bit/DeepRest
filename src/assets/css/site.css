@@ -641,6 +641,14 @@ code {
   padding: 0.8rem;
 }
 
+/* Beside the About text the side card is narrow, so its figures stack and each label has
+   the card's width. */
+@media (min-width: 48rem) {
+  .figures-compact {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .figures-note {
   margin: 1rem 0 0;
   color: var(--muted);
@@ -967,6 +975,57 @@ code {
 @media (min-width: 48rem) {
   .doc-table code {
     white-space: nowrap;
+  }
+}
+
+/* Five-column tables (the cookie lists) may run past the text column, up to 64rem, so their
+   cells are not squeezed to a word a line; below 60rem their rows stack, as on phones. */
+@media (min-width: 60rem) {
+  .table-wrap-wide {
+    width: min(64rem, calc(100vw - 2 * var(--gutter) - 1rem));
+  }
+}
+
+@media (min-width: 48rem) and (max-width: 59.99rem) {
+  .doc-table-wide thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+  }
+
+  .doc-table-wide tbody,
+  .doc-table-wide tr,
+  .doc-table-wide th,
+  .doc-table-wide td {
+    display: block;
+  }
+
+  .doc-table-wide tr {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .doc-table-wide tr:last-child {
+    border-bottom: 0;
+  }
+
+  .doc-table-wide th,
+  .doc-table-wide td {
+    padding: 0.3rem 0;
+    border: 0;
+  }
+
+  .doc-table-wide [data-label]::before {
+    content: attr(data-label);
+    display: block;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 }
 

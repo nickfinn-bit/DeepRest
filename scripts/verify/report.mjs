@@ -85,6 +85,8 @@ const LIMITS = [
   'No booking was submitted, so no session was booked in Nick\'s calendar and Calendly\'s confirmation step and emails were not exercised.',
   'No email was sent to hello@deepestrest.com, since nothing is sent outside this machine without Nick\'s yes: the routing rule and DNS records were checked, delivery was not.',
   'Lighthouse scores vary from run to run and from machine to machine; the table gives the lowest score of every run as well as the median.',
+  'Results whose time is "not recorded" were written before result files carried their time. The Lighthouse, PageSpeed Insights and PDF results in this report are from 23 October 2026, against the pages of commit 3d3382e; they were not re-run for the changes of 27 October, which change text and line breaking only.',
+  'The human-speed pass\'s captures were looked at by the agent and by subagents it briefed, one width each; every defect reported was opened again and checked by the agent. Nick has not looked at them.',
   'The privacy policy and cookie notice were drafted for UK GDPR and PECR from the sources above. They have not been reviewed by a lawyer, and Nick, as data controller, should check them against how he handles bookings and emails (PLACEHOLDERS.md lists the wording to check).',
 ];
 
@@ -170,6 +172,11 @@ out(
   row(human, `| Human-speed pass: every page at every width scrolled at reading speed, every capture looked at (${where(human)}) | ${PAGES.length * WIDTHS.length} page-widths; defects left 0 | ${yes(human && review && human.pageWidths === PAGES.length * WIDTHS.length && review.captures === human.captures && review.defectsLeft === 0)} ${human?.pageWidths} page-widths and ${human ? human.runs.length - human.pageWidths : 0} opened states at ${human?.speed} px a second, ${human?.captures} captures, ${review ? `${review.captures} looked at; defects found ${review.defects.length}, left **${review.defectsLeft}**` : 'not yet looked at'} |`),
   row(facts, `| Outside services the privacy policy names, and items the cookie notice lists, against those measured (${where(cal)}) | equal | ${tp?.measured ? `${yes(tp.pass)} services ${tp.services.always.named + tp.services.accepted.named} named, ${tp.services.always.measured + tp.services.accepted.measured} measured; items ${tp.items.always.named + tp.items.accepted.named} listed, ${tp.items.always.measured + tp.items.accepted.measured} measured; missing ${['services', 'items'].reduce((n, k) => n + tp[k].always.missing.length + tp[k].accepted.missing.length, 0)}, extra ${['services', 'items'].reduce((n, k) => n + tp[k].always.extra.length + tp[k].accepted.extra.length, 0)}` : '❌ not measured'} |`),
   row(facts, `| Home page: headline figures and the free-diagnostic offer | shown | ${yes(facts?.headline && Object.values(facts.headline).every(Boolean))} ${config.mentor.satisfaction} satisfaction across ${config.mentor.clients} clients; five years; "Your first five sessions are free, as a diagnostic" |`),
+  '',
+  `When each result was written (UTC): ${[['hosting', hosting], ['Calendly', cal], ['layout', layoutFile], ['HTML validator', html], ['links', links], ['punctuation', typo], ['facts', facts], ['strict build', ready], ['Lighthouse', lh], ['PageSpeed Insights', psi], ['human-speed pass', human]]
+    .filter(([, d]) => d)
+    .map(([n, d]) => `${n} ${d.writtenAt ? d.writtenAt.slice(0, 16).replace('T', ' ') : 'time not recorded'}`)
+    .join('; ')}.`,
   '',
 );
 

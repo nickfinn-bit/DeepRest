@@ -66,7 +66,7 @@ export default {
 ${pageHead({
   eyebrow: 'Privacy',
   title: 'Privacy policy',
-  lead: 'How DeepRest collects, uses and protects your personal information, and your rights under UK data protection law: the UK GDPR and the Data Protection Act 2018.',
+  lead: 'How DeepRest collects, uses and protects your personal information, and your rights under UK data protection law: the UK GDPR and the Data Protection Act&nbsp;2018.',
 })}
 
 <div class="section">
@@ -109,7 +109,7 @@ ${pageHead({
             <tr><th scope="row" data-label="Purpose">Loading the Calendly booking calendar, and the cookies and other items Calendly and the services its page uses then store</th><td data-label="Lawful basis">Your consent, given when you choose to load it: Article 6(1)(a)</td></tr>
             <tr><th scope="row" data-label="Purpose">Recording which advert led to a booking, from the tags in the advert’s link</th><td data-label="Lawful basis">Our legitimate interest in knowing which adverts help people find us, so that we spend only on those: Article 6(1)(f)</td></tr>
             <tr><th scope="row" data-label="Purpose">Sharing information where the law requires it, or to protect you or someone else from serious harm</th><td data-label="Lawful basis">Legal obligation, or vital interests: Article 6(1)(c) or 6(1)(d)</td></tr>
-            <tr><th scope="row" data-label="Purpose">Keeping the website secure (GitHub’s logs)</th><td data-label="Lawful basis">Legitimate interests in keeping the website safe and available: Article 6(1)(f)</td></tr>
+            <tr><th scope="row" data-label="Purpose">Keeping the website secure (GitHub’s logs)</th><td data-label="Lawful basis">Our legitimate interest in keeping the website safe and available: Article 6(1)(f)</td></tr>
           </tbody>
         </table>
       </div>

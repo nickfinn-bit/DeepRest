@@ -15,8 +15,8 @@ const owner = (id) => service(id).name.replace(/,? (LLC|Inc\.)$/, '').replace(/ 
 // verification can compare the page with what was measured.
 function itemTable(items, caption, when) {
   return `
-      <div class="table-wrap">
-        <table class="doc-table">
+      <div class="table-wrap table-wrap-wide">
+        <table class="doc-table doc-table-wide">
           <caption class="visually-hidden">${caption}</caption>
           <thead><tr><th scope="col">Name</th><th scope="col">Kept as</th><th scope="col">Belongs to</th><th scope="col">What it is for</th><th scope="col">How long it lasts</th></tr></thead>
           <tbody>

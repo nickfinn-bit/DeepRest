@@ -48,11 +48,11 @@ export async function pageHtml(p) {
   return fs.readFileSync(p.slug === '404' ? path.join(DIST, '404.html') : path.join(DIST, p.path, 'index.html'), 'utf8');
 }
 
-// Every result file records where it was tested; a list of results goes under "results".
+// Every result file records where and when it was tested; a list of results goes under "results".
 export function writeJson(name, data) {
   fs.mkdirSync(OUT, { recursive: true });
   const body = Array.isArray(data) ? { results: data } : data;
-  fs.writeFileSync(path.join(OUT, name), `${JSON.stringify({ testedAt: BASE, live: LIVE, ...body }, null, 2)}\n`);
+  fs.writeFileSync(path.join(OUT, name), `${JSON.stringify({ testedAt: BASE, live: LIVE, writtenAt: new Date().toISOString(), ...body }, null, 2)}\n`);
 }
 
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

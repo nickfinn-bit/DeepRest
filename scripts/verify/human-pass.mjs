@@ -62,7 +62,13 @@ async function pass(page, name) {
 
 const press = (page, selector, touch) => (touch ? page.tap(selector) : page.click(selector));
 
-fs.rmSync(SHOTS, { recursive: true, force: true });
+// A full pass replaces every capture; a pass of some pages or widths replaces only theirs.
+if (!arg('pages') && !arg('widths')) fs.rmSync(SHOTS, { recursive: true, force: true });
+else {
+  for (const f of fs.existsSync(SHOTS) ? fs.readdirSync(SHOTS) : []) {
+    if (pages.some((p) => f.startsWith(`${p.slug}-`)) && widths.some((w) => f.includes(`-${w}-`))) fs.rmSync(path.join(SHOTS, f));
+  }
+}
 fs.mkdirSync(SHOTS, { recursive: true });
 const browser = await puppeteer.launch();
 console.log(`Chrome ${await browser.version()} (pid ${browser.process()?.pid})`);
