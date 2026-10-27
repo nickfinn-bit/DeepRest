@@ -1,7 +1,7 @@
 # DeepRest website: verification report
 
-Written by `scripts/verify/report.mjs` (the last step of `npm run verify`) on 2026-10-27 08:48 UTC, from the JSON results each check left in this folder.
-The site was tested as built in `dist/`, served locally the way GitHub Pages serves it (`scripts/serve.mjs`, at http://localhost:4173/).
+Written by `scripts/verify/report.mjs` (the last step of `npm run verify`) on 2026-10-27 09:55 UTC, from the JSON results each check left in this folder.
+Every check below ran against the **live site, https://deepestrest.com/**, served by GitHub Pages under Nick's domain; the hosting check also confirmed that each live page is byte-for-byte the page built from this commit.
 
 ## Summary
 
@@ -10,7 +10,7 @@ The site was tested as built in `dist/`, served locally the way GitHub Pages ser
 | Hosting: DNS, HTTPS, redirects, every page live and identical to the build | all pass | ✅ 22/22 |
 | Lighthouse, mobile and desktop, 9 pages (live) | 95+ in Performance, Accessibility, Best Practices and SEO | ✅ 18/18 pass in every run; lowest score in any of 3 runs: **96**; 2 re-run after 2 failed attempts, shown below |
 | PageSpeed Insights (Lighthouse on Google's servers), mobile and desktop, 9 pages (live) | 95+ in all four categories | ✅ 9/9 pages; lowest score: **99** |
-| Horizontal scroll, 7 widths × 9 pages (local) | 0 | ✅ largest: **0 px** over 63 page-widths |
+| Horizontal scroll, 7 widths × 9 pages (live) | 0 | ✅ largest: **0 px** over 63 page-widths |
 | Layout shift during load | under 0.1 | ✅ largest: **0.0000**; with the Calendly calendar auto-loading: 0.0000 |
 | Layout faults: text cut off or overlapping, elements past the screen edge | 0 | ✅ **0**: 0 cut, 0 overlapping, 0 past the edge |
 | Booking frame before the visitor chooses to load Calendly: tallest empty band (blank in all) | no band over 80 px | ✅ 360: **41 px** (146 of 539); 390: **41 px** (146 of 488); 768: **56 px** (178 of 450); 1024: **66 px** (201 of 507); 1280: **73 px** (215 of 521); 1440: **73 px** (215 of 521); 1920: **73 px** (215 of 521) |
@@ -26,10 +26,12 @@ The site was tested as built in `dist/`, served locally the way GitHub Pages ser
 | Invented facts | 0 | ✅ **0** unexplained figures or contact details |
 | Claims beyond Nick's three facts, of the kinds found and removed | 0 | ✅ **0** left on the pages; 13 kinds were found in 50 places, listed below by page with their fixes |
 | Claims beyond his three facts in the booking calendar (the Calendly event's description, local) | 0 | ✅ **0**: “DeepRest mentoring with Nick Finnemore. Your first five sessions are free, as a diagnostic. Book one session at a time here.” |
-| Punctuation and spacing slips (local) | 0 | ✅ **0** on 9 pages and in site.js's messages; self-test: passes (27 made-up cases; the old live privacy policy's “Cloudflare, Inc..” caught) |
+| Punctuation and spacing slips (live) | 0 | ✅ **0** on 9 pages and in site.js's messages; self-test: passes (27 made-up cases; the old live privacy policy's “Cloudflare, Inc..” caught) |
 | Human-speed pass: every page at every width scrolled at reading speed, every capture looked at () | 63 page-widths; defects left 0 | not run |
 | Outside services the privacy policy names, and items the cookie notice lists, against those measured (local) | equal | ✅ services 12 named, 12 measured; items 14 listed, 14 measured; missing 0, extra 0 |
 | Home page: headline figures and the free-diagnostic offer | shown | ✅ 100% satisfaction across 23 clients; five years; "Your first five sessions are free, as a diagnostic" |
+
+When each result was written (UTC): hosting 2026-10-27 09:54; Calendly time not recorded; layout time not recorded; HTML validator 2026-10-27 09:29; links 2026-10-27 09:29; punctuation 2026-10-27 09:54; facts 2026-10-27 09:54; strict build time not recorded; Lighthouse time not recorded; PageSpeed Insights time not recorded.
 
 ## Hosting
 
@@ -37,7 +39,7 @@ Checked from this machine against https://deepestrest.com/, with DNS asked of 1.
 
 | Check | Result | Detail |
 |---|---|---|
-| deepestrest.com A records are GitHub Pages' | ✅ | `["185.199.110.153","185.199.111.153","185.199.108.153","185.199.109.153"]` |
+| deepestrest.com A records are GitHub Pages' | ✅ | `["185.199.111.153","185.199.110.153","185.199.108.153","185.199.109.153"]` |
 | deepestrest.com AAAA records are GitHub Pages' | ✅ | `["2606:50c0:8002::153","2606:50c0:8001::153","2606:50c0:8000::153","2606:50c0:8003::153"]` |
 | www.deepestrest.com is a CNAME to nickfinn-bit.github.io | ✅ | `["nickfinn-bit.github.io"]` |
 | deepestrest.com MX records are Cloudflare Email Routing's | ✅ | `[{"exchange":"route2.mx.cloudflare.net","priority":20,"type":"MX"},{"exchange":"route3.mx.cloudflare.net","priority":35,"type":"MX"},{"exchange":"route1.mx.cloudflare.net","priority":6,"type":"MX"}]` |
@@ -177,7 +179,7 @@ The 404 page was audited at `404.html`, the same file served with status 200: Li
 
 ## Layout at every width
 
-Each page was loaded fresh at each width from http://localhost:4173/ (360, 390 and 768 px emulated as touch phones and tablets; 1,024 px and up as desktops). After the page settled, the check measured: horizontal scroll (document width minus window width); layout shift, by adding up every `layout-shift` entry from the start of loading; every element reaching past the screen edge; every line of text clipped by the screen or by a box that hides overflow; and every pair of text lines covering each other. The FAQ was checked again with every answer open.
+Each page was loaded fresh at each width from https://deepestrest.com/ (360, 390 and 768 px emulated as touch phones and tablets; 1,024 px and up as desktops). After the page settled, the check measured: horizontal scroll (document width minus window width); layout shift, by adding up every `layout-shift` entry from the start of loading; every element reaching past the screen edge; every line of text clipped by the screen or by a box that hides overflow; and every pair of text lines covering each other. The FAQ was checked again with every answer open.
 
 | Page | 360 | 390 | 768 | 1024 | 1280 | 1440 | 1920 |
 |---|---|---|---|---|---|---|---|
@@ -445,7 +447,7 @@ Each kind of claim, its fix, and the pattern the facts check searches for, in ev
 | Where sessions happen | The booking flow does not name where sessions happen: on the calendar and the details form, Calendly shows only “Web conferencing details provided upon confirmation.” (calendly.mjs records it). The privacy policy now refers to “the web-conferencing service whose details come with your booking confirmation”; where sessions happen is listed under _dropped. | `/\bGoogle Meet\b\|\bZoom\b\|\bMicrosoft Teams\b\|\bvideo calls?\b\|\bin person\b\|\bface[- ]to[- ]face\b\|\bonline sessions?\b/i` | ✅ 0 |
 | That visitors commonly ask these questions | “Answers to questions about mentoring at DeepRest”. | `/\bcommon(ly asked)? questions\b\|\bfrequently asked\b\|\bpeople (often\|usually) ask\b/i` | ✅ 0 |
 
-**Outside services and stored items: named on the pages against measured.** The privacy policy's services and the cookie notice's rows, read from the built pages, against the Calendly check's measurement of 2026-10-27T08:41:00.863Z (above). ✅
+**Outside services and stored items: named on the pages against measured.** The privacy policy's services and the cookie notice's rows, read from the live pages, against the Calendly check's measurement of 2026-10-27T08:41:00.863Z (above). ✅
 
 | What | When | Measured | Named | Missing from the page | On the page but not measured |
 |---|---|---|---|---|---|
@@ -472,7 +474,7 @@ Read by the Calendly check at 1,440 px on 2026-10-27T08:40:48.074Z, on the calen
 
 ## Punctuation and spacing
 
-`scripts/verify/typography.mjs` reads every page in dist/, block by block, as a reader meets it (its visible text, the text read to screen readers, its title, description and sharing tags), and the messages site.js writes into the pages. It looks for ".." outside an ellipsis, a space before a comma, full stop, colon, semicolon, question or exclamation mark, doubled punctuation, no space after a comma, semicolon or full stop, two spaces inside a line of the HTML, a word twice in a row, brackets or curly quotes not in pairs, and straight quotes. Cookie names and other code are left out. Slips: **0**.
+`scripts/verify/typography.mjs` reads every page as served by https://deepestrest.com/, block by block, as a reader meets it (its visible text, the text read to screen readers, its title, description and sharing tags), and the messages site.js writes into the pages. It looks for ".." outside an ellipsis, a space before a comma, full stop, colon, semicolon, question or exclamation mark, doubled punctuation, no space after a comma, semicolon or full stop, two spaces inside a line of the HTML, a word twice in a row, brackets or curly quotes not in pairs, and straight quotes. Cookie names and other code are left out. Slips: **0**.
 
 | Page | Slips |
 |---|---|
@@ -533,6 +535,13 @@ Made with Chrome's print-to-PDF (Puppeteer `page.pdf`) at a desktop width of 1,4
 - The pattern for kind 11 (the calendar's cookies all from Calendly) matched only the three wordings it was written from, so the FAQ's "because Calendly sets its own cookies" passed the facts check and stayed live. The kind now matches Calendly alone as the source of cookies in any of the usual wordings, and the other kinds were widened the same way; the self-test runs every pattern against the live pages as they were.
 - The facts check read only the site's own pages, so the Calendly event's description, shown inside the booking calendar, said whom the practice is for without any check noticing. The Calendly check now reads it from the booking flow, and the facts check holds it to the same rules.
 - The first version of the punctuation check flagged "Inc.," and "Inc.:" (an abbreviation's full stop, then the sentence's comma or colon) as doubled punctuation, 4 false alarms in the old live pages; abbreviations are now allowed there, and the self-test has both as clean cases. It then still flagged them, because a Python edit through the shell had turned the pattern's `\b` into a backspace character; the escapes were put back with a Node script, and edits with backslashes are made in the editor or from a file.
+- The first local Calendly run of 27 October recorded accepting Calendly's optional cookies as done ("banner true") although OneTrust never set its OptanonAlertBoxClosed cookie: the press had not registered, so no extra service loaded and the measurement said accepting adds nothing. That measurement was not used. The check now presses again until OneTrust records the answer, and the re-run found the same 8 extra hosts as on 23 October.
+- The fresh measurement gave Cloudflare's 30-minute cookie as "29 minutes", from the 1,769 seconds it had left when read. Lifetimes under two hours are now given to the nearest 5 minutes.
+- A scripted edit that marked the claims found on 27 October put the date on an older entry instead of the contact page's, because the search for the entry's end ran past it. Reading the by-page table showed it; it was corrected by hand.
+- Starting the publish workflow from GitHub's "Run workflow" dialog with a mouse click in Nick's Chrome started nothing (GitHub's list of runs did not change); pressing the dialog's button with element.click() in the page started run #5.
+- The first human-speed pass, on commit 09bc62c, was stopped after its 360 px captures: those already showed four defects, and fixing them and passing the whole site again was quicker than finishing a pass whose captures would be replaced. Two later passes followed, on 1bbdf06 and on the final commit.
+- The first two subagents briefed to look at the captures stopped on an account usage limit before reporting anything; they could not be resumed after the session moved to another account, and fresh ones were started with the same brief.
+- Keeping each external link's last word with its icon still left that word alone on the last line at some widths ("Policy ↗."). That is ordinary wrapping, as is a paragraph whose last line holds one word; the reviewers listed these, and they were left as they are.
 - Searching the whole disk for the previous turn's `retired-test.mjs` ran past two minutes and was stopped; the file was in `.private/scratch`, outside the repository, and read files that are not kept. Its test is now `node scripts/verify/facts.mjs --self-test`, against pages saved in the repository.
 
 ## Limits of these checks
@@ -544,5 +553,7 @@ Made with Chrome's print-to-PDF (Puppeteer `page.pdf`) at a desktop width of 1,4
 - No booking was submitted, so no session was booked in Nick's calendar and Calendly's confirmation step and emails were not exercised.
 - No email was sent to hello@deepestrest.com, since nothing is sent outside this machine without Nick's yes: the routing rule and DNS records were checked, delivery was not.
 - Lighthouse scores vary from run to run and from machine to machine; the table gives the lowest score of every run as well as the median.
+- Results whose time is "not recorded" were written before result files carried their time. The Lighthouse, PageSpeed Insights and PDF results in this report are from 23 October 2026, against the pages of commit 3d3382e; they were not re-run for the changes of 27 October, which change text and line breaking only.
+- The human-speed pass's captures were looked at by the agent and by subagents it briefed, one width each; every defect reported was opened again and checked by the agent. Nick has not looked at them.
 - The privacy policy and cookie notice were drafted for UK GDPR and PECR from the sources above. They have not been reviewed by a lawyer, and Nick, as data controller, should check them against how he handles bookings and emails (PLACEHOLDERS.md lists the wording to check).
 

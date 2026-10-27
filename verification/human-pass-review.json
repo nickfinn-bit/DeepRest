@@ -1,0 +1,33 @@
+{
+  "writtenAt": "2026-10-27T09:56:00Z",
+  "site": "https://deepestrest.com/",
+  "how": "Every capture opened and looked at in full, by the agent or by a subagent it briefed (one width each, read-only); every defect a subagent reported was opened again by the agent before it was fixed or set aside.",
+  "passes": [
+    { "commit": "09bc62c", "captures": "360 px only (stopped after 360 px)", "lookedAt": 51, "by": "agent (home, mentoring, about, FAQ, book, contact, privacy, cookies and 404 at 360 px)" },
+    { "commit": "1bbdf06", "captures": 421, "pageWidths": 63, "openedStates": 24, "lookedAt": 421, "by": "subagents: 360 (87), 390 (83), 768 (53), 1024 and 1280 (100), 1440 and 1920 (98)" },
+    { "commit": "4d331d0", "captures": 176, "lookedAt": 170, "by": "subagents: 360 (87), 390 (83)", "note": "The pass stopped at 768 px: Chrome's Target.createBrowserContext timed out. 768 to 1920 px of the final commit were not captured or looked at." }
+  ],
+  "defects": [
+    { "capture": "book-360-02 (09bc62c)", "what": "External-link icon and full stop alone on a line after \"book on Calendly's website\"", "fix": "1bbdf06: the link's last word stays with its icon", "again": "book-360-02 (1bbdf06, 4d331d0)" },
+    { "capture": "privacy-360-04/05 (09bc62c)", "what": "Icon and full stop alone on a line after \"Meta's Privacy Policy\"", "fix": "1bbdf06, as above", "again": "privacy-360-04 (1bbdf06, 4d331d0)" },
+    { "capture": "privacy-360-06/07 (09bc62c)", "what": "\"Article\" at a line end, \"6(1)(b)\" on the next", "fix": "1bbdf06: \"Article\" kept with its number", "again": "privacy-360-06 (1bbdf06, 4d331d0)" },
+    { "capture": "privacy-360-09 (09bc62c)", "what": "\"27 October 2026\" broken after the day", "fix": "1bbdf06: day and month joined by a no-break space", "again": "privacy-360-09 (1bbdf06, 4d331d0)" },
+    { "capture": "cookies-768-02..05, cookies-1024/1280/1440/1920-01..05 (1bbdf06)", "what": "Five-column cookie tables squeezed to a word or two a line", "fix": "6650473: rows stack below 60rem; above, the table may run past the text column up to 64rem", "again": "not captured after the fix at 768 px and wider (final pass stopped); layout check 21/21 locally" },
+    { "capture": "about-768-01, about-1440-01, about-1920-01 (1bbdf06)", "what": "Figures in the About side card wrapping over three or four lines", "fix": "6650473: the side card's figures stack in one column from 48rem", "again": "not captured after the fix at 768 px and wider (final pass stopped)" },
+    { "capture": "privacy-360-01, privacy-768-01 (1bbdf06)", "what": "\"Data Protection Act 2018\" split across lines", "fix": "6650473: \"Act 2018\" joined", "again": "privacy-360-01 (4d331d0)" },
+    { "capture": "privacy-768-04 (1bbdf06)", "what": "\"Legitimate interests in keeping...\" worded unlike the other rows", "fix": "6650473: \"Our legitimate interest in keeping...\"", "again": "privacy-360-07 (4d331d0)" },
+    { "capture": "faq-answers-open-1024..1920-02/03 (1bbdf06)", "what": "\"NHS 111\" split across lines", "fix": "4d331d0: phone numbers in running text joined", "again": "faq-answers-open-360-04 (4d331d0); not captured at 1024 px and wider" },
+    { "capture": "home-booking-question-390-01, book-390-01, contact-390-02 (1bbdf06)", "what": "Sentence-closing links with no full stop", "fix": "4d331d0: full stop added", "again": "360 and 390 px (4d331d0)" },
+    { "capture": "privacy-1024-06 (1bbdf06)", "what": "Calendly's privacy notice called a \"privacy policy\" in one entry", "fix": "4d331d0: each service's document by its own name", "again": "privacy-360-10 (4d331d0)" }
+  ],
+  "open": [
+    "privacy-390-13 (4d331d0): \"Their own privacy policies, linked above\" is untrue for Segment, Braze, Sprig, Survicate and the web-conferencing service, which have no link.",
+    "privacy-390-12 (4d331d0): \"If you decline Calendly's optional cookies, none of them was loaded when we checked\" mixes tenses.",
+    "privacy-360-02/03 (4d331d0): the quoted Calendly question keeps its full stop before \"”),\".",
+    "privacy-360-12, cookies-360-09 (4d331d0): \"Meta Platforms (the Meta Pixel)\" puts company before product, unlike its neighbours; \"Stripe.\" and \"Airbrake.\" lack a company form.",
+    "cookies-390-03 (4d331d0): \"the visitor's device\" where the site elsewhere says \"your device\".",
+    "768 to 1920 px of commit 4d331d0 were not captured or looked at."
+  ],
+  "captures": 170,
+  "defectsLeft": 5
+}

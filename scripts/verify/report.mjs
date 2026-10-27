@@ -57,6 +57,9 @@ const FAILED = [
   'The fresh measurement gave Cloudflare\'s 30-minute cookie as "29 minutes", from the 1,769 seconds it had left when read. Lifetimes under two hours are now given to the nearest 5 minutes.',
   'A scripted edit that marked the claims found on 27 October put the date on an older entry instead of the contact page\'s, because the search for the entry\'s end ran past it. Reading the by-page table showed it; it was corrected by hand.',
   'Starting the publish workflow from GitHub\'s "Run workflow" dialog with a mouse click in Nick\'s Chrome started nothing (GitHub\'s list of runs did not change); pressing the dialog\'s button with element.click() in the page started run #5.',
+  'The first human-speed pass, on commit 09bc62c, was stopped after its 360 px captures: those already showed four defects, and fixing them and passing the whole site again was quicker than finishing a pass whose captures would be replaced. Two later passes followed, on 1bbdf06 and on the final commit.',
+  'The first two subagents briefed to look at the captures stopped on an account usage limit before reporting anything; they could not be resumed after the session moved to another account, and fresh ones were started with the same brief.',
+  'Keeping each external link\'s last word with its icon still left that word alone on the last line at some widths ("Policy ↗."). That is ordinary wrapping, as is a paragraph whose last line holds one word; the reviewers listed these, and they were left as they are.',
   'Searching the whole disk for the previous turn\'s `retired-test.mjs` ran past two minutes and was stopped; the file was in `.private/scratch`, outside the repository, and read files that are not kept. Its test is now `node scripts/verify/facts.mjs --self-test`, against pages saved in the repository.',
 ];
 
