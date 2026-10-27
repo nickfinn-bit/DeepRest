@@ -14,9 +14,15 @@ export const pageHead = ({ eyebrow, title, lead }) => `
   </div>
 </div>`;
 
-// An external link, marked as such for every reader.
-export const ext = (url, text) =>
-  `<a href="${url}" rel="noopener">${text}${icons.external}<span class="visually-hidden"> (external site)</span></a>`;
+// An external link, marked as such for every reader. Its last word and the icon stay on one
+// line, so the icon never starts a line on its own.
+export const ext = (url, text) => {
+  const i = text.lastIndexOf(' ');
+  return `<a href="${url}" rel="noopener">${text.slice(0, i + 1)}<span class="nowrap">${text.slice(i + 1)}${icons.external}</span><span class="visually-hidden"> (external site)</span></a>`;
+};
+
+// A date such as "27 October 2026" that never breaks between the day and the month.
+export const keepDate = (date) => date.replace(/^(\d{1,2}) /, '$1&nbsp;');
 
 export const notice = (kind, title, body, icon = icons.info) => `
 <div class="notice notice-${kind}">

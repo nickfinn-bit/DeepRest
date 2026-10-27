@@ -1,7 +1,7 @@
 import { CONSENT_KEY } from '../lib/layout.mjs';
 import { esc } from '../lib/facts.mjs';
 import { service, thirdParties } from '../lib/third-parties.mjs';
-import { ext, pageHead } from '../lib/ui.mjs';
+import { ext, keepDate, pageHead } from '../lib/ui.mjs';
 
 const CALENDLY_PRIVACY = 'https://calendly.com/legal/privacy-notice';
 
@@ -42,7 +42,7 @@ export default {
     const seen = thirdParties(new URL(site.url).hostname);
     const measured = seen
       ? `
-      <p>When we last checked, on ${longDate(seen.checked)}, loading the calendar and opening its booking form stored the following on the visitor’s device. Calendly decides what its page uses, so the list can change.</p>
+      <p>When we last checked, on ${keepDate(longDate(seen.checked))}, loading the calendar and opening its booking form stored the following on the visitor’s device. Calendly decides what its page uses, so the list can change.</p>
       <h3 id="always">Whatever you answer to Calendly’s banner</h3>
       ${itemTable(seen.always.items, 'Stored whatever you answer to Calendly’s cookie banner', 'always')}
       <h3 id="if-accepted">Only if you accept Calendly’s optional cookies</h3>

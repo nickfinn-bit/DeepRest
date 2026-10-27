@@ -1,7 +1,7 @@
 import { emailLink } from '../lib/layout.mjs';
 import { esc } from '../lib/facts.mjs';
 import { service, thirdParties } from '../lib/third-parties.mjs';
-import { ext, pageHead } from '../lib/ui.mjs';
+import { ext, keepDate, pageHead } from '../lib/ui.mjs';
 
 const CALENDLY_PRIVACY = 'https://calendly.com/legal/privacy-notice';
 const GOOGLE_PRIVACY = 'https://policies.google.com/privacy?hl=en-GB';
@@ -36,7 +36,7 @@ function bookingServices(seen, href) {
   const always = seen.always.services.map(service);
   const optional = seen.optional.services.map(service);
   return `
-      <p>The booking calendar is Calendly’s own page, shown inside ours. When you load it, Calendly’s page connects your browser to the services below, which Calendly chooses. We list what we saw when we last checked, on ${longDate(seen.checked)}, by loading the calendar and opening its booking form; Calendly can change them. Each collects your IP address and details of your browser, as any connection does, and the information described.</p>
+      <p>The booking calendar is Calendly’s own page, shown inside ours. When you load it, Calendly’s page connects your browser to the services below, which Calendly chooses. We list what we saw when we last checked, on ${keepDate(longDate(seen.checked))}, by loading the calendar and opening its booking form; Calendly can change them. Each collects your IP address and details of your browser, as any connection does, and the information described.</p>
       <p><strong>Whatever you answer to Calendly’s cookie banner:</strong></p>
       <ul>
         ${always.map((s) => `<li data-third-party="${s.id}" data-when="always"><strong>${esc(stop(s.name))}</strong> ${esc(s.role)} It collects ${esc(s.collects)} See its ${ext(s.privacy, 'privacy policy')}.</li>`).join('\n        ')}
@@ -48,8 +48,8 @@ function bookingServices(seen, href) {
       <p>These are Calendly’s tools, used for Calendly’s own purposes under its ${ext(CALENDLY_PRIVACY, 'privacy notice')}; DeepRest receives nothing from them. If you decline Calendly’s optional cookies, none of them was loaded when we checked. The <a href="${href('cookies')}">cookie notice</a> lists what each service stores on your device.</p>`;
 }
 
-// Keeps legal references such as 6(1)(b) or 9(2)(a) on one line.
-const keepRefsTogether = (html) => html.replace(/\b(\d\(\d\)\([a-z]\))/g, '<span class="nowrap">$1</span>');
+// Keeps legal references such as "Article 6(1)(b)", "6(1)(d)" or "Article 9" on one line.
+const keepRefsTogether = (html) => html.replace(/\bArticle \d+(?:\(\d\)\([a-z]\))?|\b\d\(\d\)\([a-z]\)/g, '<span class="nowrap">$&</span>');
 
 export default {
   slug: 'privacy',
@@ -78,7 +78,7 @@ ${pageHead({
       </ol>
     </nav>
     <div class="prose doc">
-      <p class="doc-meta">Last updated: ${F.text('privacy.lastUpdated')}</p>
+      <p class="doc-meta">Last updated: ${keepDate(F.text('privacy.lastUpdated'))}</p>
 
       <h2 id="who-we-are">Who we are</h2>
       <p>DeepRest is the mentoring practice of ${F.text('mentor.legalName')} (${nick}). ${nick} is responsible for your personal information: he is its “data controller”. In this policy, “we” and “us” mean DeepRest and ${nick}.</p>
@@ -157,7 +157,7 @@ ${pageHead({
 
       <h2 id="changes">Cookies and changes to this policy</h2>
       <p>The <a href="${href('cookies')}">cookie notice</a> explains what is stored on your device and the choices you have.</p>
-      <p>We will update this policy whenever the way we use personal information changes. It was last updated on ${F.text('privacy.lastUpdated')}.</p>
+      <p>We will update this policy whenever the way we use personal information changes. It was last updated on ${keepDate(F.text('privacy.lastUpdated'))}.</p>
     </div>
   </div>
 </div>`);

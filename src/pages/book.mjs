@@ -39,7 +39,7 @@ ${pageHead({
           <p class="booking-gate-text">To show the calendar, this page loads it from Calendly. Calendly then sets cookies on your device and connects to services it uses, such as Google reCAPTCHA and Stripe. Nothing is loaded until you choose to show it. <a href="${href('cookies')}#calendly">See what is loaded</a></p>
           <p class="booking-gate-js"><button class="btn btn-primary btn-lg" type="button" data-calendly-consent>Show the booking calendar</button></p>
           <p class="booking-gate-nojs">Your browser isn’t running JavaScript, so the calendar can’t be shown on this page.</p>
-          <p class="booking-gate-alt">You can also <a href="${esc(calendlyUrl)}" rel="noopener">book on Calendly’s website${icons.external}<span class="visually-hidden"> (external site)</span></a>.</p>
+          <p class="booking-gate-alt">You can also <a href="${esc(calendlyUrl)}" rel="noopener">book on Calendly’s <span class="nowrap">website${icons.external}</span><span class="visually-hidden"> (external site)</span></a>.</p>
         </div>
         <p class="booking-loading" role="status">Loading the booking calendar…</p>
       </div>
