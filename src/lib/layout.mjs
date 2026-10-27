@@ -70,11 +70,11 @@ export function renderPage(ctx, page, main) {
           <p><strong>Emergency.</strong> If you or someone else is in immediate danger, or a life is at risk, call 999 or go to your nearest A&amp;E.</p>
         </li>
         <li class="crisis-item">
-          <a class="crisis-number" href="tel:111">NHS 111</a>
+          <a class="crisis-number" href="tel:111">NHS&nbsp;111</a>
           <p><strong>Urgent, but not an emergency.</strong> Call 111 for urgent medical help or advice.</p>
         </li>
         <li class="crisis-item">
-          <a class="crisis-number" href="tel:116123">116 123</a>
+          <a class="crisis-number" href="tel:116123">116&nbsp;123</a>
           <p><strong>Samaritans.</strong> Free to call, day or night, 365 days a year, whatever you’re going through.</p>
         </li>
       </ul>
@@ -120,7 +120,7 @@ export function renderPage(ctx, page, main) {
   <form method="dialog" class="consent-dialog-form">
     <p class="eyebrow">Booking</p>
     <h2 id="calendly-consent-title">Booking opens Calendly</h2>
-    <p id="calendly-consent-text">DeepRest’s sessions are booked through Calendly. If you continue, this page loads Calendly’s booking calendar. Calendly then sets cookies on your device and connects to services it uses, such as Google reCAPTCHA and Stripe. <a href="${href('cookies')}#calendly">See what is loaded</a></p>
+    <p id="calendly-consent-text">DeepRest’s sessions are booked through Calendly. If you continue, this page loads Calendly’s booking calendar. Calendly then sets cookies on your device and connects to services it uses, such as Google reCAPTCHA and Stripe. <a href="${href('cookies')}#calendly">See what is loaded</a>.</p>
     <div class="consent-dialog-actions">
       <button class="btn btn-primary" value="continue">Continue to booking</button>
       <button class="btn btn-secondary" value="cancel">Not now</button>

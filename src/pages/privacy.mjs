@@ -39,7 +39,7 @@ function bookingServices(seen, href) {
       <p>The booking calendar is Calendly’s own page, shown inside ours. When you load it, Calendly’s page connects your browser to the services below, which Calendly chooses. We list what we saw when we last checked, on ${keepDate(longDate(seen.checked))}, by loading the calendar and opening its booking form; Calendly can change them. Each collects your IP address and details of your browser, as any connection does, and the information described.</p>
       <p><strong>Whatever you answer to Calendly’s cookie banner:</strong></p>
       <ul>
-        ${always.map((s) => `<li data-third-party="${s.id}" data-when="always"><strong>${esc(stop(s.name))}</strong> ${esc(s.role)} It collects ${esc(s.collects)} See its ${ext(s.privacy, 'privacy policy')}.</li>`).join('\n        ')}
+        ${always.map((s) => `<li data-third-party="${s.id}" data-when="always"><strong>${esc(stop(s.name))}</strong> ${esc(s.role)} It collects ${esc(s.collects)} See its ${ext(s.privacy, s.privacyName ?? 'privacy policy')}.</li>`).join('\n        ')}
       </ul>
       <p><strong>Only if you accept Calendly’s optional cookies.</strong> Calendly’s banner says it uses optional cookies “to improve and personalize your experience, to understand website interactions (including clicks, cursor movement and screen recordings), and for marketing”. If you accept them, Calendly’s page also loads:</p>
       <ul>

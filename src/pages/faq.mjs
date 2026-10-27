@@ -43,7 +43,7 @@ ${pageHead({
     ${item('cancel', 'Can I cancel or move a session?', `
       <p>Yes. Your confirmation email from Calendly has links to cancel the session or move it to another time.</p>`)}
     ${item('urgent', 'What if I need help urgently?', `
-      <p><strong>DeepRest is not an emergency service.</strong> If you or someone else is in immediate danger, call 999 or go to your nearest A&amp;E. For urgent medical help or advice that isn’t an emergency, call NHS 111. You can talk to Samaritans free, day or night, on 116 123.</p>`)}
+      <p><strong>DeepRest is not an emergency service.</strong> If you or someone else is in immediate danger, call 999 or go to your nearest A&amp;E. For urgent medical help or advice that isn’t an emergency, call NHS&nbsp;111. You can talk to Samaritans free, day or night, on 116&nbsp;123.</p>`)}
     ${item('data', 'What happens to the details I give?', `
       <p>Bookings are made through Calendly, which holds your booking details for DeepRest. The <a href="${href('privacy')}">privacy policy</a> explains what is collected and why, and how to ask about it: write to ${emailLink(F, false)}.</p>`)}
   </div>

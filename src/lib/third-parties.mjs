@@ -19,6 +19,7 @@ export const SERVICES = [
     collects:
       'what you enter in the booking form and, like any website, your IP address, browser, device and operating system, your approximate location, and how you use the booking page.',
     privacy: CALENDLY_PRIVACY,
+    privacyName: 'privacy notice',
     source: 'Calendly Privacy Notice, effective 3 July 2026, "log data": https://calendly.com/legal/privacy-notice',
   },
   {

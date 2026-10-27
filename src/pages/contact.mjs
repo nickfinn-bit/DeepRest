@@ -46,7 +46,7 @@ ${pageHead({
       ${notice(
         'urgent',
         'This is not an emergency service',
-        `<p>DeepRest cannot respond to urgent requests. If you need help now, call 999 in an emergency, NHS 111 for urgent medical help or advice, or Samaritans free on 116 123. <a href="#urgent-help">More about getting help now</a></p>`,
+        `<p>DeepRest cannot respond to urgent requests. If you need help now, call 999 in an emergency, NHS&nbsp;111 for urgent medical help or advice, or Samaritans free on 116&nbsp;123. <a href="#urgent-help">More about getting help now</a>.</p>`,
         icons.heart,
       )}
     </div>
