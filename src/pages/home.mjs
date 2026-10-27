@@ -6,8 +6,8 @@ export default {
   name: 'Home',
   title: ({ F }) => `DeepRest: tech-addiction mentoring with ${F.plain('mentor.name')}`,
   description: ({ F }) =>
-    `Tech-addiction mentoring with ${F.plain('mentor.name')}: ${inWords(F.value('mentor.years'))} years mentoring ${F.plain('mentor.clientGroups')}, ` +
-    `a ${F.plain('mentor.satisfaction')} satisfaction rate across ${F.plain('mentor.clients')} clients, and your first ${inWords(F.value('offer.freeSessions'))} sessions free.`,
+    `DeepRest is ${F.plain('mentor.name')}’s tech-addiction mentoring practice. He has mentored ${F.plain('mentor.clientGroups')} for ${inWords(F.value('mentor.years'))} years, ` +
+    `with a ${F.plain('mentor.satisfaction')} satisfaction rate across ${F.plain('mentor.clients')} clients. Your first ${inWords(F.value('offer.freeSessions'))} sessions are free.`,
   main: (ctx) => {
     const { F, href } = ctx;
     const free = inWords(F.value('offer.freeSessions'));

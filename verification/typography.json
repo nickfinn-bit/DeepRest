@@ -1,0 +1,71 @@
+{
+  "testedAt": "http://localhost:4173/",
+  "live": false,
+  "pages": [
+    {
+      "page": "home",
+      "slips": []
+    },
+    {
+      "page": "mentoring",
+      "slips": []
+    },
+    {
+      "page": "about",
+      "slips": []
+    },
+    {
+      "page": "faq",
+      "slips": []
+    },
+    {
+      "page": "book",
+      "slips": []
+    },
+    {
+      "page": "contact",
+      "slips": []
+    },
+    {
+      "page": "privacy",
+      "slips": []
+    },
+    {
+      "page": "cookies",
+      "slips": []
+    },
+    {
+      "page": "404",
+      "slips": []
+    },
+    {
+      "page": "site.js",
+      "slips": []
+    }
+  ],
+  "slips": 0,
+  "selfTest": {
+    "failed": 0,
+    "cases": 27,
+    "oldLive": {
+      "404": [],
+      "home": [],
+      "mentoring": [],
+      "about": [],
+      "faq": [],
+      "book": [],
+      "contact": [],
+      "privacy": [
+        {
+          "rule": "double full stop",
+          "where": "text",
+          "words": "Cloudflare, Inc.. Protects Calendly’s website f"
+        }
+      ],
+      "cookies": []
+    },
+    "oldLiveTotal": 1,
+    "knownCaught": true
+  },
+  "pass": true
+}

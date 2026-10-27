@@ -40,6 +40,7 @@ try {
   step('Layout at every width, with screenshots', 'verify/layout.mjs', live);
   step('HTML validation', 'verify/validate.mjs', live);
   step('Links', 'verify/links.mjs', live);
+  step('Punctuation and spacing', 'verify/typography.mjs', live);
   step('Placeholders, invented facts, protected titles and clinical claims', 'verify/facts.mjs', live);
   step('Strict build for publishing', 'verify/publish-ready.mjs');
   step('Lighthouse', 'verify/lighthouse.mjs', live);

@@ -102,13 +102,15 @@ const KIND = { cookie: 'Cookie', local: 'Local storage', session: 'Session stora
 export const serviceOf = (host) => SERVICES.find((s) => s.hosts.some((re) => re.test(host)));
 export const itemOf = (name, host) => ITEMS.find((i) => i.name.test(name) && (!i.host || i.host.test(host)));
 
-// How long a cookie lasts, from the seconds it had left when it was measured.
+// How long a cookie lasts, from the seconds it had left when it was measured. That is some
+// seconds after the cookie was set, so a short lifetime is given to the nearest 5 minutes:
+// Cloudflare's 30-minute cookie, read with 1,769 seconds left, is "30 minutes".
 export function lifetime(item) {
   if (item.type === 'local') return 'Until it is deleted';
   if (item.type === 'session') return 'Until you close the tab';
   const s = item.seconds;
   if (s === null || s === undefined) return 'Until you close your browser';
-  const minutes = Math.round(s / 60);
+  const minutes = Math.max(5, Math.round(s / 300) * 5);
   if (minutes < 120) return `${minutes} minutes`;
   const days = s / 86400;
   if (days < 2) return `${Math.round(s / 3600)} hours`;

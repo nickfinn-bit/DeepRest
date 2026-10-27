@@ -1,7 +1,7 @@
 # DeepRest website: verification report
 
-Written by `scripts/verify/report.mjs` (the last step of `npm run verify`) on 2026-10-23 10:26 UTC, from the JSON results each check left in this folder.
-Every check below ran against the **live site, https://deepestrest.com/**, served by GitHub Pages under Nick's domain; the hosting check also confirmed that each live page is byte-for-byte the page built from this commit.
+Written by `scripts/verify/report.mjs` (the last step of `npm run verify`) on 2026-10-27 08:48 UTC, from the JSON results each check left in this folder.
+The site was tested as built in `dist/`, served locally the way GitHub Pages serves it (`scripts/serve.mjs`, at http://localhost:4173/).
 
 ## Summary
 
@@ -10,22 +10,25 @@ Every check below ran against the **live site, https://deepestrest.com/**, serve
 | Hosting: DNS, HTTPS, redirects, every page live and identical to the build | all pass | ✅ 22/22 |
 | Lighthouse, mobile and desktop, 9 pages (live) | 95+ in Performance, Accessibility, Best Practices and SEO | ✅ 18/18 pass in every run; lowest score in any of 3 runs: **96**; 2 re-run after 2 failed attempts, shown below |
 | PageSpeed Insights (Lighthouse on Google's servers), mobile and desktop, 9 pages (live) | 95+ in all four categories | ✅ 9/9 pages; lowest score: **99** |
-| Horizontal scroll, 7 widths × 9 pages (live) | 0 | ✅ largest: **0 px** over 63 page-widths |
+| Horizontal scroll, 7 widths × 9 pages (local) | 0 | ✅ largest: **0 px** over 63 page-widths |
 | Layout shift during load | under 0.1 | ✅ largest: **0.0000**; with the Calendly calendar auto-loading: 0.0000 |
 | Layout faults: text cut off or overlapping, elements past the screen edge | 0 | ✅ **0**: 0 cut, 0 overlapping, 0 past the edge |
 | Booking frame before the visitor chooses to load Calendly: tallest empty band (blank in all) | no band over 80 px | ✅ 360: **41 px** (146 of 539); 390: **41 px** (146 of 488); 768: **56 px** (178 of 450); 1024: **66 px** (201 of 507); 1280: **73 px** (215 of 521); 1440: **73 px** (215 of 521); 1920: **73 px** (215 of 521) |
-| Calendly inline calendar, after consent: loads and opens its booking flow (live) | every width | ✅ 7/7 widths; 0 Calendly requests, 0 other outside requests and 0 cookies before consent: ✅ |
+| Calendly inline calendar, after consent: loads and opens its booking flow (local) | every width | ✅ 7/7 widths; 0 Calendly requests, 0 other outside requests and 0 cookies before consent: ✅ |
 | “Book another session”, for booking all five free sessions one at a time | hidden before consent; shown after; says a session was booked when Calendly reports one; opens a fresh calendar | ✅ 7/7 widths |
-| Calendly popup from the header button, after consent | every page, every width | ✅ 63/63 page-widths |
-| HTML validator (W3C Nu HTML Checker, live) | 0 errors | ✅ **0 errors** in 10 files; 0 other warnings; 18 known CSP warnings, explained below |
-| Broken links (live) | 0 | ✅ **0** broken of 336 references (53 distinct) |
+| Calendly popup from the header button, after consent | every page, every width | ❌ 0/0 page-widths |
+| HTML validator (W3C Nu HTML Checker, local) | 0 errors | ✅ **0 errors** in 10 files; 0 other warnings; 18 known CSP warnings, explained below |
+| Broken links (local) | 0 | ✅ **0** broken of 336 references (61 distinct) |
 | Placeholders | 0 | ✅ **0** |
 | `npm run build:strict` | passes | ✅ builds 9 pages, none showing a placeholder, with the booking link https://calendly.com/nicholas-finnemore/free-diagnostic |
 | Protected titles used for Nick (psychologist, therapist, counsellor, HCPC and BPS titles) | 0 | ✅ **0** on any page, in its text, title, description or sharing tags |
 | Clinical or medical claims | 0 | ✅ **0** |
 | Invented facts | 0 | ✅ **0** unexplained figures or contact details |
-| Claims beyond Nick's three facts, of the kinds found and removed | 0 | ✅ **0** left; 11 kinds were found in 42 places, each listed below with its fix |
-| Outside services the privacy policy names, and items the cookie notice lists, against those measured (live) | equal | ✅ services 12 named, 12 measured; items 14 listed, 14 measured; missing 0, extra 0 |
+| Claims beyond Nick's three facts, of the kinds found and removed | 0 | ✅ **0** left on the pages; 13 kinds were found in 50 places, listed below by page with their fixes |
+| Claims beyond his three facts in the booking calendar (the Calendly event's description, local) | 0 | ✅ **0**: “DeepRest mentoring with Nick Finnemore. Your first five sessions are free, as a diagnostic. Book one session at a time here.” |
+| Punctuation and spacing slips (local) | 0 | ✅ **0** on 9 pages and in site.js's messages; self-test: passes (27 made-up cases; the old live privacy policy's “Cloudflare, Inc..” caught) |
+| Human-speed pass: every page at every width scrolled at reading speed, every capture looked at () | 63 page-widths; defects left 0 | not run |
+| Outside services the privacy policy names, and items the cookie notice lists, against those measured (local) | equal | ✅ services 12 named, 12 measured; items 14 listed, 14 measured; missing 0, extra 0 |
 | Home page: headline figures and the free-diagnostic offer | shown | ✅ 100% satisfaction across 23 clients; five years; "Your first five sessions are free, as a diagnostic" |
 
 ## Hosting
@@ -174,7 +177,7 @@ The 404 page was audited at `404.html`, the same file served with status 200: Li
 
 ## Layout at every width
 
-Each page was loaded fresh at each width from https://deepestrest.com/ (360, 390 and 768 px emulated as touch phones and tablets; 1,024 px and up as desktops). After the page settled, the check measured: horizontal scroll (document width minus window width); layout shift, by adding up every `layout-shift` entry from the start of loading; every element reaching past the screen edge; every line of text clipped by the screen or by a box that hides overflow; and every pair of text lines covering each other. The FAQ was checked again with every answer open.
+Each page was loaded fresh at each width from http://localhost:4173/ (360, 390 and 768 px emulated as touch phones and tablets; 1,024 px and up as desktops). After the page settled, the check measured: horizontal scroll (document width minus window width); layout shift, by adding up every `layout-shift` entry from the start of loading; every element reaching past the screen edge; every line of text clipped by the screen or by a box that hides overflow; and every pair of text lines covering each other. The FAQ was checked again with every answer open.
 
 | Page | 360 | 390 | 768 | 1024 | 1280 | 1440 | 1920 |
 |---|---|---|---|---|---|---|---|
@@ -204,19 +207,19 @@ Every cell links to its full-page screenshot. The FAQ also has screenshots with 
 
 ## Calendly
 
-Tested with Puppeteer against https://deepestrest.com/, with the booking link https://calendly.com/nicholas-finnemore/free-diagnostic. Calendly loads only after the visitor agrees, so each test first checks that nothing came from Calendly before that choice. The booking flow was followed to Calendly's details form and never submitted, so nothing was booked in Nick's calendar. On phone and tablet widths the test taps, as people do: Calendly ignores mouse clicks on touch screens. The details form asks for: full_name, email, question_0, g-recaptcha-response, ot-group-id-C0002, ot-group-id-C0003, ot-group-id-C0004, vendor-search-handler, checkbox, checkbox, checkbox, checkbox.
+Tested with Puppeteer against http://localhost:4173/, with the booking link https://calendly.com/nicholas-finnemore/free-diagnostic. Calendly loads only after the visitor agrees, so each test first checks that nothing came from Calendly before that choice. The booking flow was followed to Calendly's details form and never submitted, so nothing was booked in Nick's calendar. On phone and tablet widths the test taps, as people do: Calendly ignores mouse clicks on touch screens. The details form asks for: full_name, email, question_0, g-recaptcha-response, ot-group-id-C0002, ot-group-id-C0003, ot-group-id-C0004, vendor-search-handler, checkbox, checkbox, checkbox, checkbox.
 
 **Inline calendar on the booking page**
 
 | Width | Calendly requests before consent | Other outside requests before consent | Cookies before consent | Calendar loaded | Booking flow opened | “Book another session”: hidden before, shown after, booked message, fresh calendar | Loads by itself when the choice is remembered | Layout shift then | Pass |
 |---|---|---|---|---|---|---|---|---|---|
-| 360 | 0 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 3:00pm → next → details form | ✅ ✅ ✅ ✅ | ✅ | 0.0000 | ✅ |
-| 390 | 0 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 3:00pm → next → details form | ✅ ✅ ✅ ✅ | ✅ | 0.0000 | ✅ |
-| 768 | 0 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 3:00pm → next → details form | ✅ ✅ ✅ ✅ | ✅ | 0.0000 | ✅ |
-| 1024 | 0 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 3:00pm → next → details form | ✅ ✅ ✅ ✅ | ✅ | 0.0000 | ✅ |
-| 1280 | 0 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 3:00pm → next → details form | ✅ ✅ ✅ ✅ | ✅ | 0.0000 | ✅ |
-| 1440 | 0 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 3:00pm → next → details form | ✅ ✅ ✅ ✅ | ✅ | 0.0000 | ✅ |
-| 1920 | 0 | 0 | 0 | ✅ | ✅ day: Friday, October 23 - Times available → time: 3:00pm → next → details form | ✅ ✅ ✅ ✅ | ✅ | 0.0000 | ✅ |
+| 360 | 0 | 0 | 0 | ✅ | ✅ day: Tuesday, October 27 - Times available → time: 1:30pm → next → details form | ✅ ✅ ✅ ✅ | ✅ | 0.0000 | ✅ |
+| 390 | 0 | 0 | 0 | ✅ | ✅ day: Tuesday, October 27 - Times available → time: 1:30pm → time pressed again → next → details form | ✅ ✅ ✅ ✅ | ✅ | 0.0000 | ✅ |
+| 768 | 0 | 0 | 0 | ✅ | ✅ day: Tuesday, October 27 - Times available → time: 1:30pm → next → details form | ✅ ✅ ✅ ✅ | ✅ | 0.0000 | ✅ |
+| 1024 | 0 | 0 | 0 | ✅ | ✅ day: Tuesday, October 27 - Times available → time: 1:30pm → next → details form | ✅ ✅ ✅ ✅ | ✅ | 0.0000 | ✅ |
+| 1280 | 0 | 0 | 0 | ✅ | ✅ day: Tuesday, October 27 - Times available → time: 1:30pm → next → details form | ✅ ✅ ✅ ✅ | ✅ | 0.0000 | ✅ |
+| 1440 | 0 | 0 | 0 | ✅ | ✅ day: Tuesday, October 27 - Times available → time: 1:30pm → next → details form | ✅ ✅ ✅ ✅ | ✅ | 0.0000 | ✅ |
+| 1920 | 0 | 0 | 0 | ✅ | ✅ day: Tuesday, October 27 - Times available → time: 1:30pm → next → details form | ✅ ✅ ✅ ✅ | ✅ | 0.0000 | ✅ |
 
 Screenshots of the details form reached at each width: [calendly/](calendly/) (`inline-<width>.png`). Content Security Policy violations recorded during these tests: 0.
 
@@ -226,19 +229,19 @@ Since tests never book, the message after a booking was tested by sending the pa
 
 | Page | 360 | 390 | 768 | 1024 | 1280 | 1440 | 1920 |
 |---|---|---|---|---|---|---|---|
-| Home | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mentoring | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| About Nick | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| FAQ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Book a free session | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Contact | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Privacy policy | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Cookie notice | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Page not found (404) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Home | – | – | – | – | – | – | – |
+| Mentoring | – | – | – | – | – | – | – |
+| About Nick | – | – | – | – | – | – | – |
+| FAQ | – | – | – | – | – | – | – |
+| Book a free session | – | – | – | – | – | – | – |
+| Contact | – | – | – | – | – | – | – |
+| Privacy policy | – | – | – | – | – | – | – |
+| Cookie notice | – | – | – | – | – | – | – |
+| Page not found (404) | – | – | – | – | – | – | – |
 
 Without JavaScript: ✅ the header button is a plain link to the booking page, which explains that the calendar needs JavaScript and links to the booking page on Calendly's website.
 
-**What the booking calendar loads.** Measured at 1,440 px on 2026-10-23T09:11:12.652Z, after loading the calendar and opening its details form: every outside host the browser contacted (from every frame, including Calendly's), every cookie, and every local and session storage item in every frame. Once with Calendly's cookie banner declined, and once, in a fresh browser context with nothing stored, accepted. The privacy policy and cookie notice are built from these measurements (`src/lib/third-parties.mjs`), and the facts check compares them, below.
+**What the booking calendar loads.** Measured at 1,440 px on 2026-10-27T08:41:00.863Z, after loading the calendar and opening its details form: every outside host the browser contacted (from every frame, including Calendly's), every cookie, and every local and session storage item in every frame. Once with Calendly's cookie banner declined, and once, in a fresh browser context with nothing stored, accepted. The privacy policy and cookie notice are built from these measurements (`src/lib/third-parties.mjs`), and the facts check compares them, below.
 
 | Banner answer | Outside hosts | Services | Cookies and stored items |
 |---|---|---|---|
@@ -249,7 +252,7 @@ Only when accepted: Google Analytics and Google Tag Manager (Google LLC), Meta P
 
 ## HTML validation
 
-Nu HTML Checker 26.10.12 (0a70d65), the engine behind validator.w3.org/nu, run locally on every page and the stylesheet, as downloaded from https://deepestrest.com/.
+Nu HTML Checker 26.10.12 (0a70d65), the engine behind validator.w3.org/nu, run locally on every page and the stylesheet in dist/.
 
 | File | Errors | Warnings | Known CSP warnings |
 |---|---|---|---|
@@ -268,7 +271,7 @@ The known warnings are the checker's, not the browser's: checking files, it has 
 
 ## Links
 
-336 references on 9 pages (53 distinct), fetched from https://deepestrest.com/: every link, stylesheet, script, icon and `#section` target, and each `#section` was found on its page. Broken: **0**.
+336 references on 9 pages (61 distinct), fetched from http://localhost:4173/: every link, stylesheet, script, icon and `#section` target, and each `#section` was found on its page. Broken: **0**.
 
 External sites:
 
@@ -325,7 +328,7 @@ Telephone links: `tel:999`, `tel:111`, `tel:116123`, `tel:03031231113`. Email li
 - `Article 6`: UK GDPR
 - `Article 9`: UK GDPR
 - `404`: HTTP status of the error page
-- `23 October 2026`: the date the privacy policy was last updated (site.config.json, privacy.lastUpdated)
+- `27 October 2026`: the date the privacy policy was last updated (site.config.json, privacy.lastUpdated)
 - `© 2026`: year of the build
 - `Article 6(1)(a)`: UK GDPR Article 6(1)(a), consent
 - `Article 6(1)(b)`: UK GDPR Article 6(1)(b), contract
@@ -336,7 +339,7 @@ Telephone links: `tel:999`, `tel:111`, `tel:116123`, `tel:03031231113`. Email li
 - `30 minutes`: how long a cookie on the cookie notice lasts, from the time it had left when scripts/verify/calendly.mjs measured it (src/data/calendly-third-parties.json)
 - `1 year`: how long a cookie on the cookie notice lasts, from the time it had left when scripts/verify/calendly.mjs measured it (src/data/calendly-third-parties.json)
 - `13 months`: how long a cookie on the cookie notice lasts, from the time it had left when scripts/verify/calendly.mjs measured it (src/data/calendly-third-parties.json)
-- `23 October 2026`: date scripts/verify/calendly.mjs measured what the booking calendar loads (src/data/calendly-third-parties.json)
+- `27 October 2026`: date scripts/verify/calendly.mjs measured what the booking calendar loads (src/data/calendly-third-parties.json)
 - `hello@deepestrest.com`: site.config.json, practice.email (Cloudflare Email Routing to Nick)
 
 Long quotations, which the scan would otherwise take for testimonials, each from its source and found again in this run:
@@ -347,7 +350,8 @@ Statements in the text, and where each was checked:
 
 - Nick's three facts (five years mentoring students and young adults; a 100% satisfaction rate across 23 clients; the first five sessions free, as a diagnostic): his order of 19 October 2026, recorded in site.config.json under _sources. His order also said that being young has played to his advantage, because he has seen many people go through tech addiction and been able to get them out of it; the site leaves those words off, as the brief limits it to his three facts, and PLACEHOLDERS.md asks him about them
 - His full name, Nicholas Finnemore, used as data controller in the privacy policy: the name on his Google account
-- The booking event, its optional question ("Please share anything that will help prepare for our meeting."), guests allowed, Google Calendar connection and Google Meet location: the Calendly event "Free diagnostic session" as configured on calendly.com/nicholas-finnemore/free-diagnostic
+- The booking event, its optional question ("Please share anything that will help prepare for our meeting."), guests allowed and Google Calendar connection: the Calendly event "Free diagnostic session" as configured on calendly.com/nicholas-finnemore/free-diagnostic
+- The session held on "the web-conferencing service whose details come with your booking confirmation", in the privacy policy: the booking flow's own words, "Web conferencing details provided upon confirmation.", as the Calendly check read them (below, under Calendly). The event is set to Google Meet, but the flow does not show it, so the pages do not name it
 - Calendly confirmation emails carry links to cancel and reschedule: Calendly's standard invitee emails
 - hello@deepestrest.com forwards to Nick's Gmail through Cloudflare Email Routing: the routing rule on his Cloudflare account
 - Samaritans, 116 123, free from landlines and mobiles, day or night, 365 days a year: https://www.samaritans.org/how-we-can-help/contact-samaritan/
@@ -368,23 +372,80 @@ Statements in the text, and where each was checked:
 
 There are no testimonials. Wording beyond Nick's three facts is listed for him to check at the end of PLACEHOLDERS.md.
 
-**Claims beyond Nick's three facts: 0 left.** Every page was read against his three facts, and each claim found beyond them was removed or rewritten. The facts check searches every page's text, title, description and sharing tags for each kind of claim, with the pattern shown, so none can return:
+**Claims beyond Nick's three facts: 0 left on the pages, 0 in the booking calendar.** Every page was read, sentence by sentence, against his three facts, and each claim found beyond them was removed or rewritten. Where each was, page by page:
 
-| Claim | Where it was, and its words | Fix | Pattern | Left |
-|---|---|---|---|---|
-| That Nick got clients out of tech addiction | Home: “For five years he has mentored students and young adults through tech addiction, and helped them out of it.”<br>Home: “he has seen many people go through tech addiction, and has been able to help them get out of it.”<br>About Nick: “For five years, Nick has helped students and young adults get out of tech addiction.”<br>About Nick: “It has meant seeing many people go through tech addiction, and being able to help them get out of it.”<br>Mentoring: “has seen many people go through tech addiction and come out of it.”<br>Mentoring: “someone on your side, who has helped others through the same thing.” | Each says only that he has mentored students and young adults for five years. | `/\bout of (it\|tech)\|\b(has\|have\|had\|been able to) help(ed)?\b\|\bhelp(ed)? (them\|others\|students\|young)\b\|\bseen many people\b\|\bthrough the same thing\b/i` | ✅ 0 |
-| That his five years of mentoring were for tech addiction | Home: “he has mentored students and young adults through tech addiction”<br>About Nick: “Nick Finnemore has mentored students and young adults through tech addiction for five years (description)” | “has mentored students and young adults for five years”; DeepRest is described separately as his tech-addiction mentoring practice. | `/\bthrough tech addiction\b/i` | ✅ 0 |
-| That he has mentored 23 clients in all | Home: “Clients mentored: 23 (figures panel)”<br>About Nick: “Clients mentored: 23 (figures panel)”<br>Home: “A 100% satisfaction rate across the 23 clients Nick has mentored.”<br>About Nick: “Across the 23 clients he has mentored, Nick’s satisfaction rate is 100%.” | The figure is given only as he gave it: “Satisfaction rate across 23 clients: 100%”. | `/\bclients mentored\b\|\bclients (Nick\|he) (has )?mentored\b/i` | ✅ 0 |
-| That he is young, and that being young is an advantage | Home: “Young, and that’s the advantage (heading)”<br>Home: “He is young, and that has played to his advantage”<br>About Nick: “He is young, and that has played to his advantage.” | Heading “Five years of mentoring”, over the three facts. | `/\bhe is young\b\|\byoung, and\b\|\badvantage\b/i` | ✅ 0 |
-| Who the practice is for | Home: “Mentoring for students and young adults who want to break free from tech addiction (description)”<br>Mentoring: “One-to-one mentoring for students and young adults who want to break free from tech addiction (description and lead)”<br>Mentoring: “Who it’s for: DeepRest is for students and young adults who feel that their phone, games or time online have taken over more of their life than they would like”<br>About Nick: “set up to offer that mentoring to students and young adults who feel that tech has too much of a hold on them.”<br>FAQ: “Who is DeepRest for? Students and young adults who feel that tech has too much of a hold on them”<br>FAQ: “Answers to common questions … who it is for (description)”<br>footer: “Tech-addiction mentoring for students and young adults, with Nick Finnemore.” | Removed. The pages say whom he has mentored (students and young adults, for five years), not whom DeepRest is for; the footer reads “Tech-addiction mentoring with Nick Finnemore.” | `/\bbreak free\b\|\btaken over\b\|\bhold on (them\|you)\b\|\bwho (it is\|it’s\|it's\|DeepRest is) for\b\|\bwho is DeepRest for\b\|\bmentoring for students\b/i` | ✅ 0 |
-| How sessions are held, and what mentoring is like | Home: “Mentoring is practical, one-to-one support from someone on your side.”<br>Mentoring: “Mentoring is practical, one-to-one support from someone on your side”<br>Mentoring: “One-to-one mentoring for students and young adults (lead)”<br>FAQ: “No. Mentoring is practical, one-to-one support.” | “Mentoring, not therapy”: mentoring is not therapy or medical care. How sessions are held is listed under _dropped in site.config.json. | `/\bone-to-one\b\|\bon your side\b\|\bpractical(,)? (one-to-one )?support\b/i` | ✅ 0 |
-| What the five free diagnostic sessions cover | Home: “With Nick, you look at how tech fits into your days, what it is costing you and what you would like to change, and you find out whether mentoring is right for you.”<br>Home: “Over your first five sessions, which are free, you and Nick build a clear picture of your tech habits and what you want to change.”<br>Mentoring: “a chance to understand your tech habits and what you want to change, and to see whether mentoring with Nick suits you.”<br>Mentoring: “Over your first five sessions, you and Nick look at how tech fits into your days, what it is costing you and what you would like to change.”<br>FAQ: “so that you and Nick can understand your situation and decide whether mentoring is right for you.” | “Your first five sessions are free, as a diagnostic. There is nothing to pay for them.” What the diagnostic covers is listed under _dropped. | `/\bhow tech fits\b\|\bwhat it is costing you\b\|\bclear picture\b\|\bunderstand your (tech habits\|situation)\b\|\bfind out whether\b\|\bwhether mentoring with Nick suits you\b\|\bwhat you (want\|would like) to change\b/i` | ✅ 0 |
-| What happens after the five free sessions | Home: “After the five free sessions, you decide together whether to carry on. There is no obligation to continue.”<br>Mentoring: “There is nothing to pay for them, and no obligation to continue afterwards.”<br>Mentoring: “When the five free sessions are over, you decide together whether to carry on. It is your choice.”<br>FAQ: “What happens after the five free sessions? You and Nick decide together whether to carry on. There is no obligation to continue.” | Removed; listed under _dropped until Nick says what happens after the five free sessions. | `/\bdecide together\b\|\bno obligation\b\|\bit is your choice\b\|\bafter the five free sessions\b\|\bcarry on\b/i` | ✅ 0 |
-| His professional background | About Nick: “He is not a medical or mental health professional”<br>FAQ: “Nick is not a medical or mental health professional.” | “Nick is a mentor, and mentoring is not therapy or medical care.” His background is not one of his facts. | `/\bmental health professional\b/i` | ✅ 0 |
-| That no Meta code can reach a visitor through the site | Privacy policy: “The website has no Meta code, such as Meta’s Pixel, and sends Meta nothing about your visit or your booking.”<br>Cookie notice: “The website has no Meta code, such as Meta’s Pixel, so Meta sets no cookies through it.” | The site’s own pages have no Meta code; Calendly’s page loads Meta’s code only if the visitor accepts Calendly’s optional cookies, as both pages now say. | `/\bMeta sets no cookies\b\|\bThe website has no Meta code\b/i` | ✅ 0 |
-| That the booking calendar’s cookies all come from Calendly | Cookie notice: “Cookies are set only if you choose to load the booking calendar, and they come from Calendly.”<br>Cookie notice: “Once it is loaded, your browser connects to Calendly, which sets its own cookies.”<br>Privacy policy: “If you choose to load the booking calendar, Calendly collects information about your device and sets cookies” | Both pages name every service the calendar loads, as measured: Calendly, Cloudflare, OneTrust, Stripe, Google reCAPTCHA and Airbrake, and those that load only if Calendly’s optional cookies are accepted. | `/\bthey come from Calendly\.\|\bconnects to Calendly, which sets its own cookies\b\|\bCalendly collects information about your device and sets cookies\b/i` | ✅ 0 |
+| Page | Claim | Its words | Found |
+|---|---|---|---|
+| Home | That Nick got clients out of tech addiction | “For five years he has mentored students and young adults through tech addiction, and helped them out of it.” | by 23 October 2026 (commit 3d3382e) |
+| Home | That Nick got clients out of tech addiction | “he has seen many people go through tech addiction, and has been able to help them get out of it.” | by 23 October 2026 (commit 3d3382e) |
+| Home | That his five years of mentoring were for tech addiction | “he has mentored students and young adults through tech addiction” | by 23 October 2026 (commit 3d3382e) |
+| Home | That his five years of mentoring were for tech addiction | “Tech-addiction mentoring with Nick Finnemore: five years mentoring students and young adults, a 100% satisfaction rate across 23 clients, and your first five sessions free. (description)” | 27 October 2026 |
+| Home | That he has mentored 23 clients in all | “Clients mentored: 23 (figures panel)” | by 23 October 2026 (commit 3d3382e) |
+| Home | That he has mentored 23 clients in all | “A 100% satisfaction rate across the 23 clients Nick has mentored.” | by 23 October 2026 (commit 3d3382e) |
+| Home | That he is young, and that being young is an advantage | “Young, and that’s the advantage (heading)” | by 23 October 2026 (commit 3d3382e) |
+| Home | That he is young, and that being young is an advantage | “He is young, and that has played to his advantage” | by 23 October 2026 (commit 3d3382e) |
+| Home | Who the practice is for | “Mentoring for students and young adults who want to break free from tech addiction (description)” | by 23 October 2026 (commit 3d3382e) |
+| Home | How sessions are held, and what mentoring is like | “Mentoring is practical, one-to-one support from someone on your side.” | by 23 October 2026 (commit 3d3382e) |
+| Home | What the five free diagnostic sessions cover | “With Nick, you look at how tech fits into your days, what it is costing you and what you would like to change, and you find out whether mentoring is right for you.” | by 23 October 2026 (commit 3d3382e) |
+| Home | What the five free diagnostic sessions cover | “Over your first five sessions, which are free, you and Nick build a clear picture of your tech habits and what you want to change.” | by 23 October 2026 (commit 3d3382e) |
+| Home | What happens after the five free sessions | “After the five free sessions, you decide together whether to carry on. There is no obligation to continue.” | by 23 October 2026 (commit 3d3382e) |
+| Mentoring | That Nick got clients out of tech addiction | “has seen many people go through tech addiction and come out of it.” | by 23 October 2026 (commit 3d3382e) |
+| Mentoring | That Nick got clients out of tech addiction | “someone on your side, who has helped others through the same thing.” | by 23 October 2026 (commit 3d3382e) |
+| Mentoring | That his five years of mentoring were for tech addiction | “Tech-addiction mentoring with Nick Finnemore, who has mentored students and young adults for five years. (description)” | 27 October 2026 |
+| Mentoring | Who the practice is for | “One-to-one mentoring for students and young adults who want to break free from tech addiction (description and lead)” | by 23 October 2026 (commit 3d3382e) |
+| Mentoring | Who the practice is for | “Who it’s for: DeepRest is for students and young adults who feel that their phone, games or time online have taken over more of their life than they would like” | by 23 October 2026 (commit 3d3382e) |
+| Mentoring | How sessions are held, and what mentoring is like | “Mentoring is practical, one-to-one support from someone on your side” | by 23 October 2026 (commit 3d3382e) |
+| Mentoring | How sessions are held, and what mentoring is like | “One-to-one mentoring for students and young adults (lead)” | by 23 October 2026 (commit 3d3382e) |
+| Mentoring | What the five free diagnostic sessions cover | “a chance to understand your tech habits and what you want to change, and to see whether mentoring with Nick suits you.” | by 23 October 2026 (commit 3d3382e) |
+| Mentoring | What the five free diagnostic sessions cover | “Over your first five sessions, you and Nick look at how tech fits into your days, what it is costing you and what you would like to change.” | by 23 October 2026 (commit 3d3382e) |
+| Mentoring | What happens after the five free sessions | “There is nothing to pay for them, and no obligation to continue afterwards.” | by 23 October 2026 (commit 3d3382e) |
+| Mentoring | What happens after the five free sessions | “When the five free sessions are over, you decide together whether to carry on. It is your choice.” | by 23 October 2026 (commit 3d3382e) |
+| About Nick | That Nick got clients out of tech addiction | “For five years, Nick has helped students and young adults get out of tech addiction.” | by 23 October 2026 (commit 3d3382e) |
+| About Nick | That Nick got clients out of tech addiction | “It has meant seeing many people go through tech addiction, and being able to help them get out of it.” | by 23 October 2026 (commit 3d3382e) |
+| About Nick | That his five years of mentoring were for tech addiction | “Nick Finnemore has mentored students and young adults through tech addiction for five years (description)” | by 23 October 2026 (commit 3d3382e) |
+| About Nick | That he has mentored 23 clients in all | “Clients mentored: 23 (figures panel)” | by 23 October 2026 (commit 3d3382e) |
+| About Nick | That he has mentored 23 clients in all | “Across the 23 clients he has mentored, Nick’s satisfaction rate is 100%.” | by 23 October 2026 (commit 3d3382e) |
+| About Nick | That he is young, and that being young is an advantage | “He is young, and that has played to his advantage.” | by 23 October 2026 (commit 3d3382e) |
+| About Nick | Who the practice is for | “set up to offer that mentoring to students and young adults who feel that tech has too much of a hold on them.” | by 23 October 2026 (commit 3d3382e) |
+| About Nick | His professional background | “He is not a medical or mental health professional” | by 23 October 2026 (commit 3d3382e) |
+| FAQ | Who the practice is for | “Who is DeepRest for? Students and young adults who feel that tech has too much of a hold on them” | by 23 October 2026 (commit 3d3382e) |
+| FAQ | Who the practice is for | “Answers to common questions … who it is for (description)” | by 23 October 2026 (commit 3d3382e) |
+| FAQ | How sessions are held, and what mentoring is like | “No. Mentoring is practical, one-to-one support.” | by 23 October 2026 (commit 3d3382e) |
+| FAQ | What the five free diagnostic sessions cover | “so that you and Nick can understand your situation and decide whether mentoring is right for you.” | by 23 October 2026 (commit 3d3382e) |
+| FAQ | What happens after the five free sessions | “What happens after the five free sessions? You and Nick decide together whether to carry on. There is no obligation to continue.” | by 23 October 2026 (commit 3d3382e) |
+| FAQ | His professional background | “Nick is not a medical or mental health professional.” | by 23 October 2026 (commit 3d3382e) |
+| FAQ | That the booking calendar’s cookies all come from Calendly | “The calendar is provided by Calendly, and loads only once you agree to it, because Calendly sets its own cookies.” | 27 October 2026 |
+| FAQ | That visitors commonly ask these questions | “Answers to common questions about mentoring at DeepRest: the five free sessions, booking all five, cancelling and urgent help. (description)” | 27 October 2026 |
+| Contact | How sessions are held, and what mentoring is like | “There will be time to talk when you meet.” | 27 October 2026 |
+| Privacy policy | That no Meta code can reach a visitor through the site | “The website has no Meta code, such as Meta’s Pixel, and sends Meta nothing about your visit or your booking.” | by 23 October 2026 (commit 3d3382e) |
+| Privacy policy | That the booking calendar’s cookies all come from Calendly | “If you choose to load the booking calendar, Calendly collects information about your device and sets cookies” | by 23 October 2026 (commit 3d3382e) |
+| Privacy policy | Where sessions happen | “Calendly adds the booking to Nick’s Google Calendar, and creates the Google Meet video call link for the session, which Google provides.” | 27 October 2026 |
+| Privacy policy | Where sessions happen | “Google LLC, which provides Nick’s calendar and email, and the Google Meet video calls.” | 27 October 2026 |
+| Cookie notice | That no Meta code can reach a visitor through the site | “The website has no Meta code, such as Meta’s Pixel, so Meta sets no cookies through it.” | by 23 October 2026 (commit 3d3382e) |
+| Cookie notice | That the booking calendar’s cookies all come from Calendly | “Cookies are set only if you choose to load the booking calendar, and they come from Calendly.” | by 23 October 2026 (commit 3d3382e) |
+| Cookie notice | That the booking calendar’s cookies all come from Calendly | “Once it is loaded, your browser connects to Calendly, which sets its own cookies.” | by 23 October 2026 (commit 3d3382e) |
+| Footer, every page | Who the practice is for | “Tech-addiction mentoring for students and young adults, with Nick Finnemore.” | by 23 October 2026 (commit 3d3382e) |
+| Booking calendar: the Calendly event’s description, on the booking page and in the popup on every page | Who the practice is for | “DeepRest mentoring with Nick Finnemore, for students and young adults who want to get on top of their tech use.” | 27 October 2026 |
 
-**Outside services and stored items: named on the pages against measured.** The privacy policy's services and the cookie notice's rows, read from the live pages, against the Calendly check's measurement of 2026-10-23T09:11:12.652Z (above). ✅
+Each kind of claim, its fix, and the pattern the facts check searches for, in every page's text, title, description and sharing tags and in the booking calendar's description, so none can return. `node scripts/verify/facts.mjs --self-test` runs each pattern against the words it was written for, and against the live pages as they were before the latest fixes (`scripts/verify/fixtures/live-2026-10-23/`).
+
+| Claim | Fix | Pattern | Left |
+|---|---|---|---|
+| That Nick got clients out of tech addiction | Each says only that he has mentored students and young adults for five years. | `/\bout of (it\|tech)\|\b(has\|have\|had\|been able to) help(ed)?\b\|\bhelp(ed)? (them\|others\|students\|young)\b\|\bseen many people\b\|\bthrough the same thing\b\|\b(overcome\|overcame\|overcoming\|beat\|beating)\b\|\b(get\|gets\|got\|getting\|helping\|helps) (them\|people\|clients\|students\|others\|young people\|young adults) (out\|off\|free\|back\|over)\b\|\bsuccess(es\|ful\|fully)?\b\|\brecover(y\|ed\|ing)?\b/i` | ✅ 0 |
+| That his five years of mentoring were for tech addiction | “has mentored students and young adults for five years”, in a sentence of its own; DeepRest is described separately as his tech-addiction mentoring practice. | `/\bthrough tech addiction\b\|\btech[- ]addiction\b[^.!?\n]*\b(five\|5) years\b\|\b(five\|5) years\b[^.!?\n]*\btech[- ]addiction\b/i` | ✅ 0 |
+| That he has mentored 23 clients in all | The figure is given only as he gave it: “Satisfaction rate across 23 clients: 100%”. | `/\bclients mentored\b\|\bclients (Nick\|he) (has )?mentored\b\|\bmentored (23\|twenty-three)\b\|\b(23\|twenty-three) (people\|students\|young people\|young adults) (mentored\|helped)\b\|\bworked with (23\|twenty-three)\b/i` | ✅ 0 |
+| That he is young, and that being young is an advantage | Heading “Five years of mentoring”, over the three facts. | `/\bhe is young\b\|\byoung, and\b\|\badvantage\b\|\bbeing young\b\|\b(his\|Nick’s\|Nick's) (youth\|age)\b\|\bclose (to you )?in age\b/i` | ✅ 0 |
+| Who the practice is for | Removed. The pages say whom he has mentored (students and young adults, for five years), not whom DeepRest is for; the footer reads “Tech-addiction mentoring with Nick Finnemore.” The Calendly event’s description now reads “DeepRest mentoring with Nick Finnemore. Your first five sessions are free, as a diagnostic. Book one session at a time here.” | `/\bbreak free\b\|\btaken over\b\|\bhold on (them\|you)\b\|\bwho (it is\|it’s\|it's\|DeepRest is) for\b\|\bwho is DeepRest for\b\|\bmentoring for students\b\|\bfor (students\|young adults\|young people\|teenagers\|anyone\|people) (and\|who\|wanting\|struggling)\b\|\bwho want to\b\|\bget on top of\b\|\btheir tech use\b/i` | ✅ 0 |
+| How sessions are held, and what mentoring is like | “Mentoring, not therapy”: mentoring is not therapy or medical care. How sessions are held is listed under _dropped in site.config.json; the contact page’s line about talking when you meet is removed. | `/\bone-to-one\b\|\bon your side\b\|\bpractical(,)? (one-to-one )?support\b\|\btime to talk\b\|\bwhen you meet\b/i` | ✅ 0 |
+| What the five free diagnostic sessions cover | “Your first five sessions are free, as a diagnostic. There is nothing to pay for them.” What the diagnostic covers is listed under _dropped. | `/\bhow tech fits\b\|\bwhat it is costing you\b\|\bclear picture\b\|\bunderstand your (tech habits\|situation)\b\|\bfind out whether\b\|\bwhether mentoring with Nick suits you\b\|\bwhat you (want\|would like) to change\b\|\b(look\|looks\|looking) at (how\|your\|what)\b\|\b(explore\|assess\|work out\|map out) (how\|your\|what)\b\|\bthe diagnostic (covers\|looks at\|explores\|is about\|helps)\b/i` | ✅ 0 |
+| What happens after the five free sessions | Removed; listed under _dropped until Nick says what happens after the five free sessions. | `/\bdecide together\b\|\bno obligation\b\|\bit is your choice\b\|\bafter the five free sessions\b\|\bcarry on\b\|\bafter (the\|your) (first )?(five\|5)( free)? sessions\b\|\bno (commitment\|pressure)\b\|\bpaid sessions?\b\|\bonce the free sessions\b/i` | ✅ 0 |
+| His professional background | “Nick is a mentor, and mentoring is not therapy or medical care.” His background is not one of his facts. | `/\bmental health professional\b\|\b(qualified\|qualifications?\|accredited\|accreditation\|trained (in\|as)\|training in\|degree in\|years of experience)\b/i` | ✅ 0 |
+| That no Meta code can reach a visitor through the site | The site’s own pages have no Meta code; Calendly’s page loads Meta’s code only if the visitor accepts Calendly’s optional cookies, as both pages now say. | `/\bMeta sets no cookies\b\|\bThe website has no Meta code\b\|(?<!own pages have )\bno Meta (code\|Pixel)\b/i` | ✅ 0 |
+| That the booking calendar’s cookies all come from Calendly | Each page names every service the calendar loads, as measured: Calendly, Cloudflare, OneTrust, Stripe, Google reCAPTCHA and Airbrake, and those that load only if Calendly’s optional cookies are accepted. The FAQ now says, as the booking page and the booking dialog do, that “Calendly then sets cookies on your device and connects to services it uses, such as Google reCAPTCHA and Stripe”. | `/\bthey come from Calendly\.\|\bconnects to Calendly, which sets its own cookies\b\|\bCalendly collects information about your device and sets cookies\b\|\bsets? its own cookies\b\|\bcookies[^.!?\n]{0,60}\bcome (only )?from Calendly\b(?! and)\|\bCalendly(’s\|'s)( own)? cookies\b\|\bCalendly( then)? (sets\|uses\|places\|stores) (its )?cookies\b(?! on your device and connects)\|\bcookies (set )?(only )?by Calendly\b(?! and)/i` | ✅ 0 |
+| Where sessions happen | The booking flow does not name where sessions happen: on the calendar and the details form, Calendly shows only “Web conferencing details provided upon confirmation.” (calendly.mjs records it). The privacy policy now refers to “the web-conferencing service whose details come with your booking confirmation”; where sessions happen is listed under _dropped. | `/\bGoogle Meet\b\|\bZoom\b\|\bMicrosoft Teams\b\|\bvideo calls?\b\|\bin person\b\|\bface[- ]to[- ]face\b\|\bonline sessions?\b/i` | ✅ 0 |
+| That visitors commonly ask these questions | “Answers to questions about mentoring at DeepRest”. | `/\bcommon(ly asked)? questions\b\|\bfrequently asked\b\|\bpeople (often\|usually) ask\b/i` | ✅ 0 |
+
+**Outside services and stored items: named on the pages against measured.** The privacy policy's services and the cookie notice's rows, read from the built pages, against the Calendly check's measurement of 2026-10-27T08:41:00.863Z (above). ✅
 
 | What | When | Measured | Named | Missing from the page | On the page but not measured |
 |---|---|---|---|---|---|
@@ -392,6 +453,41 @@ There are no testimonials. Wording beyond Nick's three facts is listed for him t
 | Services, privacy policy | only if accepted | 6 | 6 | 0 | 0 |
 | Cookies and stored items, cookie notice | whatever the banner answer | 11 | 11 | 0 | 0 |
 | Cookies and stored items, cookie notice | only if accepted | 3 | 3 | 0 | 0 |
+
+## Booking flow: where sessions happen, and the event’s description
+
+Read by the Calendly check at 1,440 px on 2026-10-27T08:40:48.074Z, on the calendar and again on the details form (`[data-component="event-type-location"]` and the paragraphs beside it), and recorded with the cookie data in `src/data/calendly-third-parties.json` when measured locally.
+
+| Step | Location shown | Description shown |
+|---|---|---|
+| Calendar | “Web conferencing details provided upon confirmation.” | “DeepRest mentoring with Nick Finnemore. Your first five sessions are free, as a diagnostic. Book one session at a time here.” |
+| Details form | “Web conferencing details provided upon confirmation.” | “DeepRest mentoring with Nick Finnemore. Your first five sessions are free, as a diagnostic. Book one session at a time here.” |
+
+**Google Meet.** The event is set to Google Meet in Calendly, but the booking flow does not name it: it says only “Web conferencing details provided upon confirmation.” So, by the Manager's ruling, the pages do not say where sessions happen: the privacy policy refers to “the web-conferencing service whose details come with your booking confirmation”, and where sessions happen stays under `_dropped` in site.config.json. The facts check fails if Google Meet, or another place, is named again.
+
+**The description.** Nick’s Calendly event said whom the practice is for, a claim beyond his three facts (retired kind “Who the practice is for”). By the Manager’s yes of 27 October 2026, only that field was changed, in a tab of its own in Nick’s Chrome, and read back on the public event page; nothing was booked and no other setting changed. Opening the event’s “More options” showed Calendly’s “Saved” notice before anything was edited.
+
+- Before: “DeepRest mentoring with Nick Finnemore, for students and young adults who want to get on top of their tech use. Your first five sessions are free, as a diagnostic. Book one session at a time here.”
+- After: “DeepRest mentoring with Nick Finnemore. Your first five sessions are free, as a diagnostic. Book one session at a time here.”
+
+## Punctuation and spacing
+
+`scripts/verify/typography.mjs` reads every page in dist/, block by block, as a reader meets it (its visible text, the text read to screen readers, its title, description and sharing tags), and the messages site.js writes into the pages. It looks for ".." outside an ellipsis, a space before a comma, full stop, colon, semicolon, question or exclamation mark, doubled punctuation, no space after a comma, semicolon or full stop, two spaces inside a line of the HTML, a word twice in a row, brackets or curly quotes not in pairs, and straight quotes. Cookie names and other code are left out. Slips: **0**.
+
+| Page | Slips |
+|---|---|
+| Home | ✅ 0 |
+| Mentoring | ✅ 0 |
+| About Nick | ✅ 0 |
+| FAQ | ✅ 0 |
+| Book a free session | ✅ 0 |
+| Contact | ✅ 0 |
+| Privacy policy | ✅ 0 |
+| Cookie notice | ✅ 0 |
+| Page not found (404) | ✅ 0 |
+| site.js | ✅ 0 |
+
+**Self-test** (`--self-test`, also run with every check): ✅ 27 made-up cases, each slip caught by its rule and each clean text left alone; and the live pages as they were before this check (`scripts/verify/fixtures/live-2026-10-23/`), where it finds 1: Privacy policy, double full stop: “Cloudflare, Inc.. Protects Calendly’s website f”.
 
 ## PDFs for review
 
@@ -434,6 +530,10 @@ Made with Chrome's print-to-PDF (Puppeteer `page.pdf`) at a desktop width of 1,4
 - Removing `src/data/calendly-cookies.json`, the only file in `src/data`, removed the folder too, so the local Calendly check, having passed, failed to write `src/data/calendly-third-parties.json`. The file was written from that run's saved result (`verification/calendly.json`), and the check now creates the folder.
 - On 23 October the live layout check stopped after 6 of 63 page-widths: Chrome closed the tab while taking the full-page screenshot of Home at 1,920 px ("Target closed"), with this machine's memory at about 85% in use. Run again on its own, with nothing else running, it passed 63/63; the layout results above are from that run.
 - The first pattern for the retired claim that Nick helped clients out of tech addiction also matched the privacy policy's "adverts help people find us". It was narrowed to the forms the site had used, and checked against the old live text, where it still finds every one.
+- The pattern for kind 11 (the calendar's cookies all from Calendly) matched only the three wordings it was written from, so the FAQ's "because Calendly sets its own cookies" passed the facts check and stayed live. The kind now matches Calendly alone as the source of cookies in any of the usual wordings, and the other kinds were widened the same way; the self-test runs every pattern against the live pages as they were.
+- The facts check read only the site's own pages, so the Calendly event's description, shown inside the booking calendar, said whom the practice is for without any check noticing. The Calendly check now reads it from the booking flow, and the facts check holds it to the same rules.
+- The first version of the punctuation check flagged "Inc.," and "Inc.:" (an abbreviation's full stop, then the sentence's comma or colon) as doubled punctuation, 4 false alarms in the old live pages; abbreviations are now allowed there, and the self-test has both as clean cases. It then still flagged them, because a Python edit through the shell had turned the pattern's `\b` into a backspace character; the escapes were put back with a Node script, and edits with backslashes are made in the editor or from a file.
+- Searching the whole disk for the previous turn's `retired-test.mjs` ran past two minutes and was stopped; the file was in `.private/scratch`, outside the repository, and read files that are not kept. Its test is now `node scripts/verify/facts.mjs --self-test`, against pages saved in the repository.
 
 ## Limits of these checks
 

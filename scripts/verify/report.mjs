@@ -10,7 +10,8 @@ const config = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.config.json'), '
 const TEXT_SOURCES = [
   `Nick's three facts (five years mentoring students and young adults; a 100% satisfaction rate across 23 clients; the first five sessions free, as a diagnostic): his order of 19 October 2026, recorded in site.config.json under _sources. His order also said that being young has played to his advantage, because he has seen many people go through tech addiction and been able to get them out of it; the site leaves those words off, as the brief limits it to his three facts, and PLACEHOLDERS.md asks him about them`,
   'His full name, Nicholas Finnemore, used as data controller in the privacy policy: the name on his Google account',
-  'The booking event, its optional question ("Please share anything that will help prepare for our meeting."), guests allowed, Google Calendar connection and Google Meet location: the Calendly event "Free diagnostic session" as configured on calendly.com/nicholas-finnemore/free-diagnostic',
+  'The booking event, its optional question ("Please share anything that will help prepare for our meeting."), guests allowed and Google Calendar connection: the Calendly event "Free diagnostic session" as configured on calendly.com/nicholas-finnemore/free-diagnostic',
+  'The session held on "the web-conferencing service whose details come with your booking confirmation", in the privacy policy: the booking flow\'s own words, "Web conferencing details provided upon confirmation.", as the Calendly check read them (below, under Calendly). The event is set to Google Meet, but the flow does not show it, so the pages do not name it',
   'Calendly confirmation emails carry links to cancel and reschedule: Calendly\'s standard invitee emails',
   'hello@deepestrest.com forwards to Nick\'s Gmail through Cloudflare Email Routing: the routing rule on his Cloudflare account',
   'Samaritans, 116 123, free from landlines and mobiles, day or night, 365 days a year: https://www.samaritans.org/how-we-can-help/contact-samaritan/',
@@ -49,7 +50,21 @@ const FAILED = [
   'Removing `src/data/calendly-cookies.json`, the only file in `src/data`, removed the folder too, so the local Calendly check, having passed, failed to write `src/data/calendly-third-parties.json`. The file was written from that run\'s saved result (`verification/calendly.json`), and the check now creates the folder.',
   'On 23 October the live layout check stopped after 6 of 63 page-widths: Chrome closed the tab while taking the full-page screenshot of Home at 1,920 px ("Target closed"), with this machine\'s memory at about 85% in use. Run again on its own, with nothing else running, it passed 63/63; the layout results above are from that run.',
   'The first pattern for the retired claim that Nick helped clients out of tech addiction also matched the privacy policy\'s "adverts help people find us". It was narrowed to the forms the site had used, and checked against the old live text, where it still finds every one.',
+  'The pattern for kind 11 (the calendar\'s cookies all from Calendly) matched only the three wordings it was written from, so the FAQ\'s "because Calendly sets its own cookies" passed the facts check and stayed live. The kind now matches Calendly alone as the source of cookies in any of the usual wordings, and the other kinds were widened the same way; the self-test runs every pattern against the live pages as they were.',
+  'The facts check read only the site\'s own pages, so the Calendly event\'s description, shown inside the booking calendar, said whom the practice is for without any check noticing. The Calendly check now reads it from the booking flow, and the facts check holds it to the same rules.',
+  'The first version of the punctuation check flagged "Inc.," and "Inc.:" (an abbreviation\'s full stop, then the sentence\'s comma or colon) as doubled punctuation, 4 false alarms in the old live pages; abbreviations are now allowed there, and the self-test has both as clean cases. It then still flagged them, because a Python edit through the shell had turned the pattern\'s `\\b` into a backspace character; the escapes were put back with a Node script, and edits with backslashes are made in the editor or from a file.',
+  'Searching the whole disk for the previous turn\'s `retired-test.mjs` ran past two minutes and was stopped; the file was in `.private/scratch`, outside the repository, and read files that are not kept. Its test is now `node scripts/verify/facts.mjs --self-test`, against pages saved in the repository.',
 ];
+
+// The change to the Calendly event's description, which the booking calendar shows.
+const DESCRIPTION_CHANGE = {
+  what: 'Nick’s Calendly event said whom the practice is for, a claim beyond his three facts (retired kind “Who the practice is for”). By the Manager’s yes of 27 October 2026, only that field was changed, in a tab of its own in Nick’s Chrome, and read back on the public event page; nothing was booked and no other setting changed. Opening the event’s “More options” showed Calendly’s “Saved” notice before anything was edited.',
+  before: 'DeepRest mentoring with Nick Finnemore, for students and young adults who want to get on top of their tech use. Your first five sessions are free, as a diagnostic. Book one session at a time here.',
+  after: 'DeepRest mentoring with Nick Finnemore. Your first five sessions are free, as a diagnostic. Book one session at a time here.',
+};
+
+// What the human-speed pass opens besides each page as it first appears.
+const STATES = { 'answers-open': 'every answer open', menu: 'menu open', 'booking-question': 'booking question', calendar: 'calendar loaded' };
 
 // A re-run keeps the failed attempt before it, which keeps its own: every failed attempt, oldest first.
 function failedAttempts(r) {
@@ -83,6 +98,9 @@ const facts = read('facts.json');
 const ready = read('publish-ready.json');
 const hosting = read('live.json');
 const psi = read('pagespeed.json');
+const typo = read('typography.json');
+const human = read('human-pass.json');
+const review = read('human-pass-review.json');
 const psiLowest = psi ? Math.min(...psi.results.flatMap((r) => [r.mobile, r.desktop].flatMap((x) => (x.scores ? Object.values(x.scores) : [0])))) : null;
 
 const live = Boolean(layoutFile?.live);
@@ -142,7 +160,10 @@ out(
   row(facts, `| Protected titles used for Nick (psychologist, therapist, counsellor, HCPC and BPS titles) | 0 | ${yes(facts?.protectedTitles === 0)} **${facts?.protectedTitles}** on any page, in its text, title, description or sharing tags |`),
   row(facts, `| Clinical or medical claims | 0 | ${yes(facts?.clinicalClaims === 0)} **${facts?.clinicalClaims}** |`),
   row(facts, `| Invented facts | 0 | ${yes(facts?.inventedFacts === 0)} **${facts?.inventedFacts}** unexplained figures or contact details |`),
-  row(facts, `| Claims beyond Nick's three facts, of the kinds found and removed | 0 | ${yes(facts?.retiredClaims === 0)} **${facts?.retiredClaims}** left; ${facts?.retiredList?.length} kinds were found in ${facts?.retiredList?.reduce((n, r) => n + r.found.length, 0)} places, each listed below with its fix |`),
+  row(facts, `| Claims beyond Nick's three facts, of the kinds found and removed | 0 | ${yes(facts?.retiredClaims === 0)} **${facts?.retiredClaims}** left on the pages; ${facts?.retiredList?.length} kinds were found in ${facts?.retiredList?.reduce((n, r) => n + r.found.length, 0)} places, listed below by page with their fixes |`),
+  row(facts, `| Claims beyond his three facts in the booking calendar (the Calendly event's description, ${where(cal)}) | 0 | ${facts?.calendar?.measured ? `${yes(facts.calendar.pass)} **${facts.calendar.retired.length + facts.calendar.protectedTitles.length + facts.calendar.clinicalClaims.length}**: “${facts.calendar.description}”` : '❌ not read'} |`),
+  row(typo, `| Punctuation and spacing slips (${where(typo)}) | 0 | ${yes(typo?.pass)} **${typo?.slips}** on ${PAGES.length} pages and in site.js's messages; self-test: ${typo?.selfTest?.failed === 0 ? `passes (${typo.selfTest.cases} made-up cases; the old live privacy policy's “Cloudflare, Inc..” caught)` : `${typo?.selfTest?.failed} failures`} |`),
+  row(human, `| Human-speed pass: every page at every width scrolled at reading speed, every capture looked at (${where(human)}) | ${PAGES.length * WIDTHS.length} page-widths; defects left 0 | ${yes(human && review && human.pageWidths === PAGES.length * WIDTHS.length && review.captures === human.captures && review.defectsLeft === 0)} ${human?.pageWidths} page-widths and ${human ? human.runs.length - human.pageWidths : 0} opened states at ${human?.speed} px a second, ${human?.captures} captures, ${review ? `${review.captures} looked at; defects found ${review.defects.length}, left **${review.defectsLeft}**` : 'not yet looked at'} |`),
   row(facts, `| Outside services the privacy policy names, and items the cookie notice lists, against those measured (${where(cal)}) | equal | ${tp?.measured ? `${yes(tp.pass)} services ${tp.services.always.named + tp.services.accepted.named} named, ${tp.services.always.measured + tp.services.accepted.measured} measured; items ${tp.items.always.named + tp.items.accepted.named} listed, ${tp.items.always.measured + tp.items.accepted.measured} measured; missing ${['services', 'items'].reduce((n, k) => n + tp[k].always.missing.length + tp[k].accepted.missing.length, 0)}, extra ${['services', 'items'].reduce((n, k) => n + tp[k].always.extra.length + tp[k].accepted.extra.length, 0)}` : '❌ not measured'} |`),
   row(facts, `| Home page: headline figures and the free-diagnostic offer | shown | ${yes(facts?.headline && Object.values(facts.headline).every(Boolean))} ${config.mentor.satisfaction} satisfaction across ${config.mentor.clients} clients; five years; "Your first five sessions are free, as a diagnostic" |`),
   '',
@@ -380,12 +401,22 @@ if (facts) {
     '',
   );
   if (facts.retiredList) {
+    const places = facts.retiredList.flatMap((r) => r.found.map(([page, words, found]) => ({ page, words, found, claim: r.claim })));
+    const label = { footer: 'Footer, every page', 'booking calendar': 'Booking calendar: the Calendly event’s description, on the booking page and in the popup on every page' };
     out(
-      `**Claims beyond Nick's three facts: ${facts.retiredClaims} left.** Every page was read against his three facts, and each claim found beyond them was removed or rewritten. The facts check searches every page's text, title, description and sharing tags for each kind of claim, with the pattern shown, so none can return:`,
+      `**Claims beyond Nick's three facts: ${facts.retiredClaims} left on the pages, ${facts.calendar?.retired.length ?? '?'} in the booking calendar.** Every page was read, sentence by sentence, against his three facts, and each claim found beyond them was removed or rewritten. Where each was, page by page:`,
       '',
-      '| Claim | Where it was, and its words | Fix | Pattern | Left |',
-      '|---|---|---|---|---|',
-      ...facts.retiredList.map((r) => `| ${r.claim} | ${r.found.map(([page, words]) => `${name(page) || page}: “${words}”`).join('<br>')} | ${r.fix} | \`${r.pattern.replace(/\|/g, '\\|')}\` | ${r.left.length ? `❌ ${r.left.join('<br>')}` : '✅ 0'} |`),
+      '| Page | Claim | Its words | Found |',
+      '|---|---|---|---|',
+      ...[...PAGES.map((p) => p.slug), 'footer', 'booking calendar'].flatMap((slug) =>
+        places.filter((x) => x.page === slug).map((x) => `| ${label[slug] ?? name(slug)} | ${x.claim} | “${x.words}” | ${x.found ?? 'by 23 October 2026 (commit 3d3382e)'} |`),
+      ),
+      '',
+      'Each kind of claim, its fix, and the pattern the facts check searches for, in every page\'s text, title, description and sharing tags and in the booking calendar\'s description, so none can return. `node scripts/verify/facts.mjs --self-test` runs each pattern against the words it was written for, and against the live pages as they were before the latest fixes (`scripts/verify/fixtures/live-2026-10-23/`).',
+      '',
+      '| Claim | Fix | Pattern | Left |',
+      '|---|---|---|---|',
+      ...facts.retiredList.map((r) => `| ${r.claim} | ${r.fix} | \`${r.pattern.replace(/\|/g, '\\|')}\` | ${r.left.length ? `❌ ${r.left.join('<br>')}` : '✅ 0'} |`),
       '',
     );
   }
@@ -403,6 +434,78 @@ if (facts) {
       '',
     );
   }
+}
+
+// The booking flow: what Calendly shows of the session, and the event's description.
+const flow = cal?.bookingFlow;
+if (flow?.calendar) {
+  out(
+    '## Booking flow: where sessions happen, and the event’s description',
+    '',
+    `Read by the Calendly check at 1,440 px on ${flow.checked}, on the calendar and again on the details form (\`[data-component="event-type-location"]\` and the paragraphs beside it), and recorded with the cookie data in \`src/data/calendly-third-parties.json\` when measured locally.`,
+    '',
+    '| Step | Location shown | Description shown |',
+    '|---|---|---|',
+    `| Calendar | “${flow.calendar.location}” | “${flow.calendar.description}” |`,
+    ...(flow.detailsForm ? [`| Details form | “${flow.detailsForm.location}” | “${flow.detailsForm.description}” |`] : []),
+    '',
+    `**Google Meet.** The event is set to Google Meet in Calendly, but the booking flow does not name it: it says only “${flow.calendar.location}” So, by the Manager's ruling, the pages do not say where sessions happen: the privacy policy refers to “the web-conferencing service whose details come with your booking confirmation”, and where sessions happen stays under \`_dropped\` in site.config.json. The facts check fails if Google Meet, or another place, is named again.`,
+    '',
+    `**The description.** ${DESCRIPTION_CHANGE.what}`,
+    '',
+    `- Before: “${DESCRIPTION_CHANGE.before}”`,
+    `- After: “${DESCRIPTION_CHANGE.after}”`,
+    '',
+  );
+}
+
+// Punctuation and spacing.
+if (typo) {
+  out(
+    '## Punctuation and spacing',
+    '',
+    `\`scripts/verify/typography.mjs\` reads every page${typo.live ? ` as served by ${typo.testedAt}` : ' in dist/'}, block by block, as a reader meets it (its visible text, the text read to screen readers, its title, description and sharing tags), and the messages site.js writes into the pages. It looks for ".." outside an ellipsis, a space before a comma, full stop, colon, semicolon, question or exclamation mark, doubled punctuation, no space after a comma, semicolon or full stop, two spaces inside a line of the HTML, a word twice in a row, brackets or curly quotes not in pairs, and straight quotes. Cookie names and other code are left out. Slips: **${typo.slips}**.`,
+    '',
+    '| Page | Slips |',
+    '|---|---|',
+    ...typo.pages.map((p) => `| ${name(p.page)} | ${p.slips.length ? `❌ ${p.slips.map((s) => `${s.rule}: “${s.words}”`).join('<br>')}` : '✅ 0'} |`),
+    '',
+    `**Self-test** (\`--self-test\`, also run with every check): ${yes(!typo.selfTest.failed)} ${typo.selfTest.cases} made-up cases, each slip caught by its rule and each clean text left alone; and the live pages as they were before this check (\`scripts/verify/fixtures/live-2026-10-23/\`), where it finds ${typo.selfTest.oldLiveTotal}: ${Object.entries(typo.selfTest.oldLive).flatMap(([page, list]) => list.map((s) => `${name(page)}, ${s.rule}: “${s.words}”`)).join('; ') || 'none'}.`,
+    '',
+  );
+}
+
+// The human-speed pass.
+if (human) {
+  const runName = (r) => `${name(r.page)}${r.state === 'page' ? '' : `, ${STATES[r.state]}`}`;
+  out(
+    '## Human-speed pass',
+    '',
+    `\`scripts/verify/human-pass.mjs\` (${human.live ? `the live site, ${human.testedAt}` : 'the build, served locally'}): every page at each of the ${WIDTHS.length} widths, scrolled from top to bottom at ${human.speed} px a second with a ${human.pause} ms pause at each stop, a screen capture at every stop, stops 80% of a screen apart. Besides each page as it first appears, it opens every FAQ answer, the menu where the screen has one, the booking question the header button asks, and the booking page's calendar. ${human.pageWidths} page-widths and ${human.runs.length - human.pageWidths} opened states; ${human.captures} captures in [human-pass/](human-pass/).`,
+    '',
+    ...(review
+      ? [
+          `**Looked at:** ${review.captures} of ${human.captures} captures, one by one, ${review.how}. Defects found: **${review.defects.length}**; left: **${review.defectsLeft}**.`,
+          '',
+          ...(review.defects.length
+            ? ['| Capture | Defect | Fix | Captured again |', '|---|---|---|---|', ...review.defects.map((d) => `| ${d.capture} | ${d.what} | ${d.fix} | ${d.again} |`), '']
+            : []),
+        ]
+      : ['**Not yet looked at.**', '']),
+    `| Page | ${WIDTHS.join(' | ')} |`,
+    `|---|${WIDTHS.map(() => '---').join('|')}|`,
+    ...[...new Set(human.runs.map((r) => `${r.page}|${r.state}`))].map((key) => {
+      const [page, state] = key.split('|');
+      const cells = WIDTHS.map((w) => {
+        const r = human.runs.find((x) => x.page === page && x.state === state && x.width === w);
+        if (!r) return '–';
+        if (r.error) return `❌ ${r.error}`;
+        return r.stops.map((s, i) => `[${i + 1}](human-pass/${s.file})`).join(' ');
+      });
+      return `| ${runName({ page, state })} | ${cells.join(' | ')} |`;
+    }),
+    '',
+  );
 }
 
 // PDFs.

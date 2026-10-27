@@ -20,7 +20,7 @@ export const REVIEW_NOTES = [
   },
   {
     where: 'Privacy policy',
-    what: 'the whole policy, above all: the lawful bases; the services listed (Calendly, Google Calendar, Gmail and Google Meet, Cloudflare Email Routing, GitHub Pages); and the retention wording, which gives criteria instead of a fixed period. Nick, as data controller, should check it against how he actually handles bookings and emails.',
+    what: 'the whole policy, above all: the lawful bases; the services listed (Calendly, Google Calendar and Gmail, the web-conferencing service whose details come with the booking confirmation, Cloudflare Email Routing, GitHub Pages); and the retention wording, which gives criteria instead of a fixed period. Nick, as data controller, should check it against how he actually handles bookings and emails. The policy does not name the conferencing service, because the booking calendar does not: if sessions are held on Google Meet, as the Calendly event is set up, he can say so and the policy can name it.',
   },
   {
     where: 'His own words, left off every page',

@@ -10,7 +10,10 @@
 // hosts the browser contacted, the cookies set and the items each frame stored. That is done
 // twice at 1,440 px, once declining Calendly's optional cookies and once accepting them, and
 // written to src/data/calendly-third-parties.json, from which the privacy policy and cookie
-// notice are built. With --live it tests the published site and leaves that file as it is;
+// notice are built. With it goes what the booking flow says about the session, at 1,440 px on
+// the calendar and on the details form: the location Calendly shows (it shows where sessions
+// happen only if the event names it) and the event's description, which facts.mjs reads for
+// claims beyond Nick's three facts. With --live it tests the published site and leaves that file as it is;
 // facts.mjs then compares what was measured with what the live pages name.
 //   node scripts/verify/calendly.mjs [--live] [--widths=360,1440] [--pages=home,book] [--skip-popup] [--skip-inline]
 import fs from 'node:fs';
@@ -110,12 +113,20 @@ async function declineCalendlyOptionalCookies(frame, touch) {
 }
 
 // Calendly's banner again, this time accepting every optional cookie, to see what that adds.
+// OneTrust records an answer in its OptanonAlertBoxClosed cookie. A press while the banner is
+// still sliding in can be lost, so it presses again until that cookie is set.
 async function acceptCalendlyOptionalCookies(frame, touch) {
-  const button = await poll(() => frame.$('#onetrust-accept-btn-handler'), 4000);
-  if (!button) return false;
-  await press(button, touch);
-  await sleep(2500);
-  return true;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const button = await poll(() => frame.$('#onetrust-accept-btn-handler'), 4000);
+    if (!button) break;
+    await press(button, touch).catch(() => {});
+    const answered = await poll(async () => (await cookies(frame.page())).some((c) => c.name === 'OptanonAlertBoxClosed'), 4000);
+    if (answered) {
+      await sleep(2500);
+      return true;
+    }
+  }
+  return false;
 }
 
 // Phones and tablets are emulated as touch screens, where Calendly responds to taps, not mouse clicks.
@@ -179,6 +190,19 @@ async function cookies(page) {
   return list.map((c) => ({ name: c.name, domain: c.domain }));
 }
 
+// The session's location as Calendly shows it, and the event's description, which Nick's
+// Calendly account sets: the paragraphs in the panel that holds the location.
+const eventDetails = (frame) =>
+  frame.evaluate(() => {
+    const location = document.querySelector('[data-component="event-type-location"]');
+    let panel = location;
+    while (panel && !panel.querySelector('p')) panel = panel.parentElement;
+    return {
+      location: location?.innerText.trim() ?? null,
+      description: panel ? [...panel.querySelectorAll('p')].map((p) => p.innerText.trim()).filter(Boolean).join('\n') : null,
+    };
+  });
+
 const CSP_WATCH = () => {
   window.__csp = [];
   document.addEventListener('securitypolicyviolation', (e) => window.__csp.push(`${e.violatedDirective} ${e.blockedURI}`));
@@ -194,6 +218,7 @@ const inline = [];
 const popup = [];
 const thirdParties = { checked: null, declined: null, accepted: null };
 let calendarText = null;
+const bookingFlow = { checked: null, calendar: null, detailsForm: null };
 
 try {
   // 1. Inline calendar on the booking page.
@@ -230,7 +255,11 @@ try {
         row.calendarLoaded = Boolean(frame);
         if (frame) {
           await sleep(1500);
-          if (width === 1440) calendarText = await frame.evaluate(() => document.body.innerText.slice(0, 1500));
+          if (width === 1440) {
+            calendarText = await frame.evaluate(() => document.body.innerText.slice(0, 1500));
+            bookingFlow.checked = new Date().toISOString();
+            bookingFlow.calendar = await eventDetails(frame);
+          }
           row.calendlyCookieBanner = await declineCalendlyOptionalCookies(frame, touch);
           const flow = await openBookingFlow(frame, touch);
           Object.assign(row, { flowOpened: flow.ok, flowSteps: flow.steps, flowProblem: flow.reason });
@@ -238,6 +267,7 @@ try {
           await sleep(800);
           await page.screenshot({ path: path.join(SHOTS, `inline-${width}.png`) });
           if (width === 1440 && flow.ok) {
+            bookingFlow.detailsForm = await eventDetails(frame);
             await sleep(6000); // reCAPTCHA and the rest of the details form
             thirdParties.checked = new Date().toISOString();
             thirdParties.declined = await observe(page, requested);
@@ -388,17 +418,19 @@ try {
     console.log(`Outside hosts up to the details form, declining Calendly's optional cookies: ${thirdParties.declined.hosts.join(', ')}`);
     console.log(`Cookies: ${thirdParties.declined.cookies.map((c) => `${c.name} (${c.domain})`).join(', ')}`);
   }
+  if (bookingFlow.calendar) console.log(`Booking flow, calendar: location "${bookingFlow.calendar.location}"; description "${bookingFlow.calendar.description}"`);
+  if (bookingFlow.detailsForm) console.log(`Booking flow, details form: location "${bookingFlow.detailsForm.location}"; description "${bookingFlow.detailsForm.description}"`);
   if (thirdParties.accepted) {
     const extra = thirdParties.accepted.hosts.filter((h) => !thirdParties.declined?.hosts.includes(h));
     console.log(`Hosts added by accepting them: ${extra.join(', ') || 'none'}`);
   }
   if (!arg('widths') && !arg('pages')) {
-    writeJson('calendly.json', { inline, popup, noJs, thirdParties, calendarText });
+    writeJson('calendly.json', { inline, popup, noJs, thirdParties, bookingFlow, calendarText });
     if (measured && !LIVE) {
       const { checked, declined, accepted } = thirdParties;
       const { bannerAccepted, detailsForm, ...acceptedSeen } = accepted;
       fs.mkdirSync(path.join(ROOT, 'src', 'data'), { recursive: true });
-      fs.writeFileSync(path.join(ROOT, 'src', 'data', 'calendly-third-parties.json'), `${JSON.stringify({ checked, declined, accepted: acceptedSeen }, null, 2)}\n`);
+      fs.writeFileSync(path.join(ROOT, 'src', 'data', 'calendly-third-parties.json'), `${JSON.stringify({ checked, declined, accepted: acceptedSeen, bookingFlow }, null, 2)}\n`);
     }
   }
   const all = [...inline, ...popup, noJs];

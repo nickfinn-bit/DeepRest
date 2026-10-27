@@ -1,6 +1,6 @@
 {
-  "testedAt": "https://deepestrest.com/",
-  "live": true,
+  "testedAt": "http://localhost:4173/",
+  "live": false,
   "placeholders": 0,
   "placeholderKeys": [],
   "missingFromPlaceholdersMd": [],
@@ -127,7 +127,7 @@
         ]
       ],
       "fix": "Each says only that he has mentored students and young adults for five years.",
-      "pattern": "/\\bout of (it|tech)|\\b(has|have|had|been able to) help(ed)?\\b|\\bhelp(ed)? (them|others|students|young)\\b|\\bseen many people\\b|\\bthrough the same thing\\b/i",
+      "pattern": "/\\bout of (it|tech)|\\b(has|have|had|been able to) help(ed)?\\b|\\bhelp(ed)? (them|others|students|young)\\b|\\bseen many people\\b|\\bthrough the same thing\\b|\\b(overcome|overcame|overcoming|beat|beating)\\b|\\b(get|gets|got|getting|helping|helps) (them|people|clients|students|others|young people|young adults) (out|off|free|back|over)\\b|\\bsuccess(es|ful|fully)?\\b|\\brecover(y|ed|ing)?\\b/i",
       "left": []
     },
     {
@@ -140,10 +140,20 @@
         [
           "about",
           "Nick Finnemore has mentored students and young adults through tech addiction for five years (description)"
+        ],
+        [
+          "home",
+          "Tech-addiction mentoring with Nick Finnemore: five years mentoring students and young adults, a 100% satisfaction rate across 23 clients, and your first five sessions free. (description)",
+          "27 October 2026"
+        ],
+        [
+          "mentoring",
+          "Tech-addiction mentoring with Nick Finnemore, who has mentored students and young adults for five years. (description)",
+          "27 October 2026"
         ]
       ],
-      "fix": "“has mentored students and young adults for five years”; DeepRest is described separately as his tech-addiction mentoring practice.",
-      "pattern": "/\\bthrough tech addiction\\b/i",
+      "fix": "“has mentored students and young adults for five years”, in a sentence of its own; DeepRest is described separately as his tech-addiction mentoring practice.",
+      "pattern": "/\\bthrough tech addiction\\b|\\btech[- ]addiction\\b[^.!?\\n]*\\b(five|5) years\\b|\\b(five|5) years\\b[^.!?\\n]*\\btech[- ]addiction\\b/i",
       "left": []
     },
     {
@@ -167,7 +177,7 @@
         ]
       ],
       "fix": "The figure is given only as he gave it: “Satisfaction rate across 23 clients: 100%”.",
-      "pattern": "/\\bclients mentored\\b|\\bclients (Nick|he) (has )?mentored\\b/i",
+      "pattern": "/\\bclients mentored\\b|\\bclients (Nick|he) (has )?mentored\\b|\\bmentored (23|twenty-three)\\b|\\b(23|twenty-three) (people|students|young people|young adults) (mentored|helped)\\b|\\bworked with (23|twenty-three)\\b/i",
       "left": []
     },
     {
@@ -187,7 +197,7 @@
         ]
       ],
       "fix": "Heading “Five years of mentoring”, over the three facts.",
-      "pattern": "/\\bhe is young\\b|\\byoung, and\\b|\\badvantage\\b/i",
+      "pattern": "/\\bhe is young\\b|\\byoung, and\\b|\\badvantage\\b|\\bbeing young\\b|\\b(his|Nick’s|Nick's) (youth|age)\\b|\\bclose (to you )?in age\\b/i",
       "left": []
     },
     {
@@ -220,10 +230,15 @@
         [
           "footer",
           "Tech-addiction mentoring for students and young adults, with Nick Finnemore."
+        ],
+        [
+          "booking calendar",
+          "DeepRest mentoring with Nick Finnemore, for students and young adults who want to get on top of their tech use.",
+          "27 October 2026"
         ]
       ],
-      "fix": "Removed. The pages say whom he has mentored (students and young adults, for five years), not whom DeepRest is for; the footer reads “Tech-addiction mentoring with Nick Finnemore.”",
-      "pattern": "/\\bbreak free\\b|\\btaken over\\b|\\bhold on (them|you)\\b|\\bwho (it is|it’s|it's|DeepRest is) for\\b|\\bwho is DeepRest for\\b|\\bmentoring for students\\b/i",
+      "fix": "Removed. The pages say whom he has mentored (students and young adults, for five years), not whom DeepRest is for; the footer reads “Tech-addiction mentoring with Nick Finnemore.” The Calendly event’s description now reads “DeepRest mentoring with Nick Finnemore. Your first five sessions are free, as a diagnostic. Book one session at a time here.”",
+      "pattern": "/\\bbreak free\\b|\\btaken over\\b|\\bhold on (them|you)\\b|\\bwho (it is|it’s|it's|DeepRest is) for\\b|\\bwho is DeepRest for\\b|\\bmentoring for students\\b|\\bfor (students|young adults|young people|teenagers|anyone|people) (and|who|wanting|struggling)\\b|\\bwho want to\\b|\\bget on top of\\b|\\btheir tech use\\b/i",
       "left": []
     },
     {
@@ -244,10 +259,15 @@
         [
           "faq",
           "No. Mentoring is practical, one-to-one support."
+        ],
+        [
+          "contact",
+          "There will be time to talk when you meet.",
+          "27 October 2026"
         ]
       ],
-      "fix": "“Mentoring, not therapy”: mentoring is not therapy or medical care. How sessions are held is listed under _dropped in site.config.json.",
-      "pattern": "/\\bone-to-one\\b|\\bon your side\\b|\\bpractical(,)? (one-to-one )?support\\b/i",
+      "fix": "“Mentoring, not therapy”: mentoring is not therapy or medical care. How sessions are held is listed under _dropped in site.config.json; the contact page’s line about talking when you meet is removed.",
+      "pattern": "/\\bone-to-one\\b|\\bon your side\\b|\\bpractical(,)? (one-to-one )?support\\b|\\btime to talk\\b|\\bwhen you meet\\b/i",
       "left": []
     },
     {
@@ -275,7 +295,7 @@
         ]
       ],
       "fix": "“Your first five sessions are free, as a diagnostic. There is nothing to pay for them.” What the diagnostic covers is listed under _dropped.",
-      "pattern": "/\\bhow tech fits\\b|\\bwhat it is costing you\\b|\\bclear picture\\b|\\bunderstand your (tech habits|situation)\\b|\\bfind out whether\\b|\\bwhether mentoring with Nick suits you\\b|\\bwhat you (want|would like) to change\\b/i",
+      "pattern": "/\\bhow tech fits\\b|\\bwhat it is costing you\\b|\\bclear picture\\b|\\bunderstand your (tech habits|situation)\\b|\\bfind out whether\\b|\\bwhether mentoring with Nick suits you\\b|\\bwhat you (want|would like) to change\\b|\\b(look|looks|looking) at (how|your|what)\\b|\\b(explore|assess|work out|map out) (how|your|what)\\b|\\bthe diagnostic (covers|looks at|explores|is about|helps)\\b/i",
       "left": []
     },
     {
@@ -299,7 +319,7 @@
         ]
       ],
       "fix": "Removed; listed under _dropped until Nick says what happens after the five free sessions.",
-      "pattern": "/\\bdecide together\\b|\\bno obligation\\b|\\bit is your choice\\b|\\bafter the five free sessions\\b|\\bcarry on\\b/i",
+      "pattern": "/\\bdecide together\\b|\\bno obligation\\b|\\bit is your choice\\b|\\bafter the five free sessions\\b|\\bcarry on\\b|\\bafter (the|your) (first )?(five|5)( free)? sessions\\b|\\bno (commitment|pressure)\\b|\\bpaid sessions?\\b|\\bonce the free sessions\\b/i",
       "left": []
     },
     {
@@ -315,7 +335,7 @@
         ]
       ],
       "fix": "“Nick is a mentor, and mentoring is not therapy or medical care.” His background is not one of his facts.",
-      "pattern": "/\\bmental health professional\\b/i",
+      "pattern": "/\\bmental health professional\\b|\\b(qualified|qualifications?|accredited|accreditation|trained (in|as)|training in|degree in|years of experience)\\b/i",
       "left": []
     },
     {
@@ -331,7 +351,7 @@
         ]
       ],
       "fix": "The site’s own pages have no Meta code; Calendly’s page loads Meta’s code only if the visitor accepts Calendly’s optional cookies, as both pages now say.",
-      "pattern": "/\\bMeta sets no cookies\\b|\\bThe website has no Meta code\\b/i",
+      "pattern": "/\\bMeta sets no cookies\\b|\\bThe website has no Meta code\\b|(?<!own pages have )\\bno Meta (code|Pixel)\\b/i",
       "left": []
     },
     {
@@ -348,16 +368,62 @@
         [
           "privacy",
           "If you choose to load the booking calendar, Calendly collects information about your device and sets cookies"
+        ],
+        [
+          "faq",
+          "The calendar is provided by Calendly, and loads only once you agree to it, because Calendly sets its own cookies.",
+          "27 October 2026"
         ]
       ],
-      "fix": "Both pages name every service the calendar loads, as measured: Calendly, Cloudflare, OneTrust, Stripe, Google reCAPTCHA and Airbrake, and those that load only if Calendly’s optional cookies are accepted.",
-      "pattern": "/\\bthey come from Calendly\\.|\\bconnects to Calendly, which sets its own cookies\\b|\\bCalendly collects information about your device and sets cookies\\b/i",
+      "fix": "Each page names every service the calendar loads, as measured: Calendly, Cloudflare, OneTrust, Stripe, Google reCAPTCHA and Airbrake, and those that load only if Calendly’s optional cookies are accepted. The FAQ now says, as the booking page and the booking dialog do, that “Calendly then sets cookies on your device and connects to services it uses, such as Google reCAPTCHA and Stripe”.",
+      "pattern": "/\\bthey come from Calendly\\.|\\bconnects to Calendly, which sets its own cookies\\b|\\bCalendly collects information about your device and sets cookies\\b|\\bsets? its own cookies\\b|\\bcookies[^.!?\\n]{0,60}\\bcome (only )?from Calendly\\b(?! and)|\\bCalendly(’s|'s)( own)? cookies\\b|\\bCalendly( then)? (sets|uses|places|stores) (its )?cookies\\b(?! on your device and connects)|\\bcookies (set )?(only )?by Calendly\\b(?! and)/i",
+      "left": []
+    },
+    {
+      "claim": "Where sessions happen",
+      "found": [
+        [
+          "privacy",
+          "Calendly adds the booking to Nick’s Google Calendar, and creates the Google Meet video call link for the session, which Google provides.",
+          "27 October 2026"
+        ],
+        [
+          "privacy",
+          "Google LLC, which provides Nick’s calendar and email, and the Google Meet video calls.",
+          "27 October 2026"
+        ]
+      ],
+      "fix": "The booking flow does not name where sessions happen: on the calendar and the details form, Calendly shows only “Web conferencing details provided upon confirmation.” (calendly.mjs records it). The privacy policy now refers to “the web-conferencing service whose details come with your booking confirmation”; where sessions happen is listed under _dropped.",
+      "pattern": "/\\bGoogle Meet\\b|\\bZoom\\b|\\bMicrosoft Teams\\b|\\bvideo calls?\\b|\\bin person\\b|\\bface[- ]to[- ]face\\b|\\bonline sessions?\\b/i",
+      "left": []
+    },
+    {
+      "claim": "That visitors commonly ask these questions",
+      "found": [
+        [
+          "faq",
+          "Answers to common questions about mentoring at DeepRest: the five free sessions, booking all five, cancelling and urgent help. (description)",
+          "27 October 2026"
+        ]
+      ],
+      "fix": "“Answers to questions about mentoring at DeepRest”.",
+      "pattern": "/\\bcommon(ly asked)? questions\\b|\\bfrequently asked\\b|\\bpeople (often|usually) ask\\b/i",
       "left": []
     }
   ],
+  "calendar": {
+    "measured": true,
+    "checked": "2026-10-27T08:40:48.074Z",
+    "location": "Web conferencing details provided upon confirmation.",
+    "description": "DeepRest mentoring with Nick Finnemore. Your first five sessions are free, as a diagnostic. Book one session at a time here.",
+    "retired": [],
+    "protectedTitles": [],
+    "clinicalClaims": [],
+    "pass": true
+  },
   "thirdParties": {
     "measured": true,
-    "checked": "2026-10-23T09:11:12.652Z",
+    "checked": "2026-10-27T08:41:00.863Z",
     "unidentified": [],
     "services": {
       "always": {
@@ -468,7 +534,7 @@
       "source": "HTTP status of the error page"
     },
     {
-      "text": "23 October 2026",
+      "text": "27 October 2026",
       "source": "the date the privacy policy was last updated (site.config.json, privacy.lastUpdated)"
     },
     {
@@ -512,7 +578,7 @@
       "source": "how long a cookie on the cookie notice lasts, from the time it had left when scripts/verify/calendly.mjs measured it (src/data/calendly-third-parties.json)"
     },
     {
-      "text": "23 October 2026",
+      "text": "27 October 2026",
       "source": "date scripts/verify/calendly.mjs measured what the booking calendar loads (src/data/calendly-third-parties.json)"
     },
     {

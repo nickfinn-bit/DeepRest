@@ -17,6 +17,7 @@ npm run serve         # serves dist/ at http://localhost:4173/, as GitHub Pages 
 npm run verify        # every check, locally, then verification/REPORT.md
 npm run verify:live   # every check against https://deepestrest.com/, plus DNS, HTTPS and redirects
 node scripts/verify/pagespeed.mjs --live --browser-url=http://127.0.0.1:9222   # PageSpeed Insights, from a Chrome signed in to Google
+node scripts/verify/human-pass.mjs --live   # every page at every width at reading speed, captures to look at
 ```
 
 The HTML check needs the W3C Nu HTML Checker unpacked into `.tools/vnu-runtime-image`: download `vnu.windows.zip`, `vnu.linux.zip` or `vnu.osx.zip` from https://github.com/validator/validator/releases. These builds need no Java.

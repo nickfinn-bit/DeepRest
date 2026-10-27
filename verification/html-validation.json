@@ -1,6 +1,6 @@
 {
-  "testedAt": "https://deepestrest.com/",
-  "live": true,
+  "testedAt": "http://localhost:4173/",
+  "live": false,
   "checker": "Nu HTML Checker 26.10.12 (0a70d65)",
   "results": [
     {

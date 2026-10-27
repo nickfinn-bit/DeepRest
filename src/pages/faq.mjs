@@ -13,7 +13,7 @@ export default {
   name: 'FAQ',
   title: () => 'Questions and answers | DeepRest',
   description: ({ F }) =>
-    `Answers to common questions about mentoring at DeepRest: the ${inWords(F.value('offer.freeSessions'))} free sessions, booking all ${inWords(F.value('offer.freeSessions'))}, cancelling and urgent help.`,
+    `Answers to questions about mentoring at DeepRest: the ${inWords(F.value('offer.freeSessions'))} free sessions, booking all ${inWords(F.value('offer.freeSessions'))}, cancelling and urgent help.`,
   main: (ctx) => {
     const { F, href } = ctx;
     const nick = F.text('mentor.firstName');
@@ -37,7 +37,7 @@ ${pageHead({
       <p>If you are worried about your mental or physical health, please talk to your GP.</p>`)}
     ${item('book', 'How do I book?', `
       <p>Choose a day and time in the <a href="${href('book')}">booking calendar</a>, and confirm it with your name and email address. Calendly books one session at a time, so you book each of your ${free} free sessions separately: the booking page explains <a href="${href('book')}#all-five">how to book all ${free}</a>.</p>
-      <p>The calendar is provided by Calendly, and loads only once you agree to it, because Calendly sets its own cookies. The <a href="${href('cookies')}">cookie notice</a> explains them.</p>`)}
+      <p>The calendar is provided by Calendly and loads only once you agree to it. Calendly then sets cookies on your device and connects to services it uses, such as Google reCAPTCHA and Stripe. The <a href="${href('cookies')}#calendly">cookie notice</a> lists what is loaded.</p>`)}
     ${item('length', 'How long is a session, and how do we meet?', `
       <p>The booking calendar shows how long a session lasts and how you will meet, and your confirmation email has the details.</p>`)}
     ${item('cancel', 'Can I cancel or move a session?', `

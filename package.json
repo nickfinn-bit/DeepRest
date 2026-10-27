@@ -14,6 +14,7 @@
     "verify:layout": "node scripts/verify/layout.mjs",
     "verify:html": "node scripts/verify/validate.mjs",
     "verify:links": "node scripts/verify/links.mjs",
+    "verify:typography": "node scripts/verify/typography.mjs",
     "verify:facts": "node scripts/verify/facts.mjs",
     "verify:publish-ready": "node scripts/verify/publish-ready.mjs",
     "verify:lighthouse": "node scripts/verify/lighthouse.mjs",

@@ -39,7 +39,7 @@ ${pageHead({
   <div class="container split">
     <div>
       <h2 id="writing-title">When you write</h2>
-      <p>Ordinary email is not encrypted from end to end, so please keep your first message short and leave out detailed personal or health information. There will be time to talk when you meet.</p>
+      <p>Ordinary email is not encrypted from end to end, so please keep your first message short and leave out detailed personal or health information.</p>
       <p>The <a href="${href('privacy')}">privacy policy</a> explains how your messages are handled.</p>
     </div>
     <div>

@@ -1,5 +1,5 @@
 {
-  "checked": "2026-10-23T07:42:06.782Z",
+  "checked": "2026-10-27T08:41:00.863Z",
   "declined": {
     "hosts": [
       "accounts.google.com",
@@ -19,7 +19,7 @@
       {
         "name": "__cf_bm",
         "domain": ".calendly.com",
-        "seconds": 1777
+        "seconds": 1769
       },
       {
         "name": "_cfuvid",
@@ -29,17 +29,17 @@
       {
         "name": "OptanonAlertBoxClosed",
         "domain": ".calendly.com",
-        "seconds": 31535986
+        "seconds": 31535987
       },
       {
         "name": "OptanonConsent",
         "domain": ".calendly.com",
-        "seconds": 31535986
+        "seconds": 31535987
       },
       {
         "name": "m",
         "domain": "m.stripe.com",
-        "seconds": 34559993
+        "seconds": 34559995
       }
     ],
     "storage": [
@@ -102,7 +102,7 @@
       {
         "name": "__cf_bm",
         "domain": ".calendly.com",
-        "seconds": 1769
+        "seconds": 1779
       },
       {
         "name": "_cfuvid",
@@ -112,17 +112,17 @@
       {
         "name": "OptanonAlertBoxClosed",
         "domain": ".calendly.com",
-        "seconds": 31535985
+        "seconds": 31535987
       },
       {
         "name": "OptanonConsent",
         "domain": ".calendly.com",
-        "seconds": 31535985
+        "seconds": 31535987
       },
       {
         "name": "m",
         "domain": "m.stripe.com",
-        "seconds": 34559996
+        "seconds": 34559994
       }
     ],
     "storage": [
@@ -172,5 +172,16 @@
         "key": "rc::a"
       }
     ]
+  },
+  "bookingFlow": {
+    "checked": "2026-10-27T08:40:48.074Z",
+    "calendar": {
+      "location": "Web conferencing details provided upon confirmation.",
+      "description": "DeepRest mentoring with Nick Finnemore. Your first five sessions are free, as a diagnostic. Book one session at a time here."
+    },
+    "detailsForm": {
+      "location": "Web conferencing details provided upon confirmation.",
+      "description": "DeepRest mentoring with Nick Finnemore. Your first five sessions are free, as a diagnostic. Book one session at a time here."
+    }
   }
 }

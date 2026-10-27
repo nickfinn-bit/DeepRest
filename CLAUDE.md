@@ -87,10 +87,12 @@
   runs the same checks against the live site, plus `live.mjs` (DNS, HTTPS,
   redirects, every live page identical to `dist/`); build the deployed commit
   first. The checks are Calendly, layout and screenshots at 7 widths, the HTML
-  validator, links, facts (placeholders, invented facts, protected titles,
-  clinical claims, retired claims, third parties named against those the
+  validator, links, punctuation and spacing, facts (placeholders, invented
+  facts, protected titles, clinical claims, retired claims on the pages and in
+  the Calendly event's description, third parties named against those the
   Calendly check measured in the same run), the strict build, Lighthouse and
-  PDFs. The validator needs
+  PDFs. `typography.mjs` and `facts.mjs` take `--self-test`, against the pages
+  saved in `scripts/verify/fixtures/`. The validator needs
   the Nu HTML Checker unpacked in `.tools/vnu-runtime-image` (vnu.windows.zip
   from github.com/validator/validator/releases; no Java).
 - `node scripts/verify/pagespeed.mjs --live --browser-url=http://127.0.0.1:9222`
@@ -98,6 +100,12 @@
   Google's servers) for every live page, through a tab of its own in a Chrome
   signed in to Google, since signed out it hits a shared quota. Lighthouse on
   this machine varies with its load; Google's result is the second opinion.
+- A change is finished only after `node scripts/verify/human-pass.mjs [--live]`,
+  also outside `verify`: every page at 7 widths scrolled at 800 px a second,
+  with every FAQ answer, the menu, the booking question and the calendar
+  opened, a capture at each stop in verification/human-pass/. Every capture is
+  looked at; what was seen goes in verification/human-pass-review.json, and
+  both go into REPORT.md.
 
 ## Code map
 
