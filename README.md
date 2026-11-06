@@ -2,6 +2,12 @@
 
 The website of DeepRest, Nick Finnemore's tech-addiction mentoring practice for students and young adults, live at **https://deepestrest.com/**. Eight pages plus an error page; sessions are booked through Calendly, whose calendar loads only after the visitor agrees to its cookies. It is a static site, built by a small Node script with no dependencies and published to GitHub Pages.
 
+## About
+
+description: How DeepRest's website is made: where its facts live, how it is built, served and checked, and how it is published to GitHub Pages on deepestrest.com.
+aim: To let anyone working on the site build it, verify it locally or live, and publish it without stating a fact that has no source.
+numerical_result_summary: 9 pages, 8 plus an error page; 0 placeholders remain (PLACEHOLDERS.md).
+
 ## Facts
 
 Every fact the site states lives in `site.config.json`, with where it came from under `_sources`. Facts that are not known are left off the pages and listed under `_dropped`; `npm run build` copies that list, and the wording Nick should check, into [PLACEHOLDERS.md](PLACEHOLDERS.md).
